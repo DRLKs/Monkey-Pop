@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+.menu-container {
+    text-align: center;
+}
+button {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#play-btn {
+    background-color: yellow;
+}
+#settings-btn, #ranking-btn {
+    background-color: gray;
+    color: white;
+}
+button:hover {
+    opacity: 0.8;
+}
