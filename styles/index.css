@@ -1,12 +1,20 @@
+
+:root{
+    --color-boton-importante: #e19718;
+    --color-fondo: #282c34
+}
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #282c34;
+    background-color: var(--color-fondo);
     color: white;
     font-family: Arial, sans-serif;
 }
+
+/*  BOTONES */
 .menu-container {
     text-align: center;
 }
@@ -21,7 +29,7 @@ button {
     cursor: pointer;
 }
 #play-btn {
-    background-color: yellow;
+    background-color: var(--color-boton-importante);
 }
 #settings-btn, #ranking-btn {
     background-color: gray;

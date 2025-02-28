@@ -1,5 +1,5 @@
 document.getElementById('play-btn').addEventListener('click', function() {
-    window.location.href = '../index.html';
+    window.location.href = 'juego.html';
 });
 document.getElementById('settings-btn').addEventListener('click', function() {
     alert('Ajustes no implementados aún.');
