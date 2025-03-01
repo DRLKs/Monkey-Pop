@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes</title>
+    <link rel="stylesheet" href="styles/ajustes.css">
+    <link rel="stylesheet" href="styles/navegador.css">
+</head>
+<body>
+    <div class="navbar">
+        <button class="back-button" onclick="goBack()">Volver</button>
+        <div class="nav-links">
+            
+        </div>
+        <script src="js/ajustes.js"></script>
+    </div>
+
+    <div id="container-controles">
+        <h1> CONTROLES </h1>
+
+        <form id="controlForm">
+
+            <div id="controles-up">
+                <label>Arriba: <input type="text" id="inputUp" maxlength="1"></label> <br>
+            </div>
+
+            <div id="controles-demas">
+                <label>Izquierda: <input type="text" id="inputLeft" maxlength="1"></label>
+
+                <label>Abajo: <input type="text" id="inputDown" maxlength="1"></label>
+    
+                <label>Derecha: <input type="text" id="inputRight" maxlength="1"></label> <br>
+            </div>
+            
+
+            <button id="boton-submit" type="submit">Guardar Controles</button>
+        </form>
+
+        <script src="js/ajustes.js"></script>
+
+    </div>
+</body>
+</html>

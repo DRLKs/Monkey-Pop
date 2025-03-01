@@ -2,6 +2,7 @@
 :root{
     --color-boton-importante: #e19718;
     --color-navegador: #282c34
+
 }
 
 body {
@@ -11,48 +12,8 @@ body {
     height: 100vh;
     background: url('../assets/images/background.jpg') no-repeat center center/cover;
     font-family: Arial, sans-serif;
+
+    overflow: hidden;/* La pantalla estará fija, no podrás scrollearla */
 }
 
 
-/* BARRA DE NAVEGACIÓN */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: var(--color-navegador);
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 18px;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
-.back-button {
-    background-color: var(--color-boton-importante);
-    border: none;
-    padding: 8px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 6px;
-}
-
-.back-button:hover {
-    background-color: var(--color-boton-importante);
-}
-
-/* Para evitar que el contenido quede debajo de la navbar */
-.content {
-    margin-top: 60px;
-    padding: 20px;
-}

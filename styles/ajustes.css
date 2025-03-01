@@ -1,0 +1,61 @@
+:root{
+    --color-boton-importante: #e19718;
+    --color-navegador: #282c34;
+
+    --color-controles: #4f5768;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../assets/images/background.jpg') no-repeat center center/cover;
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;/* La pantalla estará fija, no podrás scrollearla */
+}
+
+#container-controles{
+    color: white;
+    background-color: var(--color-navegador) ;
+
+    height: 500px;
+    width: 600px;
+    border-radius: 20%; /* Bordes redondeados */
+}
+
+#container-controles h1{
+    justify-self: center;
+}
+
+/* FORMULARIO CONTROLES */
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 15px 10px;
+}
+
+#controles-up{
+    display: flex;
+    align-items: center;
+}
+
+#controles-demas{
+    display: flex;
+}
+
+input{
+    text-align: center;
+}
+
+#boton-submit{
+    background-color: var(--color-boton-importante);
+    margin-top: 20px;
+
+    height: 100px;
+    width: 100px;
+    border-radius: 20%;
+
+    align-self: center;
+}

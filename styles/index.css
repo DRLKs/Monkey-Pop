@@ -12,6 +12,8 @@ body {
     background-color: var(--color-fondo);
     color: white;
     font-family: Arial, sans-serif;
+
+    overflow: hidden; /* La pantalla estará fija, no podrás scrollearla */
 }
 
 /*  BOTONES */
