@@ -1,4 +1,4 @@
-#🎮 Proyecto: Juego en HTML, CSS y JavaScript
+# 🎮 Proyecto: Juego en HTML, CSS y JavaScript
 
 ## 📌 Descripción
 Este es un proyecto de desarrollo de un **juego interactivo** utilizando **HTML, CSS y JavaScript**.  
