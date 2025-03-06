@@ -13,7 +13,7 @@ Nuestro objetivo es crear una experiencia divertida y desafiante, combinando mec
 | Rol  | Nombre |
 |------|--------|
 | 🎩 CEO  | Alejandro |
-| 🖥️ CIO  | So |
+| 🖥️ CIO  | Soeaya |
 | 📊 COO  | Marcos |
 | 🔧 CTO  | Fran |
 | 🎨 CXO  | David |
@@ -21,4 +21,4 @@ Nuestro objetivo es crear una experiencia divertida y desafiante, combinando mec
 ## ⚡ Instalación y Ejecución
 1. **Clonar el repositorio:**
    ```sh
-   git clone https://github.com/usuario/juego-html-css-js.git
+   git clone https://github.com/DRLKs/ProyectoIntefacesDeUsuario.git
