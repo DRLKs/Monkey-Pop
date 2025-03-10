@@ -1,56 +1,54 @@
-# PROYECTO: MONKEY POP
+# GRUPO A - PROYECTO: MONKEY POP
 
-## DESCRIPCIÓN:
-Monkey Pop es un videojuego inspirado en el  juego de estrategia y disparos Bloons. El objetivo del juego es defender tu base de globos que avanzan por un camino utilizando una variedad de torres.Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos. Cada globo tiene diferentes características, como resistencia o velocidad, lo que añade un nivel adicional de estrategia al juego.
+## DESCRIPCIÓN
+Monkey Pop es un videojuego shooter de estrategia e inspirado en el juego *Bloons*. El objetivo es defender una base de globos que avanzan por un camino especifico, usando multiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
 
-Tipo de monos:
-Los jugadores pueden colocar diferentes tipos de monos con habilidades únicas a lo largo del camino para detener a los globos. Cada mono tiene habilidades especiales, como:
-- Mono lanzador de dardos: Dispara dardos rápidos para reventar globos.
-- Mono bomba: Lanza explosivos para destruir grupos de globos.
-- Mono láser: Usa un rayo láser para eliminar globos resistentes.
-- Mono congelador: Ralentiza a los globos congelándolos.
+Cada globo tiene características especiales, como resistencia o velocidad, además de las propias mejoras que le puedes hacer al personaje lo que añade un nivel adicional de estrategia al juego.
 
-Tipos de globos:
-Los globos no son todos iguales. Algunos tienen características especiales que los hacen más difíciles de destruir:
-- Globos resistentes: Necesitan múltiples impactos para reventarse.
-- Globos camuflados: Solo pueden ser vistos y atacados por ciertos monos.
-- Globos de plomo: Son inmunes a ciertos tipos de ataques.
-- Globos de regalo: Liberan otros globos al ser destruidos.
+### **Tipos de monos** 🐵
+Los jugadores pueden colocar distintos tipos de monos a lo largo del camino, cada uno con habilidades especiales:
+- **Mono lanzador de dardos** : Dispara dardos rápidos para reventar globos.
+- **Mono bomba** : Lanza explosivos para destruir grupos de globos.
+- **Mono láser** : Usa un rayo láser para eliminar globos resistentes.
+- **Mono congelador** : Ralentiza a los globos congelándolos.
 
-Acceso a los distintos tipos de monos:
+### **Tipos de globos** 🎈
+Los globos no son todos iguales. Algunos presentan desafíos adicionales:
+- **Globos resistentes**: Necesitan múltiples impactos para reventarse.
+- **Globos camuflados**: Solo pueden ser vistos y atacados por ciertos monos.
+- **Globos de plomo**: Son inmunes a ciertos tipos de ataques.
+- **Globos de regalo**: Liberan otros globos al ser destruidos.
 
-ELEGIR EN EL GRUPO CUAL OS PARECE MEJOR:
-1) Desbloqueo por niveles: A medida que el jugador avanza, desbloquea un mono con una característica nueva que le otorga ventaja en el juego. Por ejemplo:
-- Nivel 1: Mono lanzador de dardos (básico).
-- Nivel 3: Mono bomba (desbloqueado después de completar el nivel 2).
-- Nivel 5: Mono congelador (desbloqueado después de completar el nivel 4).
+### **Sistema de desbloqueo de monos** 🏆
+Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
+1) **Desbloqueo por niveles**: A medida que el jugador avanza, se desbloquean monos con nuevas habilidades.
+   - Nivel 1: Mono lanzador de dardos (básico).
+   - Nivel 3: Mono bomba.
+   - Nivel 5: Mono de hielo.
 
- 2) Compra con monedas: Los jugadores ganan monedas al completar niveles o reventar globos. Estas monedas se pueden usar para comprar nuevos tipos de monos en una tienda dentro del juego. Por ejemplo:
+2) **Compra con monedas**: Los jugadores ganan monedas al completar niveles o reventar globos. Estas monedas pueden usarse para comprar nuevos monos en una tienda dentro del juego.
    - Mono lanzador de dardos: Gratis (disponible desde el inicio).
    - Mono bomba: 500 monedas.
-   - Mono congelador: 1,000 monedas.
+   - Mono de hielo: 1,000 monedas.
    - Mono súper láser: 2,500 monedas.
 
-## TECNOLOGÍAS QUE USAREMOS: 
-HTML5 → Estructura del juego
-HTML5 se utilizaría para definir la estructura básica del juego y los elementos de la interfaz de usuario. Esto inluirá la creación del mapa para el área de juego, menús, botones... y otros componentes interactivos. También se emplearía para integrar elementos multimedia, como imágenes y sonidos.
+## TECNOLOGÍAS UTILIZADAS 💻
+- **HTML5** → Estructura del juego y elementos de la interfaz.
+- **CSS3** → Estilos y animaciones para una experiencia visual atractiva.
+- **JavaScript** → Lógica del juego, interacción, detección de colisiones y mecánicas avanzadas.
 
-CSS3 → Estilos y animaciones
-CSS3 se usaría para dar estilo a los elementos de la interfaz, asegurando que el juego sea visualmente atractivo y responsive. Esto incluye la aplicación de colores, fuentes y efectos visuales. Además, CSS3 se utilizaría para crear animaciones, como el movimiento de los globos o efectos de transición al reventar globos.
+## ROLES DEL EQUIPO 👥
+| Rol  | Nombre | Correo |
+|------|--------------------------|--------------------------|
+| CEO  | Alejandro Jiménez González | alejg411@uma.es |
+| CIO  | Soraya Bennai Sadqi | sorayasadqui@uma.es |
+| COO  | Marcos Luque Montiel | maarcoos_8@uma.es |
+| CTO  | Francisco Ramírez Cañadas | franramirez@uma.es |
+| CXO  | David Muñoz del Valle | davidmv@uma.es |
 
-JavaScript → Lógica y mecánicas del juego
-JavaScript se encargaría de la lógica del juego, la implementación de la colocación de monos, el movimiento de los globos, la detección de colisiones... También se usaría para manejar eventos de usuario, como clics y arrastres, y para actualizar la interfaz, como la puntuación, las vidas y las monedas. Además, JavaScript permitiría implementar funcionalidades avanzadas, como la tienda de mejoras y la progresión entre niveles.
-
-## ROLES DEL EQUIPO
-| Rol  | Nombre |
-|------|--------|
-| CEO  | Alejandro |
-| CIO  | Soraya |
-| COO  | Marcos |
-| CTO  | Fran |
-| CXO  | David |
-
-## INSTALACIÓN Y EJECUCIÓN
+## INSTALACIÓN Y EJECUCIÓN 🚀
 1. Clonar el repositorio:
    ```sh
    git clone https://github.com/DRLKs/ProyectoIntefacesDeUsuario.git
+
+
