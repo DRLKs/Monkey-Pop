@@ -1,9 +1,9 @@
 # GRUPO A - PROYECTO: MONKEY POP
 
 ## DESCRIPCIÓN
-Monkey Pop es un videojuego shooter de estrategia e inspirado en el juego *Bloons*. El objetivo es defender una base de globos que avanzan por un camino especifico, usando multiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
+Monkey Pop es un videojuego shooter de estrategia, inspirado en el juego Bloons. El objetivo es defender una base de los globos que avanzan por un camino específico, usando múltiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
 
-Cada globo tiene características especiales, como resistencia o velocidad, además de las propias mejoras que le puedes hacer al personaje lo que añade un nivel adicional de estrategia al juego.
+Cada globo tiene características especiales, como resistencia o velocidad. Además, el personaje puede recibir mejoras, lo que añade un nivel adicional de estrategia al juego.
 
 ### **Tipos de monos** 🐵
 Los jugadores pueden colocar distintos tipos de monos a lo largo del camino, cada uno con habilidades especiales:
