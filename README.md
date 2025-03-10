@@ -44,7 +44,7 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 | CIO  | Soraya Bennai Sadqi | sorayasadqui@uma.es |
 | COO  | Marcos Luque Montiel | maarcoos_8@uma.es |
 | CTO  | Francisco Ramírez Cañadas | franramirez@uma.es |
-| CXO  | David Muñoz del Valle | davidmv@uma.es |
+| CXO  | David Muñoz del Valle | davidmunvalle@uma.es |
 
 ## INSTALACIÓN Y EJECUCIÓN 🚀
 1. Clonar el repositorio:
