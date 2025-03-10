@@ -21,9 +21,9 @@ Acceso a los distintos tipos de monos:
 
 ELEGIR EN EL GRUPO CUAL OS PARECE MEJOR:
 1) Desbloqueo por niveles: A medida que el jugador avanza, desbloquea un mono con una característica nueva que le otorga ventaja en el juego. Por ejemplo:
-   - Nivel 1: Mono lanzador de dardos (básico).
-   - Nivel 3: Mono bomba (desbloqueado después de completar el nivel 2).
-   - Nivel 5: Mono congelador (desbloqueado después de completar el nivel 4).
+- Nivel 1: Mono lanzador de dardos (básico).
+- Nivel 3: Mono bomba (desbloqueado después de completar el nivel 2).
+- Nivel 5: Mono congelador (desbloqueado después de completar el nivel 4).
 
  2) Compra con monedas: Los jugadores ganan monedas al completar niveles o reventar globos. Estas monedas se pueden usar para comprar nuevos tipos de monos en una tienda dentro del juego. Por ejemplo:
    - Mono lanzador de dardos: Gratis (disponible desde el inicio).
