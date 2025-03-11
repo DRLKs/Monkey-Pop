@@ -16,9 +16,24 @@
             <a id="reset-btn">Reiniciar</a>
         </div>
     </div>
+
+    <div class="game-container">
+        <h2>RONDA 1</h2>
+        <div class="info">
+            <div class="coins">Monedas <span id="coins">5,000</span></div>
+            <div class="lives">Vidas <span id="lives">150 ❤️</span></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="monkey-selection">
+            <h3>Monos Disponibles</h3>
+            <div class="monkeys">
+                <button class="monkey" data-cost="100"><img src="assets/images/monkeys/monoBasico.webp" alt="Mono 1"> 100</button>
+                <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoFusil.webp" alt="Mono 2"> 200</button>
+            </div>
+        </div>
+    </div>
     <script src="js/traducciones.js"></script>
     <script src="js/juego.js"></script>
 
-    <img class="imagen-inferior" alt="Pincho" src="assets/images/pincho.webp">
 </body>
 </html>
