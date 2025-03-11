@@ -10,16 +10,35 @@
 <body>
     <div class="navbar">
         <button class="back-button" onclick="goBack()">Volver</button>
-        <div class="nav-links">
+    </div>
+
+    <div id="container-controles">
+        <h1> CONTROLES </h1>
+
+        <form id="controlForm">
+
+            <div id="controles-up">
+                <label>Arriba: <input type="text" id="inputUp" maxlength="1"></label> <br>
+            </div>
+
+            <div id="controles-demas">
+                <label>Izquierda: <input type="text" id="inputLeft" maxlength="1"></label>
+
+                <label>Abajo: <input type="text" id="inputDown" maxlength="1"></label>
+    
+                <label>Derecha: <input type="text" id="inputRight" maxlength="1"></label> <br>
+            </div>
             
-        </div>
-        <script src="js/ajustes.js"></script>
-    </div>
 
-    <div id="container-ajustes">
+            <button id="boton-submit" type="submit">Guardar Controles</button>
+        </form>
 
         <script src="js/ajustes.js"></script>
 
     </div>
+
+    <script src="js/traducciones.js"></script>
+    <script src="js/ajustes.js"></script>
+    <script src="js/ajustes.js"></script>
 </body>
 </html>
