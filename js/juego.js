@@ -1,13 +1,7 @@
-// Botón volver
+// Función para volver atrás sin guardar cambios
 function goBack() {
     window.history.back();
 }
-document.getElementById('pause-btn').addEventListener('click', function() {
-    alert('Ajustes no implementados aún.');
-});
-document.getElementById('reset-btn').addEventListener('click', function() {
-    alert('Ranking no implementado aún.');
-});
 
 // Mapa
 const canvas = document.getElementById("gameCanvas");
@@ -57,5 +51,72 @@ canvas.addEventListener("click", (event) => {
         ctx.beginPath();
         ctx.arc(col * cellSize + cellSize / 2, row * cellSize + cellSize / 2, cellSize / 3, 0, Math.PI * 2);
         ctx.fill();
-    }
+}
 });
+
+// Botón de pausa
+const pauseBtn = document.getElementById('pause-btn');
+if (pauseBtn) {
+    pauseBtn.addEventListener('click', function() {
+        alert(getTranslation("settings_not_implemented"));
+    });
+}
+
+// Botón de reinicio
+const resetBtn = document.getElementById('reset-btn');
+if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+        alert(getTranslation("ranking_not_implemented"));
+    });
+}
+
+// Manejador de eventos para guardar los ajustes
+const ajustesForm = document.getElementById("controlForm");
+if (ajustesForm) {
+    ajustesForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Guardar volumen y lenguaje seleccionados
+        let newVolumen = document.getElementById("volumen").value;
+        let newLenguaje = document.getElementById("lenguaje").value;
+
+        localStorage.setItem("volumen", newVolumen);
+        localStorage.setItem("lenguaje", newLenguaje);
+
+        alert(getTranslation("settings_saved"));
+
+        // Redirigir al menú principal
+        window.location.href = 'index.html';
+    });
+}
+
+// Cargar los valores guardados en los ajustes
+function loadDefaults() {
+    let savedVolumen = localStorage.getItem("volumen") || 50;
+    let savedLenguaje = localStorage.getItem("lenguaje") || "es";
+
+    document.getElementById("volumen").value = savedVolumen;
+    document.getElementById("lenguaje").value = savedLenguaje;
+
+    applyLanguage(savedLenguaje);
+}
+
+// Cambia el idioma de la página según la selección
+function applyLanguage(lang) {
+    localStorage.setItem("lenguaje", lang); // Guarda el idioma
+    document.documentElement.lang = lang; // Cambia el atributo de idioma
+
+    // Traducir textos dinámicamente
+    document.querySelector("h1").textContent = getTranslation("title");
+    document.querySelector("label[for='volumen']").textContent = getTranslation("volume");
+    document.querySelector("label[for='lenguaje']").textContent = getTranslation("language");
+    document.getElementById("boton-submit").textContent = getTranslation("save");
+}
+
+// Evento para cambiar idioma en tiempo real
+document.getElementById("lenguaje").addEventListener("change", function() {
+    applyLanguage(this.value);
+});
+
+// Cargar configuración inicial
+loadDefaults();
