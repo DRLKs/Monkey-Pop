@@ -51,3 +51,4 @@ function applyLanguage(lang) {
 
 // Cargar configuración inicial
 loadDefaults();
+/*  Esto no se si va bien */

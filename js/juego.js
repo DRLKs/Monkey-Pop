@@ -126,6 +126,11 @@ if (ajustesForm) {
     });
 }
 
+// Función para volver atrás sin guardar cambios
+function goBack() {
+    window.history.back();
+}
+
 // Cargar los valores guardados en los ajustes
 function loadDefaults() {
     let savedVolumen = localStorage.getItem("volumen") || 50;
