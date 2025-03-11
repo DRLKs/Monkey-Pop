@@ -1,50 +1,53 @@
+// Función para volver atrás sin guardar cambios
 function goBack() {
     window.history.back();
 }
 
-/* GUARDAMOS LOS CONTROLES MEDIANTE localStorage */
-const controlKeys = {
-    up: localStorage.getItem("keyUp") || "W",
-    down: localStorage.getItem("keyDown") || "S",
-    left: localStorage.getItem("keyLeft") || "A",
-    right: localStorage.getItem("keyRight") || "D"
-};
+// Manejo de eventos para los botones (si existen)
+document.getElementById('pause-btn')?.addEventListener('click', function() {
+    alert(getTranslation("settings_not_implemented"));
+});
 
-function updateControlsDisplay() {
-    document.getElementById("keyUp").textContent = controlKeys.up;
-    document.getElementById("keyDown").textContent = controlKeys.down;
-    document.getElementById("keyLeft").textContent = controlKeys.left;
-    document.getElementById("keyRight").textContent = controlKeys.right;
-}
+document.getElementById('reset-btn')?.addEventListener('click', function() {
+    alert(getTranslation("ranking_not_implemented"));
+});
 
-/* ACTUALIZA LOS DATOS */
+// Manejador de eventos para guardar los ajustes
 document.getElementById("controlForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let newUp = document.getElementById("inputUp").value.toUpperCase() || controlKeys.up;
-    let newDown = document.getElementById("inputDown").value.toUpperCase() || controlKeys.down;
-    let newLeft = document.getElementById("inputLeft").value.toUpperCase() || controlKeys.left;
-    let newRight = document.getElementById("inputRight").value.toUpperCase() || controlKeys.right;
+    let newVolumen = document.getElementById("volumen").value;
+    let newLenguaje = document.getElementById("lenguaje").value;
 
-    controlKeys.up = newUp;
-    controlKeys.down = newDown;
-    controlKeys.left = newLeft;
-    controlKeys.right = newRight;
+    localStorage.setItem("volumen", newVolumen);
+    localStorage.setItem("lenguaje", newLenguaje);
 
-    localStorage.setItem("keyUp", newUp);
-    localStorage.setItem("keyDown", newDown);
-    localStorage.setItem("keyLeft", newLeft);
-    localStorage.setItem("keyRight", newRight);
+    alert(getTranslation("settings_saved"));
 
-    updateControlsDisplay();
+    window.location.href = 'index.html';
 });
 
-/* Añade al forms los valores actuales */
+// Cargar los valores guardados en los ajustes
 function loadDefaults() {
-    document.getElementById("inputUp").textContent = localStorage.getItem("keyUp") || "W";
-    document.getElementById("inputDown").textContent = localStorage.getItem("keyDown") || "S";
-    document.getElementById("inputLeft").textContent = localStorage.getItem("keyLeft") || "A";
-    document.getElementById("inputRight").textContent = localStorage.getItem("keyRight") || "D";
+    let savedVolumen = localStorage.getItem("volumen") || 50;
+    let savedLenguaje = localStorage.getItem("lenguaje") || "es";
+
+    document.getElementById("volumen").value = savedVolumen;
+    document.getElementById("lenguaje").value = savedLenguaje;
+
+    applyLanguage(savedLenguaje);
 }
 
+// Cambia el idioma de la página según la selección
+function applyLanguage(lang) {
+    localStorage.setItem("lenguaje", lang);
+    document.documentElement.lang = lang;
+
+    document.querySelector("h1").textContent = getTranslation("title");
+    document.querySelector("label[for='volumen']").textContent = getTranslation("volume");
+    document.querySelector("label[for='lenguaje']").textContent = getTranslation("language");
+    document.getElementById("boton-submit").textContent = getTranslation("save");
+}
+
+// Cargar configuración inicial
 loadDefaults();
