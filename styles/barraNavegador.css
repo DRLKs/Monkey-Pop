@@ -1,0 +1,89 @@
+/* ESTE CSS AJUSTA LA BARRA DE NAVEGACIÓN */
+.navbar {
+    /* Esto lo hace responsive */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    position: fixed;
+    top: 0; /* Lo ajusta arriva */
+    width: 100%;
+    background-color: var(--color-navegador);
+    padding: 10px 20px;
+    align-items: center;
+}
+
+.nav-button {
+    background-color: var(--color-boton-importante);
+    border: none;
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 6px;
+}
+
+.back-button:hover {
+    background-color: var(--color-boton-importante);
+}
+
+
+/* REPSONSIVE COSAS */
+
+@media (max-width: 800px) {
+    .nav-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    .monkey img {
+        width: 40px;
+        height: 40px;
+    }
+    .monkey {
+        font-size: 14px;
+    }
+    .coins, .lives {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-button {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    .monkey img {
+        width: 35px;
+        height: 35px;
+    }
+    .monkey {
+        font-size: 12px;
+    }
+    .coins, .lives {
+        font-size: 14px;
+    }
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-button {
+        padding: 4px 8px;
+        font-size: 10px;
+        margin-left: 3px;
+        border-radius: 3px;
+    }
+    .monkey img {
+        width: 30px;
+        height: 30px;
+    }
+    .monkey {
+        font-size: 10px;
+        padding: 4px;
+    }
+    .coins, .lives {
+        font-size: 12px;
+    }
+}

@@ -5,35 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juegoo</title>
     <link rel="stylesheet" href="styles/juego.css">
-    <link rel="stylesheet" href="styles/navegador.css">
+    <link rel="stylesheet" href="styles/barraNavegador.css">
 </head>
 <body>
 
     <div class="navbar">
-        <button class="back-button" onclick="goBack()">Volver</button>
-        <div class="nav-links">
-            <a id="pause-btn">Pausa</a>
-            <a id="reset-btn">Reiniciar</a>
+        <button class="nav-button" id="back-button" onclick="volverMenu()">Volver</button>
+        
+        <div class="nav-info">
+            <div>💰 1230</div>
+            <div>❤️ 700</div>  
         </div>
+
+        <div class="nav-monkeys" >
+            <button class="monkey" data-cost="100"><img src="assets/images/monkeys/monoBasico.png" alt="Mono 1"> 100</button>
+            <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoFusil.png" alt="Mono 2"> 200</button>
+            <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoArtificiero.png" alt="Mono 3"> 200</button>
+            <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoBolaPinchos.png" alt="Mono 4"> 200</button>
+            <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoFrancotirador.png" alt="Mono 5"> 200</button>
+
+        </div>
+
+        <div class="nav-links">
+            <button class="nav-button" id="pause-btn" onclick="abrirAjustes()" >Ajustes</button>
+            <button class="nav-button" id="reset-btn" onclick="pausarJuego()" >Pausa</button>
+        </div>
+
     </div>
 
     <div class="game-container">
-        <h2>RONDA 1</h2>
-        <div class="info">
-            <div class="coins">Monedas <span id="coins">5,000</span></div>
-            <div class="lives">Vidas <span id="lives">150 ❤️</span></div>
-        </div>
-        <canvas id="gameCanvas"></canvas>
-        <div class="monkey-selection">
-            <h3>Monos Disponibles</h3>
-            <div class="monkeys">
-                <button class="monkey" data-cost="100"><img src="assets/images/monkeys/monoBasico.webp" alt="Mono 1"> 100</button>
-                <button class="monkey" data-cost="200"><img src="assets/images/monkeys/monoFusil.webp" alt="Mono 2"> 200</button>
-            </div>
-        </div>
+
+        <div class="grid" id="grid"></div>
+        
     </div>
+    
     <script src="js/traducciones.js"></script>
+
     <script src="js/juego.js"></script>
+    <script src="js/botonesJuego.js"></script>
+    <script src="js/mapaJuego.js"></script>
 
 </body>
 </html>
