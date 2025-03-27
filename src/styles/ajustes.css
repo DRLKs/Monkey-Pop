@@ -1,5 +1,7 @@
 :root{
     --color-boton-importante: #e19718;
+    --color-boton-hover: #c57b14;
+
     --color-navegador: #282c34;
     --color-controles: #4f5768;
     --color-fondo: #1c1f26;
@@ -15,20 +17,24 @@ body {
     font-family: Arial, sans-serif;
     overflow: hidden;
     color: var(--color-texto);
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 #container-controles {
     color: var(--color-texto);
     background-color: var(--color-navegador);
-    width: 400px;
+    width: 95%;
+    max-width: 800px;
     border-radius: 20px;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #container-controles h1 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
 /* FORMULARIO */
@@ -39,7 +45,7 @@ form {
 }
 
 label {
-    font-size: 1.2em;
+    font-size: clamp(1rem, 4vw, 1.2em);
 }
 
 input[type="range"] {
@@ -63,6 +69,7 @@ select {
     border: none;
     background-color: var(--color-controles);
     color: var(--color-texto);
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 #boton-submit {
@@ -73,11 +80,53 @@ select {
     border-radius: 10px;
     border: none;
     color: var(--color-texto);
-    font-size: 1.2em;
+    font-size: clamp(1rem, 4vw, 1.2em);
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 #boton-submit:hover {
-    background-color: #c57b14;
+    background-color:var(--color-boton-hover) ;
+}
+
+/* Media queries para diferentes tamaños de pantalla */
+@media (min-width: 992px) {
+    #container-controles {
+        max-width: 1000px;
+        padding: 30px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #container-controles {
+        max-width: 1200px;
+        padding: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    #container-controles {
+        padding: 15px;
+        width: 95%;
+    }
+    
+    form {
+        gap: 15px;
+    }
+    
+    #boton-submit {
+        height: 45px;
+    }
+}
+
+@media (max-height: 600px) {
+    body {
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    #container-controles {
+        max-height: 85vh;
+        overflow-y: auto;
+    }
 }

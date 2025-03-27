@@ -1,0 +1,101 @@
+:root{
+  --color-terreno: #4CAF50;
+  --color-agua: #2196F3;
+  --color-camino: #A1887F;
+  --color-seleccionado: #FFC107;
+
+  --color-terreno-hover: #66BB6A;
+}
+
+/* Estilos base para todas las casillas */
+.casilla-mapa {
+  width: 32px;
+  height: 32px;
+  /*border: 1px solid rgba(0, 0, 0, 0.2); */
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Estado predeterminado - cuadrado verde (terreno) */
+.casilla-default {
+  background-color: var(--color-terreno);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  cursor: pointer;
+}
+
+/* Agua - azul */
+.casilla-agua {
+  background-color: var(--color-agua);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, 
+                    transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, 
+                    transparent 75%, transparent);
+  background-size: 10px 10px;
+  animation: mover-agua 3s linear infinite;
+
+  z-index: 5; /* Para que el agua esté por debajo del terreno */
+}
+
+@keyframes mover-agua {
+  from { background-position: 0 0; }
+  to { background-position: 20px 20px; }
+}
+
+/* Camino - marrón claro */
+.casilla-camino {
+  background-color: var(--color-camino);
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, 
+                    transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, 
+                    transparent 75%, transparent);
+  background-size: 5px 5px;
+
+  z-index: 10; /* Para que el camino esté por encima del terreno */
+}
+
+/* Casilla seleccionada - amarillo/dorado */
+.casilla-selected {
+  background-color: #FFC107;
+  transform: scale(1.05);
+}
+
+/* Efectos hover para mejorar la interactividad */
+.casilla-default:hover {
+  background-color: var(--color-terreno-hover);
+  transform: scale(1.05);
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .casilla-mapa {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .casilla-selected {
+    transform: scale(1.02);
+  }
+  
+  .casilla-default:hover,
+  .casilla-camino:hover,
+  .casilla-agua:hover {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 480px) {
+  .casilla-mapa {
+    width: 18px;
+    height: 18px;
+    border-width: 1px;
+  }
+  
+  .casilla-selected {
+    transform: none;
+    border-width: 1px;
+  }
+  
+  .casilla-default:hover,
+  .casilla-camino:hover,
+  .casilla-agua:hover {
+    transform: none;
+  }
+}

@@ -6,9 +6,12 @@
 }
 
 .game-container{
+    display: grid;
     flex-grow: 1;       /* Ocupa todo lo que puede */
-    margin-top: 90px;   /* No se superpone a la navBar */
+    margin-top: 55px;   /* No se superpone a la navBar */
     width: max-content;
+
+    grid-template-columns: repeat(20, 1fr);  
 }
 
 .coins, .lives {
@@ -18,6 +21,11 @@
 
 .monkey-selection {
     margin-top: 20px;
+}
+
+.monkey-img.monkey-disabled{
+    filter: grayscale(70%) opacity(70%);
+    cursor: not-allowed;
 }
 
 .monkeys {

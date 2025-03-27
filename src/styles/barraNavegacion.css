@@ -1,0 +1,175 @@
+:root {
+    --color-boton-importante: #e19718;
+    --color-hover: #c57b14;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 5px 15px;
+    margin: 0;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-button {
+    background-color: var(--color-boton-importante);
+    color: white;
+    border: none;
+    padding: 8px 9px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover, #back-button:hover {
+    background-color: var(--color-hover);
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monedas-container{
+    display: flex;
+    align-items: center;
+}
+
+/* Add these new styles for the coin */
+.monedas {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.monedas span {
+    margin-left: 3px;
+}
+
+.vidas-container{
+    display: flex;
+    align-items: center;
+}
+
+.monkey-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+}
+
+.monkey-count {
+    color: white;
+    font-weight: bold;
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    .navbar {
+        padding: 8px 10px;
+    }
+    
+    .nav-button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .monkey img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .monkey {
+        font-size: 14px;
+    }
+    
+    .monedas, .vidas {
+        font-size: 16px;
+    }
+    
+    main, .container, #container-controles {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 6px 8px;
+    }
+    
+    .nav-button {
+        padding: 5px 10px;
+        font-size: 12px;
+        margin-left: 4px;
+    }
+    
+    .monkey img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .monkey {
+        font-size: 12px;
+    }
+    
+    .monedas, .vidas {
+        font-size: 14px;
+    }
+    
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    main, .container, #container-controles {
+        margin-top: 45px;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar {
+        padding: 5px 6px;
+    }
+    
+    .nav-button {
+        padding: 4px 8px;
+        font-size: 10px;
+        margin-left: 3px;
+        border-radius: 3px;
+    }
+    
+    .monkey img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .monkey {
+        font-size: 10px;
+        padding: 4px;
+    }
+    
+    .monedas, .vidas {
+        font-size: 12px;
+    }
+    
+    main, .container, #container-controles {
+        margin-top: 40px;
+    }
+}
