@@ -49,6 +49,16 @@
     margin: auto;
 }
 
+.globo{
+    position: absolute;
+    max-width: 35px;
+    max-height: 35px;
+    background-color: red;
+    border-radius: 50%;
+    animation: move 5s linear infinite;
+    z-index: 10;
+}
+
 .info {
     display: flex;
     justify-content: space-around;
