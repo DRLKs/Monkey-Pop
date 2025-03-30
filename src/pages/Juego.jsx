@@ -8,6 +8,7 @@ import { BarraMonos } from '../components/BarraMonos'
 import { Mono } from '../components/Mono'
 import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
+import Ajustes from '../components/Ajustes'
 
 // Clases
 import { Globo as GloboClass } from '../utils/clases'
@@ -15,6 +16,10 @@ import { Globo as GloboClass } from '../utils/clases'
 // Utilidades
 import { mapas } from '../utils/mapas'
 import { ESTADO_CASILLA, MONOS, PARTIDA } from '../utils/constantes'
+
+// Imágenes de los botonos
+import btnAjustes from '../assets/images/botones/btn-ajustes.png'
+import btnReiniciar from '../assets/images/botones/btn-reiniciar.png'
 
 // Estilos
 import '../styles/juego.css'
@@ -107,6 +112,7 @@ function Juego() {
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
   const [globosExplotados, setGlobosExplotados] = useState(0);
+  const [ajustesVisible, setAjustesVisible] = useState(false);
   
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],
@@ -239,9 +245,32 @@ function Juego() {
     });
   };
 
+  const abrirAjustes = () => {
+    setAjustesVisible(!ajustesVisible);
+  }
+
   return (
     <>
       <BarraNavegacion>
+        <div className='botones-container'>
+          <div className="ajustes">
+            <img 
+              src={btnAjustes} 
+              alt="Ajustes" 
+              className="icono-boton" 
+              onClick={abrirAjustes} 
+            />
+          </div>
+          <div className="reiniciar">
+            <img 
+              src={btnReiniciar} 
+              alt="Reiniciar" 
+              className="icono-boton" 
+              onClick={reiniciarJuego} 
+            />
+            </div>
+        </div>
+       
 
         <div className="info-ronda">
           <h2>Ronda: {gameState.ronda}</h2>
@@ -295,6 +324,11 @@ function Juego() {
           )
         })}
       </div>
+
+      <Ajustes 
+        visible={ajustesVisible} 
+        onClose={() => setAjustesVisible(false)} 
+      />
 
       <FinJuego 
         visible={gameState.perdido} 

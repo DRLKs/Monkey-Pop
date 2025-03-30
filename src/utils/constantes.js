@@ -64,3 +64,8 @@ export const PARTIDA = {
     [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4]
   ]
 }
+
+export const VALORES_PREDETERMINADOS = {
+  volumen: 70,
+  efectos: true
+}
