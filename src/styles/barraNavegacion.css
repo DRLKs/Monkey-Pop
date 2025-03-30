@@ -1,6 +1,18 @@
 :root {
     --color-boton-importante: #e19718;
     --color-hover: #c57b14;
+    --color-dorado: #ffd700;
+    --color-marron-claro: #8b4513;
+    --color-marron-oscuro: #663300;
+    --color-texto-claro: #ffffff;
+    --sombra-texto: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --borde-radio: 20px;
+    --fuente-principal: 'Bangers', 'Comic Sans MS', cursive;
+}
+
+body {
+    padding-top: 30px; /* Reducido para compensar la barra más pequeña */
 }
 
 .navbar {
@@ -8,87 +20,225 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    padding: 5px 15px;
-    margin: 0;
+    background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
+    border: 1px solid var(--color-dorado); 
+    border-radius: 8px; /* Reducido aún más */
+    padding: 1px 20px; /* Reducido a solo 1px vertical */
     box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
+    box-shadow: var(--sombra-elemento);
+    overflow: hidden;
+    margin: 0;
     z-index: 1000;
+    height: auto;
+    min-height: 25px; /* Reducido a 25px */
+}
+
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+}
+
+/* Estilo específico para el botón de volver */
+#back-button {
+    background-color: var(--color-dorado);
+    color: var(--color-marron-oscuro);
+    border: none;
+    padding: 5px 15px; /* Mayor padding que los otros botones */
+    font-size: 1rem; /* Tamaño ligeramente más grande */
+    cursor: pointer;
+    border-radius: 50px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: var(--fuente-principal);
+    letter-spacing: 1px;
+    font-weight: bold;
 }
 
 .nav-button {
-    background-color: var(--color-boton-importante);
-    color: white;
+    background-color: var(--color-dorado);
+    color: var(--color-marron-oscuro);
     border: none;
-    padding: 8px 9px;
-    font-size: 16px;
+    padding: 3px 10px; /* Reducido aún más */
+    font-size: 0.8rem; /* Reducido aún más */
     cursor: pointer;
-    border-radius: 5px;
-    margin-left: 4px;
-    transition: background-color 0.3s;
+    border-radius: 50px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: var(--fuente-principal);
+    letter-spacing: 1px;
+    font-weight: bold;
 }
 
 .nav-button:hover, #back-button:hover {
-    background-color: var(--color-hover);
+    background-color: #ffec80;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
-.info-container{
+.nav-button:active, #back-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--color-dorado);
+    border-radius: 15px;
+    padding: 2px 8px; /* Reducido aún más */
+    margin: 0 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-width: 1px; /* Reducir grosor del borde */
 }
 
-.monedas-container{
+.monedas-container, .vidas-container {
     display: flex;
     align-items: center;
+    margin: 1px 0;
+    padding: 1px 5px;
+    border-radius: 10px;
 }
 
-/* Add these new styles for the coin */
+/* Estilos para las monedas */
 .monedas {
     width: 24px;
     height: 24px;
-    object-fit: contain;
-    color: white;
+    display: flex;
+    align-items: center;
+    color: var(--color-dorado);
     font-weight: bold;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
+    font-size: 0.9rem; /* Ajustar tamaño de texto */
+    text-shadow: var(--sombra-texto);
+    font-family: var(--fuente-principal);
+    letter-spacing: 1px;
 }
 
-.monedas span {
-    margin-left: 3px;
+.monedas img {
+    width: 18px; /* Reducir tamaños de iconos */
+    height: 18px;
+    object-fit: contain;
+    margin-right: 8px;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
-.vidas-container{
+.vidas {
     display: flex;
     align-items: center;
+    color: var(--color-dorado);
+    font-weight: bold;
+    font-size: 0.9rem; /* Ajustar tamaño de texto */
+    text-shadow: var(--sombra-texto);
+    font-family: var(--fuente-principal);
+    letter-spacing: 1px;
 }
 
-.monkey-container{
+.vidas img {
+    width: 18px; /* Reducir tamaños de iconos */
+    height: 18px;
+    object-fit: contain;
+    margin-right: 8px;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+}
+
+.monkey.disabled{
+    filter: grayscale(70%) opacity(70%);
+    cursor: not-allowed;
+    pointer-events: none; /* Evita cualquier interacción */
+}
+
+.monkey-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 2px;
+    gap: 15px;
+    padding: 5px;
+}
+
+.monkey {
+    background: linear-gradient(to bottom, var(--color-marron-oscuro), #4d2600);
+    border: 2px solid var(--color-dorado);
+    border-radius: 12px;
+    padding: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.monkey::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 10px 10px 0 0;
+    pointer-events: none;
+}
+
+.monkey:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border-color: #ffec80;
+}
+
+.monkey:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.monkey img {
+    width: 45px;
+    height: 45px;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
 }
 
 .monkey-count {
-    color: white;
+    color: var(--color-dorado);
     font-weight: bold;
-    margin-top: 3px;
-    font-size: 14px;
+    margin-top: 5px;
+    font-size: 1rem;
+    text-shadow: var(--sombra-texto);
+    font-family: var(--fuente-principal);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+/* Animación para elementos destacados */
+@keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.highlight {
+    animation: pulsate 2s infinite;
 }
 
 /* RESPONSIVE */
 @media (max-width: 800px) {
     .navbar {
-        padding: 8px 10px;
+        padding: 8px 15px;
     }
     
     .nav-button {
-        padding: 6px 12px;
-        font-size: 14px;
+        padding: 8px 12px;
+        font-size: 1rem;
     }
     
     .monkey img {
@@ -96,28 +246,22 @@
         height: 40px;
     }
     
-    .monkey {
-        font-size: 14px;
-    }
-    
     .monedas, .vidas {
-        font-size: 16px;
-    }
-    
-    main, .container, #container-controles {
-        margin-top: 50px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 600px) {
     .navbar {
-        padding: 6px 8px;
+        padding: 6px 10px;
+        flex-direction: column;
+        gap: 10px;
     }
     
     .nav-button {
-        padding: 5px 10px;
-        font-size: 12px;
-        margin-left: 4px;
+        padding: 6px 10px;
+        font-size: 0.9rem;
+        margin: 5px;
     }
     
     .monkey img {
@@ -125,34 +269,26 @@
         height: 35px;
     }
     
-    .monkey {
-        font-size: 12px;
+    .monkey-container {
+        justify-content: center;
+        flex-wrap: wrap;
     }
     
-    .monedas, .vidas {
-        font-size: 14px;
-    }
-    
-    .menu {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    main, .container, #container-controles {
-        margin-top: 45px;
+    .info-container {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
     }
 }
 
 @media (max-width: 400px) {
     .navbar {
-        padding: 5px 6px;
+        padding: 5px;
     }
     
     .nav-button {
-        padding: 4px 8px;
-        font-size: 10px;
-        margin-left: 3px;
-        border-radius: 3px;
+        padding: 5px 8px;
+        font-size: 0.8rem;
     }
     
     .monkey img {
@@ -160,16 +296,7 @@
         height: 30px;
     }
     
-    .monkey {
-        font-size: 10px;
-        padding: 4px;
-    }
-    
     .monedas, .vidas {
-        font-size: 12px;
-    }
-    
-    main, .container, #container-controles {
-        margin-top: 40px;
+        font-size: 0.9rem;
     }
 }
