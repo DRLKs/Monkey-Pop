@@ -1,7 +1,7 @@
 
 import { MONOS } from "../utils/constantes"
 
-export const Mono = ({ tipo, agarrarMono, sePuedeComprar }) => {
+export const MonoBarraNavegador = ({ tipo, agarrarMono, sePuedeComprar }) => {
 
     const agarrar = () => {
         if (sePuedeComprar) agarrarMono(tipo)

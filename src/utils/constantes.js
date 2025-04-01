@@ -16,8 +16,7 @@ import monoFusil from '../assets/images/monkeys/monoFusil.png'
 export const ESTADO_CASILLA = {
     DEFAULT: 'default',
     AGUA: 'agua',
-    CAMINO: 'camino',
-    SELECTED: 'selected'
+    CAMINO: 'camino'
 
     /* 
 
@@ -34,6 +33,8 @@ export const MONOS = {
       imagen: monoBasico,
       precio: 100,
       rango: 200,
+      tiempoRecarga: 3,
+      damage: 1,
       descripcion: "Mono atacante básico con alcance corto"
     },
     arco: {
@@ -42,6 +43,8 @@ export const MONOS = {
       imagen: monoArco,
       precio: 150,
       rango: 100,
+      damage: 1,
+      tiempoRecarga: 3,
       descripcion: "Mono con arco y alcance medio"
     },
     fusil: {
@@ -50,6 +53,8 @@ export const MONOS = {
       imagen: monoFusil,
       precio: 200,
       rango: 150,
+      damage: 2,
+      tiempoRecarga: 2,
       descripcion: "Mono con fusil y alcance largo"
     }
 }
@@ -64,7 +69,8 @@ export const PARTIDA = {
     [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4]
   ],
   tiempoActualizacionGlobos: 1000, // Tiempo en milisegundos
-  tiempoEntreRondas: 3000 // Tiempo en milisegundos
+  tiempoEntreRondas: 3000, // Tiempo en milisegundos
+  monedasGlobo: 10 // Cantidad de monedas que da un globo al ser destruido
 }
 
 export const VALORES_PREDETERMINADOS = {

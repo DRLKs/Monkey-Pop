@@ -1,17 +1,17 @@
 // Bibliotecas de React
-import React, { useMemo, useReducer, useState, useEffect } from 'react'
+import React, { useMemo, useReducer, useState, useEffect, act } from 'react'
 
 // Componentes
 import { BarraNavegacion } from '../components/BarraNavegacion'
 import { CasillaMapa } from '../components/CasillaMapa'
 import { BarraMonos } from '../components/BarraMonos'
-import { Mono } from '../components/Mono'
+import { MonoBarraNavegador } from '../components/MonoBarraNavegador'
 import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
 import Ajustes from '../components/Ajustes'
 
 // Clases
-import { Globo as GloboClass } from '../utils/clases'
+import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
 import { mapas } from '../utils/mapas'
@@ -50,25 +50,57 @@ function gameReducer(state, action) {
       const globosActualizados = [...state.globos];
       const globosAEliminar = [];
       
+      const monos = state.monosColocados;
+
       // Actualizamos los globos existentes
+      let vidasPerdidas = 0;
       globosActualizados.forEach((globo, index) => {
         globo.addTiempoDeVida();
         const tiempoDeVida = globo.getTiempoDeVida();
         
         if (tiempoDeVida >= action.camino.length) {
           globosAEliminar.push(index);
+          vidasPerdidas += globo.getHealth();
         } else {
           globo.setPosition(action.camino[tiempoDeVida]);
+        }
+      });
+
+      // Actualizamos los monos existentes
+      let sumaMonedas = 0;
+      monos.forEach(mono => {
+        if( mono.puedeAtacar() ){
+          const globosExistentes = globosActualizados.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
+          const globoAtaca = mono.attack(globosExistentes);
+          if ( globoAtaca !== null) {
+            console.log('Mono atacando...', globoAtaca.id);
+
+            if ( globoAtaca.health <= mono.damage ){  // El globo explota
+              sumaMonedas += PARTIDA.monedasGlobo;
+              globosAEliminar.push(globoAtaca.id);
+            }else{                                    // El globo pierde vida
+              for (let i = 0; i < globosActualizados.length; i++) {
+                if (globosActualizados[i].id === globoAtaca.id) {
+                  globosActualizados[i].health -= mono.damage;
+                  break;
+                }
+              }
+            }
+          }
         }
       });
       
       // Eliminamos los globos que han llegado al final del camino
       // y calculamos las vidas perdidas
-      let vidasPerdidas = 0;
-      for (let i = globosAEliminar.length - 1; i >= 0; i--) {
-        vidasPerdidas += globosActualizados[globosAEliminar[i]].getHealth();
-        globosActualizados.splice(globosAEliminar[i], 1);
-      }
+
+      globosAEliminar.forEach(globoEliminar => {
+        globosActualizados.forEach((globo, index) => {
+          if (globo.id === globoEliminar) {
+            globosActualizados.splice(index, 1);
+          }
+        });
+      });
+
 
       if (vidasPerdidas >= state.vidas) {
         return { ...state, vidas: 0, perdido: true };  
@@ -93,12 +125,18 @@ function gameReducer(state, action) {
         needsUIUpdate: true,
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
-
+        monedas: state.monedas + sumaMonedas,
       };
       
     case 'REINICIAR':
       return action.estadoInicial;
 
+    case 'AGREGAR_MONO':
+      return {
+        ...state,
+        monosColocados: [...state.monosColocados, action.mono],
+        monedas: state.monedas - action.precio,
+      };
     default:
       return state;
   }
@@ -108,7 +146,6 @@ function Juego() {
   const [mapa, setMapa] = useState(mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
-  const [casillaSeleccionada, setCasillaSeleccionada] = useState(null);
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
   const [globosExplotados, setGlobosExplotados] = useState(0);
@@ -116,6 +153,7 @@ function Juego() {
   
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],
+    monosColocados: [],
     indexGlobo: 0,
     vidas: VIDAS_INICIALES,
     monedas: MONEDAS_INICIALES,
@@ -142,7 +180,7 @@ function Juego() {
     while( caminoTerminado === false)  { 
       caminos.push(posicionActual); 
       movimiento = 0;
-      if ( posicionActual + 1 % 20 !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
+      if ((posicionActual + 1) % 20 !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
         movimiento = 1;
       } else if (posicionActual % 20 !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
         movimiento = -1;
@@ -190,18 +228,17 @@ function Juego() {
       
       // Actualiza el estado de los globos cada 1 segundo
       if (elapsed >= PARTIDA.tiempoActualizacionGlobos) {
+
         if (!gameState.perdido) {
           dispatch({
             type: 'TICK',
-            camino: camino
+            camino: camino,
           });
         }
+
+
         lastUpdateTime = timestamp;
       }
-      
-      /*
-        Añadir aquí la lógica de actualización de los ataques de los monos
-      */
       
       // Continuamos el loop de animación
       animationFrameId = requestAnimationFrame(gameLoop);
@@ -220,15 +257,20 @@ function Juego() {
     const estadoCasillaMarcada = mapa[index];
     if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
     const newMapa = [...mapa];
-    if (estadoCasillaMarcada === ESTADO_CASILLA.SELECTED) {       
-      setCasillaSeleccionada(null);
-    } else {
-      newMapa[index] = ESTADO_CASILLA.SELECTED;
-      setCasillaSeleccionada(index);
-    }
 
-    if (casillaSeleccionada !== null) {
-      newMapa[casillaSeleccionada] = ESTADO_CASILLA.DEFAULT;
+    if (monoSeleccionado !== null) {
+      const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
+                                      monoSeleccionado,
+                                      index,
+                                      MONOS[monoSeleccionado].rango, 
+                                      MONOS[monoSeleccionado].damage,
+                                      MONOS[monoSeleccionado].tiempoRecarga);
+      dispatch({
+        type: 'AGREGAR_MONO',
+        mono: nuevoMono,
+        precio: MONOS[monoSeleccionado].precio
+      });
+      setMonoSeleccionado(null);
     }
 
     setMapa(newMapa);
@@ -273,6 +315,7 @@ function Juego() {
       type: 'REINICIAR',
       estadoInicial: {
         globos: [],
+        monosColocados: [],
         indexGlobo: 0,
         vidas: VIDAS_INICIALES,
         monedas: MONEDAS_INICIALES,
@@ -322,17 +365,17 @@ function Juego() {
           vidas={gameState.vidas}
           >
           
-          <Mono
+          <MonoBarraNavegador
             tipo={MONOS.basico.tipo}
             agarrarMono={() => agarrarMono(MONOS.basico.tipo)}
             sePuedeComprar={gameState.monedas >= MONOS.basico.precio}
             />
-          <Mono
+          <MonoBarraNavegador
             tipo={MONOS.arco.tipo}
             agarrarMono={() => agarrarMono(MONOS.arco.tipo)}
             sePuedeComprar={gameState.monedas >= MONOS.arco.precio}
             />
-          <Mono
+          <MonoBarraNavegador
             tipo={MONOS.fusil.tipo}
             agarrarMono={() => agarrarMono(MONOS.fusil.tipo)}
             sePuedeComprar={gameState.monedas >= MONOS.fusil.precio}
@@ -353,6 +396,7 @@ function Juego() {
       <div className="game-container">
         {mapa.map((estado, index) => {
           const globosEnCasilla = gameState.globos.filter(globo => globo.index === index);
+          const monosEnCasilla = gameState.monosColocados.filter(mono => mono.index === index);
 
           return (
             <CasillaMapa 
@@ -361,6 +405,7 @@ function Juego() {
               index={index}
               actualizarMapa={() => actualizarMapa(index)}
               globos={globosEnCasilla} 
+              monos={monosEnCasilla}
               />
           )
         })}
