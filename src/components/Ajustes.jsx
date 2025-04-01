@@ -4,17 +4,9 @@ import { cargarConfiguracionSonido, guardarConfiguracionSonido } from '../utils/
 
 function Ajustes({ visible, onClose }) {
   // Estados para manejar los valores de los ajustes
-  const [volumen, setVolumen] = useState(70);
-  const [efectos, setEfectos] = useState(true);
-
-  // Cargar configuración desde localStorage cuando el componente se hace visible
-  useEffect(() => {
-    if (visible) {
-      const configuracion = cargarConfiguracionSonido();
-      setVolumen(configuracion.volumen);
-      setEfectos(configuracion.efectos);
-    }
-  }, [visible]);
+  const [configuracinAjustes] = useState(() => cargarConfiguracionSonido());
+  const [volumen, setVolumen] = useState(configuracinAjustes.volumen);
+  const [efectos, setEfectos] = useState(configuracinAjustes.efectos);
 
   const handleVolumenChange = (e) => {
     setVolumen(e.target.value);
@@ -32,6 +24,7 @@ function Ajustes({ visible, onClose }) {
   };
   
   // Manejar clic en el overlay
+  // Si se clica fuera del contenedor de ajustes, se cierra este
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();

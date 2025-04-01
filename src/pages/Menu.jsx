@@ -6,11 +6,14 @@ export function Menu() {
     const navigate = useNavigate()
 
     return (
+        <>
+        <div className="menu-page"></div> {/* Configuración de un div que actuará como body */}
         <div className="menu-container">
             <button id="play-btn" onClick={() => navigate('/juego')}>Jugar</button>
             <button id="settings-btn" onClick={() => navigate('/ajustes')}>Ajustes</button>
             <button id="ranking-btn" onClick={() => navigate('/ranking')}>Ranking</button>
         </div>
+        </>
     )
 }
 

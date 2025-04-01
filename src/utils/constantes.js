@@ -62,7 +62,9 @@ export const PARTIDA = {
     [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
     [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
     [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4]
-  ]
+  ],
+  tiempoActualizacionGlobos: 1000, // Tiempo en milisegundos
+  tiempoEntreRondas: 3000 // Tiempo en milisegundos
 }
 
 export const VALORES_PREDETERMINADOS = {

@@ -1,18 +1,24 @@
 
 :root{
     --color-boton-importante: #e19718;
-    --color-fondo: #282c34
 }
+
+.menu-page{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('../assets/images/backgrounds/fondoInicio.png') no-repeat center center/cover;
+    z-index: -1;}
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: var(--color-fondo);
     color: white;
     font-family: Arial, sans-serif;
-
     overflow: hidden; /* La pantalla estará fija, no podrás scrollearla */
 }
 

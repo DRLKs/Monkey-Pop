@@ -26,7 +26,7 @@ import '../styles/juego.css'
 
 // Constantes del juego
 const MONEDAS_INICIALES = 170;
-const VIDAS_INICIALES = 1;
+const VIDAS_INICIALES = 150;
 const RONDA_INICIAL = 1;
 
 /**
@@ -165,27 +165,56 @@ function Juego() {
     }
   }, [gameState.needsUIUpdate]);
 
+  /*
+   * Controla el tiempo de juego para calcular el tiempo jugado en la pantalla final 
+   */
   useEffect(() => {
     if (gameState.perdido && tiempoFin === null) {
       setTiempoFin(Date.now());
     }
   }, [gameState.perdido, tiempoFin]);
 
+
+  /*
+   * Controla el bucle del juego
+   * Actualiza el estado de los globos cada: 1 segundo
+   */
   useEffect(() => {
-    /**
-     * Función que se ejecuta cada segundo para actualizar que el juego mantenga un flujo constante
-     */
-    const gameLoop = setInterval(() => {
-      if (gameState.perdido) return;
+    let lastUpdateTime = 0;
+    let animationFrameId;
+
+    const gameLoop = (timestamp) => {
+      if (!lastUpdateTime) lastUpdateTime = timestamp;
       
-      dispatch({ 
-        type: 'TICK', 
-        camino: camino 
-      });
-    }, 1000);
+      const elapsed = timestamp - lastUpdateTime;
+      
+      // Actualiza el estado de los globos cada 1 segundo
+      if (elapsed >= PARTIDA.tiempoActualizacionGlobos) {
+        if (!gameState.perdido) {
+          dispatch({
+            type: 'TICK',
+            camino: camino
+          });
+        }
+        lastUpdateTime = timestamp;
+      }
+      
+      /*
+        Añadir aquí la lógica de actualización de los ataques de los monos
+      */
+      
+      // Continuamos el loop de animación
+      animationFrameId = requestAnimationFrame(gameLoop);
+    };
     
-    return () => clearInterval(gameLoop);
-  }, []);
+    // Iniciamos el loop de animación
+    animationFrameId = requestAnimationFrame(gameLoop);
+    
+    // Limpieza al desmontar
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [camino, gameState.perdido]);
 
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
@@ -205,6 +234,9 @@ function Juego() {
     setMapa(newMapa);
   }
 
+  /*
+   * Controla el movimiento del ratón para que la imagen del mono siga al ratón
+   */
   useEffect(() => {
     const controladorMovimientoRaton = (event) => {
       setPosition({x: event.clientX, y: event.clientY});
@@ -219,6 +251,9 @@ function Juego() {
     }
   }, [monoSeleccionado]);
 
+  /**
+   * Función que controla el manejo de los monos seleccionados
+   */
   const agarrarMono = (tipoMono) => {
     if (monoSeleccionado === tipoMono) {
       setMonoSeleccionado(null);
@@ -227,6 +262,9 @@ function Juego() {
     }
   }
 
+  /**
+   * Función que se ejecutará para reiniciar los estados y comenzar una nueva partida 
+   */
   const reiniciarJuego = () => {
     setTiempoInicio(Date.now());
     setTiempoFin(null);
@@ -245,6 +283,9 @@ function Juego() {
     });
   };
 
+  /**
+   * Función que se ejecuta al hacer click en el botón de ajustes
+   */
   const abrirAjustes = () => {
     setAjustesVisible(!ajustesVisible);
   }

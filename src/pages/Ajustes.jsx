@@ -9,6 +9,7 @@ function Ajustes() {
   
   return (
     <>
+    <div className="ajustes-page"></div> {/* Configuración de un div que actuará como body */}
     <BarraNavegacion />
     <ContainerControles/>    
     
