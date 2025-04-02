@@ -11,19 +11,11 @@ import monoFusil from '../assets/images/monkeys/monoFusil.png'
  * @property {string} DEFAULT - Casilla por defecto, verde
  * @property {string} AGUA - Casilla de agua
  * @property {string} CAMINO - Casilla de camino
- * @property {string} SELECTED - Casilla seleccionada por el usuario
  */
 export const ESTADO_CASILLA = {
     DEFAULT: 'default',
     AGUA: 'agua',
     CAMINO: 'camino'
-
-    /* 
-
-    AGREGA AQUÍ LOS ESTADOS DE LOS MONOS
-
-    */
-
 }
 
 export const MONOS = {
@@ -68,7 +60,9 @@ export const PARTIDA = {
     [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
     [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4]
   ],
-  tiempoActualizacionGlobos: 1000, // Tiempo en milisegundos
+  ancho_mapa: 30,   // Tienes que cambiar el css también en juegocss
+  largo_mapa: 15,
+  tiempoActualizacionGlobos: 200, // Tiempo en milisegundos
   tiempoEntreRondas: 3000, // Tiempo en milisegundos
   monedasGlobo: 10 // Cantidad de monedas que da un globo al ser destruido
 }

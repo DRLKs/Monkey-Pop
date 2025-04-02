@@ -54,12 +54,12 @@ function gameReducer(state, action) {
 
       // Actualizamos los globos existentes
       let vidasPerdidas = 0;
-      globosActualizados.forEach((globo, index) => {
+      globosActualizados.forEach((globo) => {
         globo.addTiempoDeVida();
         const tiempoDeVida = globo.getTiempoDeVida();
         
         if (tiempoDeVida >= action.camino.length) {
-          globosAEliminar.push(index);
+          globosAEliminar.push(globo.id);
           vidasPerdidas += globo.getHealth();
         } else {
           globo.setPosition(action.camino[tiempoDeVida]);
@@ -89,10 +89,8 @@ function gameReducer(state, action) {
           }
         }
       });
-      
-      // Eliminamos los globos que han llegado al final del camino
-      // y calculamos las vidas perdidas
 
+      // Se eliminan los globos que han sido destruidos
       globosAEliminar.forEach(globoEliminar => {
         globosActualizados.forEach((globo, index) => {
           if (globo.id === globoEliminar) {
@@ -117,11 +115,10 @@ function gameReducer(state, action) {
           return { ...state, indexGlobo: 0, ronda: state.ronda + 1 };
         }
       }
-      
+
       return {
         ...state,
         globos: globosActualizados,
-        needsUIUpdate: globosAEliminar.length > 0,
         needsUIUpdate: true,
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
@@ -143,7 +140,7 @@ function gameReducer(state, action) {
 }
 
 function Juego() {
-  const [mapa, setMapa] = useState(mapas.diagonal);
+  const [mapa, setMapa] = useState(mapas.horizontal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
@@ -167,7 +164,7 @@ function Juego() {
     let posicionAnterior;
     let posicionActual;
 
-    for (let i = 0; i < mapa.length; i = i + 20) {
+    for (let i = 0; i < mapa.length; i = i + PARTIDA.ancho_mapa) {
       if (mapa[i] === ESTADO_CASILLA.CAMINO) {
         posicionActual = i;
         posicionAnterior = i - 1;
@@ -180,14 +177,14 @@ function Juego() {
     while( caminoTerminado === false)  { 
       caminos.push(posicionActual); 
       movimiento = 0;
-      if ((posicionActual + 1) % 20 !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
+      if ((posicionActual + 1) % PARTIDA.ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
         movimiento = 1;
-      } else if (posicionActual % 20 !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
+      } else if (posicionActual % PARTIDA.ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
         movimiento = -1;
-      } else if (posicionActual < 380 && posicionActual + 20 !== posicionAnterior && mapa[posicionActual + 20] === ESTADO_CASILLA.CAMINO) {
-        movimiento = 20;
-      } else if (posicionActual > 19  && posicionActual - 20 !== posicionAnterior && mapa[posicionActual - 20] === ESTADO_CASILLA.CAMINO) {
-        movimiento = -20;
+      } else if (posicionActual < 380 && posicionActual + PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual + PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
+        movimiento = PARTIDA.ancho_mapa;
+      } else if (posicionActual > PARTIDA.ancho_mapa - 1  && posicionActual - PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual - PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
+        movimiento = -PARTIDA.ancho_mapa;
       } else {
         caminoTerminado = true;
       }
@@ -364,7 +361,7 @@ function Juego() {
           monedas={gameState.monedas}
           vidas={gameState.vidas}
           >
-          
+          { /* Arrglar esto para no poner todos los monos manualmente */ }
           <MonoBarraNavegador
             tipo={MONOS.basico.tipo}
             agarrarMono={() => agarrarMono(MONOS.basico.tipo)}
