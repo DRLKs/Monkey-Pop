@@ -2,10 +2,7 @@
 import React, { useMemo, useReducer, useState, useEffect, act } from 'react'
 
 // Componentes
-import { BarraNavegacion } from '../components/BarraNavegacion'
 import { CasillaMapa } from '../components/CasillaMapa'
-import { BarraMonos } from '../components/BarraMonos'
-import { MonoBarraNavegador } from '../components/MonoBarraNavegador'
 import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
 import AjustesContainerJuego from '../components/AjustesContainerJuego'
@@ -16,13 +13,11 @@ import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
 // Utilidades
 import { mapas } from '../utils/mapas'
 import { ESTADO_CASILLA, MONOS, PARTIDA } from '../utils/constantes'
-
-// Imágenes de los botonos
-import btnAjustes from '../assets/images/botones/btn-ajustes.png'
-import btnReiniciar from '../assets/images/botones/btn-reiniciar.png'
+import { obtenerCaminoMapa } from '../utils/funciones'
 
 // Estilos
 import '../styles/juego.css'
+import BarraNavegacionPartida from '../components/BarraNavegacionPartida'
 
 // Constantes del juego
 const MONEDAS_INICIALES = 170;
@@ -159,39 +154,12 @@ function Juego() {
     needsUIUpdate: false
   });
 
+  /*
+   * Obtenemos el camino que deben seguir los globos
+   */
   const camino = useMemo(() => {
-    const caminos = [];
-    let posicionAnterior;
-    let posicionActual;
-
-    for (let i = 0; i < mapa.length; i = i + PARTIDA.ancho_mapa) {
-      if (mapa[i] === ESTADO_CASILLA.CAMINO) {
-        posicionActual = i;
-        posicionAnterior = i - 1;
-        break;
-      }
-    }
-
-    let caminoTerminado = false;
-    let movimiento;
-    while( caminoTerminado === false)  { 
-      caminos.push(posicionActual); 
-      movimiento = 0;
-      if ((posicionActual + 1) % PARTIDA.ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
-        movimiento = 1;
-      } else if (posicionActual % PARTIDA.ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
-        movimiento = -1;
-      } else if (posicionActual < 380 && posicionActual + PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual + PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-        movimiento = PARTIDA.ancho_mapa;
-      } else if (posicionActual > PARTIDA.ancho_mapa - 1  && posicionActual - PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual - PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-        movimiento = -PARTIDA.ancho_mapa;
-      } else {
-        caminoTerminado = true;
-      }
-      posicionAnterior = posicionActual;
-      posicionActual = posicionActual + movimiento;
-    }    
-    return caminos;
+    return obtenerCaminoMapa(mapa)
+    
   }, []);
 
   useEffect(() => {
@@ -252,24 +220,21 @@ function Juego() {
 
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
-    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
-    const newMapa = [...mapa];
+    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO || monoSeleccionado === null ) return;
 
-    if (monoSeleccionado !== null) {
-      const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
+    const newMapa = [...mapa];
+    const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
                                       monoSeleccionado,
                                       index,
                                       MONOS[monoSeleccionado].rango, 
                                       MONOS[monoSeleccionado].damage,
                                       MONOS[monoSeleccionado].tiempoRecarga);
-      dispatch({
-        type: 'AGREGAR_MONO',
-        mono: nuevoMono,
-        precio: MONOS[monoSeleccionado].precio
-      });
-      setMonoSeleccionado(null);
-    }
-
+    dispatch({
+      type: 'AGREGAR_MONO',
+      mono: nuevoMono,
+      precio: MONOS[monoSeleccionado].precio
+    });
+    setMonoSeleccionado(null);
     setMapa(newMapa);
   }
 
@@ -332,55 +297,14 @@ function Juego() {
 
   return (
     <>
-      <BarraNavegacion>
-        <div className='botones-container'>
-          <div className="ajustes">
-            <img 
-              src={btnAjustes} 
-              alt="Ajustes" 
-              className="icono-boton" 
-              onClick={abrirAjustes} 
-            />
-          </div>
-          <div className="reiniciar">
-            <img 
-              src={btnReiniciar} 
-              alt="Reiniciar" 
-              className="icono-boton" 
-              onClick={reiniciarJuego} 
-            />
-            </div>
-        </div>
-       
-
-        <div className="info-ronda">
-          <h2>Ronda: {gameState.ronda}</h2>
-        </div>
-
-        <BarraMonos
-          monedas={gameState.monedas}
-          vidas={gameState.vidas}
-          >
-          { /* Arrglar esto para no poner todos los monos manualmente */ }
-          <MonoBarraNavegador
-            tipo={MONOS.basico.tipo}
-            agarrarMono={() => agarrarMono(MONOS.basico.tipo)}
-            sePuedeComprar={gameState.monedas >= MONOS.basico.precio}
-            />
-          <MonoBarraNavegador
-            tipo={MONOS.arco.tipo}
-            agarrarMono={() => agarrarMono(MONOS.arco.tipo)}
-            sePuedeComprar={gameState.monedas >= MONOS.arco.precio}
-            />
-          <MonoBarraNavegador
-            tipo={MONOS.fusil.tipo}
-            agarrarMono={() => agarrarMono(MONOS.fusil.tipo)}
-            sePuedeComprar={gameState.monedas >= MONOS.fusil.precio}
-            />
-
-
-        </BarraMonos>
-      </BarraNavegacion>
+      <BarraNavegacionPartida 
+        ronda={gameState.ronda}
+        vidas={gameState.vidas}
+        monedas={gameState.monedas}
+        reiniciarJuego={reiniciarJuego}
+        abrirAjustes={abrirAjustes}
+        agarrarMono={agarrarMono}
+      />
 
       {monoSeleccionado !== null && (
         <MonoAgarrado

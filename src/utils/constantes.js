@@ -18,6 +18,9 @@ export const ESTADO_CASILLA = {
     CAMINO: 'camino'
 }
 
+/**
+ * Los diferentes tipos de monos existentes
+ */
 export const MONOS = {
     basico: {
       nombre: "Mono Básico",
@@ -69,5 +72,6 @@ export const PARTIDA = {
 
 export const VALORES_PREDETERMINADOS = {
   volumen: 70,
-  efectos: true
+  efectos: true,
+  idioma: 'es'
 }

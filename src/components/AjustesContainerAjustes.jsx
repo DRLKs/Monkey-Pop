@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { cargarConfiguracion, guardarConfiguracion } from '../utils/funciones';
-import { useNavigate } from 'react-router-dom';
 
-function AjustesContainerAjustes({ onClose }) {
-    const navigate = useNavigate();
+function AjustesContainerAjustes() {
     
     // Cargar configuración inicial
     const [configuracionAjustes] = useState(() => cargarConfiguracion());
