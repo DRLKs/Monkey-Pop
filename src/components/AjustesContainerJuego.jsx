@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/ajustesJuego.css'
-import { cargarConfiguracionSonido, guardarConfiguracionSonido } from '../utils/funciones'
+import { cargarConfiguracion, guardarConfiguracion } from '../utils/funciones'
 
-function Ajustes({ visible, onClose }) {
+function AjustesContainerJuego({ visible, onClose }) {
   // Estados para manejar los valores de los ajustes
-  const [configuracinAjustes] = useState(() => cargarConfiguracionSonido());
+  const [configuracinAjustes] = useState(() => cargarConfiguracion());
   const [volumen, setVolumen] = useState(configuracinAjustes.volumen);
   const [efectos, setEfectos] = useState(configuracinAjustes.efectos);
 
@@ -16,9 +16,9 @@ function Ajustes({ visible, onClose }) {
     setEfectos(e.target.checked);
   };
 
-  const guardarConfiguracion = () => {
+  const guardar = () => {
     // Guardar valores actuales en localStorage
-    guardarConfiguracionSonido(volumen, efectos);
+    guardarConfiguracion(volumen, efectos);
     console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}`);
     onClose();
   };
@@ -42,7 +42,7 @@ function Ajustes({ visible, onClose }) {
         
         <div className="ajustes-body">
           <div className="ajuste-item">
-            <label htmlFor="volumen">Volumen de música</label>
+            <label htmlFor="volumen">Volumen</label>
             <input 
               type="range" 
               id="volumen" 
@@ -69,7 +69,7 @@ function Ajustes({ visible, onClose }) {
         </div>
         
         <div className="ajustes-footer">
-          <button className="btn-guardar" onClick={guardarConfiguracion}>Guardar</button>
+          <button className="btn-guardar" onClick={guardar}>Guardar</button>
           <button className="btn-cancelar" onClick={onClose}>Cancelar</button>
         </div>
       </div>
@@ -77,4 +77,4 @@ function Ajustes({ visible, onClose }) {
   )
 }
 
-export default Ajustes
+export default AjustesContainerJuego

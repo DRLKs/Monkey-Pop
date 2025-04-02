@@ -1,4 +1,3 @@
-
 import { VALORES_PREDETERMINADOS } from "./constantes";
 
 /**
@@ -6,12 +5,17 @@ import { VALORES_PREDETERMINADOS } from "./constantes";
  * 
  * @param {*} volumen Nivel de volumen de la música y efectos
  * @param {*} efectos Mutear o no los efectos de sonido y la música
+ * @param {*} lenguaje Idioma de la configuración
  * @returns {void}
  */
-export const guardarConfiguracionSonido = (volumen, efectos) => {
-  localStorage.setItem('volumen', volumen);
-  localStorage.setItem('efectos', efectos);
-}
+export const guardarConfiguracion = (volumen, efectos, lenguaje) => {
+    const configuracion = {
+        volumen,
+        efectos,
+        lenguaje
+    };
+    localStorage.setItem('configuracion', JSON.stringify(configuracion));
+};
 
 /**
  * Carga en la partida la configuración de sonido desde el localStorage.
@@ -19,19 +23,23 @@ export const guardarConfiguracionSonido = (volumen, efectos) => {
  * @returns {Object} Objeto con la configuración de sonido
  * * @property {number} volumen - Nivel de volumen de la música y efectos
  * * @property {boolean} efectos - Mutear o no los efectos de sonido y la música
+ * * @property {string} lenguaje - Idioma de la configuración
  */
-export const cargarConfiguracionSonido = () => {
-  // Cargar volumen (valor numérico)
-  const volumenGuardado = localStorage.getItem('volumen');
-  const volumen = volumenGuardado !== null ? Number(volumenGuardado) : VALORES_PREDETERMINADOS.volumen;
-  
-  // Cargar efectos (valor booleano)
-  const efectosGuardado = localStorage.getItem('efectos');
-  const efectos = efectosGuardado !== null ? 
-    efectosGuardado === 'true' : 
-    VALORES_PREDETERMINADOS.efectos;
-  return { volumen, efectos };
-}
+export const cargarConfiguracion = () => {
+    const configuracionGuardada = localStorage.getItem('configuracion');
+    if (configuracionGuardada) {
+        return JSON.parse(configuracionGuardada);
+    }
+    return {
+        volumen: 50,
+        efectos: true,
+        lenguaje: 'es'
+    };
+};
+
+
+
+
 
 /**
  * Guarda la configuración de la partida en el localStorage.
@@ -49,7 +57,7 @@ export const guardarConfiguracionPartida = (configuracion) => {
  * 
  */
 export const cargarConfiguracionPartida = () => {
-  const configuracion = JSON.parse(localStorage.getItem('configuracionPartida'));
+  const configuracion = JSON.parse(localStorage.getItem('configuracion'));
   return configuracion || null;
 }
 

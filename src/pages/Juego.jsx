@@ -8,7 +8,7 @@ import { BarraMonos } from '../components/BarraMonos'
 import { MonoBarraNavegador } from '../components/MonoBarraNavegador'
 import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
-import Ajustes from '../components/Ajustes'
+import AjustesContainerJuego from '../components/AjustesContainerJuego'
 
 // Clases
 import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
@@ -408,7 +408,7 @@ function Juego() {
         })}
       </div>
 
-      <Ajustes 
+      <AjustesContainerJuego 
         visible={ajustesVisible} 
         onClose={() => setAjustesVisible(false)} 
       />
