@@ -18,6 +18,7 @@ import { obtenerCaminoMapa } from '../utils/funciones'
 // Estilos
 import '../styles/juego.css'
 import BarraNavegacionPartida from '../components/BarraNavegacionPartida'
+import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 // Constantes del juego
 const MONEDAS_INICIALES = 170;
@@ -42,14 +43,15 @@ const RONDA_INICIAL = 1;
 function gameReducer(state, action) {
   switch (action.type) {
     case 'TICK':
-      const globosActualizados = [...state.globos];
-      const globosAEliminar = [];
-      
+      const globosTablero = [...state.globos];      
       const monos = state.monosColocados;
 
-      // Actualizamos los globos existentes
+      const globosAEliminar = [];
+
+
+      // Actualizamos la posición de los globos existentes
       let vidasPerdidas = 0;
-      globosActualizados.forEach((globo) => {
+      globosTablero.forEach((globo) => {
         globo.addTiempoDeVida();
         const tiempoDeVida = globo.getTiempoDeVida();
         
@@ -63,20 +65,23 @@ function gameReducer(state, action) {
 
       // Actualizamos los monos existentes
       let sumaMonedas = 0;
+      let sumaGlobosExplotados = 0;
       monos.forEach(mono => {
         if( mono.puedeAtacar() ){
-          const globosExistentes = globosActualizados.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
-          const globoAtaca = mono.attack(globosExistentes);
-          if ( globoAtaca !== null) {
-            console.log('Mono atacando...', globoAtaca.id);
+          const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
+          const globoAtacado = mono.attack(globosExistentes);
+          if ( globoAtacado !== null) {
+            console.log('Mono atacando a globo:', globoAtacado.id);
 
-            if ( globoAtaca.health <= mono.damage ){  // El globo explota
+            if ( globoAtacado.health <= mono.damage ){  // El globo explota
               sumaMonedas += PARTIDA.monedasGlobo;
-              globosAEliminar.push(globoAtaca.id);
+              ++sumaGlobosExplotados;
+              globosAEliminar.push(globoAtacado.id);
             }else{                                    // El globo pierde vida
-              for (let i = 0; i < globosActualizados.length; i++) {
-                if (globosActualizados[i].id === globoAtaca.id) {
-                  globosActualizados[i].health -= mono.damage;
+              for (let i = 0; i < globosTablero.length; i++) {
+                if (globosTablero[i].id === globoAtacado.id) {
+                  console.log("Globo atacado,", globoAtacado.id,  "vida restante: ", globoAtacado.health - mono.damage)
+                  globosTablero[i].health -= mono.damage;
                   break;
                 }
               }
@@ -87,37 +92,39 @@ function gameReducer(state, action) {
 
       // Se eliminan los globos que han sido destruidos
       globosAEliminar.forEach(globoEliminar => {
-        globosActualizados.forEach((globo, index) => {
+        globosTablero.forEach((globo, index) => {
           if (globo.id === globoEliminar) {
-            globosActualizados.splice(index, 1);
+            globosTablero.splice(index, 1);
           }
         });
       });
 
 
       if (vidasPerdidas >= state.vidas) {
-        return { ...state, vidas: 0, perdido: true };  
+        return { ...state,  vidas: 0, perdido: true };  
       }
       
       // Los globos que quedan de la ronde se introducen en el juego
       if (state.indexGlobo < PARTIDA.rondas[state.ronda-1].length) {
         const health = PARTIDA.rondas[state.ronda-1][state.indexGlobo];
         const globo = new GloboClass(state.indexGlobo, action.camino[0], health, 0);
-        globosActualizados.push(globo);
+        globosTablero.push(globo);
       }else{
         // Si no quedan globos de la ronda, se pasa a la siguiente ronda
-        if (globosActualizados.length === 0) {
-          return { ...state, indexGlobo: 0, ronda: state.ronda + 1 };
+        if (globosTablero.length === 0) {
+          return { ...state, globos: globosTablero, indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
         }
       }
 
       return {
         ...state,
-        globos: globosActualizados,
+        globos: globosTablero,
         needsUIUpdate: true,
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
         monedas: state.monedas + sumaMonedas,
+        globosExplotados: state.globosExplotados + sumaGlobosExplotados,
+        nuevaRonda: false
       };
       
     case 'REINICIAR':
@@ -140,7 +147,6 @@ function Juego() {
   const [position, setPosition] = useState({x: 0, y:0});
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
-  const [globosExplotados, setGlobosExplotados] = useState(0);
   const [ajustesVisible, setAjustesVisible] = useState(false);
   
   const [gameState, dispatch] = useReducer(gameReducer, {
@@ -151,7 +157,9 @@ function Juego() {
     monedas: MONEDAS_INICIALES,
     ronda: RONDA_INICIAL,
     perdido: false,
-    needsUIUpdate: false
+    needsUIUpdate: false,
+    globosExplotados: 0,
+    nuevaRonda: true
   });
 
   /*
@@ -177,6 +185,12 @@ function Juego() {
     }
   }, [gameState.perdido, tiempoFin]);
 
+  /*
+   * Cada vez que comience una ronda nuevva, aparecerá un mensaje en la pantalla informando de ello
+   */
+  useEffect(() => {
+  
+  }, [gameState.ronda])
 
   /*
    * Controla el bucle del juego
@@ -190,20 +204,27 @@ function Juego() {
       if (!lastUpdateTime) lastUpdateTime = timestamp;
       
       const elapsed = timestamp - lastUpdateTime;
-      
-      // Actualiza el estado de los globos cada 1 segundo
-      if (elapsed >= PARTIDA.tiempoActualizacionGlobos) {
+      if ( gameState.nuevaRonda  ){       // Mantiene un margen entre ronda y ronda
 
-        if (!gameState.perdido) {
+        if ( elapsed >= PARTIDA.tiempoEntreRondas ){
           dispatch({
             type: 'TICK',
             camino: camino,
           });
         }
+      }else {
+        if (elapsed >= PARTIDA.tiempoActualizacionGlobos ) {
+          if (!gameState.perdido) {
+            dispatch({
+              type: 'TICK',
+              camino: camino,
+            });
+          }
 
-
-        lastUpdateTime = timestamp;
+          lastUpdateTime = timestamp;
+        }
       }
+      
       
       // Continuamos el loop de animación
       animationFrameId = requestAnimationFrame(gameLoop);
@@ -216,8 +237,14 @@ function Juego() {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [camino, gameState.perdido]);
+  }, [gameState.globos, gameState.perdido, gameState.nuevaRonda]);
 
+  /*
+   * Función que obtiene la casilla del mapa clicada 
+   *
+   * @param {Entero} index Índice del mapa que se ha clicado
+   * @returns 
+   */
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
     if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO || monoSeleccionado === null ) return;
@@ -272,7 +299,6 @@ function Juego() {
   const reiniciarJuego = () => {
     setTiempoInicio(Date.now());
     setTiempoFin(null);
-    setGlobosExplotados(0);
     dispatch({
       type: 'REINICIAR',
       estadoInicial: {
@@ -283,7 +309,9 @@ function Juego() {
         monedas: MONEDAS_INICIALES,
         ronda: RONDA_INICIAL,
         perdido: false,
-        needsUIUpdate: false
+        needsUIUpdate: false,
+        globosExplotados: 0,
+        nuevaRonda: true
       }
     });
   };
@@ -343,10 +371,16 @@ function Juego() {
           ronda: gameState.ronda,
           monedas: gameState.monedas - MONEDAS_INICIALES,
           tiempoJugado: Math.floor(((tiempoFin || Date.now()) - tiempoInicio) / 1000),
-          globosExplotados: globosExplotados
+          globosExplotados: gameState.globosExplotados
         }}
         onReiniciar={reiniciarJuego}
       />
+
+      <NuevaRondaContainer
+        visible={gameState.nuevaRonda}
+        ronda={gameState.ronda}
+      />
+
     </>
   )
 }

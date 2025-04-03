@@ -8,6 +8,8 @@ function AjustesContainerAjustes() {
     const [volumen, setVolumen] = useState(configuracionAjustes.volumen || 50);
     const [efectos, setEfectos] = useState(configuracionAjustes.efectos === null ? true : configuracionAjustes.efectos);
     const [lenguaje, setLenguaje] = useState(configuracionAjustes.lenguaje || "es");
+
+    const [ configuracionGuardada, setConfiguracionGuardada] = useState(false);
     
     const handleVolumenChange = (e) => {
         setVolumen(e.target.value);
@@ -28,8 +30,21 @@ function AjustesContainerAjustes() {
         // Guardar valores actuales en localStorage
         guardarConfiguracion(volumen, efectos, lenguaje);
         console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
-        
+        setConfiguracionGuardada(true); // Reiniciar el estado
     };
+
+    // Efecto que reacciona al cambio de estado
+    useEffect(() => {
+        if (configuracionGuardada) {
+            console.log("Configuración guardada correctamente");
+            console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
+            
+            // Aquí podrías hacer más cosas, como ocultar un mensaje de éxito tras un tiempo
+            setTimeout(() => {
+                setConfiguracionGuardada(false); // Reiniciar el estado
+            }, 2000);
+        }
+    }, [configuracionGuardada]);
 
     return (
         <div id="container-controles">
@@ -77,6 +92,12 @@ function AjustesContainerAjustes() {
                 </div>
 
                 <button id="boton-submit" type="submit">Guardar Ajustes</button>
+
+                { configuracionGuardada && (
+                    <div id='mensaje-guardado-correctamente'>
+                        <label> Guardado correctamente </label>
+                    </div>
+                )}
             </form>
         </div>
     );

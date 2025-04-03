@@ -65,8 +65,8 @@ export const PARTIDA = {
   ],
   ancho_mapa: 30,   // Tienes que cambiar el css también en juegocss
   largo_mapa: 15,
-  tiempoActualizacionGlobos: 200, // Tiempo en milisegundos
-  tiempoEntreRondas: 3000, // Tiempo en milisegundos
+  tiempoActualizacionGlobos: 100, // Tiempo en milisegundos
+  tiempoEntreRondas: 5000, // Tiempo en milisegundos
   monedasGlobo: 10 // Cantidad de monedas que da un globo al ser destruido
 }
 

@@ -32,21 +32,18 @@ const FinJuego = ({ visible, estadisticas, onReiniciar }) => {
             <span className="valor">{estadisticas.monedas}</span>
           </div>
           
-          {estadisticas.tiempoJugado && (
-            <div className="estadistica">
-              <span className="etiqueta">Tiempo jugado:</span>
-              <span className="valor">
-                {Math.floor(estadisticas.tiempoJugado / 60)}m {estadisticas.tiempoJugado % 60}s
-              </span>
-            </div>
-          )}
+          <div className="estadistica">
+            <span className="etiqueta">Tiempo jugado:</span>
+            <span className="valor">
+              {Math.floor(estadisticas.tiempoJugado / 60)}m {estadisticas.tiempoJugado % 60}s
+            </span>
+          </div>
           
-          {estadisticas.globosExplotados && (
-            <div className="estadistica">
-              <span className="etiqueta">Globos explotados:</span>
-              <span className="valor">{estadisticas.globosExplotados}</span>
-            </div>
-          )}
+          <div className="estadistica">
+            <span className="etiqueta">Globos explotados:</span>
+            <span className="valor">{estadisticas.globosExplotados}</span>
+          </div>
+          
         </div>
         
         <button className="fin-juego-boton" onClick={onReiniciar}>
