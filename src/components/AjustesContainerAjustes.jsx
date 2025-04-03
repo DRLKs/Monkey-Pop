@@ -9,8 +9,10 @@ function AjustesContainerAjustes() {
     const [efectos, setEfectos] = useState(configuracionAjustes.efectos === null ? true : configuracionAjustes.efectos);
     const [lenguaje, setLenguaje] = useState(configuracionAjustes.lenguaje || "es");
 
+    const [ isFirstRender, setIsFirstRender ] = useState(true);      // Estado para que el sistema entienda que es la primera vez que se renderiza
     const [ configuracionGuardada, setConfiguracionGuardada] = useState(false);
     
+
     const handleVolumenChange = (e) => {
         setVolumen(e.target.value);
     };
@@ -30,20 +32,21 @@ function AjustesContainerAjustes() {
         // Guardar valores actuales en localStorage
         guardarConfiguracion(volumen, efectos, lenguaje);
         console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
-        setConfiguracionGuardada(true); // Reiniciar el estado
+        const confGuardada = configuracionGuardada
+        setConfiguracionGuardada(!confGuardada);    // Cambia el estado para que se aprecie una actualización
+
     };
 
     // Efecto que reacciona al cambio de estado
     useEffect(() => {
-        if (configuracionGuardada) {
-            console.log("Configuración guardada correctamente");
-            console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
-            
-            // Aquí podrías hacer más cosas, como ocultar un mensaje de éxito tras un tiempo
-            setTimeout(() => {
-                setConfiguracionGuardada(false); // Reiniciar el estado
-            }, 2000);
+        if ( isFirstRender ){
+            setIsFirstRender(false);
+            return;
         }
+        console.log("Configuración guardada correctamente");
+        console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
+        setConfiguracionGuardada(true);
+        
     }, [configuracionGuardada]);
 
     return (

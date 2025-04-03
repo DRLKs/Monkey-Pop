@@ -47,7 +47,7 @@ function gameReducer(state, action) {
       const monos = state.monosColocados;
 
       const globosAEliminar = [];
-
+      const indexGlobosExplotados = []
 
       // Actualizamos la posición de los globos existentes
       let vidasPerdidas = 0;
@@ -71,16 +71,16 @@ function gameReducer(state, action) {
           const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
           const globoAtacado = mono.attack(globosExistentes);
           if ( globoAtacado !== null) {
-            console.log('Mono atacando a globo:', globoAtacado.id);
+            console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
 
             if ( globoAtacado.health <= mono.damage ){  // El globo explota
               sumaMonedas += PARTIDA.monedasGlobo;
               ++sumaGlobosExplotados;
               globosAEliminar.push(globoAtacado.id);
+              indexGlobosExplotados.push(globoAtacado.index);
             }else{                                    // El globo pierde vida
               for (let i = 0; i < globosTablero.length; i++) {
-                if (globosTablero[i].id === globoAtacado.id) {
-                  console.log("Globo atacado,", globoAtacado.id,  "vida restante: ", globoAtacado.health - mono.damage)
+                if (globosTablero[i].id == globoAtacado.id) {
                   globosTablero[i].health -= mono.damage;
                   break;
                 }
@@ -112,7 +112,7 @@ function gameReducer(state, action) {
       }else{
         // Si no quedan globos de la ronda, se pasa a la siguiente ronda
         if (globosTablero.length === 0) {
-          return { ...state, globos: globosTablero, indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
+          return { ...state, vidas: state.vidas - vidasPerdidas, globos: globosTablero, indexsGlobosExplotados: [], indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
         }
       }
 
@@ -124,7 +124,8 @@ function gameReducer(state, action) {
         vidas: state.vidas - vidasPerdidas,
         monedas: state.monedas + sumaMonedas,
         globosExplotados: state.globosExplotados + sumaGlobosExplotados,
-        nuevaRonda: false
+        nuevaRonda: false,
+        indexsGlobosExplotados: indexGlobosExplotados
       };
       
     case 'REINICIAR':
@@ -150,16 +151,17 @@ function Juego() {
   const [ajustesVisible, setAjustesVisible] = useState(false);
   
   const [gameState, dispatch] = useReducer(gameReducer, {
-    globos: [],
-    monosColocados: [],
-    indexGlobo: 0,
-    vidas: VIDAS_INICIALES,
-    monedas: MONEDAS_INICIALES,
-    ronda: RONDA_INICIAL,
-    perdido: false,
-    needsUIUpdate: false,
-    globosExplotados: 0,
-    nuevaRonda: true
+    globos: [],                   // Guarda los globos que está sin explotar en el camino
+    monosColocados: [],           // Guarda las posicies de los monos colocados por el usuario
+    indexGlobo: 0,                // Controla el índice del último globo que salió, esto es para solo enviar los globos de cada ronda
+    vidas: VIDAS_INICIALES,       // Mantiene la cuenta de vidas que le quedan al usuario
+    monedas: MONEDAS_INICIALES,   // Mantiene la cuenta de las monedas que tiene ahorradas el usuario
+    ronda: RONDA_INICIAL,         // Estado que controla la ronda por la que vamos
+    perdido: false,               // Estado que cotrola que el jugador o haya perdido
+    needsUIUpdate: false,       
+    globosExplotados: 0,          // Mantiene la suma de los globos explotados durante todas las rodas
+    nuevaRonda: true,             // Indica si estamos en un ronda nueva
+    indexsGlobosExplotados: []    // Globos explotados por los monos durante el TICK
   });
 
   /*
@@ -253,8 +255,8 @@ function Juego() {
     const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
                                       monoSeleccionado,
                                       index,
-                                      MONOS[monoSeleccionado].rango, 
                                       MONOS[monoSeleccionado].damage,
+                                      MONOS[monoSeleccionado].rango, 
                                       MONOS[monoSeleccionado].tiempoRecarga);
     dispatch({
       type: 'AGREGAR_MONO',
@@ -311,7 +313,8 @@ function Juego() {
         perdido: false,
         needsUIUpdate: false,
         globosExplotados: 0,
-        nuevaRonda: true
+        nuevaRonda: true,
+        indexsGlobosExplotados: []
       }
     });
   };
@@ -325,6 +328,7 @@ function Juego() {
 
   return (
     <>
+      <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
         ronda={gameState.ronda}
         vidas={gameState.vidas}
@@ -346,7 +350,8 @@ function Juego() {
         {mapa.map((estado, index) => {
           const globosEnCasilla = gameState.globos.filter(globo => globo.index === index);
           const monosEnCasilla = gameState.monosColocados.filter(mono => mono.index === index);
-
+          const explotaGloboCasilla = gameState.indexsGlobosExplotados.some(idx => index === idx);
+          
           return (
             <CasillaMapa 
               key={index} 
@@ -355,6 +360,7 @@ function Juego() {
               actualizarMapa={() => actualizarMapa(index)}
               globos={globosEnCasilla} 
               monos={monosEnCasilla}
+              explotaGloboCasilla={explotaGloboCasilla}
               />
           )
         })}

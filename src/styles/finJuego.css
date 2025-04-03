@@ -81,6 +81,11 @@
   font-weight: bold;
 }
 
+.buttons-container{
+  display: flex;
+  flex-direction: row;
+}
+
 .fin-juego-boton {
   background-color: #ffd700;
   color: #663300;
@@ -95,6 +100,13 @@
   font-family: 'Bangers', 'Comic Sans MS', cursive;
   letter-spacing: 1px;
 }
+
+#boton-salir{
+  max-width: 110px;
+  justify-content: center;
+}
+
+
 
 .fin-juego-boton:hover {
   background-color: #ffec80;
