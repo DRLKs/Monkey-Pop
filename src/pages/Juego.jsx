@@ -143,7 +143,7 @@ function gameReducer(state, action) {
 }
 
 function Juego() {
-  const [mapa, setMapa] = useState(mapas.horizontal);
+  const [mapa, setMapa] = useState(mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());

@@ -20,7 +20,13 @@ export function Menu() {
             <button id="settings-btn" onClick={() => navigate('/ajustes')}>Ajustes</button>
             <button id="ranking-btn" onClick={() => navigate('/ranking')}>Ranking</button>
         </div>
+        
+        <footer>
+            <a onClick={() => navigate('/creditos')}> Créditos </a>
+            <a href='https://github.com/DRLKs' > github </a>
+        </footer>
         </>
+        
     )
 }
 

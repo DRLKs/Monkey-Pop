@@ -80,12 +80,13 @@ export const obtenerCaminoMapa = (mapa) => {
         movimiento = 0;
         if ((posicionActual + 1) % PARTIDA.ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
            movimiento = 1;
-        } else if (posicionActual % PARTIDA.ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
-            movimiento = -1;
-        } else if (posicionActual < 380 && posicionActual + PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual + PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-            movimiento = PARTIDA.ancho_mapa;
         } else if (posicionActual > PARTIDA.ancho_mapa - 1  && posicionActual - PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual - PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
             movimiento = -PARTIDA.ancho_mapa;
+        } else if (posicionActual < 420 && posicionActual + PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual + PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
+            movimiento = PARTIDA.ancho_mapa;
+        } else if (posicionActual % PARTIDA.ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
+            movimiento = -1;
+        
         } else {
             caminoTerminado = true;
         }

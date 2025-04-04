@@ -24,7 +24,8 @@ export const mapaCaminoDiagonal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa)
   const y = Math.floor(index / PARTIDA.ancho_mapa);
   
   // Agua en las esquinas
-  if ((x > 22 && y < 4) || (x < 8 && y > 10)) return 'agua';
+  if ( y > 3 && y - 4 > x ) return 'agua'
+  if ( x > 17 && x > y + 17 ) return 'agua'
   
   // Camino diagonal ajustado para 30x15
   if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return 'camino';
@@ -38,11 +39,16 @@ export const mapaRio = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('defa
   const y = Math.floor(index / PARTIDA.ancho_mapa);
   
   // Crear río horizontal (ajustado para nuevas dimensiones)
+  if (y === 3) return 'agua';
+  if (y === 4) return 'agua';
   if (y === 5) return 'agua';
+
+  if (y === 9) return 'agua';
   if (y === 10) return 'agua';
+  if (y === 11) return 'agua';
   
-  // Crear camino vertical
-  if (x === 15 && y !== 5 && y !== 10) return 'camino';
+  // Crear camino horizontal
+  if (y == 7) return 'camino';
   
   // Puentes sobre el río
   if ((x === 15 && y === 5) || (x === 15 && y === 10)) return 'camino';
@@ -66,14 +72,11 @@ export const mapaLago = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('def
   if (distancia < 6) return 'agua';
   
   // Caminos alrededor del lago
-  if (distancia >= 6 && distancia < 7) return 'camino';
+  if (distancia < 8) return 'camino';
   
   // Camino horizontal
-  if (y === 4 && x > 3 && x < PARTIDA.ancho_mapa - 4) return 'camino';
-  
-  // Camino vertical
-  if (x === 7 && y > 2 && y < PARTIDA.largo_mapa - 3) return 'camino';
-  
+  if (y === 4) return 'camino';
+    
   return casilla;
 });
 
@@ -90,24 +93,6 @@ export const mapaIsla = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('def
   
   // Caminos verticales
   if ((x === 8 || x === PARTIDA.ancho_mapa - 9) && y >= 2 && y <= PARTIDA.largo_mapa - 3) return 'camino';
-  
-  return casilla;
-});
-
-// Mapa tipo laberinto
-export const mapaLaberinto = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
-  const x = index % PARTIDA.ancho_mapa;
-  const y = Math.floor(index / PARTIDA.ancho_mapa);
-  
-  // Paredes del laberinto (usando agua para visualizarlas)
-  if ((x % 6 === 0 || y % 3 === 0) && 
-      !(x % 6 === 0 && y % 3 === 0) && 
-      x > 0 && x < PARTIDA.ancho_mapa - 1 && y > 0 && y < PARTIDA.largo_mapa - 1) return 'agua';
-  
-  // Caminos del laberinto
-  if ((x % 3 === 1 && y % 2 === 1) || 
-      (x === PARTIDA.ancho_mapa/2 && y >= PARTIDA.largo_mapa/4 && y <= PARTIDA.largo_mapa*3/4) || 
-      (y === PARTIDA.largo_mapa/2 && x >= PARTIDA.ancho_mapa/4 && x <= PARTIDA.ancho_mapa*3/4)) return 'camino';
   
   return casilla;
 });
@@ -132,7 +117,7 @@ export const mapaArchipiélago = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).
     if (distancia <= isla.radio) return 'default';
     if (distancia > isla.radio && distancia <= isla.radio + 0.5) return 'camino';
   }
-  
+
   return casilla;
 });
 
@@ -141,7 +126,6 @@ export const mapas = {
   rio: mapaRio,
   lago: mapaLago,
   isla: mapaIsla,
-  laberinto: mapaLaberinto,
   archipielago: mapaArchipiélago,
   horizontal: mapaCaminoHorizontal,
   diagonal: mapaCaminoDiagonal
