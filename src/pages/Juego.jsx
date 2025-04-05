@@ -6,6 +6,7 @@ import { CasillaMapa } from '../components/CasillaMapa'
 import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
 import AjustesContainerJuego from '../components/AjustesContainerJuego'
+import AjustesMono from '../components/AjustesMono'
 
 // Clases
 import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
@@ -137,6 +138,15 @@ function gameReducer(state, action) {
         monosColocados: [...state.monosColocados, action.mono],
         monedas: state.monedas - action.precio,
       };
+    
+    case 'VENDER_MONO':
+      const nuevosMonos = state.monosColocados.filter(mono => mono.index !== action.index);
+      return {
+        ...state,
+        monosColocados: nuevosMonos,
+        monedas: state.monedas + action.precio
+      };
+      
     default:
       return state;
   }
@@ -145,6 +155,7 @@ function gameReducer(state, action) {
 function Juego() {
   const [mapa, setMapa] = useState(mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
+  const [verAjustesMono, setVerAjustesMono] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
@@ -249,22 +260,35 @@ function Juego() {
    */
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
-    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO || monoSeleccionado === null ) return;
+    setVerAjustesMono(null);  // Deselecciona el mono 
+    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
 
-    const newMapa = [...mapa];
-    const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
-                                      monoSeleccionado,
-                                      index,
-                                      MONOS[monoSeleccionado].damage,
-                                      MONOS[monoSeleccionado].rango, 
-                                      MONOS[monoSeleccionado].tiempoRecarga);
-    dispatch({
-      type: 'AGREGAR_MONO',
-      mono: nuevoMono,
-      precio: MONOS[monoSeleccionado].precio
-    });
-    setMonoSeleccionado(null);
-    setMapa(newMapa);
+    if ( monoSeleccionado !== null ){ // Mono seleccionado
+      const newMapa = [...mapa];
+      const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
+                                        monoSeleccionado,
+                                        index,
+                                        MONOS[monoSeleccionado].damage,
+                                        MONOS[monoSeleccionado].rango, 
+                                        MONOS[monoSeleccionado].tiempoRecarga);
+      dispatch({
+        type: 'AGREGAR_MONO',
+        mono: nuevoMono,
+        precio: MONOS[monoSeleccionado].precio
+      });
+      setVerAjustesMono({ tipo: monoSeleccionado, index: index });
+      setMonoSeleccionado(null);
+      setMapa(newMapa);
+    
+    }
+
+    const monoExistente = gameState.monosColocados.find(mono => mono.index === index);
+    if (monoExistente) {
+      setVerAjustesMono({ tipo: monoExistente.tipo, index: index });
+      console.log('Mono seleccionado para ajustes:', monoExistente);
+    }
+
+    
   }
 
   /*
@@ -293,6 +317,15 @@ function Juego() {
     } else {
       setMonoSeleccionado(tipoMono);
     }
+  }
+
+  const venderMono = () => {
+    setVerAjustesMono(null);
+    dispatch({
+      type: 'VENDER_MONO',
+      index: verAjustesMono.index,
+      precio: MONOS[verAjustesMono.tipo].precio / 2
+    });
   }
 
   /**
@@ -365,6 +398,14 @@ function Juego() {
           )
         })}
       </div>
+
+      { verAjustesMono !== null && 
+      <AjustesMono
+        tipo={verAjustesMono.tipo}
+        venderMono={venderMono}
+        cerrar={() => setVerAjustesMono(null)}
+      />
+      }
 
       <AjustesContainerJuego 
         visible={ajustesVisible} 

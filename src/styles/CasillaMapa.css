@@ -9,8 +9,8 @@
 
 /* Estilos base para todas las casillas */
 .casilla-mapa {
-  width: 45px;
-  height: 45px;
+  width: 36px;
+  height: 36px;
   /*border: 1px solid rgba(0, 0, 0, 0.2); */
   transition: all 0.2s ease;
   position: relative;

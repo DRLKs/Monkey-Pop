@@ -131,11 +131,12 @@ footer {
     width: 100%;
     background-color: var(--color-marron-claro);
     opacity: 77%;
-    text-align: center;
-    padding: 15px 0;
+    text-align: left;
+    padding: 7px 0;
     font-size: 16px;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
+    
 }
 
 footer a {
@@ -143,6 +144,7 @@ footer a {
     color: var(--color-texto-claro);
     text-decoration: none;
     font-weight: bold;
+    padding: 0px 10px;
 }
 
 footer a:hover {
