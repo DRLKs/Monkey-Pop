@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/finJuego.css';
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Componente que muestra la pantalla de fin de juego
@@ -13,9 +14,11 @@ import '../styles/finJuego.css';
  * @param {function} props.onReiniciar - Función para reiniciar el juego
  * @returns {JSX.Element}
  */
-const FinJuego = ({ visible, estadisticas, onReiniciar }) => {
+const FinJuego = ({ visible, estadisticas, onReiniciar, onclose }) => {
   if (!visible) return null;
 
+  const navigate = useNavigate()
+  
   return (
     <div className="fin-juego-overlay">
       <div className="fin-juego-contenedor">
@@ -32,26 +35,29 @@ const FinJuego = ({ visible, estadisticas, onReiniciar }) => {
             <span className="valor">{estadisticas.monedas}</span>
           </div>
           
-          {estadisticas.tiempoJugado && (
-            <div className="estadistica">
-              <span className="etiqueta">Tiempo jugado:</span>
-              <span className="valor">
-                {Math.floor(estadisticas.tiempoJugado / 60)}m {estadisticas.tiempoJugado % 60}s
-              </span>
-            </div>
-          )}
+          <div className="estadistica">
+            <span className="etiqueta">Tiempo jugado:</span>
+            <span className="valor">
+              {Math.floor(estadisticas.tiempoJugado / 60)}m {estadisticas.tiempoJugado % 60}s
+            </span>
+          </div>
           
-          {estadisticas.globosExplotados && (
-            <div className="estadistica">
-              <span className="etiqueta">Globos explotados:</span>
-              <span className="valor">{estadisticas.globosExplotados}</span>
-            </div>
-          )}
+          <div className="estadistica">
+            <span className="etiqueta">Globos explotados:</span>
+            <span className="valor">{estadisticas.globosExplotados}</span>
+          </div>
+          
         </div>
         
-        <button className="fin-juego-boton" onClick={onReiniciar}>
-          Jugar de nuevo
-        </button>
+        <div className='buttons-container'>
+          <button className="fin-juego-boton" onClick={onReiniciar}>
+            Jugar de nuevo
+          </button>
+          <button id='boton-salir' className="fin-juego-boton" onClick={() => navigate('/')}>
+            Salir
+          </button>
+        </div>
+        
       </div>
     </div>
   );

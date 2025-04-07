@@ -12,7 +12,7 @@
 }
 
 body {
-    padding-top: 30px; /* Reducido para compensar la barra más pequeña */
+    padding-top: 60px; /* Ajustable según el tamaño de la navbar */
 }
 
 .navbar {
@@ -21,19 +21,17 @@ body {
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
-    border: 1px solid var(--color-dorado); 
-    border-radius: 8px; /* Reducido aún más */
-    padding: 1px 20px; /* Reducido a solo 1px vertical */
+    border-bottom: 2px solid var(--color-dorado);
+    padding: 5px 10px;
     box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
     box-shadow: var(--sombra-elemento);
-    overflow: hidden;
+    overflow: visible;
     margin: 0;
     z-index: 1000;
     height: auto;
-    min-height: 25px; /* Reducido a 25px */
 }
 
 .navbar::before {
@@ -44,7 +42,6 @@ body {
     right: 0;
     height: 40%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
-    border-radius: 16px 16px 0 0;
     pointer-events: none;
 }
 
@@ -53,37 +50,39 @@ body {
     background-color: var(--color-dorado);
     color: var(--color-marron-oscuro);
     border: none;
-    padding: 5px 15px; /* Mayor padding que los otros botones */
-    font-size: 1rem; /* Tamaño ligeramente más grande */
+    padding: 8px 12px;
+    font-size: 0.9rem;
     cursor: pointer;
     border-radius: 50px;
-    margin-left: 10px;
+    margin: 0 5px;
     transition: all 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .nav-button {
     background-color: var(--color-dorado);
     color: var(--color-marron-oscuro);
     border: none;
-    padding: 3px 10px; /* Reducido aún más */
-    font-size: 0.8rem; /* Reducido aún más */
+    padding: 8px 12px;
+    font-size: 0.9rem;
     cursor: pointer;
     border-radius: 50px;
-    margin-left: 10px;
+    margin: 0 5px;
     transition: all 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .nav-button:hover, #back-button:hover {
     background-color: #ffec80;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
@@ -94,44 +93,41 @@ body {
 
 .info-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--color-dorado);
+    border: 1px solid var(--color-dorado);
     border-radius: 15px;
-    padding: 2px 8px; /* Reducido aún más */
-    margin: 0 8px;
+    padding: 4px 8px;
+    margin: 0 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-width: 1px; /* Reducir grosor del borde */
 }
 
 .monedas-container, .vidas-container {
     display: flex;
     align-items: center;
-    margin: 1px 0;
-    padding: 1px 5px;
+    margin: 0 5px;
+    padding: 2px 5px;
     border-radius: 10px;
 }
 
 /* Estilos para las monedas */
 .monedas {
-    width: 24px;
-    height: 24px;
     display: flex;
     align-items: center;
     color: var(--color-dorado);
     font-weight: bold;
-    font-size: 0.9rem; /* Ajustar tamaño de texto */
+    font-size: 0.9rem;
     text-shadow: var(--sombra-texto);
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
+    white-space: nowrap;
 }
 
-.monedas img {
-    width: 18px; /* Reducir tamaños de iconos */
-    height: 18px;
+.monedas, .vidas {
+    width: 20px;
+    height: 20px;
     object-fit: contain;
-    margin-right: 8px;
+    margin-right: 5px;
     filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
@@ -140,43 +136,44 @@ body {
     align-items: center;
     color: var(--color-dorado);
     font-weight: bold;
-    font-size: 0.9rem; /* Ajustar tamaño de texto */
+    font-size: 0.9rem;
     text-shadow: var(--sombra-texto);
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
-}
-
-.vidas img {
-    width: 18px; /* Reducir tamaños de iconos */
-    height: 18px;
-    object-fit: contain;
-    margin-right: 8px;
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
+    white-space: nowrap;
 }
 
 .monkey.disabled{
     filter: grayscale(70%) opacity(70%);
     cursor: not-allowed;
-    pointer-events: none; /* Evita cualquier interacción */
+    pointer-events: none;
 }
 
 .monkey-container {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 3px;
 }
 
 .monkey {
     background: linear-gradient(to bottom, var(--color-marron-oscuro), #4d2600);
     border: 2px solid var(--color-dorado);
-    border-radius: 12px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 5px;
     transition: all 0.2s;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .monkey::before {
@@ -187,12 +184,12 @@ body {
     right: 0;
     height: 30%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
-    border-radius: 10px 10px 0 0;
+    border-radius: 8px 8px 0 0;
     pointer-events: none;
 }
 
 .monkey:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     border-color: #ffec80;
 }
@@ -203,16 +200,16 @@ body {
 }
 
 .monkey img {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
 }
 
 .monkey-count {
     color: var(--color-dorado);
     font-weight: bold;
-    margin-top: 5px;
-    font-size: 1rem;
+    margin-top: 2px;
+    font-size: 0.8rem;
     text-shadow: var(--sombra-texto);
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
@@ -231,64 +228,44 @@ body {
 }
 
 /* RESPONSIVE */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+    body {
+        padding-top: 100px;
+    }
+    
     .navbar {
-        padding: 8px 15px;
-    }
-    
-    .nav-button {
-        padding: 8px 12px;
-        font-size: 1rem;
-    }
-    
-    .monkey img {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .monedas, .vidas {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .navbar {
-        padding: 6px 10px;
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .nav-button {
-        padding: 6px 10px;
-        font-size: 0.9rem;
-        margin: 5px;
-    }
-    
-    .monkey img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .monkey-container {
-        justify-content: center;
         flex-wrap: wrap;
     }
     
     .info-container {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
+        order: 1;
+        flex: 1 0 100%;
+        margin: 5px 0;
+        justify-content: center;
+    }
+    
+    .monkey-container {
+        order: 2;
+        flex: 1 0 100%;
+        justify-content: center;
+    }
+    
+    .botones-container {
+        order: 3;
+        flex: 1 0 100%;
+        justify-content: center;
+        margin-top: 5px;
     }
 }
 
-@media (max-width: 400px) {
-    .navbar {
-        padding: 5px;
+@media (max-width: 768px) {
+    body {
+        padding-top: 120px;
     }
     
-    .nav-button {
-        padding: 5px 8px;
-        font-size: 0.8rem;
+    .nav-button, #back-button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
     }
     
     .monkey img {
@@ -296,7 +273,57 @@ body {
         height: 30px;
     }
     
+    .monkey {
+        min-width: 35px;
+        min-height: 35px;
+        padding: 4px;
+    }
+    
+    .monkey-count {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 150px;
+    }
+    
+    .navbar {
+        padding: 5px;
+    }
+    
+    .info-container {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    
     .monedas, .vidas {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+    }
+    
+    .monkey {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 3px;
+    }
+    
+    .monkey img {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .nav-button, #back-button {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        margin: 3px;
+    }
+    
+    .botones-container {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
     }
 }

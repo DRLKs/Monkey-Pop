@@ -7,7 +7,7 @@ const MonoMapa = (tipo) => {
 
   return (
     <div className="mono-mapa">
-          <img src={mono_img} alt={`Mono${tipo}`} className="globo" />
+          <img src={mono_img} alt={`Mono${tipo}`} className="mono" />
     </div>
   );
 }

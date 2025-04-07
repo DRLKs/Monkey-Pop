@@ -1,0 +1,96 @@
+.nueva-ronda-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+    pointer-events: none; /* Permite el paso de clics a elementos detrás */
+}
+
+.nueva-ronda-overlay > * {
+    pointer-events: auto; /* El contenido del overlay sigue siendo interactivo */
+}
+
+.nueva-ronda-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to bottom, #8b4513, #663300);
+    border: 4px solid #ffd700;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    text-align: center;
+    z-index: 101;
+    max-width: 80%;
+    animation: appear 0.5s forwards;
+}
+  
+.nueva-ronda-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+}
+  
+.nueva-ronda-msg {
+    color: #ffd700;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-family: 'Bangers', 'Comic Sans MS', cursive;
+    letter-spacing: 2px;
+    animation: pulsate 2s infinite;
+}
+  
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .nueva-ronda-msg {
+      font-size: 2rem;
+    }
+  }
+
+@media (max-width: 768px) {
+    .nueva-ronda-container {
+        padding: 15px;
+        max-width: 90%;
+    }
+    
+    .nueva-ronda-container h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nueva-ronda-container {
+        padding: 12px;
+        max-width: 95%;
+        border-width: 3px;
+    }
+    
+    .nueva-ronda-container h2 {
+        font-size: 20px;
+    }
+}

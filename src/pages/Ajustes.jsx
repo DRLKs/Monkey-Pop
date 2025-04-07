@@ -2,7 +2,7 @@ import React from 'react'
 
 import '../styles/ajustes.css'
 
-import { ContainerControles } from '../components/containerControles'
+import AjustesContainerAjustes from '../components/AjustesContainerAjustes'
 import { BarraNavegacion } from '../components/BarraNavegacion'
 
 function Ajustes() {
@@ -11,7 +11,7 @@ function Ajustes() {
     <>
     <div className="ajustes-page"></div> {/* Configuración de un div que actuará como body */}
     <BarraNavegacion />
-    <ContainerControles/>    
+    <AjustesContainerAjustes/>    
     
     </>
   )
