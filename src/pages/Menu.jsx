@@ -54,6 +54,7 @@ export function Menu() {
             <button id="play-btn" onClick={() => navigate('/juego')}>Jugar</button>
             <button id="settings-btn" onClick={() => navigate('/ajustes')}>Ajustes</button>
             <button id="ranking-btn" onClick={() => navigate('/ranking')}>Ranking</button>
+            <button id="infomonos-btn" onClick={() => navigate('/monoInfo')}>Monos</button>
         </div>
         
         <footer>

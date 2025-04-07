@@ -113,6 +113,31 @@ button::before {
     color: var(--color-texto-claro);
 }
 
+#infomonos-btn {
+    background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
+    color: var(--color-texto-claro);
+    border: 2px solid var(--color-dorado);
+    border-radius: 50px;
+    font-family: var(--fuente-principal);
+    font-weight: bold;
+    font-size: 22px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#infomonos-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border-color: #ffec80;
+}
+
+#infomonos-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 button:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);

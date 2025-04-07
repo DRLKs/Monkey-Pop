@@ -6,6 +6,7 @@ import Juego from './pages/Juego'
 import Ajustes from './pages/Ajustes'
 import Tutorial from './pages/Tutorial'
 import Creditos from './pages/Creditos'
+import MonoInfo from './pages/MonoInfo.'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/tutorial" element={<Tutorial/>} />
         <Route path="/creditos" element={<Creditos/>} />
+        <Route path="/monoInfo" element={<MonoInfo/>} />
       </Routes>
     </BrowserRouter>
 
