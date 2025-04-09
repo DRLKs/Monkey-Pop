@@ -57,7 +57,7 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, reiniciarJuego, abrirAj
                   alt="Reiniciar" 
                   className="icono-boton" 
                   onClick={reiniciarJuego} 
-                />
+                  />
                 </div>
                 <div className="pausar-reaudar">
                 <img 
@@ -113,6 +113,8 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, reiniciarJuego, abrirAj
     
             </BarraMonos>
           </BarraNavegacion>
+
+          
     )
 }
 

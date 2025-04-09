@@ -113,3 +113,14 @@ export const VALORES_PREDETERMINADOS = {
   efectos: true,
   idioma: 'es'
 }
+
+export const MENSAJES = {
+  REINICIAR : {
+    msg: "¿Seguro que quieres reiniciar la partida?",
+    msgAccion: "Reiniciar"
+  },
+  VOLVER: {
+    msg: "¿Seguro que quieres volver al menú principal?",
+    msgAccion: "Volver"
+  }
+}

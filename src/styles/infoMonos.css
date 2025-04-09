@@ -39,6 +39,7 @@ body {
     justify-content: center;
     align-items: flex-start; /* Cambiado de center a flex-start para evitar desalineación vertical */
     padding: 20px;
+    margin-top: 170px;
 }
   
 .tarjeta-mono {
@@ -107,4 +108,11 @@ body {
   .tarjeta-mono button:active {
     background-color: #3e8e41;
     transform: translateY(0); /* Efecto de clic */
+  }
+
+  @media screen and (max-width: 768px) {
+    .tarjeta-mono{
+      width: 80%; /* Ajustado para pantallas más pequeñas */
+      height: auto; /* Permite que la altura se ajuste automáticamente */
+    }
   }

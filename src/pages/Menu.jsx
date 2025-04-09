@@ -51,15 +51,15 @@ export function Menu() {
         </div>
 
         <div className="menu-container">
-            <button id="play-btn" onClick={() => navigate('/juego')}>Jugar</button>
-            <button id="settings-btn" onClick={() => navigate('/ajustes')}>Ajustes</button>
-            <button id="ranking-btn" onClick={() => navigate('/ranking')}>Ranking</button>
-            <button id="infomonos-btn" onClick={() => navigate('/monoInfo')}>Monos</button>
+            <button id="play-btn" className='menu-btn' onClick={() => navigate('/juego')}>Jugar</button>
+            <button id="tutorial-btn" className='menu-btn' onClick={() => navigate('/tutorial')}>Tutorial</button>
+            <button id="settings-btn" className='menu-btn' onClick={() => navigate('/ajustes')}>Ajustes</button>
+            <button id="infomonos-btn" className='menu-btn' onClick={() => navigate('/monoInfo')}>Monos</button>
         </div>
         
         <footer>
             <a onClick={() => navigate('/creditos')}> Créditos </a>
-            <a href='https://github.com/DRLKs' > github </a>
+            <a href='https://github.com/DRLKs/Monkey-Pop' > github </a>
             <a href='https://ninjakiwi.com/Games/Mobile/Bloons-TD-Battles-Mobile.html'> Bloons TD Battles </a>
         </footer>
         </>

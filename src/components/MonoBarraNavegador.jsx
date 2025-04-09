@@ -14,6 +14,7 @@ export const MonoBarraNavegador = ({ tipo, agarrarMono, sePuedeComprar }) => {
                 alt={`Monkey ${tipo}`} 
                 className={'monkey-img' }
                 onClick={agarrar}
+                onDragStart={agarrar}
             />
             <span className="monkey-count">{ MONOS[tipo].precio }</span>
         </div>

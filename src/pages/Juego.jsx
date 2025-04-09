@@ -7,13 +7,14 @@ import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
 import AjustesContainerJuego from '../components/AjustesContainerJuego'
 import AjustesMono from '../components/AjustesMono'
+import ConfirmacionComponent from '../components/CofirmacionComponent';
 
 // Clases
 import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
 import { mapas } from '../utils/mapas'
-import { ESTADO_CASILLA, MONOS, PARTIDA } from '../utils/constantes'
+import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA } from '../utils/constantes'
 import { obtenerCaminoMapa } from '../utils/funciones'
 
 // Estilos
@@ -160,6 +161,12 @@ function Juego() {
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
   const [ajustesVisible, setAjustesVisible] = useState(false);
+
+  /* Constantes para el componente de la confirmación */
+  const [confirmacionVisible, setConfirmacionVisible] = useState(false);
+  const [funcionConfirmacion, setFuncionConfirmacion] = useState(null);
+  const [funcionConfirmacionNombre, setFuncionConfirmacionNombre] = useState(null);
+  
   
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],                   // Guarda los globos que está sin explotar en el camino
@@ -263,7 +270,11 @@ function Juego() {
     setVerAjustesMono(null);  // Deselecciona el mono 
     if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
 
-    if ( monoSeleccionado !== null ){ // Mono seleccionado
+    const monoExistente = gameState.monosColocados.find(mono => mono.index === index);  // En la casilla pinchada, hay un mono
+    if (monoExistente) {
+      setVerAjustesMono({ tipo: monoExistente.tipo, index: index });
+      console.log('Mono seleccionado para ajustes:', monoExistente);
+    }else if ( monoSeleccionado !== null ){ // Mono seleccionado
       const newMapa = [...mapa];
       const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
                                         monoSeleccionado,
@@ -282,11 +293,7 @@ function Juego() {
     
     }
 
-    const monoExistente = gameState.monosColocados.find(mono => mono.index === index);
-    if (monoExistente) {
-      setVerAjustesMono({ tipo: monoExistente.tipo, index: index });
-      console.log('Mono seleccionado para ajustes:', monoExistente);
-    }
+
 
     
   }
@@ -301,6 +308,7 @@ function Juego() {
     
     if (monoSeleccionado !== null) {
       window.addEventListener('pointermove', controladorMovimientoRaton);
+      setVerAjustesMono({ tipo: monoSeleccionado, index: 0 });
     }
     
     return () => {
@@ -334,6 +342,10 @@ function Juego() {
   const reiniciarJuego = () => {
     setTiempoInicio(Date.now());
     setTiempoFin(null);
+    setMonoSeleccionado(null);
+    setConfirmacionVisible(false);
+    setAjustesVisible(false);
+    setVerAjustesMono(null);
     dispatch({
       type: 'REINICIAR',
       estadoInicial: {
@@ -359,6 +371,17 @@ function Juego() {
     setAjustesVisible(!ajustesVisible);
   }
 
+  /**
+   * Componente para confirmar acciones críticas
+   * @param {*} funcion 
+   */
+  const abrirConfirmacion = (funcion, nombreFuncion) => {
+    console.log('abrirConfirmacion', funcion);
+    setConfirmacionVisible(true);
+    setFuncionConfirmacion(() => funcion);
+    setFuncionConfirmacionNombre(nombreFuncion);
+  };
+
   return (
     <>
       <div className='fondo-juego'></div>
@@ -366,7 +389,7 @@ function Juego() {
         ronda={gameState.ronda}
         vidas={gameState.vidas}
         monedas={gameState.monedas}
-        reiniciarJuego={reiniciarJuego}
+        reiniciarJuego={() => abrirConfirmacion(reiniciarJuego, 'REINICIAR')}
         abrirAjustes={abrirAjustes}
         agarrarMono={agarrarMono}
       />
@@ -427,6 +450,15 @@ function Juego() {
         visible={gameState.nuevaRonda}
         ronda={gameState.ronda}
       />
+
+      {confirmacionVisible && (
+        <ConfirmacionComponent
+          msg={MENSAJES[funcionConfirmacionNombre].msg}
+          msgAccion={MENSAJES[funcionConfirmacionNombre].msgAccion}
+          funcion={() => {funcionConfirmacion(); setConfirmacionVisible(false);}}
+          onClose={() => setConfirmacionVisible(false)}
+        />
+      )}
 
     </>
   )

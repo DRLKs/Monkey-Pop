@@ -1,5 +1,6 @@
 :root {
     --color-boton-importante: #e19718;
+    --color-boton-tutorial: #caa615;
     --color-hover: #c57b14;
     --color-dorado: #ffd700;
     --color-marron-claro: #8b4513;
@@ -108,23 +109,14 @@ button::before {
     transform: scale(1.05);
 }
 
-#settings-btn, #ranking-btn {
-    background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
+#tutorial-btn{
+    background: linear-gradient(to bottom, var(--color-boton-tutorial), var(--color-hover));
     color: var(--color-texto-claro);
 }
 
-#infomonos-btn {
+#settings-btn, #infomonos-btn {
     background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
     color: var(--color-texto-claro);
-    border: 2px solid var(--color-dorado);
-    border-radius: 50px;
-    font-family: var(--fuente-principal);
-    font-weight: bold;
-    font-size: 22px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #infomonos-btn:hover {
