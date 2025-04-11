@@ -1,118 +1,143 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-y: scroll; /* Permite el desplazamiento vertical */
-  }
 
-  .barra-navegacion {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px; /* Altura de la barra */
-    z-index: 1000;
-    background-color: #333; /* Color de fondo */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-y: scroll; /* Permite el desplazamiento vertical */
 }
-  
-  .pagina-mono-info {
-    margin-top: 300px;
-    min-height: calc(100vh - 60px); 
-    width: 100%; /* Asegura que el fondo cubra todo el ancho */
-    background-image: url('../assets/images/backgrounds/fondoMonos.png'); /* Ruta de la imagen de fondo */
-    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-attachment: fixed; /* Hace que el fondo sea fijo al hacer scroll */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; 
-    padding: 20px;
-    overflow: auto;
-  }
-  
-  .contenedor-monos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start; /* Cambiado de center a flex-start para evitar desalineación vertical */
-    padding: 20px;
-    margin-top: 170px;
+
+.barra-navegacion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Altura de la barra */
+  z-index: 1000;
+  background-color: #333; /* Color de fondo */
 }
-  
-.tarjeta-mono {
-  z-index: 1;
-  position: relative;
-  border: 2px solid #3d1a00;
-  border-radius: 12px;
-  padding: 16px;
-  width: 400px; /* Aumentado el ancho */
-  height: 500px; /* Aumentado el alto */
-  text-align: center;
-  background: linear-gradient(145deg, #e0e0e0, #ffffff);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2), inset 0 -4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  background-image: url('../assets/images/backgrounds/madera4.png');
-  background-size: cover;
-  background-position: center;
+
+.pagina-mono-info {
+  margin-top: 300px; /* Ajustado para asegurar espacio inicial, puede variar */
+  min-height: calc(100vh - 60px);
+  width: 100%; /* Asegura que el fondo cubra todo el ancho */
+  background-image: url('../assets/images/backgrounds/fondoMonos.png'); /* Ruta de la imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Hace que el fondo sea fijo al hacer scroll */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Asegura que los elementos internos estén espaciados */
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+  padding-top: 80px; /* Añade padding superior para compensar barra fija */
 }
-  
-.tarjeta-mono:hover {
-  transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.4), inset 0 -6px 8px rgba(0, 0, 0, 0.25);
-}
-  
-.imagen-mono {
-  width: 95%; /* Ajustado para que se vea mejor en el nuevo tamaño */
-  height: 250px; /* Aumentado para mayor visibilidad */
-  object-fit: contain;
-  border-radius: 8px;
-  margin: 0 auto 12px auto; /* Centrado horizontalmente */
-  border: 5px solid #3d1a00;
-}
-  
-.tarjeta-mono h3 {
-  margin: 8px 0;
-  font-size: 1.8em; /* Aumentado el tamaño del texto */
-  color: #111; /* Más oscuro para mayor contraste */
-  font-weight: bold; /* Aumentado el peso */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
-}
-  
-.tarjeta-mono p {
-  margin: 6px 0;
-  font-size: 1.2em; /* Aumentado el tamaño del texto */
-  color: #222; /* Más oscuro para mayor contraste */
-  font-weight: 600; /* Aumentado el peso */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
-  word-wrap: break-word; /* Asegura que el texto largo se ajuste */
-}
-  
-.tarjeta-mono p strong {
-  color: #000; /* Más oscuro para destacar */
-  font-weight: bold; /* Aumentado el peso */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra más sutil */
-}
-  
-  
-  .tarjeta-mono button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
-  }
-  
-  .tarjeta-mono button:active {
-    background-color: #3e8e41;
-    transform: translateY(0); /* Efecto de clic */
-  }
 
-  @media screen and (max-width: 768px) {
-    .tarjeta-mono{
-      width: 80%; /* Ajustado para pantallas más pequeñas */
-      height: auto; /* Permite que la altura se ajuste automáticamente */
-    }
+.contenedor-monos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start; /* Mantenido para alinear tarjetas */
+  padding: 20px;
+  margin-top: 0; /* Eliminado el margen superior aquí, controlado por pagina-mono-info */
+  width: 100%;
+  max-width: 1600px; /* Opcional: limita el ancho máximo del contenedor */
+}
+
+.tarjeta-mono {
+z-index: 1;
+position: relative;
+border: 2px solid #3d1a00;
+border-radius: 12px;
+padding: 16px;
+width: 400px; /* Ancho */
+/* height: 500px; Eliminamos altura fija para que se ajuste al contenido */
+text-align: center;
+background: linear-gradient(145deg, #e0e0e0, #ffffff);
+box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2), inset 0 -4px 6px rgba(0, 0, 0, 0.1);
+transition: transform 0.2s, box-shadow 0.2s;
+background-image: url('../assets/images/backgrounds/madera4.png');
+background-size: cover;
+background-position: center;
+display: flex;
+flex-direction: column;
+/* justify-content: space-between; Comentado o eliminado para permitir ajuste de altura */
+align-items: center; /* Centra elementos horizontalmente */
+box-sizing: border-box;
+}
+
+.tarjeta-mono:hover {
+transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+box-shadow: 0 8px 14px rgba(0, 0, 0, 0.4), inset 0 -6px 8px rgba(0, 0, 0, 0.25);
+}
+
+.imagen-mono {
+width: 90%; /* Reducido ligeramente para dar espacio */
+max-height: 250px; /* Mantenido */
+height: auto; /* Permite que la altura se ajuste */
+object-fit: contain;
+border-radius: 8px;
+margin-bottom: 12px; /* Espacio debajo de la imagen */
+border: 5px solid #3d1a00;
+}
+
+/* --- NUEVOS ESTILOS --- */
+.info-texto-mono {
+background-color: rgba(245, 235, 218, 0.85); /* Un color pergamino/papel claro semi-transparente */
+border-radius: 8px; /* Bordes redondeados */
+padding: 15px; /* Espacio interior */
+margin-top: 10px; /* Espacio entre la imagen y este cuadro */
+width: 90%; /* Ocupa la mayor parte del ancho de la tarjeta */
+box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15); /* Sombra interior sutil */
+border: 1px solid rgba(101, 67, 33, 0.5); /* Borde sutil color madera */
+box-sizing: border-box; /* Asegura que el padding esté dentro del width */
+}
+/* --- FIN NUEVOS ESTILOS --- */
+
+
+.info-texto-mono h3 { /* Estilos específicos para el h3 dentro del nuevo div */
+margin-top: 0; /* Quita margen superior por defecto */
+margin-bottom: 10px;
+font-size: 1.8em;
+color: #3d1a00; /* Color más oscuro para el título */
+font-weight: bold;
+text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7); /* Sombra clara */
+}
+
+.info-texto-mono p { /* Estilos específicos para los párrafos dentro del nuevo div */
+margin: 6px 0;
+font-size: 1.2em;
+color: #444; /* Color de texto principal */
+font-weight: 500; /* Peso ligeramente menor que el bold */
+text-shadow: none; /* Quita sombra anterior si no se ve bien sobre el fondo claro */
+word-wrap: break-word;
+}
+
+.info-texto-mono p strong { /* Estilos para el texto en negrita */
+color: #222; /* Más oscuro para destacar etiquetas */
+font-weight: bold;
+}
+
+
+/* Botones (si los hubiera dentro de la tarjeta) - Estilos previos mantenidos */
+.tarjeta-mono button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+}
+
+.tarjeta-mono button:active {
+  background-color: #3e8e41;
+  transform: translateY(0); /* Efecto de clic */
+}
+
+@media screen and (max-width: 768px) {
+  .tarjeta-mono{
+    width: 80%; /* Ajustado para pantallas más pequeñas */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
   }
+  .info-texto-mono {
+      width: 95%; /* Ajusta el ancho del cuadro de texto en pantallas pequeñas */
+  }
+}
