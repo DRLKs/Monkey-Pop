@@ -9,7 +9,7 @@ import AjustesContainerJuego from '../components/AjustesContainerJuego'
 import AjustesMono from '../components/AjustesMono'
 import ConfirmacionComponent from '../components/CofirmacionComponent';
 
-// Clases
+// Clases 
 import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
