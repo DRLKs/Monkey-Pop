@@ -15,15 +15,13 @@ import btnReanudar from '../assets/images/botones/btn-play.png'
 import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
 import btnAcelerar from '../assets/images/botones/btn-acelerar.png'
 
-function BarraNavegacionPartida( {ronda, vidas, monedas, reiniciarJuego, abrirAjustes, agarrarMono} ){
+function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reiniciarJuego, abrirAjustes, agarrarMono} ){
 
     const [pausado, setPausado] = useState(false)
 
     const pausarReaunudar = () => {
       setPausado(!pausado)
-      if(pausado){
-        // Lógica para reanudar el juego
-        }
+      pararReaunudar()
     }
 
     return(

@@ -51,6 +51,18 @@ export class Globo {
       return this.tipo;
     }
 
+    getDamage() {
+      return this.damage;
+    }
+
+    getRango() {
+      return this.rango;
+    }
+
+    getTiempoRecarga() {
+      return this.tiempoRecarga;
+    }
+
     setPosition(newIndex) {
       this.index = newIndex;
     }
@@ -79,6 +91,18 @@ export class Globo {
         this.recarga = this.tiempoRecarga - 1;  // Está cargado
       }
       return globoAtacar;
+  }
+
+  mejorarRango(){
+    this.rango += 50;
+  }
+
+  mejorarDamage(){
+    this.damage += 1;
+  }
+
+  mejorarTiempoRecarga(){
+    this.tiempoRecarga -= 1;
   }
 }
 

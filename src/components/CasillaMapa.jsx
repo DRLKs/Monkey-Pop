@@ -5,6 +5,7 @@ import '../styles/CasillaMapa.css'
 import Globo from './Globo'
 import MonoMapa from './MonoMapa'
 import globoExplotado from '../assets/images/globos/globoExplotado.png'
+
 /**
  * 
  * @param {*} estado: Estado de la casilla, puede ser 'default', 'agua', 'camino', 'selected'. El selected es un estado del 'default'

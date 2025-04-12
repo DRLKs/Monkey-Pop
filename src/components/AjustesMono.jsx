@@ -1,26 +1,47 @@
-
 import { MONOS } from "../utils/constantes";
 
 import '../styles/ajustesMono.css';
 
-function AjustesMono({tipo, venderMono, cerrar}) {
+function AjustesMono({mono, venderMono, cerrar}) {
   return (
     <div className="ajustes-mono-container">
         <div className="presentacion-continer">
-            <img src={MONOS[tipo].imagen} alt={MONOS[tipo].nombre} />
-            <h1> { MONOS[tipo].nombre } </h1>
+            <img src={MONOS[mono.getTipo()].imagen} alt={MONOS[mono.getTipo()].nombre} />
+            <h1> { MONOS[mono.getTipo()].nombre } </h1>
         </div>
         <div className="estadisticas-container">
             <h2> Estadísticas </h2>
-            <p> Precio: { MONOS[tipo].precio } </p>
-            <p> Rango: { MONOS[tipo].rango } </p>
-            <p> Daño: { MONOS[tipo].damage } </p>
-            <p> Tiempo de recarga: { MONOS[tipo].tiempoRecarga } </p>
-            <p> Descripción: { MONOS[tipo].descripcion } </p>
+            <div className="estadistica-row">
+              <p> Rango: { mono.getRango() } </p>
+              <button 
+                className="btn-mejorar-small" 
+                onClick={() => mono.mejorarRango()}
+              >
+                +
+              </button>
+            </div>
+            <div className="estadistica-row">
+              <p> Daño: { mono.getDamage() } </p>
+              <button 
+                className="btn-mejorar-small" 
+                onClick={() => mono.mejorarDamage()}
+              >
+                +
+              </button>
+            </div>
+            <div className="estadistica-row">
+              <p> Tiempo de recarga: { mono.getTiempoRecarga() } </p>
+              <button 
+                className="btn-mejorar-small" 
+                onClick={() => mono.mejorarTiempoRecarga()}
+              >
+                +
+              </button>
+            </div>
         </div>
         <div className="botones-container">
-            <button className="btn-cerrar" onClick={cerrar}> Cerrar </button>
-            <button className="btn-vender" onClick={venderMono}> Vender </button>
+            <button className="btn" onClick={cerrar}> Cerrar </button>
+            <button className="btn" onClick={venderMono}> Vender </button>
         </div>
     </div>
   );

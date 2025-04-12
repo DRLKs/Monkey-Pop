@@ -22,10 +22,7 @@ import '../styles/juego.css'
 import BarraNavegacionPartida from '../components/BarraNavegacionPartida'
 import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
-// Constantes del juego
-const MONEDAS_INICIALES = 170;
-const VIDAS_INICIALES = 150;
-const RONDA_INICIAL = 1;
+
 
 /**
  * 
@@ -36,7 +33,6 @@ const RONDA_INICIAL = 1;
  * @param {number} state.monedas Monedas del jugador
  * @param {number} state.ronda Ronda actual del juego
  * @param {boolean} state.perdido Indica si el jugador ha perdido
- * @param {boolean} state.needsUIUpdate Indica si se necesita actualizar la UI
  * 
  * @param {*} action Acción a realizar en el juego
  * @param {string} action.type Tipo de acción a realizar 
@@ -73,7 +69,7 @@ function gameReducer(state, action) {
           const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
           const globoAtacado = mono.attack(globosExistentes);
           if ( globoAtacado !== null) {
-            console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
+            //console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
 
             if ( globoAtacado.health <= mono.damage ){  // El globo explota
               sumaMonedas += PARTIDA.monedasGlobo;
@@ -121,7 +117,6 @@ function gameReducer(state, action) {
       return {
         ...state,
         globos: globosTablero,
-        needsUIUpdate: true,
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
         monedas: state.monedas + sumaMonedas,
@@ -141,7 +136,7 @@ function gameReducer(state, action) {
       };
     
     case 'VENDER_MONO':
-      const nuevosMonos = state.monosColocados.filter(mono => mono.index !== action.index);
+      const nuevosMonos = state.monosColocados.filter(mono => mono.id !== action.id);
       return {
         ...state,
         monosColocados: nuevosMonos,
@@ -156,11 +151,12 @@ function gameReducer(state, action) {
 function Juego() {
   const [mapa, setMapa] = useState(mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
-  const [verAjustesMono, setVerAjustesMono] = useState(null);
+  const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
   const [tiempoInicio, setTiempoInicio] = useState(Date.now());
   const [tiempoFin, setTiempoFin] = useState(null);
   const [ajustesVisible, setAjustesVisible] = useState(false);
+  const [cronometroActivo, setCronometroActivo] = useState(true);
 
   /* Constantes para el componente de la confirmación */
   const [confirmacionVisible, setConfirmacionVisible] = useState(false);
@@ -169,17 +165,16 @@ function Juego() {
   
   
   const [gameState, dispatch] = useReducer(gameReducer, {
-    globos: [],                   // Guarda los globos que está sin explotar en el camino
-    monosColocados: [],           // Guarda las posicies de los monos colocados por el usuario
-    indexGlobo: 0,                // Controla el índice del último globo que salió, esto es para solo enviar los globos de cada ronda
-    vidas: VIDAS_INICIALES,       // Mantiene la cuenta de vidas que le quedan al usuario
-    monedas: MONEDAS_INICIALES,   // Mantiene la cuenta de las monedas que tiene ahorradas el usuario
-    ronda: RONDA_INICIAL,         // Estado que controla la ronda por la que vamos
-    perdido: false,               // Estado que cotrola que el jugador o haya perdido
-    needsUIUpdate: false,       
-    globosExplotados: 0,          // Mantiene la suma de los globos explotados durante todas las rodas
-    nuevaRonda: true,             // Indica si estamos en un ronda nueva
-    indexsGlobosExplotados: []    // Globos explotados por los monos durante el TICK
+    globos: [],                       // Guarda los globos que está sin explotar en el camino
+    monosColocados: [],               // Guarda las posicies de los monos colocados por el usuario
+    indexGlobo: 0,                    // Controla el índice del último globo que salió, esto es para solo enviar los globos de cada ronda
+    vidas: PARTIDA.vidas_iniciales,       // Mantiene la cuenta de vidas que le quedan al usuario
+    monedas: PARTIDA.monedas_iniciales,   // Mantiene la cuenta de las monedas que tiene ahorradas el usuario
+    ronda: PARTIDA.ronda_inicial,         // Estado que controla la ronda por la que vamos
+    perdido: false,                   // Estado que cotrola que el jugador o haya perdido
+    globosExplotados: 0,              // Mantiene la suma de los globos explotados durante todas las rodas
+    nuevaRonda: true,                 // Indica si estamos en un ronda nueva
+    indexsGlobosExplotados: []        // Globos explotados por los monos durante el TICK
   });
 
   /*
@@ -187,14 +182,7 @@ function Juego() {
    */
   const camino = useMemo(() => {
     return obtenerCaminoMapa(mapa)
-    
   }, []);
-
-  useEffect(() => {
-    if (gameState.needsUIUpdate) {
-      // Update visual states from gameState
-    }
-  }, [gameState.needsUIUpdate]);
 
   /*
    * Controla el tiempo de juego para calcular el tiempo jugado en la pantalla final 
@@ -206,13 +194,6 @@ function Juego() {
   }, [gameState.perdido, tiempoFin]);
 
   /*
-   * Cada vez que comience una ronda nuevva, aparecerá un mensaje en la pantalla informando de ello
-   */
-  useEffect(() => {
-  
-  }, [gameState.ronda])
-
-  /*
    * Controla el bucle del juego
    * Actualiza el estado de los globos cada: 1 segundo
    */
@@ -221,7 +202,8 @@ function Juego() {
     let animationFrameId;
 
     const gameLoop = (timestamp) => {
-      if (!lastUpdateTime) lastUpdateTime = timestamp;
+      if ( !cronometroActivo ) return;
+      if (!lastUpdateTime ) lastUpdateTime = timestamp;
       
       const elapsed = timestamp - lastUpdateTime;
       if ( gameState.nuevaRonda  ){       // Mantiene un margen entre ronda y ronda
@@ -257,7 +239,7 @@ function Juego() {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [gameState.globos, gameState.perdido, gameState.nuevaRonda]);
+  }, [gameState.globos, gameState.perdido, gameState.nuevaRonda, cronometroActivo]);
 
   /*
    * Función que obtiene la casilla del mapa clicada 
@@ -267,17 +249,17 @@ function Juego() {
    */
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
-    setVerAjustesMono(null);  // Deselecciona el mono 
+    setMonoVerAjustes(null);  // Deselecciona el mono 
     if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
 
     const monoExistente = gameState.monosColocados.find(mono => mono.index === index);  // En la casilla pinchada, hay un mono
     if (monoExistente) {
-      setVerAjustesMono({ tipo: monoExistente.tipo, index: index });
+      setMonoVerAjustes( monoExistente );
       console.log('Mono seleccionado para ajustes:', monoExistente);
     }else if ( monoSeleccionado !== null ){ // Mono seleccionado
       const newMapa = [...mapa];
       const nuevoMono = new MonoClass(gameState.monosColocados.length,  // Si existe la posibilidad de quitar monos, esto dará error
-                                        monoSeleccionado,
+                                        MONOS[monoSeleccionado].tipo,
                                         index,
                                         MONOS[monoSeleccionado].damage,
                                         MONOS[monoSeleccionado].rango, 
@@ -287,7 +269,6 @@ function Juego() {
         mono: nuevoMono,
         precio: MONOS[monoSeleccionado].precio
       });
-      setVerAjustesMono({ tipo: monoSeleccionado, index: index });
       setMonoSeleccionado(null);
       setMapa(newMapa);
     
@@ -308,7 +289,6 @@ function Juego() {
     
     if (monoSeleccionado !== null) {
       window.addEventListener('pointermove', controladorMovimientoRaton);
-      setVerAjustesMono({ tipo: monoSeleccionado, index: 0 });
     }
     
     return () => {
@@ -318,6 +298,8 @@ function Juego() {
 
   /**
    * Función que controla el manejo de los monos seleccionados
+   * Se ejecuta arrastrando o clicando en un mono de la barra de navegación
+   * @param {string} tipoMono Tipo de mono seleccionado
    */
   const agarrarMono = (tipoMono) => {
     if (monoSeleccionado === tipoMono) {
@@ -327,12 +309,17 @@ function Juego() {
     }
   }
 
+  /**
+   * Función que se ejecutará para vender un mono
+   * Se ejecuta desde el componente AjustesMono.jsx
+   */
   const venderMono = () => {
-    setVerAjustesMono(null);
+    setMonoVerAjustes(null);
+    console.log('Vender mono:', monoVerAjustes);
     dispatch({
       type: 'VENDER_MONO',
-      index: verAjustesMono.index,
-      precio: MONOS[verAjustesMono.tipo].precio / 2
+      id: monoVerAjustes.id,
+      precio: MONOS[monoVerAjustes.tipo].precio / 2
     });
   }
 
@@ -345,31 +332,23 @@ function Juego() {
     setMonoSeleccionado(null);
     setConfirmacionVisible(false);
     setAjustesVisible(false);
-    setVerAjustesMono(null);
+    setMonoVerAjustes(null);
     dispatch({
       type: 'REINICIAR',
       estadoInicial: {
         globos: [],
         monosColocados: [],
         indexGlobo: 0,
-        vidas: VIDAS_INICIALES,
-        monedas: MONEDAS_INICIALES,
-        ronda: RONDA_INICIAL,
+        vidas: PARTIDA.vidas_iniciales,
+        monedas: PARTIDA.monedas_iniciales,
+        ronda: PARTIDA.ronda_inicial,
         perdido: false,
-        needsUIUpdate: false,
         globosExplotados: 0,
         nuevaRonda: true,
         indexsGlobosExplotados: []
       }
     });
   };
-
-  /**
-   * Función que se ejecuta al hacer click en el botón de ajustes
-   */
-  const abrirAjustes = () => {
-    setAjustesVisible(!ajustesVisible);
-  }
 
   /**
    * Componente para confirmar acciones críticas
@@ -382,6 +361,22 @@ function Juego() {
     setFuncionConfirmacionNombre(nombreFuncion);
   };
 
+  /**
+   * Función que pausa o reanuda el cronómetro del juego
+   * Esta función se ejecuta al hacer click en el botón de pausa/reanudar en la barra de navegación
+   */
+  const pausarReaunudarCronometro = () => {
+    setCronometroActivo(!cronometroActivo);
+  }
+
+  /**
+   * Función que se ejecuta al hacer click en el botón de ajustes
+   */
+  const abrirAjustes = () => {
+    const estaranLosAjustesVisibles = !ajustesVisible;
+    setAjustesVisible(estaranLosAjustesVisibles);
+  }
+
   return (
     <>
       <div className='fondo-juego'></div>
@@ -389,6 +384,7 @@ function Juego() {
         ronda={gameState.ronda}
         vidas={gameState.vidas}
         monedas={gameState.monedas}
+        pararReaunudar={pausarReaunudarCronometro}
         reiniciarJuego={() => abrirConfirmacion(reiniciarJuego, 'REINICIAR')}
         abrirAjustes={abrirAjustes}
         agarrarMono={agarrarMono}
@@ -422,11 +418,11 @@ function Juego() {
         })}
       </div>
 
-      { verAjustesMono !== null && 
+      { monoVerAjustes !== null && 
       <AjustesMono
-        tipo={verAjustesMono.tipo}
+        mono={monoVerAjustes}
         venderMono={venderMono}
-        cerrar={() => setVerAjustesMono(null)}
+        cerrar={() => setMonoVerAjustes(null)}
       />
       }
 
@@ -439,7 +435,7 @@ function Juego() {
         visible={gameState.perdido} 
         estadisticas={{
           ronda: gameState.ronda,
-          monedas: gameState.monedas - MONEDAS_INICIALES,
+          monedas: gameState.monedas - PARTIDA.monedas_iniciales,
           tiempoJugado: Math.floor(((tiempoFin || Date.now()) - tiempoInicio) / 1000),
           globosExplotados: gameState.globosExplotados
         }}

@@ -105,7 +105,10 @@ export const PARTIDA = {
   largo_mapa: 15,
   tiempoActualizacionGlobos: 100, // Tiempo en milisegundos
   tiempoEntreRondas: 5000, // Tiempo en milisegundos
-  monedasGlobo: 10 // Cantidad de monedas que da un globo al ser destruido
+  monedasGlobo: 10, // Cantidad de monedas que da un globo al ser destruido
+  monedas_iniciales: 170,
+  vidas_iniciales: 1,
+  ronda_inicial: 1
 }
 
 export const VALORES_PREDETERMINADOS = {

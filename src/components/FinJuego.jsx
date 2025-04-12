@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom'
  * @param {function} props.onReiniciar - Función para reiniciar el juego
  * @returns {JSX.Element}
  */
-const FinJuego = ({ visible, estadisticas, onReiniciar, onclose }) => {
+const FinJuego = ({ visible, estadisticas, onReiniciar }) => {
   if (!visible) return null;
 
   const navigate = useNavigate()
