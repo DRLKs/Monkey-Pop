@@ -1,0 +1,127 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #5a4a42; /* Brownish color */
+}
+
+form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #fdfdfd;
+}
+
+legend {
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 0 10px;
+    color: #d2691e; /* Chocolate color */
+    border-bottom: 2px solid #d2691e;
+    margin-bottom: 15px;
+}
+
+.question-block {
+    margin-bottom: 25px;
+    padding: 15px;
+    border-left: 4px solid #e0e0e0; /* Light grey left border */
+    background-color: #ffffff; /* Slightly different background if needed */
+}
+
+.question-block p strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.question-item {
+    margin-bottom: 15px;
+}
+
+.question-item label {
+    display: block; /* Makes the label take its own line */
+    margin-bottom: 8px;
+    font-weight: normal;
+    color: #444;
+}
+
+.options {
+    margin-bottom: 8px;
+}
+
+/* Style radio buttons and their labels */
+.options input[type="radio"] {
+    margin-right: 5px;
+    vertical-align: middle; /* Align radio button with text */
+}
+
+.options label {
+    display: inline-block; /* Keep labels next to radios */
+    margin-right: 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%; /* Take full width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in width */
+    font-size: 1em;
+    margin-top: 5px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #5cb85c; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #4cae4c; /* Darker green */
+}
+
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+}
+
+.message.error {
+     background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+}

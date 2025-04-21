@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Feedback - Monkey Pop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Formulario de Feedback - Monkey Pop</h1>
+
+    <form id="feedbackForm" action="https://formspree.io/f/xqaqzllv" method="POST">
+
+        <fieldset>
+            <legend>TAREA: JUGAR UNA PARTIDA</legend>
+
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario inicia la aplicación “Monkey Pop”</p>
+                <div class="question-item">
+                    <label>¿Tiene sentido para el usuario que iniciar la aplicación es el primer paso para jugar?</label>
+                    <div class="options">
+                        <input type="radio" id="q1_si" name="q1_sentido_inicio" value="Sí" required><label for="q1_si">Sí</label>
+                        <input type="radio" id="q1_no" name="q1_sentido_inicio" value="No" required><label for="q1_no">No</label>
+                    </div>
+                    <textarea id="q1_texto" name="q1_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Es visible el icono o acceso directo de “Monkey Pop”?</label>
+                    <div class="options">
+                        <input type="radio" id="q2_si" name="q2_icono_visible" value="Sí" required><label for="q2_si">Sí</label>
+                        <input type="radio" id="q2_no" name="q2_icono_visible" value="No" required><label for="q2_no">No</label>
+                    </div>
+                    <textarea id="q2_texto" name="q2_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿Está claro que esa acción inicia la app del juego?</label>
+                    <div class="options">
+                        <input type="radio" id="q3_si" name="q3_accion_clara" value="Sí" required><label for="q3_si">Sí</label>
+                        <input type="radio" id="q3_no" name="q3_accion_clara" value="No" required><label for="q3_no">No</label>
+                    </div>
+                    <textarea id="q3_texto" name="q3_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿El sistema muestra claramente que se ha abierto la app correctamente?</label>
+                    <div class="options">
+                        <input type="radio" id="q4_si" name="q4_sistema_muestra" value="Sí" required><label for="q4_si">Sí</label>
+                        <input type="radio" id="q4_no" name="q4_sistema_muestra" value="No" required><label for="q4_no">No</label>
+                    </div>
+                    <textarea id="q4_texto" name="q4_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-block">
+                 <p><strong>Subtarea:</strong> Usuario presiona jugar</p>
+                 <div class="question-item">
+                    <label>¿Tiene sentido para el usuario que presionar "Jugar" inicie la partida?</label>
+                    <div class="options">
+                        <input type="radio" id="q5_si" name="q5_sentido_jugar" value="Sí" required><label for="q5_si">Sí</label>
+                        <input type="radio" id="q5_no" name="q5_sentido_jugar" value="No" required><label for="q5_no">No</label>
+                    </div>
+                    <textarea id="q5_texto" name="q5_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Es visible el botón "Jugar" de forma destacada?</label>
+                    <div class="options">
+                        <input type="radio" id="q6_si" name="q6_boton_visible" value="Sí" required><label for="q6_si">Sí</label>
+                        <input type="radio" id="q6_no" name="q6_boton_visible" value="No" required><label for="q6_no">No</label>
+                    </div>
+                    <textarea id="q6_texto" name="q6_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Está claro que ese botón es para iniciar el juego?</label>
+                    <div class="options">
+                        <input type="radio" id="q7_si" name="q7_boton_claro" value="Sí" required><label for="q7_si">Sí</label>
+                        <input type="radio" id="q7_no" name="q7_boton_claro" value="No" required><label for="q7_no">No</label>
+                    </div>
+                    <textarea id="q7_texto" name="q7_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema indica de forma clara que el juego ha comenzado?</label>
+                    <div class="options">
+                        <input type="radio" id="q8_si" name="q8_sistema_indica_inicio" value="Sí" required><label for="q8_si">Sí</label>
+                        <input type="radio" id="q8_no" name="q8_sistema_indica_inicio" value="No" required><label for="q8_no">No</label>
+                    </div>
+                    <textarea id="q8_texto" name="q8_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+
+            <div class="question-block">
+                 <p><strong>Subtarea:</strong> Usuario arrastra un mono</p>
+                 <div class="question-item">
+                    <label>¿El usuario entiende que puede arrastrar un mono como parte del juego?</label>
+                    <div class="options">
+                        <input type="radio" id="q9_si" name="q9_entiende_arrastrar" value="Sí" required><label for="q9_si">Sí</label>
+                        <input type="radio" id="q9_no" name="q9_entiende_arrastrar" value="No" required><label for="q9_no">No</label>
+                    </div>
+                    <textarea id="q9_texto" name="q9_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Hay elementos visuales que indican que los monos pueden arrastrarse?</label>
+                    <div class="options">
+                        <input type="radio" id="q10_si" name="q10_visual_arrastrar" value="Sí" required><label for="q10_si">Sí</label>
+                        <input type="radio" id="q10_no" name="q10_visual_arrastrar" value="No" required><label for="q10_no">No</label>
+                    </div>
+                    <textarea id="q10_texto" name="q10_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Se entiende que debe colocarlo en una zona válida del mapa?</label>
+                    <div class="options">
+                        <input type="radio" id="q11_si" name="q11_entiende_zona" value="Sí" required><label for="q11_si">Sí</label>
+                        <input type="radio" id="q11_no" name="q11_entiende_zona" value="No" required><label for="q11_no">No</label>
+                    </div>
+                    <textarea id="q11_texto" name="q11_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema confirma claramente que el mono fue colocado?</label>
+                    <div class="options">
+                        <input type="radio" id="q12_si" name="q12_sistema_confirma_colocado" value="Sí" required><label for="q12_si">Sí</label>
+                        <input type="radio" id="q12_no" name="q12_sistema_confirma_colocado" value="No" required><label for="q12_no">No</label>
+                    </div>
+                    <textarea id="q12_texto" name="q12_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario vende un mono</p>
+                <div class="question-item">
+                    <label>¿El usuario comprende por qué y cuándo vender un mono?</label>
+                    <div class="options">
+                        <input type="radio" id="q13_si" name="q13_comprende_vender" value="Sí" required><label for="q13_si">Sí</label>
+                        <input type="radio" id="q13_no" name="q13_comprende_vender" value="No" required><label for="q13_no">No</label>
+                    </div>
+                    <textarea id="q13_texto" name="q13_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Está visible y accesible la opción de vender?</label>
+                    <div class="options">
+                        <input type="radio" id="q14_si" name="q14_opcion_vender_visible" value="Sí" required><label for="q14_si">Sí</label>
+                        <input type="radio" id="q14_no" name="q14_opcion_vender_visible" value="No" required><label for="q14_no">No</label>
+                    </div>
+                    <textarea id="q14_texto" name="q14_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Está claro que esa acción elimina el mono y recupera recursos?</label>
+                    <div class="options">
+                        <input type="radio" id="q15_si" name="q15_accion_vender_clara" value="Sí" required><label for="q15_si">Sí</label>
+                        <input type="radio" id="q15_no" name="q15_accion_vender_clara" value="No" required><label for="q15_no">No</label>
+                    </div>
+                    <textarea id="q15_texto" name="q15_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿El sistema muestra de forma evidente que el mono fue vendido?</label>
+                    <div class="options">
+                        <input type="radio" id="q16_si" name="q16_sistema_confirma_venta" value="Sí" required><label for="q16_si">Sí</label>
+                        <input type="radio" id="q16_no" name="q16_sistema_confirma_venta" value="No" required><label for="q16_no">No</label>
+                    </div>
+                    <textarea id="q16_texto" name="q16_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+
+             <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario mejora a un mono</p>
+                <div class="question-item">
+                    <label>¿El usuario entiende que puede mejorar un mono como parte de su estrategia?</label>
+                    <div class="options">
+                        <input type="radio" id="q17_si" name="q17_entiende_mejorar" value="Sí" required><label for="q17_si">Sí</label>
+                        <input type="radio" id="q17_no" name="q17_entiende_mejorar" value="No" required><label for="q17_no">No</label>
+                    </div>
+                    <textarea id="q17_texto" name="q17_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿La opción de mejora es visible al seleccionar un mono?</label>
+                    <div class="options">
+                        <input type="radio" id="q18_si" name="q18_opcion_mejora_visible" value="Sí" required><label for="q18_si">Sí</label>
+                        <input type="radio" id="q18_no" name="q18_opcion_mejora_visible" value="No" required><label for="q18_no">No</label>
+                    </div>
+                    <textarea id="q18_texto" name="q18_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Está claro que esta acción aumentará las capacidades del mono?</label>
+                    <div class="options">
+                        <input type="radio" id="q19_si" name="q19_accion_mejora_clara" value="Sí" required><label for="q19_si">Sí</label>
+                        <input type="radio" id="q19_no" name="q19_accion_mejora_clara" value="No" required><label for="q19_no">No</label>
+                    </div>
+                    <textarea id="q19_texto" name="q19_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿El sistema muestra claramente que el mono ha sido mejorado (ej. efectos visuales, cambios en estadísticas)?</label>
+                    <div class="options">
+                        <input type="radio" id="q20_si" name="q20_sistema_confirma_mejora" value="Sí" required><label for="q20_si">Sí</label>
+                        <input type="radio" id="q20_no" name="q20_sistema_confirma_mejora" value="No" required><label for="q20_no">No</label>
+                    </div>
+                    <textarea id="q20_texto" name="q20_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>TAREA: MODIFICAR LOS AJUSTES</legend>
+
+             <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario presiona ajustes</p>
+                <div class="question-item">
+                    <label>¿Es lógico que el usuario busque configuraciones en "Ajustes"?</label>
+                    <div class="options">
+                        <input type="radio" id="q21_si" name="q21_logico_ajustes" value="Sí" required><label for="q21_si">Sí</label>
+                        <input type="radio" id="q21_no" name="q21_logico_ajustes" value="No" required><label for="q21_no">No</label>
+                    </div>
+                    <textarea id="q21_texto" name="q21_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿El botón de ajustes es visible y reconocible?</label>
+                    <div class="options">
+                        <input type="radio" id="q22_si" name="q22_boton_ajustes_visible" value="Sí" required><label for="q22_si">Sí</label>
+                        <input type="radio" id="q22_no" name="q22_boton_ajustes_visible" value="No" required><label for="q22_no">No</label>
+                    </div>
+                    <textarea id="q22_texto" name="q22_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Se entiende que sirve para modificar configuraciones?</label>
+                    <div class="options">
+                        <input type="radio" id="q23_si" name="q23_entiende_ajustes" value="Sí" required><label for="q23_si">Sí</label>
+                        <input type="radio" id="q23_no" name="q23_entiende_ajustes" value="No" required><label for="q23_no">No</label>
+                    </div>
+                    <textarea id="q23_texto" name="q23_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿El sistema muestra claramente que se está en el menú de ajustes?</label>
+                    <div class="options">
+                        <input type="radio" id="q24_si" name="q24_sistema_muestra_ajustes" value="Sí" required><label for="q24_si">Sí</label>
+                        <input type="radio" id="q24_no" name="q24_sistema_muestra_ajustes" value="No" required><label for="q24_no">No</label>
+                    </div>
+                    <textarea id="q24_texto" name="q24_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario modifica el volumen</p>
+                <div class="question-item">
+                    <label>¿Tiene sentido para el usuario usar una barra para modificar el volumen?</label>
+                    <div class="options">
+                        <input type="radio" id="q25_si" name="q25_sentido_barra_volumen" value="Sí" required><label for="q25_si">Sí</label>
+                        <input type="radio" id="q25_no" name="q25_sentido_barra_volumen" value="No" required><label for="q25_no">No</label>
+                    </div>
+                    <textarea id="q25_texto" name="q25_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Es visible la barra de volumen en los ajustes?</label>
+                    <div class="options">
+                        <input type="radio" id="q26_si" name="q26_barra_volumen_visible" value="Sí" required><label for="q26_si">Sí</label>
+                        <input type="radio" id="q26_no" name="q26_barra_volumen_visible" value="No" required><label for="q26_no">No</label>
+                    </div>
+                    <textarea id="q26_texto" name="q26_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿Está claro que se puede interactuar con la barra para cambiar el volumen?</label>
+                    <div class="options">
+                        <input type="radio" id="q27_si" name="q27_interaccion_barra_clara" value="Sí" required><label for="q27_si">Sí</label>
+                        <input type="radio" id="q27_no" name="q27_interaccion_barra_clara" value="No" required><label for="q27_no">No</label>
+                    </div>
+                    <textarea id="q27_texto" name="q27_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿El sistema da feedback inmediato del cambio de volumen (barra cambia, sonido de prueba)?</label>
+                    <div class="options">
+                        <input type="radio" id="q28_si" name="q28_feedback_volumen" value="Sí" required><label for="q28_si">Sí</label>
+                        <input type="radio" id="q28_no" name="q28_feedback_volumen" value="No" required><label for="q28_no">No</label>
+                    </div>
+                    <textarea id="q28_texto" name="q28_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+
+             <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario activa/desactiva los efectos de sonido</p>
+                 <div class="question-item">
+                    <label>¿Tiene sentido que el usuario use un checkbox para activar o desactivar efectos?</label>
+                    <div class="options">
+                        <input type="radio" id="q29_si" name="q29_sentido_checkbox_efectos" value="Sí" required><label for="q29_si">Sí</label>
+                        <input type="radio" id="q29_no" name="q29_sentido_checkbox_efectos" value="No" required><label for="q29_no">No</label>
+                    </div>
+                    <textarea id="q29_texto" name="q29_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Es visible el checkbox correspondiente?</label>
+                    <div class="options">
+                        <input type="radio" id="q30_si" name="q30_checkbox_efectos_visible" value="Sí" required><label for="q30_si">Sí</label>
+                        <input type="radio" id="q30_no" name="q30_checkbox_efectos_visible" value="No" required><label for="q30_no">No</label>
+                    </div>
+                    <textarea id="q30_texto" name="q30_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Está claro qué activa o desactiva ese checkbox?</label>
+                    <div class="options">
+                        <input type="radio" id="q31_si" name="q31_checkbox_efectos_claro" value="Sí" required><label for="q31_si">Sí</label>
+                        <input type="radio" id="q31_no" name="q31_checkbox_efectos_claro" value="No" required><label for="q31_no">No</label>
+                    </div>
+                    <textarea id="q31_texto" name="q31_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema confirma el cambio de estado (sonido, visualización del cambio)?</label>
+                    <div class="options">
+                        <input type="radio" id="q32_si" name="q32_feedback_efectos" value="Sí" required><label for="q32_si">Sí</label>
+                        <input type="radio" id="q32_no" name="q32_feedback_efectos" value="No" required><label for="q32_no">No</label>
+                    </div>
+                    <textarea id="q32_texto" name="q32_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+
+             <div class="question-block">
+                 <p><strong>Subtarea:</strong> Usuario cambia el idioma</p>
+                 <div class="question-item">
+                    <label>¿Tiene sentido para el usuario usar un menú desplegable para cambiar el idioma?</label>
+                    <div class="options">
+                        <input type="radio" id="q33_si" name="q33_sentido_menu_idioma" value="Sí" required><label for="q33_si">Sí</label>
+                        <input type="radio" id="q33_no" name="q33_sentido_menu_idioma" value="No" required><label for="q33_no">No</label>
+                    </div>
+                    <textarea id="q33_texto" name="q33_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Es visible el menú de idiomas dentro de ajustes?</label>
+                    <div class="options">
+                        <input type="radio" id="q34_si" name="q34_menu_idioma_visible" value="Sí" required><label for="q34_si">Sí</label>
+                        <input type="radio" id="q34_no" name="q34_menu_idioma_visible" value="No" required><label for="q34_no">No</label>
+                    </div>
+                    <textarea id="q34_texto" name="q34_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Está claro qué idiomas están disponibles y cómo seleccionar uno?</label>
+                    <div class="options">
+                        <input type="radio" id="q35_si" name="q35_menu_idioma_claro" value="Sí" required><label for="q35_si">Sí</label>
+                        <input type="radio" id="q35_no" name="q35_menu_idioma_claro" value="No" required><label for="q35_no">No</label>
+                    </div>
+                    <textarea id="q35_texto" name="q35_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema cambia el idioma de forma inmediata o notifica que se aplicó?</label>
+                    <div class="options">
+                        <input type="radio" id="q36_si" name="q36_feedback_idioma" value="Sí" required><label for="q36_si">Sí</label>
+                        <input type="radio" id="q36_no" name="q36_feedback_idioma" value="No" required><label for="q36_no">No</label>
+                    </div>
+                    <textarea id="q36_texto" name="q36_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+        </fieldset>
+
+         <fieldset>
+            <legend>TAREA: MOSTRAR LA INFO DE LOS MONOS</legend>
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario presiona “Monkey Info”</p>
+                <div class="question-item">
+                    <label>¿Tiene sentido que el usuario presione “Monkey Info” para ver la información de los monos?</label>
+                    <div class="options">
+                        <input type="radio" id="q37_si" name="q37_sentido_monkey_info" value="Sí" required><label for="q37_si">Sí</label>
+                        <input type="radio" id="q37_no" name="q37_sentido_monkey_info" value="No" required><label for="q37_no">No</label>
+                    </div>
+                    <textarea id="q37_texto" name="q37_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Es visible el botón “Monkey Info” en la interfaz?</label>
+                    <div class="options">
+                        <input type="radio" id="q38_si" name="q38_boton_monkey_info_visible" value="Sí" required><label for="q38_si">Sí</label>
+                        <input type="radio" id="q38_no" name="q38_boton_monkey_info_visible" value="No" required><label for="q38_no">No</label>
+                    </div>
+                    <textarea id="q38_texto" name="q38_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Está claro que ese botón muestra la información sobre los monos?</label>
+                    <div class="options">
+                        <input type="radio" id="q39_si" name="q39_boton_monkey_info_claro" value="Sí" required><label for="q39_si">Sí</label>
+                        <input type="radio" id="q39_no" name="q39_boton_monkey_info_claro" value="No" required><label for="q39_no">No</label>
+                    </div>
+                    <textarea id="q39_texto" name="q39_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema despliega correctamente esa información al presionarlo?</label>
+                    <div class="options">
+                        <input type="radio" id="q40_si" name="q40_sistema_muestra_info" value="Sí" required><label for="q40_si">Sí</label>
+                        <input type="radio" id="q40_no" name="q40_sistema_muestra_info" value="No" required><label for="q40_no">No</label>
+                    </div>
+                    <textarea id="q40_texto" name="q40_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>TAREA: MOSTRAR CRÉDITOS</legend>
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario presiona “Créditos”</p>
+                <div class="question-item">
+                    <label>¿Tiene sentido que los créditos estén en un botón llamado “Créditos”?</label>
+                    <div class="options">
+                        <input type="radio" id="q41_si" name="q41_sentido_creditos" value="Sí" required><label for="q41_si">Sí</label>
+                        <input type="radio" id="q41_no" name="q41_sentido_creditos" value="No" required><label for="q41_no">No</label>
+                    </div>
+                    <textarea id="q41_texto" name="q41_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Es visible ese apartado en la interfaz?</label>
+                    <div class="options">
+                        <input type="radio" id="q42_si" name="q42_boton_creditos_visible" value="Sí" required><label for="q42_si">Sí</label>
+                        <input type="radio" id="q42_no" name="q42_boton_creditos_visible" value="No" required><label for="q42_no">No</label>
+                    </div>
+                    <textarea id="q42_texto" name="q42_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Está claro que ese botón lleva a los créditos del juego?</label>
+                    <div class="options">
+                        <input type="radio" id="q43_si" name="q43_boton_creditos_claro" value="Sí" required><label for="q43_si">Sí</label>
+                        <input type="radio" id="q43_no" name="q43_boton_creditos_claro" value="No" required><label for="q43_no">No</label>
+                    </div>
+                    <textarea id="q43_texto" name="q43_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿El sistema muestra los créditos correctamente tras pulsarlo?</label>
+                    <div class="options">
+                        <input type="radio" id="q44_si" name="q44_sistema_muestra_creditos" value="Sí" required><label for="q44_si">Sí</label>
+                        <input type="radio" id="q44_no" name="q44_sistema_muestra_creditos" value="No" required><label for="q44_no">No</label>
+                    </div>
+                    <textarea id="q44_texto" name="q44_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>TAREA: JUGAR EL TUTORIAL</legend>
+
+            <div class="question-block">
+                 <p><strong>Subtarea:</strong> Usuario presiona el tutorial</p>
+                 <div class="question-item">
+                    <label>¿Es esperable que un usuario nuevo busque el tutorial desde el menú?</label>
+                    <div class="options">
+                        <input type="radio" id="q45_si" name="q45_esperable_tutorial" value="Sí" required><label for="q45_si">Sí</label>
+                        <input type="radio" id="q45_no" name="q45_esperable_tutorial" value="No" required><label for="q45_no">No</label>
+                    </div>
+                    <textarea id="q45_texto" name="q45_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El botón "Tutorial" es fácil de encontrar?</label>
+                    <div class="options">
+                        <input type="radio" id="q46_si" name="q46_boton_tutorial_visible" value="Sí" required><label for="q46_si">Sí</label>
+                        <input type="radio" id="q46_no" name="q46_boton_tutorial_visible" value="No" required><label for="q46_no">No</label>
+                    </div>
+                    <textarea id="q46_texto" name="q46_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Se entiende que este botón inicia una guía paso a paso?</label>
+                    <div class="options">
+                        <input type="radio" id="q47_si" name="q47_boton_tutorial_claro" value="Sí" required><label for="q47_si">Sí</label>
+                        <input type="radio" id="q47_no" name="q47_boton_tutorial_claro" value="No" required><label for="q47_no">No</label>
+                    </div>
+                    <textarea id="q47_texto" name="q47_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema deja claro que se ha ingresado al modo tutorial?</label>
+                    <div class="options">
+                        <input type="radio" id="q48_si" name="q48_sistema_muestra_tutorial" value="Sí" required><label for="q48_si">Sí</label>
+                        <input type="radio" id="q48_no" name="q48_sistema_muestra_tutorial" value="No" required><label for="q48_no">No</label>
+                    </div>
+                    <textarea id="q48_texto" name="q48_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+
+             <div class="question-block">
+                 <p><strong>Subtarea:</strong> Usuario sigue los pasos ofrecidos por el tutorial</p>
+                 <div class="question-item">
+                    <label>¿Tiene sentido que el usuario siga los pasos como parte del aprendizaje?</label>
+                    <div class="options">
+                        <input type="radio" id="q49_si" name="q49_sentido_seguir_pasos" value="Sí" required><label for="q49_si">Sí</label>
+                        <input type="radio" id="q49_no" name="q49_sentido_seguir_pasos" value="No" required><label for="q49_no">No</label>
+                    </div>
+                    <textarea id="q49_texto" name="q49_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Son visibles y comprensibles los pasos del tutorial?</label>
+                    <div class="options">
+                        <input type="radio" id="q50_si" name="q50_pasos_visibles" value="Sí" required><label for="q50_si">Sí</label>
+                        <input type="radio" id="q50_no" name="q50_pasos_visibles" value="No" required><label for="q50_no">No</label>
+                    </div>
+                    <textarea id="q50_texto" name="q50_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿Está claro qué debe hacer el usuario en cada paso?</label>
+                    <div class="options">
+                        <input type="radio" id="q51_si" name="q51_pasos_claros" value="Sí" required><label for="q51_si">Sí</label>
+                        <input type="radio" id="q51_no" name="q51_pasos_claros" value="No" required><label for="q51_no">No</label>
+                    </div>
+                    <textarea id="q51_texto" name="q51_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+                 <div class="question-item">
+                    <label>¿El sistema da feedback tras cada paso (confirmación, avance automático, mensajes)?</label>
+                    <div class="options">
+                        <input type="radio" id="q52_si" name="q52_feedback_pasos" value="Sí" required><label for="q52_si">Sí</label>
+                        <input type="radio" id="q52_no" name="q52_feedback_pasos" value="No" required><label for="q52_no">No</label>
+                    </div>
+                    <textarea id="q52_texto" name="q52_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                 </div>
+            </div>
+
+            <div class="question-block">
+                <p><strong>Subtarea:</strong> Usuario abandona el tutorial</p>
+                <div class="question-item">
+                    <label>¿Tiene sentido que exista una opción para abandonar el tutorial?</label>
+                    <div class="options">
+                        <input type="radio" id="q53_si" name="q53_sentido_abandonar" value="Sí" required><label for="q53_si">Sí</label>
+                        <input type="radio" id="q53_no" name="q53_sentido_abandonar" value="No" required><label for="q53_no">No</label>
+                    </div>
+                    <textarea id="q53_texto" name="q53_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                <div class="question-item">
+                    <label>¿Es visible el botón “Abandonar tutorial”?</label>
+                    <div class="options">
+                        <input type="radio" id="q54_si" name="q54_boton_abandonar_visible" value="Sí" required><label for="q54_si">Sí</label>
+                        <input type="radio" id="q54_no" name="q54_boton_abandonar_visible" value="No" required><label for="q54_no">No</label>
+                    </div>
+                    <textarea id="q54_texto" name="q54_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿Está claro que presionar ese botón termina el tutorial sin guardar ningún progreso?</label>
+                    <div class="options">
+                        <input type="radio" id="q55_si" name="q55_boton_abandonar_claro" value="Sí" required><label for="q55_si">Sí</label>
+                        <input type="radio" id="q55_no" name="q55_boton_abandonar_claro" value="No" required><label for="q55_no">No</label>
+                    </div>
+                    <textarea id="q55_texto" name="q55_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+                 <div class="question-item">
+                    <label>¿El sistema da feedback claro al salir (mensaje, regreso al menú, confirmación)?</label>
+                    <div class="options">
+                        <input type="radio" id="q56_si" name="q56_feedback_abandono" value="Sí" required><label for="q56_si">Sí</label>
+                        <input type="radio" id="q56_no" name="q56_feedback_abandono" value="No" required><label for="q56_no">No</label>
+                    </div>
+                    <textarea id="q56_texto" name="q56_detalles" rows="2" placeholder="Respuesta detallada..."></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit">Enviar Respuestas</button>
+
+        <div id="formMessage" class="message"></div>
+
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
