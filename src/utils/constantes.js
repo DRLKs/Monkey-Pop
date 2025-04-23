@@ -99,7 +99,17 @@ export const PARTIDA = {
     [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6],
     [9,9,8,8,8,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7],
     [10,10,10,10,10,9,9,9,9,9,9,9,9,9,9,9],
-    [13,13,13,13,12,12,12,11,10]
+    [13,13,13,13,12,12,12,11,10],
+    [14,14,14,14,13,13,13,12,11],
+    [15,15,15,15,14,14,14,13,12],
+    [16,16,16,16,15,15,15,14,13],
+    [17,17,17,17,16,16,16],
+    [18,18,18,18,17,17,17],
+    [19,19,19,19,18,18,18],
+    [20,20,20,20,19,19],
+    [21,21,21,21],
+    [22,22],
+    [90,90]
   ],
   ancho_mapa: 30,   // Tienes que cambiar el css también en juegocss
   largo_mapa: 15,
@@ -107,7 +117,7 @@ export const PARTIDA = {
   tiempoEntreRondas: 5000, // Tiempo en milisegundos
   monedasGlobo: 10, // Cantidad de monedas que da un globo al ser destruido
   monedas_iniciales: 170,
-  vidas_iniciales: 1,
+  vidas_iniciales: 100,
   ronda_inicial: 1
 }
 
