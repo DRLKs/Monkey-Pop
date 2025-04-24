@@ -27,7 +27,7 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
     return(
         <BarraNavegacion>
             <div className='botones-container'>
-            <div className="ralentizar">
+              <div className="ralentizar">
                 <img 
                   src={btnRalentizar} 
                   alt="Ralentizar" 

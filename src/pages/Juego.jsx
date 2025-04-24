@@ -1,5 +1,5 @@
 // Bibliotecas de React
-import React, { useMemo, useReducer, useState, useEffect, act } from 'react'
+import React, { useMemo, useReducer, useState, useEffect, useRef } from 'react'
 
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa'
@@ -8,6 +8,7 @@ import FinJuego from '../components/FinJuego'
 import AjustesContainerJuego from '../components/AjustesContainerJuego'
 import AjustesMono from '../components/AjustesMono'
 import ConfirmacionComponent from '../components/CofirmacionComponent';
+import OrientationWarning from '../components/OrientationWarning';
 
 // Clases 
 import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
@@ -141,6 +142,12 @@ function gameReducer(state, action) {
         ...state,
         monosColocados: nuevosMonos,
         monedas: state.monedas + action.precio
+      };
+
+    case 'MEJORAR_MONO':
+      return {
+        ...state,
+        monedas: state.monedas - action.precio
       };
       
     default:
@@ -323,6 +330,13 @@ function Juego() {
     });
   }
 
+  const mejorarMono = (precio) => {
+    dispatch({
+      type: 'MEJORAR_MONO',
+      precio: precio
+    });
+  }
+
   /**
    * Función que se ejecutará para reiniciar los estados y comenzar una nueva partida 
    */
@@ -377,8 +391,39 @@ function Juego() {
     setAjustesVisible(estaranLosAjustesVisibles);
   }
 
+  // Estado para detectar la orientación
+  const [isPortrait, setIsPortrait] = useState(false);
+  const prevOrientationRef = useRef(false);
+
+  // Effect para manejar cambios de orientación
+  useEffect(() => {
+    const checkOrientation = () => {
+      // Detectar si la pantalla está en modo retrato (portrait)
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+    
+    // Verificar orientación inicial
+    checkOrientation();
+    
+    // Agregar listener para cambios de orientación
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+    
+    // Limpiar listeners
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+  
   return (
     <>
+      {/* Mostrar advertencia si es móvil y está en portrait */}
+      {isPortrait && window.innerWidth <= 768 && (
+        <OrientationWarning isPaused={pausarReaunudarCronometro} />
+      )}
+      
+      {/* El resto de tu código existente */}
       <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
         ronda={gameState.ronda}
@@ -422,6 +467,7 @@ function Juego() {
       <AjustesMono
         mono={monoVerAjustes}
         venderMono={venderMono}
+        funcionMejorarMono={(precio) => mejorarMono(precio)}
         cerrar={() => setMonoVerAjustes(null)}
       />
       }
@@ -457,7 +503,7 @@ function Juego() {
       )}
 
     </>
-  )
+  );
 }
 
 export default Juego

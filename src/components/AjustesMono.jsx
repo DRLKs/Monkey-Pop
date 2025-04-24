@@ -1,8 +1,11 @@
-import { MONOS } from "../utils/constantes";
-
 import '../styles/ajustesMono.css';
 
-function AjustesMono({mono, venderMono, cerrar}) {
+import { MONOS } from '../utils/constantes'
+
+function AjustesMono({mono, venderMono, cerrar, funcionMejorarMono}) {
+
+  const precioVentaMono = MONOS[mono.getTipo()].precio / 2;
+
   return (
     <div className="ajustes-mono-container">
         <div className="presentacion-continer">
@@ -12,36 +15,36 @@ function AjustesMono({mono, venderMono, cerrar}) {
         <div className="estadisticas-container">
             <h2> Estadísticas </h2>
             <div className="estadistica-row">
-              <p> Rango: { mono.getRango() } </p>
-              <button 
-                className="btn-mejorar-small" 
-                onClick={() => mono.mejorarRango()}
-              >
-                +
-              </button>
+              Rango: {mono.getRango()} 
+              {mono.esMejorable() && (
+                <span className="mejora-label"> → {mono.getRango() + 12}</span>
+              )}
             </div>
+
             <div className="estadistica-row">
-              <p> Daño: { mono.getDamage() } </p>
-              <button 
-                className="btn-mejorar-small" 
-                onClick={() => mono.mejorarDamage()}
-              >
-                +
-              </button>
+              Daño: { mono.getDamage() }
+              {mono.esMejorable() && (
+                <span className="mejora-label"> → {mono.getDamage() + 12}</span>
+              )}
             </div>
+
             <div className="estadistica-row">
-              <p> Tiempo de recarga: { mono.getTiempoRecarga() } </p>
-              <button 
-                className="btn-mejorar-small" 
-                onClick={() => mono.mejorarTiempoRecarga()}
-              >
-                +
-              </button>
+              Recarga: { mono.getTiempoRecarga() }
+              {mono.esMejorable() && (
+                <span className="mejora-label"> → {mono.getTiempoRecarga() + 12}</span>
+              )}
             </div>
+            
         </div>
+
+        {mono.esMejorable() && (
+            <button className="btn-mejora" onClick={() => {mono.mejorarMono(), funcionMejorarMono(50);}}> Mejorar </button>
+            )}
+
         <div className="botones-container">
+            
             <button className="btn" onClick={cerrar}> Cerrar </button>
-            <button className="btn" onClick={venderMono}> Vender </button>
+            <button className="btn" onClick={venderMono}> Vender {precioVentaMono} </button>
         </div>
     </div>
   );
