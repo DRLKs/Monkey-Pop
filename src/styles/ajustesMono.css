@@ -74,14 +74,14 @@
     flex-grow: 1;
 }
 
-.botones-container {
+.botones-container-cerrar-vender {
     margin-top: auto; /* Empuja los botones hacia abajo */
     display: flex;
     justify-content: space-between;
     gap: 5px;
 }
 
-.botones-container button {
+.botones-container-cerrar-vender button {
     flex: 1;
     padding: 6px 8px;
     font-size: 14px;
@@ -150,5 +150,76 @@
 @media (max-width: 480px) {
     .ajustes-mono-container {
         margin-top: 260px;
+    }
+}
+
+@media (max-height: 450px) {
+    
+    .ajustes-mono-container {
+        margin-top: 100px;
+        width: 150px; /* Ancho reducido */
+        height: auto; /* Altura automática */
+    }
+
+    .presentacion-continer img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .estadisticas-container h2 {
+        font-size: 14px;
+    }
+
+    .estadisticas-container {
+        padding: 0 3px;
+        font-size: 12px;
+    }
+
+    .btn-mejora{
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+
+    .botones-container-cerrar-vender button {
+        width: 100%;
+        padding: 5px 6px;
+        font-size: 0.6rem;
+    }
+
+}
+
+@media (max-height: 400px) {
+    
+    .ajustes-mono-container {
+        width: 150px;
+        height: auto;
+        margin: 105px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
+        padding: 5px; /* Padding mínimo pero específico */
+        max-height: calc(100vh - 55px); /* Altura máxima calculada */
+    }
+
+    .presentacion-continer {
+        margin-bottom: 5px;
+        padding-bottom: 0;
+    }
+
+    .presentacion-continer img {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 5px;
+    }
+
+    .presentacion-continer h1 {
+        margin: 0 0 5px 0;
+        font-size: 14px;
+    }
+
+    .estadistica-row {
+        margin-bottom: 3px;
+    }
+
+    .botones-container-cerrar-vender button {
+        padding: 1px 3px;
+        font-size: 9px;
     }
 }

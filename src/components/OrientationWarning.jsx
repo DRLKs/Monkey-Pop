@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/orientationWarning.css';
-import iconoRotar from '../assets/images/ui/rotate-phone.png'; // Asegúrate de añadir este ícono
+import iconoRotar from '../assets/images/ui/rotate-phone2.png'; // Asegúrate de añadir este ícono
 
 function OrientationWarning() {
   return (

@@ -27,21 +27,21 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
     return(
         <BarraNavegacion>
             <div className='botones-container'>
-              <div className="ralentizar">
+              <div className="boton-barraNavegacion">
                 <img 
                   src={btnRalentizar} 
                   alt="Ralentizar" 
                   className="icono-boton" 
                 />
               </div>
-              <div className="acelerar">
+              <div className="boton-barraNavegacion">
                 <img 
                   src={btnAcelerar} 
                   alt="Acelerar" 
                   className="icono-boton" 
                 />
               </div>
-              <div className="ajustes">
+              <div className="boton-barraNavegacion">
                 <img 
                   src={btnAjustes} 
                   alt="Ajustes" 
@@ -49,7 +49,7 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
                   onClick={abrirAjustes} 
                 />
               </div>
-              <div className="reiniciar">
+              <div className="boton-barraNavegacion">
                 <img 
                   src={btnReiniciar} 
                   alt="Reiniciar" 
@@ -57,8 +57,8 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
                   onClick={reiniciarJuego} 
                   />
                 </div>
-                <div className="pausar-reaudar">
-                <img 
+                <div className="boton-barraNavegacion">
+                  <img 
                   src={pausado ? btnReanudar : btnPausar}
                   alt="Pausar/Reanudar" 
                   className="icono-boton" 
