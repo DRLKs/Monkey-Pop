@@ -46,15 +46,17 @@ export function Menu() {
         <>
         <div className="menu-page"></div>
         
-        <div className='titulo-juego-container'>
-                <img src={tituloJuego} alt='titulo'/>
-        </div>
+        <div className='menu-container-container'>
+            <div className='titulo-juego-container'>
+                    <img src={tituloJuego} alt='titulo'/>
+            </div>
 
-        <div className="menu-container">
-            <button id="play-btn" className='menu-btn' onClick={() => navigate('/juego')}>Jugar</button>
-            <button id="tutorial-btn" className='menu-btn' onClick={() => navigate('/tutorial')}>Tutorial</button>
-            <button id="settings-btn" className='menu-btn' onClick={() => navigate('/ajustes')}>Ajustes</button>
-            <button id="infomonos-btn" className='menu-btn' onClick={() => navigate('/monoInfo')}>Monos</button>
+            <div className="menu-container">
+                <button id="play-btn" className='menu-btn' onClick={() => navigate('/juego')}>Jugar</button>
+                <button id="tutorial-btn" className='menu-btn' onClick={() => navigate('/tutorial')}>Tutorial</button>
+                <button id="settings-btn" className='menu-btn' onClick={() => navigate('/ajustes')}>Ajustes</button>
+                <button id="infomonos-btn" className='menu-btn' onClick={() => navigate('/monoInfo')}>Monos</button>
+            </div>
         </div>
         
         <footer>

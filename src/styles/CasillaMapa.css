@@ -67,6 +67,15 @@
   filter: brightness(1.2);
 }
 
+.globo, .mono, .globo-explotado{
+  position: absolute;
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  animation: move 5s linear infinite;
+  z-index: 10;
+}
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .casilla-mapa {
@@ -102,4 +111,23 @@
   .casilla-agua:hover {
     transform: none;
   }
+}
+
+@media (max-height: 450px) {
+  .casilla-mapa {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .casilla-selected {
+    transform: none;
+  }
+
+  .mono, .globo, .globo-explotado{
+    max-width: 18px;
+    max-height: 18px;
+  }
+
+
+  
 }
