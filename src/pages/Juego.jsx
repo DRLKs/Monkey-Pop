@@ -303,6 +303,71 @@ function Juego() {
     }
   }, [monoSeleccionado]);
 
+
+  /**
+   * Función que se ejecuta al presionar una tecla
+   */
+  useEffect(() => {
+    // Función que se ejecuta cuando se presiona una tecla
+    const handleKeyDown = (event) => {
+      // Obtener el código o nombre de la tecla presionada
+      const key = event.key;
+      
+      // Diferentes acciones según la tecla presionada
+      switch (key) {
+        case 'Escape':
+          // Por ejemplo, cancelar el mono seleccionado
+          setAjustesVisible(true);
+          break;
+        case ' ':
+          // Espacio para pausar/reanudar
+          pausarReaunudarCronometro();  // Habrá que ponerlo en el botón de pausa para poder actualizarlo
+          break;
+        case '0':
+          setMonoSeleccionado(null);
+          break;
+        case '1':
+          setMonoSeleccionado(MONOS.basico.tipo);
+          break;
+        case '2':
+          setMonoSeleccionado(MONOS.arco.tipo);
+          break;
+
+        case '3':
+          setMonoSeleccionado(MONOS.fusil.tipo);
+          break;
+
+        case '4':
+          setMonoSeleccionado(MONOS.artificiero.tipo);
+          break;
+
+        case '5':
+          setMonoSeleccionado(MONOS.francotirador.tipo);
+          break;
+        
+        case '6':
+          setMonoSeleccionado(MONOS.laser.tipo);
+          break;
+
+        case 'p':
+          // Pausar el juego
+          pausarReaunudarCronometro();
+          break;
+
+        default:
+          break;
+      }
+    };
+  
+    // Agregar el event listener
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Función de limpieza que se ejecuta cuando el componente se desmonta
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [monoSeleccionado, cronometroActivo]); // Dependencias del useEffect
+
   /**
    * Función que controla el manejo de los monos seleccionados
    * Se ejecuta arrastrando o clicando en un mono de la barra de navegación
@@ -393,7 +458,6 @@ function Juego() {
 
   // Estado para detectar la orientación
   const [isPortrait, setIsPortrait] = useState(false);
-  const prevOrientationRef = useRef(false);
 
   // Effect para manejar cambios de orientación
   useEffect(() => {
@@ -423,7 +487,6 @@ function Juego() {
         <OrientationWarning isPaused={pausarReaunudarCronometro} />
       )}
       
-      {/* El resto de tu código existente */}
       <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
         ronda={gameState.ronda}
