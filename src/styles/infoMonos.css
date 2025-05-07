@@ -1,10 +1,17 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  overflow-y: scroll; /* Permite el desplazamiento vertical */
+  /* El padding: 0; del body no es necesario si los hijos manejan su propio espacio */
+  font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+  overflow-y: scroll;
+  background-color: #3E2723;
 }
+/* ... (el reseteo de box-sizing y body de arriba) ... */
 
 .barra-navegacion {
   position: fixed;
@@ -13,131 +20,166 @@ body {
   width: 100%;
   height: 60px; /* Altura de la barra */
   z-index: 1000;
-  background-color: #333; /* Color de fondo */
+  background-color: #bd7d4c;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  border-bottom: 4px solid #FFB300;
 }
 
 .pagina-mono-info {
-  margin-top: 300px; /* Ajustado para asegurar espacio inicial, puede variar */
-  min-height: calc(100vh - 60px);
-  width: 100%; /* Asegura que el fondo cubra todo el ancho */
-  background-image: url('../assets/images/backgrounds/fondoMonos.png'); /* Ruta de la imagen de fondo */
-  background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-attachment: fixed; /* Hace que el fondo sea fijo al hacer scroll */
+  /* --- AJUSTE CRUCIAL PARA LA SEPARACIÓN --- */
+  padding-top: 250px;  /* AlturaBarra (60px) + EspacioVisualDeseado (40px) */
+  
+  /* El margin-top aquí ya no es necesario si el padding-top maneja todo el espacio */
+  /* margin-top: 0;  <-- Puedes asegurarte de que no haya margen superior aquí */
+
+  min-height: calc(100vh - 100px); /* Ajustado al nuevo padding-top total */
+  width: 100%;
+  background-image: url('../assets/images/backgrounds/fondoMonos.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: 20px;
-  box-sizing: border-box; /* Incluye padding en el tamaño total */
-  padding-top: 80px; /* Añade padding superior para compensar barra fija */
+  padding-bottom: 50px;
+  /* box-sizing: border-box; <-- Ya está cubierto por el reseteo global */
 }
 
 .contenedor-monos {
+  /* Ya NO necesita margin-top aquí si pagina-mono-info tiene suficiente padding-top */
+  /* margin-top: 0; */
+  
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
   justify-content: center;
-  align-items: flex-start; /* Mantenido para alinear tarjetas */
-  padding: 20px;
-  margin-top: 0; /* Eliminado el margen superior aquí, controlado por pagina-mono-info */
+  align-items: stretch;
+  padding: 20px; /* Padding interno del contenedor de tarjetas */
   width: 100%;
-  max-width: 1600px; /* Opcional: limita el ancho máximo del contenedor */
+  max-width: 1750px;
+  /* box-sizing: border-box; <-- Cubierto por el reseteo global */
 }
 
+/* El resto de tu CSS (.tarjeta-mono, .imagen-mono, etc.) permanece igual que antes */
 .tarjeta-mono {
-z-index: 1;
-position: relative;
-border: 2px solid #3d1a00;
-border-radius: 12px;
-padding: 16px;
-width: 400px; /* Ancho */
-/* height: 500px; Eliminamos altura fija para que se ajuste al contenido */
-text-align: center;
-background: linear-gradient(145deg, #e0e0e0, #ffffff);
-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2), inset 0 -4px 6px rgba(0, 0, 0, 0.1);
-transition: transform 0.2s, box-shadow 0.2s;
-background-image: url('../assets/images/backgrounds/madera4.png');
-background-size: cover;
-background-position: center;
-display: flex;
-flex-direction: column;
-/* justify-content: space-between; Comentado o eliminado para permitir ajuste de altura */
-align-items: center; /* Centra elementos horizontalmente */
-box-sizing: border-box;
+  z-index: 1;
+  border: 5px solid #FFC107;
+  border-radius: 22px;
+  padding: 20px;
+  width: 380px;
+  height: 600px;
+  text-align: center;
+  background-color: rgba(139, 69, 19, 0.8); /* SaddleBrown con 80% opacidad */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(0,0,0,0.25);
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, background-color 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* box-sizing: border-box; <-- Cubierto */
 }
 
 .tarjeta-mono:hover {
-transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
-box-shadow: 0 8px 14px rgba(0, 0, 0, 0.4), inset 0 -6px 8px rgba(0, 0, 0, 0.25);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), inset 0 0 18px rgba(0,0,0,0.3);
 }
 
 .imagen-mono {
-width: 90%; /* Reducido ligeramente para dar espacio */
-max-height: 250px; /* Mantenido */
-height: auto; /* Permite que la altura se ajuste */
-object-fit: contain;
-border-radius: 8px;
-margin-bottom: 12px; /* Espacio debajo de la imagen */
-border: 5px solid #3d1a00;
+  width: 90%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background-color: #6A8A64; 
+  border: 4px solid #4A3F35;
+  padding: 8px;
+  /* box-sizing: border-box; <-- Cubierto */
 }
 
-/* --- NUEVOS ESTILOS --- */
 .info-texto-mono {
-background-color: rgba(245, 235, 218, 0.85); /* Un color pergamino/papel claro semi-transparente */
-border-radius: 8px; /* Bordes redondeados */
-padding: 15px; /* Espacio interior */
-margin-top: 10px; /* Espacio entre la imagen y este cuadro */
-width: 90%; /* Ocupa la mayor parte del ancho de la tarjeta */
-box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.15); /* Sombra interior sutil */
-border: 1px solid rgba(101, 67, 33, 0.5); /* Borde sutil color madera */
-box-sizing: border-box; /* Asegura que el padding esté dentro del width */
-}
-/* --- FIN NUEVOS ESTILOS --- */
-
-
-.info-texto-mono h3 { /* Estilos específicos para el h3 dentro del nuevo div */
-margin-top: 0; /* Quita margen superior por defecto */
-margin-bottom: 10px;
-font-size: 1.8em;
-color: #3d1a00; /* Color más oscuro para el título */
-font-weight: bold;
-text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.7); /* Sombra clara */
+  background-color: #B09D8D;
+  border-radius: 12px;
+  padding: 15px 20px;
+  width: 100%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  border: 2px solid #605043;
+  /* box-sizing: border-box; <-- Cubierto */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.info-texto-mono p { /* Estilos específicos para los párrafos dentro del nuevo div */
-margin: 6px 0;
-font-size: 1.2em;
-color: #444; /* Color de texto principal */
-font-weight: 500; /* Peso ligeramente menor que el bold */
-text-shadow: none; /* Quita sombra anterior si no se ve bien sobre el fondo claro */
-word-wrap: break-word;
+.info-texto-mono h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.8em;
+  color: #FFEB3B;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
 }
 
-.info-texto-mono p strong { /* Estilos para el texto en negrita */
-color: #222; /* Más oscuro para destacar etiquetas */
-font-weight: bold;
+.info-texto-mono p {
+  margin: 6px 0;
+  font-size: 1.05em;
+  color: #FFFDE7;
+  line-height: 1.5;
+  text-align: left;
+  word-wrap: break-word;
 }
 
-
-/* Botones (si los hubiera dentro de la tarjeta) - Estilos previos mantenidos */
-.tarjeta-mono button:hover {
-  background-color: #45a049;
-  transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+.info-texto-mono p strong {
+  color: #FFC107;
+  font-weight: bold; 
 }
 
-.tarjeta-mono button:active {
-  background-color: #3e8e41;
-  transform: translateY(0); /* Efecto de clic */
+/* Media Queries (sin cambios, ya estaban bien) */
+@media screen and (max-width: 1200px) {
+    .tarjeta-mono {
+        width: 30%;
+        min-width: 320px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+  .tarjeta-mono {
+    width: 45%;
+    min-width: 300px;
+    height: 580px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .tarjeta-mono{
-    width: 80%; /* Ajustado para pantallas más pequeñas */
-    height: auto; /* Permite que la altura se ajuste automáticamente */
+  .pagina-mono-info {
+    padding-top: 80px; /* Ajustamos para móviles también, ej. 60px barra + 20px espacio */
+  }
+  /* Ya no necesitamos .contenedor-monos { margin-top: ... } aquí */
+  .tarjeta-mono {
+    width: 85%;
+    max-width: 400px;
+    height: auto;
+    min-height: 520px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pagina-mono-info {
+    padding-top: 70px; /* ej. 60px barra + 10px espacio */
+  }
+  .tarjeta-mono {
+    min-height: 480px;
+    padding: 15px;
+  }
+  .imagen-mono {
+    max-height: 180px;
   }
   .info-texto-mono {
-      width: 95%; /* Ajusta el ancho del cuadro de texto en pantallas pequeñas */
+    padding: 12px 15px;
+  }
+  .info-texto-mono h3 {
+    font-size: 1.6em;
+  }
+  .info-texto-mono p {
+    font-size: 1em;
   }
 }
