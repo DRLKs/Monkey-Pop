@@ -20,6 +20,13 @@ function AjustesContainerJuego({ visible, onClose }) {
     // Guardar valores actuales en localStorage
     guardarConfiguracion(volumen, efectos);
     console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}`);
+
+    // Emitir evento personalizado para notificar a UIContext
+    const evento = new CustomEvent('configuracionActualizada', {
+      detail: { volumen, efectos }
+    });
+    window.dispatchEvent(evento);
+
     onClose();
   };
   

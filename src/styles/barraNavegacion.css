@@ -170,6 +170,7 @@ body {
 
 .monkey-container {
     display: flex;
+    gap: 9px;
     align-items: center;
     justify-content: center;
     flex: 1 1 auto; /* Puede crecer y encoger según espacio disponible */
@@ -178,11 +179,12 @@ body {
     margin: 0 10px;
 }
 
+/* Marco de los monos en la barra de navegación */
 .monkey {
     background: linear-gradient(to bottom, var(--color-marron-oscuro), #4d2600);
     border: 2px solid var(--color-dorado);
     border-radius: 10px;
-    padding: 5px;
+    padding: 6px;
     transition: all 0.2s;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -343,6 +345,41 @@ body {
 
 
 
+}
+
+@media (max-width: 1000px) {
+    body {
+        padding-top: 80px;
+    }
+    
+    .navbar {
+        padding: 5px;
+    }
+    
+    .monedas, .vidas {
+        font-size: 0.85rem;
+    }
+    
+    .monkey img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .nav-button, #back-button {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .botones-container {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .info-ronda h2{
+        font-size: 1.2rem;
+    }
+    
 }
 
 @media (max-width: 700px) {

@@ -1,4 +1,3 @@
-
 // Import the images directly
 import monoBasico from '../assets/images/monkeys/monoBasico.png'
 import monoArco from '../assets/images/monkeys/monoArco.png'
@@ -137,3 +136,8 @@ export const MENSAJES = {
     msgAccion: "Volver"
   }
 }
+
+export const GLOBO_AMARILLO = '../assets/images/globos/globoAmarillo.webp';
+export const GLOBO_ROJO = '../assets/images/globos/globoRojo.webp';
+export const GLOBO_VERDE = '../assets/images/globos/globoVerde.webp';
+export const GLOBO_MORADO = '../assets/images/globos/globoMorado.webp';

@@ -9,10 +9,9 @@ function AjustesContainerAjustes() {
     const [efectos, setEfectos] = useState(configuracionAjustes.efectos === null ? true : configuracionAjustes.efectos);
     const [lenguaje, setLenguaje] = useState(configuracionAjustes.lenguaje || "es");
 
-    const [ isFirstRender, setIsFirstRender ] = useState(true);      // Estado para que el sistema entienda que es la primera vez que se renderiza
+    const [ isFirstRender, setIsFirstRender ] = useState(true);
     const [ configuracionGuardada, setConfiguracionGuardada] = useState(false);
     
-
     const handleVolumenChange = (e) => {
         setVolumen(e.target.value);
     };
@@ -25,27 +24,34 @@ function AjustesContainerAjustes() {
         setLenguaje(e.target.value);
     };
     
+    /**
+     * Función que guarda la configuración actual en localStorage y emite un evento personalizado.
+     */
     const guardar = (e) => {
         // Prevenir comportamiento predeterminado del formulario
         e.preventDefault();
         
         // Guardar valores actuales en localStorage
         guardarConfiguracion(volumen, efectos, lenguaje);
-        console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
-        const confGuardada = configuracionGuardada
-        setConfiguracionGuardada(!confGuardada);    // Cambia el estado para que se aprecie una actualización
-
+        const confGuardada = configuracionGuardada;
+        setConfiguracionGuardada(!confGuardada);
     };
 
     // Efecto que reacciona al cambio de estado
     useEffect(() => {
-        if ( isFirstRender ){
+        if (isFirstRender) {
             setIsFirstRender(false);
             return;
         }
         console.log("Configuración guardada correctamente");
         console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
         setConfiguracionGuardada(true);
+        
+        // Emitir evento personalizado para notificar a UIContext
+        const evento = new CustomEvent('configuracionActualizada', {
+            detail: { volumen, efectos }
+        });
+        window.dispatchEvent(evento);
         
     }, [configuracionGuardada]);
 
@@ -67,7 +73,7 @@ function AjustesContainerAjustes() {
                 </div>
 
                 <div className="ajuste-item">
-                    <label htmlFor="efectos">Efectos de sonido</label>
+                    <label htmlFor="efectos">Silenciar efectos de sonido</label>
                     <div className="toggle-container">
                         <input 
                             type="checkbox" 

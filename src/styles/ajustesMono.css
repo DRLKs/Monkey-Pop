@@ -1,6 +1,7 @@
 :root{
     --color-botones: #8b4513;
     --color-mejoras: #4caf50;
+    --color-botones-cerrar-vender: #4e350e;
 }
 
 .ajustes-mono-container {
@@ -16,7 +17,7 @@
     z-index: 100;
     overflow-y: hidden;
     border-left: 3px solid var(--color-dorado);
-    margin-top: 95px; /* Valor por defecto */
+    margin-top: 78px; /* Valor por defecto */
     border-right: none;
     border-bottom: none;
     color: #ffffff;
@@ -82,11 +83,12 @@
 }
 
 .botones-container-cerrar-vender button {
+    color: white;
     flex: 1;
     padding: 6px 8px;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 5px;
-    background-color: var(--color-botones);
+    background-color: var(--color-botones-cerrar-vender);
 }
 
 .mejora-label{
