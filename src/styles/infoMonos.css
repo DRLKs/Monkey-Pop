@@ -1,185 +1,454 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* --- Importación de Fuente (Si no está ya en :root o globalmente) --- */
+/* @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700&display=swap'); */
+
+:root {
+    --color-boton-importante: #e19718;
+    --color-hover: #c57b14;
+    --color-dorado: #ffd700;
+    --color-marron-claro: #8b4513;
+    --color-marron-oscuro: #663300;
+    --color-texto-claro: #ffffff;
+    --sombra-texto: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
+    --borde-radio: 20px;
+    --fuente-principal: 'Bangers', 'Comic Sans MS', cursive;
+    --fuente-parrafos: 'Nunito', sans-serif;
 }
 
 body {
-  margin: 0;
-  /* El padding: 0; del body no es necesario si los hijos manejan su propio espacio */
-  font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
-  overflow-y: scroll;
-  background-color: #3E2723;
-}
-/* ... (el reseteo de box-sizing y body de arriba) ... */
-
-.barra-navegacion {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px; /* Altura de la barra */
-  z-index: 1000;
-  background-color: #bd7d4c;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  border-bottom: 4px solid #FFB300;
+    margin: 0;
+    font-family: var(--fuente-parrafos);
+    color: var(--color-texto-claro);
+    background-image: url('../assets/images/backgrounds/fondoMonos.png'); /* Ruta actualizada */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    /* Habilitamos siempre el scroll para asegurar que se pueda desplazar */
+    overflow-y: scroll;
 }
 
+/* --- Contenedor Principal de la Página --- */
 .pagina-mono-info {
-  /* --- AJUSTE CRUCIAL PARA LA SEPARACIÓN --- */
-  padding-top: 250px;  /* AlturaBarra (60px) + EspacioVisualDeseado (40px) */
-  
-  /* El margin-top aquí ya no es necesario si el padding-top maneja todo el espacio */
-  /* margin-top: 0;  <-- Puedes asegurarte de que no haya margen superior aquí */
-
-  min-height: calc(100vh - 100px); /* Ajustado al nuevo padding-top total */
-  width: 100%;
-  background-image: url('../assets/images/backgrounds/fondoMonos.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 50px;
-  /* box-sizing: border-box; <-- Ya está cubierto por el reseteo global */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que la página ocupe al menos toda la altura visible */
+    box-sizing: border-box;
+    /* Eliminamos el padding-top aquí para usar el separador explícito en su lugar */
+    /* Aseguramos que el contenido pueda desplazarse si es más alto que la ventana */
+    overflow-y: auto;
+    /* Añadimos un poco de padding en la parte inferior para mejorar la estética */
+    padding-bottom: 50px;
+    align-items: center; /* Centramos el contenido horizontalmente */
 }
 
-.contenedor-monos {
-  /* Ya NO necesita margin-top aquí si pagina-mono-info tiene suficiente padding-top */
-  /* margin-top: 0; */
-  
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  align-items: stretch;
-  padding: 20px; /* Padding interno del contenedor de tarjetas */
-  width: 100%;
-  max-width: 1750px;
-  /* box-sizing: border-box; <-- Cubierto por el reseteo global */
+/* Estilo para el separador que garantiza espacio entre barra de navegación y contenido */
+.separador-navbar {
+    width: 100%;
+    height: 70px; /* Altura fija para evitar la superposición con la barra de navegación */
+    flex-shrink: 0;
+    display: block;
 }
 
-/* El resto de tu CSS (.tarjeta-mono, .imagen-mono, etc.) permanece igual que antes */
-.tarjeta-mono {
-  z-index: 1;
-  border: 5px solid #FFC107;
-  border-radius: 22px;
-  padding: 20px;
-  width: 380px;
-  height: 600px;
-  text-align: center;
-  background-color: rgba(139, 69, 19, 0.8); /* SaddleBrown con 80% opacidad */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), inset 0 0 12px rgba(0,0,0,0.25);
-  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, background-color 0.25s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* box-sizing: border-box; <-- Cubierto */
+/* --- Contenedor para el wrapper del scroll y los botones --- */
+.scroll-container-wrapper {
+    position: relative;
+    width: 95%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 }
 
-.tarjeta-mono:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4), inset 0 0 18px rgba(0,0,0,0.3);
+/* --- Botones de scroll horizontal --- */
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-marron-claro);
+    color: var(--color-dorado);
+    border: 2px solid var(--color-dorado);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: var(--sombra-elemento);
+    transition: background-color 0.3s, transform 0.3s;
+    opacity: 0.85;
 }
 
-.imagen-mono {
-  width: 90%;
-  max-height: 220px;
-  object-fit: contain;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  background-color: #6A8A64; 
-  border: 4px solid #4A3F35;
-  padding: 8px;
-  /* box-sizing: border-box; <-- Cubierto */
+.scroll-button:hover {
+    background-color: var(--color-marron-oscuro);
+    color: #ffec80;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
 }
 
-.info-texto-mono {
-  background-color: #B09D8D;
-  border-radius: 12px;
-  padding: 15px 20px;
-  width: 100%;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-  border: 2px solid #605043;
-  /* box-sizing: border-box; <-- Cubierto */
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.scroll-button.left {
+    left: -15px;
 }
 
-.info-texto-mono h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 1.8em;
-  color: #FFEB3B;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+.scroll-button.right {
+    right: -15px;
 }
 
-.info-texto-mono p {
-  margin: 6px 0;
-  font-size: 1.05em;
-  color: #FFFDE7;
-  line-height: 1.5;
-  text-align: left;
-  word-wrap: break-word;
-}
-
-.info-texto-mono p strong {
-  color: #FFC107;
-  font-weight: bold; 
-}
-
-/* Media Queries (sin cambios, ya estaban bien) */
-@media screen and (max-width: 1200px) {
-    .tarjeta-mono {
-        width: 30%;
-        min-width: 320px;
+@media (max-width: 768px) {
+    .scroll-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .scroll-button.left {
+        left: -10px;
+    }
+    
+    .scroll-button.right {
+        right: -10px;
     }
 }
 
-@media screen and (max-width: 992px) {
-  .tarjeta-mono {
-    width: 45%;
-    min-width: 300px;
-    height: 580px;
-  }
+/* --- Contenedor de las Tarjetas de Monos --- */
+.contenedor-monos {
+    display: flex;
+    /* Cambiamos a nowrap para permitir que las tarjetas se extiendan horizontalmente */
+    flex-wrap: nowrap;
+    justify-content: flex-start; /* Alineamos al inicio para el scroll horizontal */
+    gap: 30px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 100%; /* Permitimos que ocupe todo el ancho disponible */
+    /* Permitimos scroll horizontal cuando sea necesario */
+    overflow-x: auto;
+    overflow-y: visible;
+    /* Mejora la experiencia de desplazamiento en dispositivos táctiles */
+    -webkit-overflow-scrolling: touch;
+    /* Aseguramos que la barra de desplazamiento sea visible */
+    scrollbar-width: thin;
+    scroll-behavior: smooth; /* Desplazamiento suave */
+    /* Aseguramos que el contenedor sea lo suficientemente ancho para permitir el scroll */
+    min-height: 600px; /* Altura mínima para contener las tarjetas */
+    /* Añadimos un padding horizontal para evitar que las tarjetas toquen los bordes */
+    padding-left: 10px;
+    padding-right: 10px;
+    /* Para dispositivos táctiles */
+    touch-action: pan-x;
+    /* Eliminamos las barras de desplazamiento en algunos navegadores */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-@media screen and (max-width: 768px) {
-  .pagina-mono-info {
-    padding-top: 80px; /* Ajustamos para móviles también, ej. 60px barra + 20px espacio */
-  }
-  /* Ya no necesitamos .contenedor-monos { margin-top: ... } aquí */
-  .tarjeta-mono {
-    width: 85%;
-    max-width: 400px;
+/* Ocultar la barra de desplazamiento pero permitir scroll */
+.contenedor-monos::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- Estilo Individual de cada Tarjeta de Mono --- */
+.tarjeta-mono {
+    background-color: rgba(70, 35, 10, 0.88);
+    border: 4px solid var(--color-dorado);
+    border-radius: var(--borde-radio);
+    padding: 25px;
+    width: 320px;
+    min-width: 320px; /* Asegura que las tarjetas no se compriman demasiado */
+    height: auto; /* Permite que la altura se ajuste al contenido */
+    min-height: 550px; /* Altura mínima para mantener consistencia visual */
+    box-shadow: var(--sombra-elemento), inset 0 0 15px rgba(50,20,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: visible; /* Cambiado a visible para evitar que se corte el contenido */
+    flex-shrink: 0; /* Evita que las tarjetas se compriman en el contenedor */
+}
+
+.tarjeta-mono::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+    border-radius: var(--borde-radio) var(--borde-radio) 0 0;
+}
+
+.tarjeta-mono:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), inset 0 0 18px rgba(60,30,0,0.7);
+    border-color: #ffec80;
+}
+
+/* --- Imagen del Mono dentro de la Tarjeta --- */
+.imagen-mono {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    background-color: rgba(0,0,0,0.25);
+    border-radius: 15px;
+    padding: 8px;
+    border: 2px solid rgba(255, 215, 0, 0.6);
+    filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.4));
+}
+
+/* --- Contenedor de la Información de Texto del Mono --- */
+.info-texto-mono {
+    width: 100%;
+    /* Ajustando para que el texto nunca se corte */
+    overflow: visible;
     height: auto;
-    min-height: 520px;
-  }
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que crezca para acomodar todo el contenido */
 }
 
-@media screen and (max-width: 480px) {
-  .pagina-mono-info {
-    padding-top: 70px; /* ej. 60px barra + 10px espacio */
-  }
-  .tarjeta-mono {
-    min-height: 480px;
-    padding: 15px;
-  }
-  .imagen-mono {
-    max-height: 180px;
-  }
-  .info-texto-mono {
-    padding: 12px 15px;
-  }
-  .info-texto-mono h3 {
-    font-size: 1.6em;
-  }
-  .info-texto-mono p {
-    font-size: 1em;
-  }
+.info-texto-mono h3 {
+    font-family: var(--fuente-principal);
+    color: var(--color-dorado);
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-shadow: var(--sombra-texto);
+    letter-spacing: 1px;
+    word-wrap: break-word; /* Permite que las palabras largas se quiebren */
+}
+
+.info-texto-mono p {
+    color: #FEFDE0;
+    font-family: var(--fuente-parrafos);
+    font-size: 1.05em;
+    margin: 8px 0;
+    line-height: 1.5;
+    word-wrap: break-word; /* Asegura que el texto nunca se salga de su contenedor */
+    overflow-wrap: break-word; /* Ayuda con palabras muy largas */
+}
+
+/* --- Descripción Específica del Mono --- */
+.descripcion-mono {
+    font-size: 0.95em;
+    color: #F5EAAA;
+    margin-top: 15px !important;
+    font-style: italic;
+    min-height: 65px;
+    line-height: 1.4;
+}
+
+/* --- Estilos para Scrollbar --- */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-marron-oscuro);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-dorado);
+    border-radius: 10px;
+    border: 2px solid var(--color-marron-oscuro);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #ffec80;
+}
+
+/* --- Media Queries para Responsividad --- */
+@media (max-width: 1024px) {
+    .pagina-mono-info {
+        padding-top: 80px; /* Aumenta el padding para pantallas medianas */
+    }
+    
+    .separador-navbar {
+        height: 80px; /* Ajustamos la altura para pantallas medianas */
+    }
+    
+    /* Ajustamos el contenedor de monos */
+    .contenedor-monos {
+        /* Mantenemos el scroll horizontal */
+        justify-content: flex-start;
+        padding: 20px 15px;
+        min-height: 580px; /* Ajustamos la altura mínima */
+    }
+    
+    /* La tarjeta mantiene su tamaño fijo para desplazamiento horizontal */
+    .tarjeta-mono {
+        width: 320px;
+        min-width: 320px;
+    }
+
+    .contenedor-monos::after {
+        content: "⟺ Desliza para ver más monos";
+        display: block;
+        position: sticky;
+        right: 10px;
+        bottom: 10px;
+        background-color: rgba(70, 35, 10, 0.9);
+        color: var(--color-dorado);
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-family: var(--fuente-parrafos);
+        box-shadow: var(--sombra-elemento);
+        border: 2px solid var(--color-dorado);
+        animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 5s forwards;
+        pointer-events: none;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    /* Ajustamos los botones de scroll */
+    .scroll-container-wrapper {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagina-mono-info {
+        padding-top: 100px; /* Aumenta para pantallas pequeñas */
+    }
+
+    .separador-navbar {
+        height: 100px; /* Ajustamos la altura para pantallas pequeñas */
+    }
+
+    .contenedor-monos {
+        padding: 20px 15px;
+        gap: 20px;
+        min-height: 580px;
+        /* Aseguramos que el scroll horizontal siga funcionando */
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+
+    .tarjeta-mono {
+        /* Tamaño fijo para desplazamiento horizontal */
+        width: 300px;
+        min-width: 300px;
+        height: auto;
+        min-height: 550px;
+        padding: 20px;
+    }
+    .info-texto-mono h3 {
+        font-size: 1.8em;
+    }
+    .info-texto-mono p {
+        font-size: 1em;
+    }
+    .imagen-mono {
+        width: 110px;
+        height: 110px;
+    }
+
+    /* Ajustamos los botones de scroll */
+    .scroll-container-wrapper {
+        width: 95%;
+    }
+}
+
+@media (max-width: 600px) {
+    .pagina-mono-info {
+        padding-top: 120px; /* Más espacio para pantallas muy pequeñas */
+    }
+    
+    .separador-navbar {
+        height: 120px; /* Más espacio para pantallas muy pequeñas */
+    }
+    
+    .contenedor-monos {
+        /* Mantenemos el scroll horizontal */
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 15px;
+        min-height: 550px;
+    }
+    
+    .tarjeta-mono {
+        /* Reducimos un poco el tamaño para pantallas pequeñas */
+        width: 280px;
+        min-width: 280px;
+        min-height: 520px;
+    }
+    
+    /* Ajustamos los botones de scroll para que sean menos intrusivos */
+    .scroll-button {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagina-mono-info {
+        padding-top: 150px; /* Amplio espacio para dispositivos muy pequeños */
+    }
+    
+    .separador-navbar {
+        height: 150px; /* Amplio espacio para dispositivos muy pequeños */
+    }
+    
+    .contenedor-monos {
+        padding: 10px;
+        gap: 15px;
+        min-height: 530px;
+    }
+    
+    .tarjeta-mono {
+        /* Reducimos aún más para móviles muy pequeños */
+        width: 260px;
+        min-width: 260px;
+        min-height: 500px;
+        padding: 15px;
+    }
+    
+    .info-texto-mono h3 {
+        font-size: 1.7em; /* Ajuste para pantallas muy pequeñas */
+    }
+    .info-texto-mono p {
+        font-size: 0.95em;
+    }
+    .imagen-mono {
+        width: 100px;
+        height: 100px;
+    }
+    .descripcion-mono {
+        font-size: 0.9em;
+    }
+    
+    /* Hacemos los botones de scroll más pequeños y más cerca de los bordes */
+    .scroll-button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+    }
+    
+    .scroll-button.left {
+        left: -5px;
+    }
+    
+    .scroll-button.right {
+        right: -5px;
+    }
 }

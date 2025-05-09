@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import AjustesMono from "../components/AjustesMono";
@@ -8,32 +8,82 @@ import '../styles/infoMonos.css';
 
 function MonoInfo() {
     const [verAjustesMono, setVerAjustesMono] = useState(null);
+    const scrollContainerRef = useRef(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
 
     const cerrarAjustes = () => {
         setVerAjustesMono(null);
     };
 
+    // Función para verificar si se puede hacer scroll
+    const checkScroll = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setCanScrollLeft(scrollLeft > 0);
+            setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10); // -10 para un pequeño margen
+        }
+    };
+
+    // Función para hacer scroll horizontal con botones
+    const scroll = (direction) => {
+        if (scrollContainerRef.current) {
+            const { clientWidth } = scrollContainerRef.current;
+            const scrollAmount = direction === 'left' ? -300 : 300;
+            scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    };
+
+    // Comprobar el estado de scroll al montar y cuando cambie el tamaño
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            checkScroll();
+            container.addEventListener('scroll', checkScroll);
+            window.addEventListener('resize', checkScroll);
+            
+            return () => {
+                container.removeEventListener('scroll', checkScroll);
+                window.removeEventListener('resize', checkScroll);
+            };
+        }
+    }, []);
+
     return (
         <div className="pagina-mono-info">
             <BarraNavegacion />
-            <div className="contenedor-monos">
-                {Object.values(MONOS).map((mono) => (
-                    <div 
-                        key={mono.tipo || mono.id}
-                        className="tarjeta-mono"
-                    >
-                        <img src={mono.imagen} alt={mono.nombre} className="imagen-mono" />
-                        
-                        <div className="info-texto-mono">
-                            <h3>{mono.nombre}</h3>
-                            <p><strong>Precio:</strong> ${mono.precio}</p>
-                            <p><strong>Rango:</strong> {mono.rango}</p>
-                            <p><strong>Velocidad:</strong> {mono.tiempoRecarga}s</p>
-                            <p><strong>Daño:</strong> {mono.damage}</p>
-                            <p className="descripcion-mono">{mono.descripcion}</p>
+            
+            {/* Separador para evitar la superposición con la barra de navegación */}
+            <div className="separador-navbar"></div>
+            
+            <div className="scroll-container-wrapper">
+                {canScrollLeft && <button className="scroll-button left" onClick={() => scroll('left')}>◀</button>}
+                
+                <div 
+                    ref={scrollContainerRef}
+                    className="contenedor-monos"
+                    onScroll={checkScroll}
+                >
+                    {Object.values(MONOS).map((mono) => (
+                        <div 
+                            key={mono.tipo || mono.id}
+                            className="tarjeta-mono"
+                        >
+                            <img src={mono.imagen} alt={mono.nombre} className="imagen-mono" />
+                            
+                            <div className="info-texto-mono">
+                                <h3>{mono.nombre}</h3>
+                                <p><strong>Precio:</strong> ${mono.precio}</p>
+                                <p><strong>Rango:</strong> {mono.rango}</p>
+                                <p><strong>Velocidad:</strong> {mono.tiempoRecarga}s</p>
+                                <p><strong>Daño:</strong> {mono.damage}</p>
+                                <p className="descripcion-mono">{mono.descripcion}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
+                
+                {canScrollRight && <button className="scroll-button right" onClick={() => scroll('right')}>▶</button>}
             </div>
 
             {verAjustesMono !== null && (
