@@ -137,6 +137,28 @@ export const MENSAJES = {
   }
 }
 
+/**
+ * Función que devuelve la información que expondrá la barra de navegación en cada paso del tutorial
+ */
+export const INFORMACION_TUTORIAL = {
+  0: {
+    texto: "Bienvenido al tutorial de Monkey Pop"
+  },
+  1: {
+    texto: "Aquí se indican las vidas y las monedas que tienes"
+  },
+  2: {
+    texto: "Las monedas se obtienen al destruir los globos"
+  },
+  3: {
+    texto: "Con las monedas puedes comprar más monos o mejorar los que ya tienes"
+  },
+  4: {
+    texto: "Juega con libertad, coloca los monos donde quieras"
+  }
+
+}
+
 export const GLOBO_AMARILLO = '../assets/images/globos/globoAmarillo.webp';
 export const GLOBO_ROJO = '../assets/images/globos/globoRojo.webp';
 export const GLOBO_VERDE = '../assets/images/globos/globoVerde.webp';

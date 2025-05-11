@@ -81,6 +81,7 @@
 .tutorial-image {
   flex: 2;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -98,15 +99,19 @@
   background-color: var(--color-boton-importante);
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 12px; /* Reduced horizontal padding from 14px to 10px */
   font-size: 14px;
-  border-radius: 20px;
+  border-radius: 18px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   margin-top: 8px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   font-family: 'Bangers', 'Comic Sans MS', cursive;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px; /* Reduced from 1px for tighter text */
+  max-width: 170px; /* Add maximum width */
+  width: fit-content; /* Make button only as wide as its content */
+  text-align: center; /* Center text inside the button */
+  display: inline-block; /* Keep it inline-block for width: fit-content to work properly */
 }
 
 .tutorial-button:hover {
@@ -114,16 +119,275 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-  .tutorial-content {
-    flex-direction: column;
+/* Mejoras responsivas escalonadas */
+
+/* Pantallas grandes (estado normal) */
+@media (min-width: 1200px) {
+  .tutorial-mensaje {
+    width: 500px;
+    padding: 18px;
   }
   
-  .tutorial-mensaje {
-    width: 75%; /* Slightly larger on mobile */
+  .tutorial-text h2 {
+    font-size: 24px;
+  }
+  
+  .tutorial-text p {
+    font-size: 17px;
   }
   
   .tutorial-image img {
-    max-height: 150px;
+    max-height: 180px;
+  }
+}
+
+/* Pantallas medianas */
+@media (max-width: 1199px) and (min-width: 769px) {
+  .tutorial-mensaje {
+    width: 450px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .tutorial-container {
+    bottom: 70px;
+  }
+  
+  .tutorial-mensaje {
+    width: 85%;
+    max-width: 450px;
+    padding: 14px;
+  }
+  
+  .tutorial-content {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .tutorial-text h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .tutorial-text p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .tutorial-image img {
+    max-height: 140px;
+  }
+}
+
+/* Móviles grandes */
+@media (max-width: 576px) {
+  .tutorial-container {
+    bottom: 60px;
+  }
+  
+  .tutorial-mensaje {
+    width: 90%;
+    max-width: 400px;
+    padding: 12px;
+  }
+  
+  .tutorial-text h2 {
+    font-size: 18px;
+  }
+  
+  .tutorial-text p {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  
+  .tutorial-image img {
+    max-height: 120px;
+  }
+  
+  .tutorial-button {
+    padding: 6px 10px;
+    font-size: 13px;
+    max-width: 110px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 380px) {
+  .tutorial-container {
+    bottom: 40px;
+  }
+  
+  .tutorial-mensaje {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  .tutorial-text h2 {
+    font-size: 16px;
+  }
+  
+  .tutorial-text p {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  
+  .tutorial-image img {
+    max-height: 100px;
+  }
+  
+  .tutorial-button {
+    padding: 5px 8px;
+    font-size: 12px;
+    border-radius: 15px;
+  }
+}
+
+/* Para pantallas muy estrechas (modo paisaje en móviles) */
+@media (max-height: 500px) {
+  .tutorial-container {
+    bottom: 20px;
+  }
+  
+  .tutorial-mensaje {
+    max-width: 80%;
+    padding: 10px;
+  }
+  
+  .tutorial-content {
+    flex-direction: row; /* Volver a mostrar en fila para aprovechar el espacio horizontal */
+  }
+  
+  .tutorial-text {
+    flex: 2;
+  }
+  
+  .tutorial-image {
+    flex: 1;
+  }
+  
+  .tutorial-image img {
+    max-height: 80px;
+  }
+  
+  .tutorial-text h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .tutorial-text p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+}
+
+/* Ajustes específicos para móviles en modo landscape (horizontal) */
+@media (max-height: 500px) and (min-width: 600px) {
+  .tutorial-container {
+    bottom: 20px; /* Más cerca del borde inferior */
+  }
+  
+  .tutorial-mensaje {
+    max-width: 600px;
+    width: 80%; /* Ancho relativo al viewport */
+    padding: 12px;
+  }
+  
+  .tutorial-content {
+    flex-direction: row; /* Mostrar contenido en fila para aprovechar el espacio horizontal */
+    gap: 20px; /* Más separación entre texto e imagen */
+  }
+  
+  .tutorial-text {
+    flex: 3;
+  }
+  
+  .tutorial-image {
+    flex: 2;
+  }
+  
+  .tutorial-image img {
+    max-height: 100px; /* Altura reducida para no ocupar demasiado espacio vertical */
+  }
+  
+  .tutorial-text h2 {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  
+  .tutorial-text p {
+    font-size: 14px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  
+  .tutorial-button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Para pantallas aún más bajas (dispositivos muy pequeños en landscape) */
+@media (max-height: 400px) {
+  .tutorial-container {
+    bottom: 10px;
+  }
+  
+  .tutorial-mensaje {
+    padding: 8px;
+  }
+  
+  .tutorial-text h2 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .tutorial-text p {
+    font-size: 12px;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+  
+  .tutorial-image img {
+    max-height: 80px;
+  }
+  
+  /* Ocultar algunos elementos en pantallas extremadamente pequeñas */
+  .tutorial-text p:not(:first-of-type) {
+    display: none;
+  }
+}
+
+/* Pantallas anchas pero de poca altura (tablets landscape o pantallas panorámicas) */
+@media (min-width: 900px) and (max-height: 600px) {
+  .tutorial-container {
+    bottom: 30px;
+  }
+  
+  .tutorial-mensaje {
+    max-width: 700px;
+    width: 70%;
+  }
+  
+  .tutorial-content {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .tutorial-text {
+    flex: 2;
+  }
+  
+  .tutorial-image {
+    flex: 1;
+  }
+}
+
+/* Ajustes para la pantalla de bienvenida */
+@media (max-width: 576px) {
+  .tutorial-container-bienvenida .tutorial-mensaje {
+    width: 90%;
+    max-width: 350px;
   }
 }

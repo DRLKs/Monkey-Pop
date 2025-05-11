@@ -15,13 +15,13 @@ import btnReanudar from '../assets/images/botones/btn-play.png'
 import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
 import btnAcelerar from '../assets/images/botones/btn-acelerar.png'
 
-function BarraNavegacionPartida( {vidas, monedas, agarrarMono} ){
+function BarraNavegacionPartida( {vidas, monedas, agarrarMono, informacion} ){
 
     return(
         <BarraNavegacion>
             
-            <div className="info-ronda">
-                Esta es la barra de acción. Aquí podrás realizar todas las acciones necesarias para jugar.
+            <div className="info-tutorial">
+              {informacion}
             </div>
     
             <BarraMonos

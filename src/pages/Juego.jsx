@@ -1,5 +1,5 @@
 // Bibliotecas de React
-import React, { useMemo, useReducer, useState, useEffect, useRef } from 'react'
+import React, { useMemo, useReducer, useState, useEffect } from 'react'
 
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa'
@@ -11,12 +11,12 @@ import ConfirmacionComponent from '../components/CofirmacionComponent';
 import OrientationWarning from '../components/OrientationWarning';
 
 // Clases 
-import { Globo as GloboClass, Mono as MonoClass } from '../utils/clases'
+import { Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
 import { mapas } from '../utils/mapas'
 import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA } from '../utils/constantes'
-import { obtenerCaminoMapa } from '../utils/funciones'
+import { obtenerCaminoMapa, gameReducer } from '../utils/funciones'
 
 // Estilos
 import '../styles/juego.css'
@@ -25,135 +25,7 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 
-/**
- * 
- * @param {*} state Información del estado del juego
- * @param {GloboClass[]} state.globos Lista de globos en el juego
- * @param {number} state.indexGlobo Índice del globo actual
- * @param {number} state.vidas Vidas restantes del jugador
- * @param {number} state.monedas Monedas del jugador
- * @param {number} state.ronda Ronda actual del juego
- * @param {boolean} state.perdido Indica si el jugador ha perdido
- * 
- * @param {*} action Acción a realizar en el juego
- * @param {string} action.type Tipo de acción a realizar 
- * @returns 
- */
-function gameReducer(state, action) {
-  switch (action.type) {
-    case 'TICK':
-      const globosTablero = [...state.globos];      
-      const monos = state.monosColocados;
 
-      const globosAEliminar = [];
-      const indexGlobosExplotados = []
-
-      // Actualizamos la posición de los globos existentes
-      let vidasPerdidas = 0;
-      globosTablero.forEach((globo) => {
-        globo.addTiempoDeVida();
-        const tiempoDeVida = globo.getTiempoDeVida();
-        
-        if (tiempoDeVida >= action.camino.length) {
-          globosAEliminar.push(globo.id);
-          vidasPerdidas += globo.getHealth();
-        } else {
-          globo.setPosition(action.camino[tiempoDeVida]);
-        }
-      });
-
-      // Actualizamos los monos existentes
-      let sumaMonedas = 0;
-      let sumaGlobosExplotados = 0;
-      monos.forEach(mono => {
-        if( mono.puedeAtacar() ){
-          const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
-          const globoAtacado = mono.attack(globosExistentes);
-          if ( globoAtacado !== null) {
-            //console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
-
-            if ( globoAtacado.health <= mono.damage ){  // El globo explota
-              sumaMonedas += PARTIDA.monedasGlobo;
-              ++sumaGlobosExplotados;
-              globosAEliminar.push(globoAtacado.id);
-              indexGlobosExplotados.push(globoAtacado.index);
-            }else{                                    // El globo pierde vida
-              for (let i = 0; i < globosTablero.length; i++) {
-                if (globosTablero[i].id == globoAtacado.id) {
-                  globosTablero[i].health -= mono.damage;
-                  break;
-                }
-              }
-            }
-          }
-        }
-      });
-
-      // Se eliminan los globos que han sido destruidos
-      globosAEliminar.forEach(globoEliminar => {
-        globosTablero.forEach((globo, index) => {
-          if (globo.id === globoEliminar) {
-            globosTablero.splice(index, 1);
-          }
-        });
-      });
-
-
-      if (vidasPerdidas >= state.vidas) {
-        return { ...state,  vidas: 0, perdido: true };  
-      }
-      
-      // Los globos que quedan de la ronde se introducen en el juego
-      if (state.indexGlobo < PARTIDA.rondas[state.ronda-1].length) {
-        const health = PARTIDA.rondas[state.ronda-1][state.indexGlobo];
-        const globo = new GloboClass(state.indexGlobo, action.camino[0], health, 0);
-        globosTablero.push(globo);
-      }else{
-        // Si no quedan globos de la ronda, se pasa a la siguiente ronda
-        if (globosTablero.length === 0) {
-          return { ...state, vidas: state.vidas - vidasPerdidas, globos: globosTablero, indexsGlobosExplotados: [], indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
-        }
-      }
-
-      return {
-        ...state,
-        globos: globosTablero,
-        indexGlobo: state.indexGlobo + 1,
-        vidas: state.vidas - vidasPerdidas,
-        monedas: state.monedas + sumaMonedas,
-        globosExplotados: state.globosExplotados + sumaGlobosExplotados,
-        nuevaRonda: false,
-        indexsGlobosExplotados: indexGlobosExplotados
-      };
-      
-    case 'REINICIAR':
-      return action.estadoInicial;
-
-    case 'AGREGAR_MONO':
-      return {
-        ...state,
-        monosColocados: [...state.monosColocados, action.mono],
-        monedas: state.monedas - action.precio,
-      };
-    
-    case 'VENDER_MONO':
-      const nuevosMonos = state.monosColocados.filter(mono => mono.id !== action.id);
-      return {
-        ...state,
-        monosColocados: nuevosMonos,
-        monedas: state.monedas + action.precio
-      };
-
-    case 'MEJORAR_MONO':
-      return {
-        ...state,
-        monedas: state.monedas - action.precio
-      };
-      
-    default:
-      return state;
-  }
-}
 
 function Juego() {
   const [mapa, setMapa] = useState(mapas.diagonal);
@@ -170,6 +42,9 @@ function Juego() {
   const [funcionConfirmacion, setFuncionConfirmacion] = useState(null);
   const [funcionConfirmacionNombre, setFuncionConfirmacionNombre] = useState(null);
   
+  // Para configurar la orientación
+  const [isPortrait, setIsPortrait] = useState(false);
+
   
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],                       // Guarda los globos que está sin explotar en el camino
@@ -248,10 +123,11 @@ function Juego() {
     };
   }, [gameState.globos, gameState.perdido, gameState.nuevaRonda, cronometroActivo]);
 
-  /*
-   * Función que obtiene la casilla del mapa clicada 
+
+  /**
+   * Función que según la casilla clicada en el tablero realiza unas acciones u otras
    *
-   * @param {Entero} index Índice del mapa que se ha clicado
+   * @param {Number} index Índice del mapa que se ha clicado
    * @returns 
    */
   const actualizarMapa = (index) => {
@@ -280,14 +156,11 @@ function Juego() {
       setMapa(newMapa);
     
     }
-
-
-
-    
   }
 
-  /*
-   * Controla el movimiento del ratón para que la imagen del mono siga al ratón
+  /**
+   * Función que trackea la posición del ratón
+   * Es usada para que la imagen del mono seleccionado parezca que es arrastrada por el jugador
    */
   useEffect(() => {
     const controladorMovimientoRaton = (event) => {
@@ -368,6 +241,7 @@ function Juego() {
     };
   }, [monoSeleccionado, cronometroActivo]); // Dependencias del useEffect
 
+
   /**
    * Función que controla el manejo de los monos seleccionados
    * Se ejecuta arrastrando o clicando en un mono de la barra de navegación
@@ -381,9 +255,10 @@ function Juego() {
     }
   }
 
+
   /**
-   * Función que se ejecutará para vender un mono
-   * Se ejecuta desde el componente AjustesMono.jsx
+   * Vende un mono teniendo en cuenta su identificador
+   * @param {Number} id Identificador
    */
   const venderMono = () => {
     setMonoVerAjustes(null);
@@ -395,6 +270,10 @@ function Juego() {
     });
   }
 
+  /**
+   * Mejora un mono teniendo en cuenta su identificador
+   * @param {Number} id Identificador
+   */
   const mejorarMono = (precio) => {
     dispatch({
       type: 'MEJORAR_MONO',
@@ -455,9 +334,6 @@ function Juego() {
     const estaranLosAjustesVisibles = !ajustesVisible;
     setAjustesVisible(estaranLosAjustesVisibles);
   }
-
-  // Estado para detectar la orientación
-  const [isPortrait, setIsPortrait] = useState(false);
 
   // Effect para manejar cambios de orientación
   useEffect(() => {

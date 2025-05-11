@@ -125,7 +125,7 @@ body {
     display: flex;
     align-items: center;
     margin: 0 5px;
-    padding: 2px 5px;
+    padding: 2px 2px;
     border-radius: 10px;
 }
 
@@ -243,6 +243,36 @@ body {
     position: relative;
     overflow: hidden;
   }
+
+  .info-tutorial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4d2e00;
+    border: 3px solid #8b4513;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    max-width: 400px; /* Ancho máximo fijo */
+    white-space: normal; /* Permite saltos de línea */
+    text-align: center; /* Centra el texto */
+    word-wrap: break-word; /* Rompe palabras largas si es necesario */
+    line-height: 1.2; /* Ajusta el espaciado entre líneas */
+  }
+  
+  .info-tutorial::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
+    border-radius: 8px 8px 0 0;
+  }
   
   .info-ronda::before {
     content: "";
@@ -305,6 +335,7 @@ body {
 @media (max-width: 1200px) {
     .navbar {
         flex-wrap: nowrap; /* Mantener en una línea incluso en pantallas pequeñas */
+        scrollbar-gutter: 0px;
     }
     
     .monkey-container {
@@ -317,7 +348,7 @@ body {
         margin: 0 5px;
     }
 
-    .nav-button, #back-button, .info-ronda {
+    .nav-button, #back-button {
         padding: 4px 8px;
         font-size: 0.85rem;
         width: auto;
@@ -325,12 +356,11 @@ body {
 
     .info-container{
         flex-direction: column;
-        padding: auto;
         width: auto;
     }
 
     .vidas-container, .monedas-container {
-        padding: 2px 4px;
+        padding: 2px 2px;
         width: auto;
     }
 
@@ -344,8 +374,12 @@ body {
         min-height: 100%; /* Asegura altura mínima */
     }
 
-
-
+    .info-tutorial {
+        width: 200px;
+        max-width: 200px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -373,12 +407,42 @@ body {
     
     .botones-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 5px;
+        align-items: center;
+        gap: 3px;
+        margin: 2px 0;
+        padding: 1px 0;
+        width: 15%;
+    }
+    
+
+    .botones-container .icono-boton {
+        width: 20px;
+        height: 20px;
     }
 
+
     .info-ronda h2{
-        font-size: 1.2rem;
+        font-size: 0.7rem;
+        padding: 4px 7px;
+    }
+
+    .info-container{
+        margin: auto;
+        padding: 0px 0px;
+    }
+
+    .info-container img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .info-tutorial {
+        width: 190px;
+        max-width: 200px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
     }
     
 }
@@ -411,17 +475,6 @@ body {
     h2{
         font-size: 0.1rem;
     }
-
-    .botones-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 3px;
-        margin: 2px 0;
-        padding: 1px 0;
-        width: 15%;
-    }
     
     .boton-barraNavegacion {
         margin: 0px;
@@ -441,9 +494,21 @@ body {
         font-size: 1.0rem;
     }
 
-    .info-container {
-        height: 50%;
+    .vidas-container{
         padding: 0px 0px;
+        margin: 0px;
+    }
+
+    .vidas{
+        margin: 1px;
+    }
+
+    .info-tutorial {
+        width: 155px;
+        max-width: 180px;
+        padding: 2px 4px;
+        font-size: 0.65rem;
+        margin: 0 5px;
     }
 }
 
@@ -483,15 +548,17 @@ body {
         font-size: 0.8rem;
         margin: 3px;
     }
-    
-    .botones-container {
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-    }
 
     .info-ronda h2{
         font-size: 1.2rem;
+    }
+
+    .info-tutorial {
+        width: 150px;
+        max-width: 150px;
+        padding: 3px 6px;
+        font-size: 0.6rem;
+        margin: 0 3px;
     }
 }
 

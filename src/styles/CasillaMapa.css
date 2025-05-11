@@ -62,18 +62,26 @@
   transform: scale(1.05);
 }
 
-/* Efectos hover para mejorar la interactividad */
-.casilla-default:hover {
-  filter: brightness(1.2);
-}
-
 .globo, .mono, .globo-explotado{
   position: absolute;
   max-width: 35px;
   max-height: 35px;
   border-radius: 50%;
   animation: move 5s linear infinite;
-  z-index: 10;
+  z-index: 1000;
+}
+
+/* Efectos hover solo para dispositivos que soportan hover (principalmente PC) */
+@media (hover: hover) {
+  .casilla-default:hover {
+    filter: brightness(1.2);
+  }
+  
+  .casilla-default:hover,
+  .casilla-camino:hover,
+  .casilla-agua:hover {
+    transform: scale(1.05);
+  }
 }
 
 /* Estilos para dispositivos móviles */
@@ -87,11 +95,7 @@
     transform: scale(1.02);
   }
   
-  .casilla-default:hover,
-  .casilla-camino:hover,
-  .casilla-agua:hover {
-    transform: scale(1.02);
-  }
+  /* Eliminamos los estilos hover aquí */
 }
 
 @media (max-width: 480px) {
@@ -106,15 +110,11 @@
     border-width: 1px;
   }
   
-  .casilla-default:hover,
-  .casilla-camino:hover,
-  .casilla-agua:hover {
-    transform: none;
-  }
+  /* Eliminamos los estilos hover aquí también */
 }
 
 @media (max-height: 450px) {
-  .casilla-mapa {
+  .casilla-mapa, .globo {
     width: 18px;
     height: 18px;
   }
@@ -124,10 +124,21 @@
   }
 
   .mono, .globo, .globo-explotado{
-    max-width: 18px;
-    max-height: 18px;
+    max-width: 25px;
+    max-height: 25px;
+  }
+}
+
+@media (max-height: 380px) {
+  
+  
+  .casilla-selected {
+    transform: none;
   }
 
+  .mono, .globo-explotado{
+    max-width: 20px;
+    max-height: 20px;
+  }
 
-  
 }

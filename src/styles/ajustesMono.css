@@ -190,12 +190,20 @@
 
 }
 
+/* IPHONE 14 PROMAX */ /* IPHONE XR */
+@media (max-height: 435px) {
+    .ajustes-mono-container {
+        margin: 89px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
+    }
+}
+
+
 @media (max-height: 400px) {
     
     .ajustes-mono-container {
         width: 150px;
         height: auto;
-        margin: 105px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
+        margin: 95px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
         padding: 5px; /* Padding mínimo pero específico */
         max-height: calc(100vh - 55px); /* Altura máxima calculada */
     }
@@ -223,5 +231,19 @@
     .botones-container-cerrar-vender button {
         padding: 1px 3px;
         font-size: 9px;
+    }
+}
+
+/* IPHONE SE */
+@media (max-height: 377px) {
+    .ajustes-mono-container {
+        margin: 80px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
+    }
+}
+
+/* BlackBerry Z30 */
+@media (max-height: 362px) {
+    .ajustes-mono-container {
+        margin: 60px 0 0 0; /* Reducido significativamente el margen superior y eliminado laterales */
     }
 }

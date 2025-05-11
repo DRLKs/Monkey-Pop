@@ -273,8 +273,8 @@ body {
     }
     
     .imagenMonoAgarrado {
-      max-width: 25px; 
-      max-height: 25px;
+      max-width: 30px; 
+      max-height: 30px;
     }
     
     /* Hacer la barra de navegación más compacta */
@@ -283,13 +283,10 @@ body {
       padding: 0 5px;
     }
     
-    
-    
     /* Ajustar tamaño de monos y globos */
-    .globo, .mono, .globo-explotado {
-      max-width: 25px;
-      max-height: 25px;
-      z-index: 1000;
+    .mono, .globo-explotado {
+      max-width: 28px;
+      max-height: 28px;
     }
   }
   
@@ -313,8 +310,8 @@ body {
     }
     
     .imagenMonoAgarrado, .globo, .mono, .globo-explotado {
-      max-width: 20px;
-      max-height: 20px;
+      max-width: 25px;
+      max-height: 40px;
     }
     
 
