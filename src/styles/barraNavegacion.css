@@ -310,6 +310,7 @@ body {
     .monkey-container {
         flex: 1 1 auto; /* Mantiene la capacidad de crecer/encoger */
         padding: 5px 0; 
+        gap: 2px;
     }
     .info-ronda {
         padding: 4px 8px;

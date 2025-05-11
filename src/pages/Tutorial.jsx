@@ -3,7 +3,7 @@ import React, { useMemo, useReducer, useState, useEffect } from 'react';
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa';
 import MonoAgarrado from '../components/MonoAgarrado';
-import BarraNavegacionPartida from '../components/BarraNavegacionPartida';
+import BarraNavegacionTutorial from '../components/BarraNavegacionTutorial';
 import AjustesMono from '../components/AjustesMono';
 import FinJuego from '../components/FinJuego';
 
@@ -15,70 +15,101 @@ import { mapas } from '../utils/mapas';
 import { ESTADO_CASILLA, MONOS, PARTIDA } from '../utils/constantes';
 import { obtenerCaminoMapa } from '../utils/funciones';
 
+// Imágenes para el tutorial
+import monoAnciano from '../assets/images/tutorial/monoAnciano.png';
+import globoMalvado from '../assets/images/tutorial/globoMalvado.png';
+
 // Estilos
 import '../styles/juego.css';
+import '../styles/tutorial.css';
 
-// Reducer actualizado para manejar el ataque de los monos
+/**
+ * 
+ * @param {*} state Información del estado del juego
+ * @param {GloboClass[]} state.globos Lista de globos en el juego
+ * @param {number} state.indexGlobo Índice del globo actual
+ * @param {number} state.vidas Vidas restantes del jugador
+ * @param {number} state.monedas Monedas del jugador
+ * @param {number} state.ronda Ronda actual del juego
+ * @param {boolean} state.perdido Indica si el jugador ha perdido
+ * 
+ * @param {*} action Acción a realizar en el juego
+ * @param {string} action.type Tipo de acción a realizar 
+ * @returns 
+ */
 function gameReducer(state, action) {
   switch (action.type) {
     case 'TICK':
-      const globosTablero = [...state.globos];
+      const globosTablero = [...state.globos];      
       const monos = state.monosColocados;
-      const globosAEliminar = [];
-      let vidasPerdidas = 0;
 
-      // Actualizamos la posición de los globos
+      const globosAEliminar = [];
+      const indexGlobosExplotados = []
+
+      // Actualizamos la posición de los globos existentes
+      let vidasPerdidas = 0;
       globosTablero.forEach((globo) => {
         globo.addTiempoDeVida();
         const tiempoDeVida = globo.getTiempoDeVida();
-
+        
         if (tiempoDeVida >= action.camino.length) {
           globosAEliminar.push(globo.id);
           vidasPerdidas += globo.getHealth();
-
-          // Detectar si el globo fuerte llegó al final
-          if (globo.id === 999 && action.onGloboFinal) {
-            action.onGloboFinal(); // Llamar al callback para avanzar el tutorial
-          }
         } else {
           globo.setPosition(action.camino[tiempoDeVida]);
         }
       });
 
-      // Actualizamos los monos
+      // Actualizamos los monos existentes
       let sumaMonedas = 0;
-      monos.forEach((mono) => {
-        if (mono.puedeAtacar()) {
-          const globosExistentes = globosTablero.filter(
-            (globo) => !globosAEliminar.includes(globo.id) && globo.id !== 999 // Proteger el globo fuerte
-          );
+      let sumaGlobosExplotados = 0;
+      monos.forEach(mono => {
+        if( mono.puedeAtacar() ){
+          const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
           const globoAtacado = mono.attack(globosExistentes);
-          if (globoAtacado && globoAtacado.health <= mono.damage) {
-            sumaMonedas += PARTIDA.monedasGlobo;
-            globosAEliminar.push(globoAtacado.id);
+          if ( globoAtacado !== null) {
+            //console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
+
+            if ( globoAtacado.health <= mono.damage ){  // El globo explota
+              sumaMonedas += PARTIDA.monedasGlobo;
+              ++sumaGlobosExplotados;
+              globosAEliminar.push(globoAtacado.id);
+              indexGlobosExplotados.push(globoAtacado.index);
+            }else{                                    // El globo pierde vida
+              for (let i = 0; i < globosTablero.length; i++) {
+                if (globosTablero[i].id == globoAtacado.id) {
+                  globosTablero[i].health -= mono.damage;
+                  break;
+                }
+              }
+            }
           }
         }
       });
 
-      // Eliminamos los globos destruidos
-      globosAEliminar.forEach((id) => {
-        const index = globosTablero.findIndex((globo) => globo.id === id);
-        if (index !== -1) globosTablero.splice(index, 1);
+      // Se eliminan los globos que han sido destruidos
+      globosAEliminar.forEach(globoEliminar => {
+        globosTablero.forEach((globo, index) => {
+          if (globo.id === globoEliminar) {
+            globosTablero.splice(index, 1);
+          }
+        });
       });
 
-      if (vidasPerdidas >= state.vidas) {
-        return { ...state, vidas: 0, perdido: true };
-      }
 
-      // Generar nuevos globos si es necesario
-      if (state.indexGlobo < PARTIDA.rondas[state.ronda - 1].length) {
-        const health = PARTIDA.rondas[state.ronda - 1][state.indexGlobo];
-        const nuevoGlobo = new GloboClass(state.indexGlobo, action.camino[0], health, 0);
-        globosTablero.push(nuevoGlobo);
-      } else {
+      if (vidasPerdidas >= state.vidas) {
+        return { ...state,  vidas: 0, perdido: true };  
+      }
+      
+      // Los globos que quedan de la ronde se introducen en el juego
+      if (state.indexGlobo < PARTIDA.rondas[state.ronda-1].length) {
+        const health = PARTIDA.rondas[state.ronda-1][state.indexGlobo];
+        const globo = new GloboClass(state.indexGlobo, action.camino[0], health, 0);
+        globosTablero.push(globo);
+      }else{
         // Si no quedan globos de la ronda, se pasa a la siguiente ronda
         if (globosTablero.length === 0) {
-          return { ...state, globos: globosTablero, indexGlobo: 0, ronda: state.ronda + 1 };
+          return { ...state, vidas: state.vidas - vidasPerdidas, globos: globosTablero, indexsGlobosExplotados: [], indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
         }
       }
 
@@ -88,7 +119,13 @@ function gameReducer(state, action) {
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
         monedas: state.monedas + sumaMonedas,
+        globosExplotados: state.globosExplotados + sumaGlobosExplotados,
+        nuevaRonda: false,
+        indexsGlobosExplotados: indexGlobosExplotados
       };
+      
+    case 'REINICIAR':
+      return action.estadoInicial;
 
     case 'AGREGAR_MONO':
       return {
@@ -96,53 +133,54 @@ function gameReducer(state, action) {
         monosColocados: [...state.monosColocados, action.mono],
         monedas: state.monedas - action.precio,
       };
-
-    case 'AGREGAR_GLOBO':
+    
+    case 'VENDER_MONO':
+      const nuevosMonos = state.monosColocados.filter(mono => mono.id !== action.id);
       return {
         ...state,
-        globos: [...state.globos, action.globo],
+        monosColocados: nuevosMonos,
+        monedas: state.monedas + action.precio
       };
 
     case 'MEJORAR_MONO':
       return {
         ...state,
-        monosColocados: state.monosColocados.map((mono) =>
-          mono.id === action.id ? { ...mono, damage: mono.damage + action.incremento } : mono
-        ),
-        monedas: state.monedas - action.precio,
+        monedas: state.monedas - action.precio
       };
-
-    case 'VENDER_MONO':
-      return {
-        ...state,
-        monosColocados: state.monosColocados.filter((mono) => mono.id !== action.id),
-        monedas: state.monedas + action.precio,
-      };
-
+      
     default:
       return state;
   }
 }
 
 function Tutorial() {
-  const [paso, setPaso] = useState(0);
+
+  // Estados del juego:
   const [mapa, setMapa] = useState(mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [globosActivos, setGlobosActivos] = useState(false);
+  const [position, setPosition] = useState({x: 0, y:0});
+  const [cronometroActivo, setCronometroActivo] = useState(false);
+
+  // Estados del tutorial
+  const [paso, setPaso] = useState(0);
   const [tutorialTerminado, setTutorialTerminado] = useState(false); // Nuevo estado para controlar el final del tutorial
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],
     monosColocados: [],
     indexGlobo: 0,
     vidas: PARTIDA.vidas_iniciales,
-    monedas: PARTIDA.monedas_iniciales,
+    monedas: 999,   
     ronda: 1, // Inicia en la ronda 1
     perdido: false,
   });
 
   const camino = useMemo(() => obtenerCaminoMapa(mapa), [mapa]);
+
+  /**
+   * Función del tutorial que avanza al siguiente paso
+   */
+  const avanzarPaso = () => setPaso(paso + 1);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -164,19 +202,14 @@ function Tutorial() {
     let animationFrameId;
 
     const gameLoop = (timestamp) => {
+      if ( !cronometroActivo ) return;
       if (!lastUpdateTime) lastUpdateTime = timestamp;
 
       const elapsed = timestamp - lastUpdateTime;
-      if (globosActivos && elapsed >= PARTIDA.tiempoActualizacionGlobos) {
+      if (elapsed >= PARTIDA.tiempoActualizacionGlobos) {
         dispatch({
           type: 'TICK',
-          camino,
-          onGloboFinal: () => {
-            if (paso === 2) {
-              setPaso(3); // Avanzar al siguiente paso del tutorial
-              setGlobosActivos(false); // Detener los globos
-            }
-          },
+          camino
         });
         lastUpdateTime = timestamp;
       }
@@ -186,19 +219,26 @@ function Tutorial() {
 
     animationFrameId = requestAnimationFrame(gameLoop);
 
+    
+
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [camino, globosActivos, paso]);
+  }, [camino, paso]);
 
   useEffect(() => {
     // Detectar si el tutorial ha terminado después de 2 rondas adicionales
     if (gameState.ronda > 5 && paso === 4) {
       setTutorialTerminado(true);
     }
-  }, [gameState.ronda, paso]);
+    if ( paso == 2 && gameState.ronda > 1 ) {
+      pausarReaunudarCronometro();
+      avanzarPaso();
+    }
+    console.log('Paso:', paso, 'Ronda:', gameState.ronda);
 
-  const avanzarPaso = () => setPaso(paso + 1);
+  }, [gameState.ronda]);
+
 
   const actualizarMapa = (index) => {
     const estadoCasilla = mapa[index];
@@ -209,10 +249,7 @@ function Tutorial() {
     const monoExistente = gameState.monosColocados.find((mono) => mono.index === index);
     if (monoExistente) {
       setMonoVerAjustes(monoExistente);
-      return;
-    }
-
-    if (monoSeleccionado !== null) {
+    }else if (monoSeleccionado !== null) {
       const nuevoMono = new MonoClass(
         gameState.monosColocados.length,
         MONOS[monoSeleccionado].tipo,
@@ -224,24 +261,14 @@ function Tutorial() {
       dispatch({ type: 'AGREGAR_MONO', mono: nuevoMono, precio: MONOS[monoSeleccionado].precio });
       setMonoSeleccionado(null);
 
-      const nuevoMapa = [...mapa];
-      nuevoMapa[index] = ESTADO_CASILLA.MONO;
-      setMapa(nuevoMapa);
 
       if (paso === 1) {
         avanzarPaso();
+        pausarReaunudarCronometro();
 
-        setTimeout(() => {
-          setGlobosActivos(true);
-
-          // Restaurar el globo con 50 de vida
-          const globoFuerte = new GloboClass(999, camino[0], 50, 0);
-          dispatch({ type: 'AGREGAR_GLOBO', globo: globoFuerte });
-        }, 1000);
       } else if (paso === 3) {
         // Avanzar al paso 4 después de colocar un mono
         avanzarPaso();
-        setGlobosActivos(true);
       }
     }
   };
@@ -251,7 +278,7 @@ function Tutorial() {
     const precio = MONOS[mono.tipo].precio * 0.5;
     const incremento = MONOS[mono.tipo].damage * 0.5;
     dispatch({ type: 'MEJORAR_MONO', id, precio, incremento });
-    if (paso === 3) avanzarPaso();
+    if (paso === 3) avanzarPaso(), pausarReaunudarCronometro();
   };
 
   const venderMono = (id) => {
@@ -260,9 +287,16 @@ function Tutorial() {
     dispatch({ type: 'VENDER_MONO', id, precio });
   };
 
+  /**
+   * Función que pausa o reanuda el cronómetro del juego
+   * Esta función se ejecuta al hacer click en el botón de pausa/reanudar en la barra de navegación
+   */
+  const pausarReaunudarCronometro = () => {
+    setCronometroActivo(!cronometroActivo);
+  }
   return (
     <div>
-      <BarraNavegacionPartida
+      <BarraNavegacionTutorial
         vidas={gameState.vidas}
         monedas={gameState.monedas}
         agarrarMono={(tipoMono) => setMonoSeleccionado(tipoMono)}
@@ -270,39 +304,87 @@ function Tutorial() {
       {monoSeleccionado && (
         <MonoAgarrado x={position.x} y={position.y} tipoMono={monoSeleccionado} />
       )}
-      <div className="tutorial-container">
         {paso === 0 && (
+        <div className="tutorial-container-bienvenida">
           <div className="tutorial-mensaje">
-            <h2>Bienvenido al tutorial</h2>
-            <p>Aquí aprenderás a jugar Monkey Pop.</p>
-            <button onClick={avanzarPaso}>Comenzar</button>
+            <div className="tutorial-content">
+              <div className="tutorial-text">
+                <h2>Bienvenido al tutorial</h2>
+                <p>Aquí aprenderás a jugar Monkey Pop.</p>
+                <button className="tutorial-button" onClick={avanzarPaso}>Comenzar</button>
+              </div>
+              <div className="tutorial-image">
+                <img src={monoAnciano} alt="Bienvenida al tutorial" />
+              </div>
+            </div>
           </div>
+        </div>
         )}
         {paso === 1 && (
+        <div className="tutorial-container">
           <div className="tutorial-mensaje">
-            <h2>Selecciona un mono</h2>
-            <p>Los monos están arriba a la derecha. Selecciona uno y colócalo en el mapa.</p>
+            <div className="tutorial-content">
+              <div className="tutorial-text">
+                <h2>Selecciona un mono</h2>
+                <p>Nuestros monos están arriba a la derecha.</p>
+                <p>Arrastra el que quieras a una casilla de cesped del mapa. </p>
+                <p>Ellos son nuestros héroes, nos defienden de .....</p>
+              </div>
+              <div className="tutorial-image">
+                <img src={monoAnciano} alt="Selección de mono" />
+              </div>
+            </div>
           </div>
+        </div>
         )}
         {paso === 2 && (
+        <div className="tutorial-container">
           <div className="tutorial-mensaje">
-            <h2>¡Globos!</h2>
-            <p>Observa cómo los monos atacan a los globos y ganas monedas. Un globo llegará al final para mostrar que te hace daño.</p>
+            <div className="tutorial-content">
+              <div className="tutorial-text">
+                <h2>¡LOS GLOBOS!</h2>
+                <p>Estas bestias hechas de plástico no pueden llegar al final del camino</p>
+                <p>Nuestros aliados moniles intentarán explotarlos</p>
+              </div>
+              <div className="tutorial-image">
+                <img src={globoMalvado} alt="Globos" />
+              </div>
+            </div>
           </div>
+        </div>
         )}
         {paso === 3 && (
+        <div className="tutorial-container">
           <div className="tutorial-mensaje">
-            <h2>Mejora y vende monos</h2>
-            <p>Selecciona un mono para mejorarlo o venderlo. Coloca más monos para pasar de ronda.</p>
+            <div className="tutorial-content">
+              <div className="tutorial-text">
+                <h2>Mejora y vende monos</h2>
+                <p>Selecciona un mono para mejorarlo o venderlo. Coloca más monos para pasar de ronda.</p>
+              </div>
+              <div className="tutorial-image">
+                <img src={monoAnciano} alt="Mejora de monos" />
+              </div>
+            </div>
           </div>
+        </div>
         )}
         {paso === 4 && tutorialTerminado && (
+        <div className="tutorial-container">
           <div className="tutorial-mensaje">
-            <h2>¡Enhorabuena!</h2>
-            <p>Has completado el tutorial. Ahora puedes jugar libremente.</p>
+            <div className="tutorial-content">
+              <div className="tutorial-text">
+                <h2>¡Enhorabuena!</h2>
+                <p>Has completado el tutorial. Ahora puedes jugar libremente.</p>
+                <p>Puedes volve a jugar el tutorail si lo crees necesario</p>
+              </div>
+              <div className="tutorial-image">
+                <img src={monoAnciano} alt="Felicitaciones" />
+                <button className='tutorial-button' onClick={() => window.location.reload()}>Volver a jugar</button>
+              </div>
+            </div>
           </div>
+        </div>
         )}
-      </div>
       <div className="game-container">
         {mapa.map((estado, index) => (
           <CasillaMapa

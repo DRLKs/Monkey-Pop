@@ -210,7 +210,7 @@ function Juego() {
 
     const gameLoop = (timestamp) => {
       if ( !cronometroActivo ) return;
-      if (!lastUpdateTime ) lastUpdateTime = timestamp;
+      if ( !lastUpdateTime ) lastUpdateTime = timestamp;
       
       const elapsed = timestamp - lastUpdateTime;
       if ( gameState.nuevaRonda  ){       // Mantiene un margen entre ronda y ronda
