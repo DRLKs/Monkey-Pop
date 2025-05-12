@@ -60,6 +60,32 @@ export const cargarConfiguracionPartida = () => {
 }
 
 
+
+
+/**
+ * Función que guarda en localStorage la capacidad del usuario de jugar.
+ * Podrá jugar cuando haya terminado el tutorial.
+ */
+export const puedeJugar = () => {
+    localStorage.setItem("PuedeJugar", true);
+};
+
+/**
+ * Recupera un valor booleano desde el localStorage.
+ * 
+ */
+export const habilitadoParaJugar = () => {
+    
+    const valorGuardado = localStorage.getItem("PuedeJugar");
+    
+    if (valorGuardado === null) {
+        return false; // Si no existe el valor, devolver false
+    }else{
+      return true;    // Si existe el valor, devolver true
+    }
+    
+};
+
 export const obtenerCaminoMapa = (mapa) => {
     const camino = []
     let posicionAnterior;

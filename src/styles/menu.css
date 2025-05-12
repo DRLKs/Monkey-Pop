@@ -107,6 +107,15 @@ button::before {
     background: linear-gradient(to bottom, var(--color-boton-importante), var(--color-hover));
     color: var(--color-texto-claro);
     transform: scale(1.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px; /* Añadido padding más grande para acomodar el icono */
+}
+
+#play-btn span {
+    margin-left: 6px;
+    font-size: 1.1em; /* Ligeramente más grande para equilibrar con la imagen */
 }
 
 #tutorial-btn{
@@ -139,6 +148,52 @@ button:hover {
 button:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el botón oscurecido */
+.btn-oscuro {
+    opacity: 0.8;
+    filter: brightness(70%);
+    background-color: #554231 !important; /* Color más oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    transition: none !important; /* Desactiva transiciones */
+    animation: none !important; /* Desactiva animaciones */
+}
+
+
+/* Mantener la imagen del candado con brillo normal en botón oscuro */
+.icono-candado {
+    filter: brightness(130%) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4)) !important;
+    opacity: 1 !important;
+}
+
+.btn-oscuro .icono-candado {
+    filter: brightness(130%) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4)) !important;
+    opacity: 1 !important;
+}
+
+/* Anular efectos hover para el botón oscuro */
+.btn-oscuro:hover {
+    background-color: #554231 !important;
+    transform: none !important;
+    filter: brightness(70%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    transition: none !important;
+}
+
+/* Anular efectos active para el botón oscuro */
+.btn-oscuro:active {
+    transform: none !important;
+    background-color: #554231 !important;
+}
+
+/* Estilo para el botón con candado */
+.icono-candado {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
 }
 
 footer {
@@ -181,6 +236,128 @@ footer a:hover {
     animation: pulsate 2s infinite;
 }
 
+/* Estilos para el modal de confirmación */
+.modal-confirmacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-contenido {
+    background: linear-gradient(to bottom, #8b4513, #663300);
+    border: 3px solid var(--color-dorado, #ffd700);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 450px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    animation: aparecer 0.3s ease-out;
+    position: relative; /* Necesario para posicionar el botón correctamente */
+}
+
+.modal-contenido h2 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-family: 'Bangers', 'Comic Sans MS', cursive;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.modal-contenido p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.modal-cerrar-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal-cerrar-btn:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-botones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-primario {
+    background-color: #4d9c2d;
+}
+
+.btn-primario:hover {
+    background-color: #5cba36;
+}
+
+.btn-secundario {
+    background-color: #a34a4a;
+}
+
+.btn-secundario:hover {
+    background-color: #f38e8e;
+}
+
+/* Estilo para el header del modal con título y candado */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.modal-header h2 {
+    margin-bottom: 0; /* Quitar el margen del título para alinearlo correctamente */
+}
+
+.modal-icono-candado {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
     button {
@@ -195,6 +372,22 @@ footer a:hover {
 
     .titulo-juego-container img{
         width: 250px;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal-contenido {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .modal-icono-candado {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .modal-header h2 {
+        font-size: 24px;
     }
 }
 

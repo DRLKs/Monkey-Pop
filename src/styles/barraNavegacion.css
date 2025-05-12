@@ -510,6 +510,10 @@ body {
         font-size: 0.65rem;
         margin: 0 5px;
     }
+
+    .info-container{
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 480px) {

@@ -7,6 +7,7 @@ import BarraNavegacionTutorial from '../components/BarraNavegacionTutorial';
 import AjustesMono from '../components/AjustesMono';
 import FinJuego from '../components/FinJuego';
 import OrientationWarning from '../components/OrientationWarning';
+import ProTip from '../components/tutorial/ProTip';
 
 // Clases
 import { Mono as MonoClass } from '../utils/clases';
@@ -14,13 +15,17 @@ import { Mono as MonoClass } from '../utils/clases';
 // Utilidades
 import { mapas } from '../utils/mapas';
 import { ESTADO_CASILLA, MONOS, PARTIDA, INFORMACION_TUTORIAL } from '../utils/constantes';
-import { gameReducer, obtenerCaminoMapa} from '../utils/funciones';
+import { gameReducer, habilitadoParaJugar, obtenerCaminoMapa} from '../utils/funciones';
 
 // Imágenes para el tutorial
 import monoAncianoPrincipio from '../assets/images/tutorial/monoAncianoPrincipio.png'
 import monoAncianoApunta from '../assets/images/tutorial/monoAncianoApunta.png';
 import monoAncianoFinal from '../assets/images/tutorial/monoAncianoFinal.png';
 import globoMalvado from '../assets/images/tutorial/globoMalvado.png';
+import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.png' 
+
+// Funciones para el tutorial
+import { puedeJugar } from '../utils/funciones.js';
 
 // Estilos
 import '../styles/juego.css';
@@ -39,13 +44,14 @@ function Tutorial() {
 
   // Estados del tutorial
   const [paso, setPaso] = useState(0);
+  const [mostrarImagenTemporal, setMostrarImagenTemporal] = useState(false);
   const [tutorialTerminado, setTutorialTerminado] = useState(false);
   const [gameState, dispatch] = useReducer(gameReducer, {
     globos: [],
     monosColocados: [],
     indexGlobo: 0,
     vidas: PARTIDA.vidas_iniciales,
-    monedas: 999,   
+    monedas: 99999,   
     ronda: 1,
     perdido: false,
   });
@@ -130,6 +136,10 @@ function Tutorial() {
   useEffect(() => {
     if (gameState.ronda > 5 && paso === 4) {
       setTutorialTerminado(true);
+      if( !habilitadoParaJugar() ) {
+        puedeJugar();
+        mostrarCandado();
+      }
     }
     if ( paso == 2 && gameState.ronda > 1 ) {
       pausarReaunudarCronometro();
@@ -138,6 +148,73 @@ function Tutorial() {
     console.log('Paso:', paso, 'Ronda:', gameState.ronda);
 
   }, [gameState.ronda]);
+
+
+  /**
+     * Función que se ejecuta al presionar una tecla
+     */
+    useEffect(() => {
+      // Función que se ejecuta cuando se presiona una tecla
+      const handleKeyDown = (event) => {
+        // Obtener el código o nombre de la tecla presionada
+        const key = event.key;
+        
+        // Diferentes acciones según la tecla presionada
+        switch (key) {
+          
+          case '0':
+            setMonoSeleccionado(null);
+            break;
+          case '1':
+            setMonoSeleccionado(MONOS.basico.tipo);
+            break;
+          case '2':
+            setMonoSeleccionado(MONOS.arco.tipo);
+            break;
+  
+          case '3':
+            setMonoSeleccionado(MONOS.fusil.tipo);
+            break;
+  
+          case '4':
+            setMonoSeleccionado(MONOS.artificiero.tipo);
+            break;
+  
+          case '5':
+            setMonoSeleccionado(MONOS.francotirador.tipo);
+            break;
+          
+          case '6':
+            setMonoSeleccionado(MONOS.laser.tipo);
+            break;
+  
+          default:
+            break;
+        }
+      };
+    
+      // Agregar el event listener
+      window.addEventListener('keydown', handleKeyDown);
+      
+      // Función de limpieza que se ejecuta cuando el componente se desmonta
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }, [monoSeleccionado, cronometroActivo]); // Dependencias del useEffect
+
+
+  /**
+   * Mostrar la imagen del candado
+   * @param {*} rutaImagen 
+   */
+  const mostrarCandado = () => {
+    setMostrarImagenTemporal(true);
+    
+    // Ocultar la imagen después de 2 segundos
+    setTimeout(() => {
+      setMostrarImagenTemporal(false);
+    }, 2000);
+  };
 
 
   /**
@@ -257,6 +334,7 @@ function Tutorial() {
         </div>
         )}
         {paso === 1 && (
+        <>
         <div className="tutorial-container">
           <div className="tutorial-mensaje">
             <div className="tutorial-content">
@@ -272,6 +350,13 @@ function Tutorial() {
             </div>
           </div>
         </div>
+        
+        <div className="pro-tip-container">
+        <ProTip 
+          message={"Puedes seleccionar los monos con los números del teclado"}
+        />
+        </div>
+        </>
         )}
         {paso === 2 && (
         <div className="tutorial-container">
@@ -304,7 +389,7 @@ function Tutorial() {
           </div>
         </div>
         )}
-        {paso === 4 && tutorialTerminado && (
+        {paso === 4 && tutorialTerminado &&(
         <div className="tutorial-container">
           <div className="tutorial-mensaje">
             <div className="tutorial-content">
@@ -347,6 +432,18 @@ function Tutorial() {
           visible={gameState.perdido}
           onReiniciar={() => window.location.reload()}
         />
+      )}
+      {/* Imagen temporal centrada */}
+      {mostrarImagenTemporal && (
+        <div className="imagen-temporal-overlay">
+          <div className="imagen-temporal-container">
+            <img 
+              src={candadoAbierto} 
+              alt="Candado abierto" 
+              className="imagen-temporal" 
+            />
+          </div>
+        </div>
       )}
     </div>
     </>
