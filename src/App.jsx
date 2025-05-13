@@ -7,11 +7,10 @@ import Ajustes from './pages/Ajustes'
 import Tutorial from './pages/Tutorial'
 import Creditos from './pages/Creditos'
 import MonoInfo from './pages/MonoInfo'
-import UIContext from './context/UIContext'
-function App() {
-  return (
+import { UIContext, UIProvider } from './context/UIContext'
+function App() {  return (
     <HashRouter>
-      <UIContext>
+      <UIProvider>
         <Routes>
           <Route path="/" element={<Menu />} />
           <Route path="/juego" element={<Juego />} />
@@ -21,7 +20,7 @@ function App() {
           <Route path="/creditos" element={<Creditos/>} />
           <Route path="/monoInfo" element={<MonoInfo/>} />
         </Routes>
-      </UIContext>
+      </UIProvider>
     </HashRouter>
 
   )
