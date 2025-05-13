@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import { Menu } from './pages/Menu'
 import Ranking from './pages/Ranking'
@@ -10,7 +10,7 @@ import MonoInfo from './pages/MonoInfo.'
 import UIContext from './context/UIContext'
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <UIContext>
         <Routes>
           <Route path="/" element={<Menu />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path="/monoInfo" element={<MonoInfo/>} />
         </Routes>
       </UIContext>
-    </BrowserRouter>
+    </HashRouter>
 
   )
 }
