@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import '../styles/ajustesJuego.css'
 import { cargarConfiguracion, guardarConfiguracion } from '../utils/funciones'
 
+// Botones silenciado/desilenciado
+import silenciado from '../assets/images/botones/silenciado.webp';
+import desilenciado from '../assets/images/botones/desilenciado.webp';
+
+
 function AjustesContainerJuego({ visible, onClose }) {
   // Estados para manejar los valores de los ajustes
   const [configuracinAjustes] = useState(() => cargarConfiguracion());
@@ -60,18 +65,20 @@ function AjustesContainerJuego({ visible, onClose }) {
             />
           </div>
           
-          <div className="ajuste-item">
-            <label htmlFor="efectos">Efectos de sonido</label>
-            <div className="toggle-container">
-              <input 
-                type="checkbox" 
-                id="efectos" 
-                checked={efectos} 
-                onChange={handleEfectosChange} 
-              />
-              <span className="toggle-label">{efectos ? 'Activado' : 'Desactivado'}</span>
-            </div>
-          </div>
+          <div className="toggle-container">
+                                  <button 
+                                      type="button"
+                                      id="efectos" 
+                                      className="boton-sonido"
+                                      onClick={() => setEfectos(!efectos)}
+                                  >
+                                      <img 
+                                          src={efectos ? desilenciado : silenciado} 
+                                          alt={efectos ? "Sonido activado" : "Sonido silenciado"} 
+                                          className="icono-sonido"
+                                      />
+                                  </button>
+                              </div>
           
         </div>
         

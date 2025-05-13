@@ -277,25 +277,28 @@ footer a:hover {
     line-height: 1.4;
 }
 
+/* Mejoras para el botón de cerrar */
 .modal-cerrar-btn {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 10px;  /* Cambiado de right a left para posicionar a la izquierda */
     background-color: rgba(0, 0, 0, 0.3);
+    color: white;
     border: none;
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
+    font-size: 28px;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
     padding: 0;
     line-height: 1;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .modal-cerrar-btn:hover {
@@ -309,19 +312,19 @@ footer a:hover {
 }
 
 .btn-primario {
-    background-color: #4d9c2d;
+    background-color: #70c74e;
 }
 
 .btn-primario:hover {
-    background-color: #5cba36;
+    background-color: #36ba6f;
 }
 
 .btn-secundario {
-    background-color: #a34a4a;
+    background-color: #dbbd43;
 }
 
 .btn-secundario:hover {
-    background-color: #f38e8e;
+    background-color: #f3f38e;
 }
 
 /* Estilo para el header del modal con título y candado */

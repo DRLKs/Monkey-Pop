@@ -243,6 +243,9 @@ body {
   max-height: 35px;
   object-fit: contain;
   pointer-events: none;
+  touch-action: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 /* Estilo del círculo que indica el rango del mono seleccionado */
@@ -260,6 +263,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  touch-action: none; /* Previene acciones táctiles predeterminadas como zoom */
 }
 
 /* Media queries para dispositivos móviles */

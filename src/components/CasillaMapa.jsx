@@ -13,12 +13,16 @@ import globoExplotado from '../assets/images/globos/globoExplotado.png'
  */
 export const CasillaMapa = ({ estado = 'default', index, actualizarMapa, globos, monos, explotaGloboCasilla  }) => {
 
-    const manejarClick = () => {
+    const manejarInteraccion = () => {
         actualizarMapa(index)
     }
 
     return (
-        <div onClick={manejarClick} className={`casilla-mapa casilla-${estado}`}>
+        <div 
+            onClick={manejarInteraccion} 
+            onTouchStart={manejarInteraccion}
+            className={`casilla-mapa casilla-${estado}`}
+        >
 
         {globos.map(globo => (
             <Globo 

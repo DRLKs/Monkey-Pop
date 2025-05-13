@@ -1,8 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import AjustesMono from "../components/AjustesMono";
 import { MONOS } from "../utils/constantes";
+import { UIContext } from "../context/UIContext";
+
+// Importamos la música específica para la sección de información de monos
+import musica from '../assets/sounds/MonoInfo.mp3';
+import backgroundMusic from '../assets/sounds/musicaFondo.mp3';
 
 import '../styles/infoMonos.css';
 
@@ -11,6 +16,9 @@ function MonoInfo() {
     const scrollContainerRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
+    
+    // Obtenemos la función para cambiar música del contexto
+    const { changeBackgroundMusic } = useContext(UIContext);
 
     const cerrarAjustes = () => {
         setVerAjustesMono(null);
@@ -32,9 +40,7 @@ function MonoInfo() {
             const scrollAmount = direction === 'left' ? -300 : 300;
             scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-    };
-
-    // Comprobar el estado de scroll al montar y cuando cambie el tamaño
+    };    // Comprobar el estado de scroll al montar y cuando cambie el tamaño
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (container) {
@@ -48,6 +54,17 @@ function MonoInfo() {
             };
         }
     }, []);
+    
+    // Efecto para cambiar la música cuando se monta el componente
+    useEffect(() => {
+        // Cambiar a la música de la sección de información de monos
+        changeBackgroundMusic(musica);
+        
+        // Restaurar la música original cuando se desmonte el componente
+        return () => {
+            changeBackgroundMusic(backgroundMusic);
+        };
+    }, [changeBackgroundMusic]);
 
     return (
         <div className="pagina-mono-info">

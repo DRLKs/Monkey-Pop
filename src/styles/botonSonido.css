@@ -1,0 +1,31 @@
+/* Estilos para el botón de sonido en los ajustes */
+.boton-sonido {
+    background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
+    border: 2px solid var(--color-dorado);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.boton-sonido:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    border-color: #ffec80;
+}
+
+.boton-sonido:active {
+    transform: scale(0.95);
+}
+
+.icono-sonido {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}

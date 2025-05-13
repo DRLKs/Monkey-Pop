@@ -97,6 +97,7 @@ label {
 
 input[type="range"] {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     height: 10px;
     background: linear-gradient(to right, var(--color-marron-claro), var(--color-marron-oscuro));
@@ -242,4 +243,24 @@ select:hover {
         letter-spacing: 1px;
         line-height: 1;
     }
+}
+
+/* Estilos para el ajuste-item */
+.ajuste-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Estilos para el container del toggle */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.toggle-label {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: var(--color-texto-claro);
 }

@@ -7,7 +7,7 @@ export function BarraMonos({ monedas, vidas, children }) {
         <div className="monkey-container">
             <div className='info-container'>
                 <div className="monedas-container">
-                    <img src= {monedaImagen} alt="Monedas" className="monedas" />
+                    <img src={monedaImagen} alt="Monedas" className="monedas" draggable="false" />
                     <span className="moneda-count">{monedas}</span>
                 </div>
                 <div className="vidas-container">

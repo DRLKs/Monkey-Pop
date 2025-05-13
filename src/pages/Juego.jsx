@@ -157,22 +157,27 @@ function Juego() {
     
     }
   }
-
   /**
    * Función que trackea la posición del ratón
    * Es usada para que la imagen del mono seleccionado parezca que es arrastrada por el jugador
    */
   useEffect(() => {
     const controladorMovimientoRaton = (event) => {
-      setPosition({x: event.clientX, y: event.clientY});
+      // Usar clientX/Y para navegadores de escritorio y touches[0] para dispositivos móviles
+      const posX = event.touches ? event.touches[0].clientX : event.clientX;
+      const posY = event.touches ? event.touches[0].clientY : event.clientY;
+      setPosition({x: posX, y: posY});
     }
     
     if (monoSeleccionado !== null) {
+      // Soportar tanto eventos de mouse como eventos táctiles
       window.addEventListener('pointermove', controladorMovimientoRaton);
+      window.addEventListener('touchmove', controladorMovimientoRaton, { passive: false });
     }
     
     return () => {
       window.removeEventListener('pointermove', controladorMovimientoRaton);
+      window.removeEventListener('touchmove', controladorMovimientoRaton);
     }
   }, [monoSeleccionado]);
 
@@ -248,6 +253,8 @@ function Juego() {
    * @param {string} tipoMono Tipo de mono seleccionado
    */
   const agarrarMono = (tipoMono) => {
+    // Si ya está seleccionado, lo deseleccionamos; si no, lo seleccionamos
+    console.log("Agarrando mono:", tipoMono, "Mono seleccionado actualmente:", monoSeleccionado);
     if (monoSeleccionado === tipoMono) {
       setMonoSeleccionado(null);
     } else {
@@ -335,6 +342,23 @@ function Juego() {
     setAjustesVisible(estaranLosAjustesVisibles);
   }
 
+  useEffect(() => {
+    // Deshabilitamos el comportamiento predeterminado de eventos táctiles para prevenir el scroll
+    const preventDefaultTouchMove = (e) => {
+      if (monoSeleccionado !== null) {
+        e.preventDefault();
+      }
+    };
+
+    // Agregamos el event listener al document
+    document.addEventListener('touchmove', preventDefaultTouchMove, { passive: false });
+
+    // Limpieza al desmontar
+    return () => {
+      document.removeEventListener('touchmove', preventDefaultTouchMove);
+    };
+  }, [monoSeleccionado]);
+
   // Effect para manejar cambios de orientación
   useEffect(() => {
     const checkOrientation = () => {
@@ -372,13 +396,13 @@ function Juego() {
         reiniciarJuego={() => abrirConfirmacion(reiniciarJuego, 'REINICIAR')}
         abrirAjustes={abrirAjustes}
         agarrarMono={agarrarMono}
-      />
-
+      />      
+      
       {monoSeleccionado !== null && (
         <MonoAgarrado
           x={position.x}
           y={position.y}
-          tipoMono={[monoSeleccionado]}
+          tipoMono={monoSeleccionado}
         />
         )}
 

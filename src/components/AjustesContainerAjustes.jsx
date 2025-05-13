@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 import { cargarConfiguracion, guardarConfiguracion } from '../utils/funciones';
 
+// Botones silenciado/desilenciado
+import silenciado from '../assets/images/botones/silenciado.webp';
+import desilenciado from '../assets/images/botones/desilenciado.webp';
+
+// Importamos los estilos del botón de sonido
+import '../styles/botonSonido.css';
+
+
 function AjustesContainerAjustes() {
     
     // Cargar configuración inicial
@@ -70,18 +78,20 @@ function AjustesContainerAjustes() {
                         value={volumen} 
                         onChange={handleVolumenChange} 
                     />
-                </div>
-
-                <div className="ajuste-item">
-                    <label htmlFor="efectos">Silenciar efectos de sonido</label>
+                </div>                <div className="ajuste-item">
                     <div className="toggle-container">
-                        <input 
-                            type="checkbox" 
+                        <button 
+                            type="button"
                             id="efectos" 
-                            checked={efectos} 
-                            onChange={handleEfectosChange} 
-                        />
-                        <span className="toggle-label">{efectos ? 'Activado' : 'Desactivado'}</span>
+                            className="boton-sonido"
+                            onClick={() => setEfectos(!efectos)}
+                        >
+                            <img 
+                                src={efectos ? desilenciado : silenciado} 
+                                alt={efectos ? "Sonido activado" : "Sonido silenciado"} 
+                                className="icono-sonido"
+                            />
+                        </button>
                     </div>
                 </div>
 

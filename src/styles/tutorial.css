@@ -176,7 +176,7 @@
 /* Pantallas grandes (estado normal) */
 @media (min-width: 1200px) {
   .tutorial-mensaje {
-    width: 500px;
+    width: 600px;
     padding: 18px;
   }
   
@@ -419,7 +419,7 @@
   
   .tutorial-mensaje {
     max-width: 700px;
-    width: 70%;
+    width: 90%;
   }
   
   .tutorial-content {

@@ -227,6 +227,12 @@ body {
     width: 35px;
     height: 35px;
     filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
+    -webkit-touch-callout: none; /* Safari */
+    -webkit-user-select: none; /* Safari, Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Estándar */
+    touch-action: manipulation; /* Mejora interacción táctil */
 }
 
 /* Estilo del marcador de la ronda */

@@ -217,6 +217,23 @@ function Tutorial() {
   };
 
 
+  useEffect(() => {
+      // Deshabilitamos el comportamiento predeterminado de eventos táctiles para prevenir el scroll
+      const preventDefaultTouchMove = (e) => {
+        if (monoSeleccionado !== null) {
+          e.preventDefault();
+        }
+      };
+  
+      // Agregamos el event listener al document
+      document.addEventListener('touchmove', preventDefaultTouchMove, { passive: false });
+  
+      // Limpieza al desmontar
+      return () => {
+        document.removeEventListener('touchmove', preventDefaultTouchMove);
+      };
+    }, [monoSeleccionado]);
+
   /**
    * Función que según la casilla clicada en el tablero realiza unas acciones u otras
    *

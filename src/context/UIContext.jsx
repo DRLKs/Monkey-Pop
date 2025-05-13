@@ -82,12 +82,36 @@ export const UIProvider = ({children}) => {
         return () => {
             window.removeEventListener('configuracionActualizada', handleConfiguracionActualizada);
         };
-    }, []);
+    }, []);    // Función para cambiar la música de fondo
+    const changeBackgroundMusic = (newMusicSrc) => {
+        if (!audioRef.current) return;
+        
+        // Guardar el volumen actual
+        const currentVolume = audioRef.current.volume;
+        const currentTime = audioRef.current.currentTime;
+        const wasPlaying = !audioRef.current.paused;
+        
+        // Pausar la música actual
+        audioRef.current.pause();
+        
+        // Cambiar la fuente de la música
+        audioRef.current.src = newMusicSrc;
+        audioRef.current.volume = currentVolume;
+        
+        // Si estaba reproduciendo, continuar reproduciendo
+        if (wasPlaying) {
+            audioRef.current.play().catch(error => {
+                console.log("Error al reproducir la nueva música:", error);
+            });
+        }
+        
+        console.log(`Música cambiada a: ${newMusicSrc}`);
+    };
 
     // Valores y funciones para compartir en el contexto
     const contextValue = {
-        // Aquí puedes agregar funciones para controlar el audio
-        // Por ejemplo: pausar, reanudar, cambiar volumen, etc.
+        changeBackgroundMusic,
+        // Otras funciones que quieras exponer
     };
 
     return (
