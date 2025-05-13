@@ -1,9 +1,8 @@
 {
   "name": "Monkey-Pop",
-  "private": true,
-  "version": "0.0.0",
+  "private": true,  "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/DRLKs/Monkey-Pop",
+  "homepage": "https://DRLKs.github.io/Monkey-Pop",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
