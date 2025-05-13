@@ -6,7 +6,7 @@ import Juego from './pages/Juego'
 import Ajustes from './pages/Ajustes'
 import Tutorial from './pages/Tutorial'
 import Creditos from './pages/Creditos'
-import MonoInfo from './pages/MonoInfo.'
+import MonoInfo from './pages/MonoInfo'
 import UIContext from './context/UIContext'
 function App() {
   return (
