@@ -1,12 +1,14 @@
 import React, { use, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import tituloJuego from '../assets/images/tituloJuego2.png';
 
 // Función para saber si el usuario puede jugar
 import { habilitadoParaJugar, puedeJugar } from '../utils/funciones.js'
 
-import candadoCerrado from '../assets/images/tutorial/candadoTutorialCerrado.png'
-import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.png'
+import candadoCerrado from '../assets/images/tutorial/candadoTutorialCerrado.webp'
+import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.webp'
+
+// Importamos las imágenes del título
+import tituloJuego from '../assets/images/tituloJuego.webp';
 
 import '../styles/menu.css'
 

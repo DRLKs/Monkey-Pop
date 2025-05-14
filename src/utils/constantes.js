@@ -108,7 +108,8 @@ export const PARTIDA = {
     [20,20,20,20,19,19],
     [21,21,21,21],
     [22,22],
-    [90,90]
+    [90,90],
+    [500]
   ],
   ancho_mapa: 30,   // Tienes que cambiar el css también en juegocss
   largo_mapa: 15,
@@ -118,6 +119,36 @@ export const PARTIDA = {
   monedas_iniciales: 170,
   vidas_iniciales: 100,
   ronda_inicial: 1
+}
+
+export const CAMINO_DIAGONAL_MOVIL = [
+  // Inicio en la esquina superior izquierda (0,0)
+  { x: 0, y: 0 },
+  { x: 1, y: 0 },
+  { x: 2, y: 1 },
+  { x: 3, y: 1 },
+  { x: 4, y: 2 },
+  { x: 5, y: 2 },
+  { x: 6, y: 3 },
+  { x: 7, y: 3 },
+  { x: 8, y: 4 },
+  { x: 9, y: 4 },
+  { x: 10, y: 5 },
+  { x: 11, y: 5 },
+  { x: 12, y: 6 },
+  { x: 13, y: 6 },
+  { x: 14, y: 7 },
+  { x: 15, y: 7 },
+  { x: 16, y: 8 },
+  { x: 17, y: 8 },
+  { x: 18, y: 9 },
+  { x: 19, y: 9 }
+  // Termina en la esquina inferior derecha (19,9)
+];
+
+export const MAPA_MOVIL = {
+  ancho_mapa: 20,
+  largo_mapa: 10,
 }
 
 export const VALORES_PREDETERMINADOS = {

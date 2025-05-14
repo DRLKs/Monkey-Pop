@@ -86,12 +86,12 @@ export const habilitadoParaJugar = () => {
     
 };
 
-export const obtenerCaminoMapa = (mapa) => {
+export const obtenerCaminoMapa = (mapa, ancho_mapa,largo_mapa) => {
     const camino = []
     let posicionAnterior;
     let posicionActual;
     
-    for (let i = 0; i < mapa.length; i = i + PARTIDA.ancho_mapa) {
+    for (let i = 0; i < mapa.length; i = i + ancho_mapa) {
         if (mapa[i] === ESTADO_CASILLA.CAMINO) {
         posicionActual = i;
         posicionAnterior = i - 1;
@@ -104,13 +104,13 @@ export const obtenerCaminoMapa = (mapa) => {
     while( caminoTerminado === false)  { 
         camino.push(posicionActual); 
         movimiento = 0;
-        if ((posicionActual + 1) % PARTIDA.ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
+        if ((posicionActual + 1) % ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
            movimiento = 1;
-        } else if (posicionActual > PARTIDA.ancho_mapa - 1  && posicionActual - PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual - PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-            movimiento = -PARTIDA.ancho_mapa;
-        } else if (posicionActual < 420 && posicionActual + PARTIDA.ancho_mapa !== posicionAnterior && mapa[posicionActual + PARTIDA.ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-            movimiento = PARTIDA.ancho_mapa;
-        } else if (posicionActual % PARTIDA.ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
+        } else if (posicionActual > ancho_mapa - 1  && posicionActual - ancho_mapa !== posicionAnterior && mapa[posicionActual - ancho_mapa] === ESTADO_CASILLA.CAMINO) {
+            movimiento = -ancho_mapa;
+        } else if (posicionActual < ((ancho_mapa*largo_mapa)-ancho_mapa) && posicionActual + ancho_mapa !== posicionAnterior && mapa[posicionActual + ancho_mapa] === ESTADO_CASILLA.CAMINO) {
+            movimiento = ancho_mapa;
+        } else if (posicionActual % ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
             movimiento = -1;
         } else {
             caminoTerminado = true;
@@ -252,3 +252,10 @@ export const gameReducer = (state, action) => {
   }
 };
 
+
+/**
+ * Función para saber si el dispositivo es móvil o no.
+ */
+export const isMovile = () => {
+  return window.innerWidth <= 768;
+}

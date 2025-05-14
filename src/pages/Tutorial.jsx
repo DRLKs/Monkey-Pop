@@ -22,7 +22,7 @@ import monoAncianoPrincipio from '../assets/images/tutorial/monoAncianoPrincipio
 import monoAncianoApunta from '../assets/images/tutorial/monoAncianoApunta.webp';
 import monoAncianoFinal from '../assets/images/tutorial/monoAncianoFinal.webp';
 import globoMalvado from '../assets/images/tutorial/globoMalvado.webp';
-import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.png' 
+import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.webp' 
 
 // Funciones para el tutorial
 import { puedeJugar } from '../utils/funciones.js';

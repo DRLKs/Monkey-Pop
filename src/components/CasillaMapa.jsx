@@ -4,7 +4,7 @@ import '../styles/CasillaMapa.css'
 
 import Globo from './Globo'
 import MonoMapa from './MonoMapa'
-import globoExplotado from '../assets/images/globos/globoExplotado.png'
+import globoExplotado from '../assets/images/globos/globoExplotado.webp'
 
 /**
  * 

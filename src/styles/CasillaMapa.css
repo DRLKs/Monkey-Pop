@@ -87,8 +87,8 @@
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .casilla-mapa {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
   }
   
   .casilla-selected {
@@ -100,8 +100,8 @@
 
 @media (max-width: 480px) {
   .casilla-mapa {
-    width: 18px;
-    height: 18px;
+    width: 30px;
+    height: 30px;
     border-width: 1px;
   }
   
@@ -115,8 +115,8 @@
 
 @media (max-height: 450px) {
   .casilla-mapa, .globo, .globo-explotado {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
   
   .casilla-selected {

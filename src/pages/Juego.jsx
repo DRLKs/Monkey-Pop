@@ -15,8 +15,8 @@ import { Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
 import { mapas } from '../utils/mapas'
-import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA } from '../utils/constantes'
-import { obtenerCaminoMapa, gameReducer } from '../utils/funciones'
+import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA, MAPA_MOVIL } from '../utils/constantes'
+import { obtenerCaminoMapa, gameReducer, isMovile } from '../utils/funciones'
 
 // Estilos
 import '../styles/juego.css'
@@ -28,7 +28,7 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 function Juego() {
-  const [mapa, setMapa] = useState(mapas.diagonal);
+  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -63,7 +63,8 @@ function Juego() {
    * Obtenemos el camino que deben seguir los globos
    */
   const camino = useMemo(() => {
-    return obtenerCaminoMapa(mapa)
+    if( isMovile() )  return obtenerCaminoMapa(mapa, MAPA_MOVIL.ancho_mapa, MAPA_MOVIL.largo_mapa);
+    else              return obtenerCaminoMapa(mapa, PARTIDA.ancho_mapa, PARTIDA.largo_mapa);
   }, []);
 
   /*

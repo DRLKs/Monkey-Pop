@@ -2,7 +2,7 @@
 // Cada mapa es un array de 450 elementos (30x15)
 // Valores posibles: 'default' (verde), 'agua', 'camino', 'selected'
 
-import { PARTIDA } from "./constantes";
+import { PARTIDA, MAPA_MOVIL, CAMINO_DIAGONAL_MOVIL } from "./constantes";
 
 // Mapa con camino horizontal y agua en los bordes superior e inferior
 export const mapaCaminoHorizontal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
@@ -29,6 +29,29 @@ export const mapaCaminoDiagonal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa)
   
   // Camino diagonal ajustado para 30x15
   if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return 'camino';
+  
+  return casilla;
+});
+
+/**
+ * Para mejorar la jugabilidad en dispositivos móviles, se ajusta el mapa diagonal
+ * En este caso el mapa será más pequeño y las casillas serán más grande por lo tanto
+ */
+export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % MAPA_MOVIL.ancho_mapa;
+  const y = Math.floor(index / MAPA_MOVIL.ancho_mapa);
+  
+  // Agua en las esquinas superiores izquierdas e inferiores derechas
+  if (y > 3 && y - 2 > x) return 'agua';
+  if (x > 15 && x > y + 14) return 'agua';
+  
+  // Usar el camino definido en CAMINO_DIAGONAL_MOVIL
+  for (const punto of CAMINO_DIAGONAL_MOVIL) {
+    if (punto.x === x && punto.y === y) return 'camino';
+    
+    // También hacemos el camino un poco más ancho (1 casilla adicional de ancho)
+    if (punto.x === x && punto.y === y - 1) return 'camino';
+  }
   
   return casilla;
 });
@@ -128,7 +151,8 @@ export const mapas = {
   isla: mapaIsla,
   archipielago: mapaArchipiélago,
   horizontal: mapaCaminoHorizontal,
-  diagonal: mapaCaminoDiagonal
+  diagonal: mapaCaminoDiagonal,
+  diagonalMovil: mapaCaminoDiagonalMovil
 };
 
 export default mapas;
