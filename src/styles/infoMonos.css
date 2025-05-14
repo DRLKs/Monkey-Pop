@@ -267,10 +267,6 @@ body {
 
 /* --- Media Queries para Responsividad --- */
 @media (max-width: 1024px) {
-    .pagina-mono-info {
-        padding-top: 80px; /* Aumenta el padding para pantallas medianas */
-    }
-    
     .separador-navbar {
         height: 80px; /* Ajustamos la altura para pantallas medianas */
     }
@@ -289,34 +285,6 @@ body {
         min-width: 320px;
     }
 
-    .contenedor-monos::after {
-        content: "⟺ Desliza para ver más monos";
-        display: block;
-        position: sticky;
-        right: 10px;
-        bottom: 10px;
-        background-color: rgba(70, 35, 10, 0.9);
-        color: var(--color-dorado);
-        padding: 8px 12px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-family: var(--fuente-parrafos);
-        box-shadow: var(--sombra-elemento);
-        border: 2px solid var(--color-dorado);
-        animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 5s forwards;
-        pointer-events: none;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
-    }
-
     /* Ajustamos los botones de scroll */
     .scroll-container-wrapper {
         width: 90%;
@@ -324,10 +292,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .pagina-mono-info {
-        padding-top: 100px; /* Aumenta para pantallas pequeñas */
-    }
-
     .separador-navbar {
         height: 100px; /* Ajustamos la altura para pantallas pequeñas */
     }
@@ -368,10 +332,6 @@ body {
 }
 
 @media (max-width: 600px) {
-    .pagina-mono-info {
-        padding-top: 120px; /* Más espacio para pantallas muy pequeñas */
-    }
-    
     .separador-navbar {
         height: 120px; /* Más espacio para pantallas muy pequeñas */
     }
@@ -401,22 +361,23 @@ body {
 }
 
 @media (max-width: 480px) {
-    .pagina-mono-info {
-        padding-top: 150px; /* Amplio espacio para dispositivos muy pequeños */
+    .separador-navbar {
+        height: 150px;
     }
     
-    .separador-navbar {
-        height: 150px; /* Amplio espacio para dispositivos muy pequeños */
+    .scroll-container-wrapper {
+        width: 85%; /* Reducido del 95% original para más margen */
+        padding: 0 10px; /* Padding adicional */
     }
     
     .contenedor-monos {
-        padding: 10px;
+        padding: 10px 20px; /* Aumentado el padding horizontal */
         gap: 15px;
         min-height: 530px;
+        margin: 0 15px; /* Margen adicional */
     }
     
     .tarjeta-mono {
-        /* Reducimos aún más para móviles muy pequeños */
         width: 260px;
         min-width: 260px;
         min-height: 500px;
@@ -450,5 +411,154 @@ body {
     
     .scroll-button.right {
         right: -5px;
+    }
+}
+
+/* Media Query mejorado para Móviles en Horizontal (Landscape) */
+@media (max-height: 480px) and (orientation: landscape) {
+    .separador-navbar {
+        height: 70px;
+    }
+
+    .scroll-container-wrapper {
+        width: 70%; /* Reducido del 80% para dar más margen lateral (más parecido al escritorio) */
+        max-width: 1200px;
+        margin: 5px auto;
+        padding: 0 25px; /* Padding adicional aumentado */
+    }
+
+    .contenedor-monos {
+        padding: 10px 40px; /* Aumentado el padding horizontal significativamente */
+        gap: 30px; /* Mayor separación entre tarjetas */
+        min-height: 280px;
+        margin: 0 40px; /* Aumentado el margen horizontal considerablemente */
+    }
+
+    .tarjeta-mono {
+        width: 200px; /* Tarjetas significativamente más pequeñas */
+        min-width: 200px;
+        min-height: 280px; /* Altura reducida */
+        max-height: 280px; /* Altura máxima fija */
+        padding: 10px;
+        margin: 5px 0; /* Margen vertical */
+        border-width: 3px; /* Borde más delgado */
+        overflow: auto; /* Permitir scroll dentro de la tarjeta si el contenido es muy largo */
+    }
+
+    .imagen-mono {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 8px;
+        padding: 5px;
+    }
+
+    .info-texto-mono h3 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    .info-texto-mono p {
+        font-size: 0.75em;
+        margin: 3px 0;
+        line-height: 1.2;
+    }
+
+    .descripcion-mono {
+        font-size: 0.7em;
+        min-height: 40px;
+        margin-top: 5px !important;
+    }
+
+    .scroll-button {
+        width: 25px;
+        height: 25px;
+        font-size: 0.7rem;
+        top: 45%; /* Ajuste hacia arriba para evitar solapamiento */
+    }
+
+    .scroll-button.left {
+        left: 10px; /* Más alejado del borde */
+    }
+
+    .scroll-button.right {
+        right: 10px; /* Más alejado del borde */
+    }
+    
+    /* Ajuste para iPhone SE y otros dispositivos muy pequeños en landscape */
+    @media (max-width: 568px) {
+        .tarjeta-mono {
+            width: 180px;
+            min-width: 180px;
+            min-height: 260px;
+            max-height: 260px;
+        }
+        
+        .imagen-mono {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+/* Ajuste extra para dispositivos muy pequeños en landscape */
+@media (max-height: 375px) and (orientation: landscape) {
+    .separador-navbar {
+        height: 60px;
+    }
+    
+    .scroll-container-wrapper {
+        width: 65%; /* Aún más margen (reducido del 75%) */
+        margin: 0 auto;
+        padding: 0 30px; /* Padding adicional aumentado */
+    }
+    
+    .contenedor-monos {
+        margin: 0 50px; /* Margen horizontal aumentado significativamente */
+        padding: 5px 35px; /* Más padding horizontal */
+    }
+    
+    .tarjeta-mono {
+        width: 170px;
+        min-width: 170px;
+        min-height: 230px;
+        max-height: 230px;
+        padding: 8px;
+    }
+    
+    .imagen-mono {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 5px;
+    }
+    
+    .info-texto-mono h3 {
+        font-size: 1.1em;
+    }
+    
+    .scroll-container-wrapper {
+        margin: 0 auto;
+    }
+    
+    .contenedor-monos {
+        margin: 0 10px;
+        padding: 5px;
+    }
+    
+    .tarjeta-mono {
+        width: 170px;
+        min-width: 170px;
+        min-height: 230px;
+        max-height: 230px;
+        padding: 8px;
+    }
+    
+    .imagen-mono {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 5px;
+    }
+    
+    .info-texto-mono h3 {
+        font-size: 1.1em;
     }
 }
