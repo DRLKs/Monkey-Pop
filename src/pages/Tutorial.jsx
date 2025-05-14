@@ -35,7 +35,7 @@ import '../styles/tutorial.css';
 
 function Tutorial() {
   // Estados del juego:
-  const [mapa, setMapa] = useState(mapas.diagonal);
+  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonal);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -57,11 +57,13 @@ function Tutorial() {
   });
 
 
-  /**
-   * Esta función solo se ejecuta una vez.
-   * Esta obtiene el camino que deberán recorrer los globos según el mapa seleccionado
+  /*
+   * Obtenemos el camino que deben seguir los globos
    */
-  const camino = useMemo(() => obtenerCaminoMapa(mapa), [mapa]);
+  const camino = useMemo(() => {
+    if( isMovile() )  return obtenerCaminoMapa(mapa, MAPA_MOVIL.ancho_mapa, MAPA_MOVIL.largo_mapa);
+    else              return obtenerCaminoMapa(mapa, PARTIDA.ancho_mapa, PARTIDA.largo_mapa);
+  }, []);
 
 
   /**

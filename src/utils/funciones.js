@@ -257,5 +257,5 @@ export const gameReducer = (state, action) => {
  * Función para saber si el dispositivo es móvil o no.
  */
 export const isMovile = () => {
-  return window.innerWidth <= 768;
+  return window.innerWidth <= 900;
 }
