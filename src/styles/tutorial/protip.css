@@ -1,20 +1,17 @@
 /* Por defecto, ocultamos el componente */
-.pro-tip-container {
-  display: none;
-}
+
 
 /* Solo mostramos el componente en dispositivos que soportan hover (principalmente PCs) */
 @media (hover: hover) {
   .pro-tip-container {
-    display: block;
-    position: fixed;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 220px;
-    max-width: 25%;
-    z-index: 90;
-  }
+  position: fixed;
+  right: 50px; /* Cambiado de left a right, a 150px del borde derecho */
+  top: 120px; /* Mantenemos la misma altura */
+  width: 220px;
+  max-width: 25%;
+  z-index: 90;
+  font-size: 20px;
+}
 }
 
 .pro-tip {

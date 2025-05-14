@@ -13,27 +13,33 @@
   pointer-events: none;
 }
 
+/* Tutorial container styles - centered horizontally */
 .tutorial-container {
   position: fixed;
-  bottom: 80px; /* Positioned higher from bottom */
-  left: 50%;
-  transform: translateX(-50%); /* Center horizontally */
-  width: auto;
+  bottom: 40px;
+  left: 0;
+  right: 0; /* Añadido right:0 para ocupar todo el ancho */
+  margin: 0 auto; /* Centrado automático */
+  width: 100%;
   z-index: 100;
   pointer-events: none;
+  display: flex;
+  justify-content: center; /* Centrar el contenido horizontalmente */
+  align-items: center;
 }
 
 .tutorial-mensaje {
-  background: linear-gradient(to bottom, #8b4513, #663300); /* Brown gradient matching the navbar */
+  background: linear-gradient(to bottom, #8b4513, #663300);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  padding: 15px;
-  max-width: 500px;
-  width: 450px; /* Slightly smaller width */
+  padding: 12px 20px;
+  max-width: 900px;
+  width: 80%;
   pointer-events: auto;
   border: 2px solid var(--color-dorado);
   position: relative;
   overflow: hidden;
+  /* El elemento ya está centrado por el justify-content del padre */
 }
 
 .tutorial-mensaje::before {
@@ -42,7 +48,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 40%;
+  height: 30%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
   border-radius: 10px 10px 0 0;
   pointer-events: none;
@@ -52,34 +58,34 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
+  gap: 20px; /* Increased gap for better separation */
   position: relative;
   z-index: 2;
 }
 
 .tutorial-text {
-  flex: 3;
+  flex: 4; /* Increased ratio for text */
 }
 
 .tutorial-text h2 {
-  color: #ffd700; /* Gold title */
-  margin-bottom: 10px;
-  font-size: 22px;
+  color: #ffd700;
+  margin-bottom: 6px; /* Reduced bottom margin */
+  font-size: 26px; /* Increased font size */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
   font-family: 'Bangers', 'Comic Sans MS', cursive;
   letter-spacing: 1px;
 }
 
 .tutorial-text p {
-  color: #ffffff; /* White text for better readability */
-  font-size: 16px;
-  margin-bottom: 12px;
-  line-height: 1.4;
+  color: #ffffff;
+  font-size: 18px; /* Increased font size */
+  margin-bottom: 6px; /* Reduced bottom margin */
+  line-height: 1.3; /* Tighter line height */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .tutorial-image {
-  flex: 2;
+  flex: 1; /* Reduced ratio for image */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +94,7 @@
 
 .tutorial-image img {
   max-width: 100%;
-  max-height: 160px; /* Slightly smaller */
+  max-height: 130px; /* Reduced height */
   border-radius: 8px;
   object-fit: contain;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -119,15 +125,7 @@
   transform: translateY(-2px);
 }
 
-.pro-tip-container {
-  position: fixed;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 220px;
-  max-width: 25%;
-  z-index: 90;
-}
+
 
 /* Estilos para la imagen temporal centrada */
 .imagen-temporal-overlay {
@@ -176,85 +174,71 @@
 /* Pantallas grandes (estado normal) */
 @media (min-width: 1200px) {
   .tutorial-mensaje {
-    width: 600px;
-    padding: 18px;
-  }
-  
-  .tutorial-text h2 {
-    font-size: 24px;
-  }
-  
-  .tutorial-text p {
-    font-size: 17px;
-  }
-  
-  .tutorial-image img {
-    max-height: 180px;
+    width: 800px;
+    padding: 16px 25px;
   }
 }
 
 /* Pantallas medianas */
 @media (max-width: 1199px) and (min-width: 769px) {
   .tutorial-mensaje {
-    width: 450px;
+    width: 650px;
   }
 }
 
 /* Tablets */
 @media (max-width: 768px) {
   .tutorial-container {
-    bottom: 70px;
+    bottom: 50px;
   }
   
   .tutorial-mensaje {
     width: 85%;
-    max-width: 450px;
-    padding: 14px;
+    max-width: 550px;
+    padding: 14px 18px;
   }
   
   .tutorial-content {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row; /* Keep row direction for wider appearance */
+    gap: 15px;
   }
   
   .tutorial-text h2 {
-    font-size: 20px;
-    margin-bottom: 8px;
+    font-size: 26px;
   }
   
   .tutorial-text p {
-    font-size: 15px;
-    margin-bottom: 10px;
-  }
-  
-  .tutorial-image img {
-    max-height: 140px;
+    font-size: 18px;
   }
 }
 
 /* Móviles grandes */
 @media (max-width: 576px) {
   .tutorial-container {
-    bottom: 60px;
+    bottom: 30px;
+    width: 100%;
   }
   
   .tutorial-mensaje {
-    width: 90%;
-    max-width: 400px;
-    padding: 12px;
+    width: 85%; /* Casi todo el ancho de la pantalla */
+    max-width: none;
+    padding: 12px 16px;
   }
   
-  .tutorial-text h2 {
-    font-size: 18px;
+  .tutorial-content {
+    flex-direction: row; /* Keep it row even on smaller devices */
   }
   
-  .tutorial-text p {
-    font-size: 14px;
-    line-height: 1.3;
+  .tutorial-text {
+    flex: 3;
+  }
+  
+  .tutorial-image {
+    flex: 1;
   }
   
   .tutorial-image img {
-    max-height: 120px;
+    max-height: 100px;
   }
   
   .tutorial-button {
@@ -267,25 +251,23 @@
 /* Móviles pequeños */
 @media (max-width: 380px) {
   .tutorial-container {
-    bottom: 40px;
+    bottom: 25px;
+    width: 100%;
   }
   
   .tutorial-mensaje {
-    width: 95%;
-    padding: 10px;
+    width: 97%; /* Prácticamente todo el ancho */
+    padding: 10px 12px;
+    border-radius: 10px;
   }
   
   .tutorial-text h2 {
-    font-size: 16px;
+    font-size: 18px;
   }
   
   .tutorial-text p {
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-  
-  .tutorial-image img {
-    max-height: 100px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
   
   .tutorial-button {
@@ -298,12 +280,14 @@
 /* Para pantallas muy estrechas (modo paisaje en móviles) */
 @media (max-height: 500px) {
   .tutorial-container {
-    bottom: 20px;
+    bottom: 15px;
+    width: 100%;
   }
   
   .tutorial-mensaje {
-    max-width: 80%;
-    padding: 10px;
+    width: 96%;
+    max-width: none;
+    padding: 8px 12px;
   }
   
   .tutorial-content {
@@ -323,13 +307,13 @@
   }
   
   .tutorial-text h2 {
-    font-size: 16px;
+    font-size: 20px;
     margin-bottom: 5px;
   }
   
   .tutorial-text p {
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 18px;
+    margin-bottom: 4px;
     line-height: 1.2;
   }
 }
@@ -337,18 +321,19 @@
 /* Ajustes específicos para móviles en modo landscape (horizontal) */
 @media (max-height: 500px) and (min-width: 600px) {
   .tutorial-container {
-    bottom: 20px; /* Más cerca del borde inferior */
+    bottom: 15px;
+    width: 100%;
   }
   
   .tutorial-mensaje {
-    max-width: 600px;
-    width: 80%; /* Ancho relativo al viewport */
-    padding: 12px;
+    width: 84%;
+    max-width: none;
+    padding: 10px 14px;
   }
   
   .tutorial-content {
     flex-direction: row; /* Mostrar contenido en fila para aprovechar el espacio horizontal */
-    gap: 20px; /* Más separación entre texto e imagen */
+    gap: 6px; /* Más separación entre texto e imagen */
   }
   
   .tutorial-text {
@@ -396,7 +381,7 @@
   }
   
   .tutorial-text p {
-    font-size: 12px;
+    font-size: 16px;
     margin-bottom: 4px;
     line-height: 1.1;
   }

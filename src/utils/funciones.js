@@ -217,7 +217,7 @@ export const gameReducer = (state, action) => {
         globos: globosTablero,
         indexGlobo: state.indexGlobo + 1,
         vidas: state.vidas - vidasPerdidas,
-        monedas: state.monedas + sumaMonedas,
+        monedas: Math.min(99999, (state.monedas + sumaMonedas)),
         globosExplotados: state.globosExplotados + sumaGlobosExplotados,
         nuevaRonda: false,
         indexsGlobosExplotados: indexGlobosExplotados

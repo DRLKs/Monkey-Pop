@@ -14,7 +14,7 @@ import { Mono as MonoClass } from '../utils/clases';
 
 // Utilidades
 import { mapas } from '../utils/mapas';
-import { ESTADO_CASILLA, MONOS, PARTIDA, INFORMACION_TUTORIAL } from '../utils/constantes';
+import { ESTADO_CASILLA, MONOS, PARTIDA, INFORMACION_TUTORIAL, MAPA_MOVIL } from '../utils/constantes';
 import { gameReducer, habilitadoParaJugar, obtenerCaminoMapa} from '../utils/funciones';
 
 // Imágenes para el tutorial
@@ -25,7 +25,7 @@ import globoMalvado from '../assets/images/tutorial/globoMalvado.webp';
 import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.webp' 
 
 // Funciones para el tutorial
-import { puedeJugar } from '../utils/funciones.js';
+import { puedeJugar, isMovile } from '../utils/funciones.js';
 
 // Estilos
 import '../styles/juego.css';

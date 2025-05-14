@@ -85,7 +85,13 @@ export const MONOS = {
     },
 }
 
+/**
+ * Constantes de una partida normal
+ */
 export const PARTIDA = {
+  /**
+   * Globos y su vida en cada ronda del juego
+   */
   rondas: [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1],
@@ -111,16 +117,38 @@ export const PARTIDA = {
     [90,90],
     [500]
   ],
-  ancho_mapa: 30,   // Tienes que cambiar el css también en juegocss
-  largo_mapa: 15,
-  tiempoActualizacionGlobos: 100, // Tiempo en milisegundos
-  tiempoEntreRondas: 5000, // Tiempo en milisegundos
-  monedasGlobo: 10, // Cantidad de monedas que da un globo al ser destruido
+  /**
+   * Número de columnas del mapa    Hay que cambiarlo también en el css
+   */
+
+  ancho_mapa: 30, 
+  /**
+   * Número de filas del mapa       Hay que cambiarlo también en el css
+   */                
+  largo_mapa: 15,    
+  
+  /**
+   * Tiempo de un tick del jeugo en milisegundos
+   */
+  tiempoActualizacionGlobos: 100,
+
+  /**
+   * Tiempo entre rondas en milisegundos
+   */
+  tiempoEntreRondas: 2500,      
+
+  /**
+   * Monedas que da un globo al ser destruido
+   */
+  monedasGlobo: 10,               
   monedas_iniciales: 170,
   vidas_iniciales: 100,
   ronda_inicial: 1
 }
 
+/**
+ * Array con las coordenadas de los caminos en el mapa
+ */
 export const CAMINO_DIAGONAL_MOVIL = [
   // Inicio en la esquina superior izquierda (0,0)
   { x: 0, y: 0 },
