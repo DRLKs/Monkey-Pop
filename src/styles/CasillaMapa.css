@@ -21,7 +21,7 @@
   /*background-color: var(--color-terreno);
   /*background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)); */
 
-  background-image: url('../assets/images/mapa/cesped.png');
+  background-image: url('../assets/images/mapa/cesped.webp');
   cursor: pointer;
 }
 
@@ -35,7 +35,7 @@
   background-size: 10px 10px;
   animation: mover-agua 3s linear infinite;*/
 
-  background-image: url('../assets/images/mapa/agua.png');
+  background-image: url('../assets/images/mapa/agua.webp');
   z-index: 5; /* Para que el agua esté por debajo del terreno */
 }
 
@@ -51,7 +51,7 @@
                     transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, 
                     transparent 75%, transparent); */
 
-  background-image: url('../assets/images/mapa/camino.png');
+  background-image: url('../assets/images/mapa/camino.webp');
 
   z-index: 10; /* Para que el camino esté por encima del terreno */
 }
@@ -68,7 +68,7 @@
   max-height: 35px;
   border-radius: 50%;
   animation: move 5s linear infinite;
-  z-index: 1000;
+  z-index: 10;
 }
 
 /* Efectos hover solo para dispositivos que soportan hover (principalmente PC) */
@@ -114,7 +114,7 @@
 }
 
 @media (max-height: 450px) {
-  .casilla-mapa, .globo {
+  .casilla-mapa, .globo, .globo-explotado {
     width: 18px;
     height: 18px;
   }
@@ -124,8 +124,8 @@
   }
 
   .mono, .globo, .globo-explotado{
-    max-width: 25px;
-    max-height: 25px;
+    max-width: 35px;
+    max-height: 35px;
   }
 }
 
@@ -137,8 +137,8 @@
   }
 
   .mono, .globo-explotado{
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 30px;
+    max-height: 30px;
   }
 
 }

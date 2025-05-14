@@ -1,5 +1,5 @@
 // Import the images directly
-import monoBasico from '../assets/images/monkeys/monoBasico.png'
+import monoBasico from '../assets/images/monkeys/monoBasico.webp'
 import monoArco from '../assets/images/monkeys/monoArco.png'
 import monoFusil from '../assets/images/monkeys/monoFusil.png'
 import monoArtificiero from '../assets/images/monkeys/monoArtificiero.png'

@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/tutorial/protip.css'; // Asegúrate de tener un archivo CSS para los estilos
 
 // Imagenes
-import proTipBombilla from '../../assets/images/tutorial/proTip.png';
+import proTipBombilla from '../../assets/images/tutorial/proTip.webp';
 
 
 /**

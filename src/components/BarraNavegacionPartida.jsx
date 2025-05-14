@@ -13,7 +13,7 @@ import btnReiniciar from '../assets/images/botones/btn-reiniciar.png'
 import btnPausar from '../assets/images/botones/btn-pausa.png'
 import btnReanudar from '../assets/images/botones/btn-play.png'
 import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
-import btnAcelerar from '../assets/images/botones/btn-acelerar.png'
+import btnAcelerar from '../assets/images/botones/btn-acelerar.webp'
 
 function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reiniciarJuego, abrirAjustes, agarrarMono} ){
 

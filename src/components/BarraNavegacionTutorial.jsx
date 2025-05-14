@@ -7,14 +7,6 @@ import { BarraNavegacion } from "./BarraNavegacion";
 import { BarraMonos } from "./BarraMonos";
 import { MonoBarraNavegador } from "./MonoBarraNavegador";
 
-// Imágenes de los botonos
-import btnAjustes from '../assets/images/botones/btn-ajustes.png'
-import btnReiniciar from '../assets/images/botones/btn-reiniciar.png'
-import btnPausar from '../assets/images/botones/btn-pausa.png'
-import btnReanudar from '../assets/images/botones/btn-play.png'
-import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
-import btnAcelerar from '../assets/images/botones/btn-acelerar.png'
-
 function BarraNavegacionPartida( {vidas, monedas, agarrarMono, informacion} ){
 
     return(

@@ -286,12 +286,6 @@ body {
       height: 45px;
       padding: 0 5px;
     }
-    
-    /* Ajustar tamaño de monos y globos */
-    .mono, .globo-explotado {
-      max-width: 28px;
-      max-height: 28px;
-    }
   }
   
   .confirmacion-container {

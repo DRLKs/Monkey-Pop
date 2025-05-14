@@ -361,7 +361,6 @@ body {
     }
 
     .info-container{
-        flex-direction: column;
         width: auto;
     }
 
@@ -519,6 +518,7 @@ body {
 
     .info-container{
         font-size: 13px;
+        flex-direction: column;
     }
 }
 

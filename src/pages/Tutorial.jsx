@@ -18,10 +18,10 @@ import { ESTADO_CASILLA, MONOS, PARTIDA, INFORMACION_TUTORIAL } from '../utils/c
 import { gameReducer, habilitadoParaJugar, obtenerCaminoMapa} from '../utils/funciones';
 
 // Imágenes para el tutorial
-import monoAncianoPrincipio from '../assets/images/tutorial/monoAncianoPrincipio.png'
-import monoAncianoApunta from '../assets/images/tutorial/monoAncianoApunta.png';
-import monoAncianoFinal from '../assets/images/tutorial/monoAncianoFinal.png';
-import globoMalvado from '../assets/images/tutorial/globoMalvado.png';
+import monoAncianoPrincipio from '../assets/images/tutorial/monoAncianoPrincipio.webp'
+import monoAncianoApunta from '../assets/images/tutorial/monoAncianoApunta.webp';
+import monoAncianoFinal from '../assets/images/tutorial/monoAncianoFinal.webp';
+import globoMalvado from '../assets/images/tutorial/globoMalvado.webp';
 import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.png' 
 
 // Funciones para el tutorial

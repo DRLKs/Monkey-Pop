@@ -105,7 +105,6 @@ export const UIProvider = ({children}) => {
             });
         }
         
-        console.log(`Música cambiada a: ${newMusicSrc}`);
     };
 
     // Valores y funciones para compartir en el contexto
