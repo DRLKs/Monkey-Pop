@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 2000;
   pointer-events: none;
 }
 
@@ -21,7 +21,7 @@
   right: 0; /* Añadido right:0 para ocupar todo el ancho */
   margin: 0 auto; /* Centrado automático */
   width: 100%;
-  z-index: 100;
+  z-index: 2000;
   pointer-events: none;
   display: flex;
   justify-content: center; /* Centrar el contenido horizontalmente */
@@ -72,7 +72,7 @@
   margin-bottom: 6px; /* Reduced bottom margin */
   font-size: 26px; /* Increased font size */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-  font-family: 'Bangers', 'Comic Sans MS', cursive;
+  font-family: 'Bangers', 'Comic Sans MS';
   letter-spacing: 1px;
 }
 
@@ -112,7 +112,7 @@
   transition: background-color 0.3s, transform 0.2s;
   margin-top: 8px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  font-family: 'Bangers', 'Comic Sans MS', cursive;
+  font-family: 'Bangers', 'Comic Sans MS';
   letter-spacing: 0.5px; /* Reduced from 1px for tighter text */
   max-width: 170px; /* Add maximum width */
   width: fit-content; /* Make button only as wide as its content */

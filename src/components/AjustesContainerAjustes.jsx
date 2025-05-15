@@ -10,20 +10,20 @@ import '../styles/botonSonido.css';
 
 
 function AjustesContainerAjustes() {
-    
+
     // Cargar configuración inicial
     const [configuracionAjustes] = useState(() => cargarConfiguracion());
     const [volumen, setVolumen] = useState(configuracionAjustes.volumen || 50);
     const [efectos, setEfectos] = useState(configuracionAjustes.efectos === null ? true : configuracionAjustes.efectos);
     const [lenguaje, setLenguaje] = useState(configuracionAjustes.lenguaje || "es");
 
-    const [ isFirstRender, setIsFirstRender ] = useState(true);
-    const [ configuracionGuardada, setConfiguracionGuardada] = useState(false);
-    
+    const [isFirstRender, setIsFirstRender] = useState(true);
+    const [configuracionGuardada, setConfiguracionGuardada] = useState(false);
+
     const handleVolumenChange = (e) => {
         setVolumen(e.target.value);
     };
-    
+
     const handleEfectosChange = (e) => {
         setEfectos(e.target.checked);
     };
@@ -31,14 +31,14 @@ function AjustesContainerAjustes() {
     const handleLenguajeChange = (e) => {
         setLenguaje(e.target.value);
     };
-    
+
     /**
      * Función que guarda la configuración actual en localStorage y emite un evento personalizado.
      */
     const guardar = (e) => {
         // Prevenir comportamiento predeterminado del formulario
         e.preventDefault();
-        
+
         // Guardar valores actuales en localStorage
         guardarConfiguracion(volumen, efectos, lenguaje);
         const confGuardada = configuracionGuardada;
@@ -54,13 +54,13 @@ function AjustesContainerAjustes() {
         console.log("Configuración guardada correctamente");
         console.log(`Guardado: Volumen: ${volumen}, Efectos: ${efectos}, Lenguaje: ${lenguaje}`);
         setConfiguracionGuardada(true);
-        
+
         // Emitir evento personalizado para notificar a UIContext
         const evento = new CustomEvent('configuracionActualizada', {
             detail: { volumen, efectos }
         });
         window.dispatchEvent(evento);
-        
+
     }, [configuracionGuardada]);
 
     return (
@@ -70,36 +70,37 @@ function AjustesContainerAjustes() {
             <form id="controlForm" onSubmit={guardar}>
                 <div id="control-volumen">
                     <label htmlFor="volumen">Volumen: </label>
-                    <input 
-                        type="range" 
-                        id="volumen" 
-                        min="0" 
-                        max="100" 
-                        value={volumen} 
-                        onChange={handleVolumenChange} 
+                    <input
+                        type="range"
+                        id="volumen"
+                        min="0"
+                        max="100"
+                        value={volumen}
+                        onChange={handleVolumenChange}
                     />
-                </div>                <div className="ajuste-item">
-                    <div className="toggle-container">
-                        <button 
-                            type="button"
-                            id="efectos" 
-                            className="boton-sonido"
-                            onClick={() => setEfectos(!efectos)}
-                        >
-                            <img 
-                                src={efectos ? desilenciado : silenciado} 
-                                alt={efectos ? "Sonido activado" : "Sonido silenciado"} 
-                                className="icono-sonido"
-                            />
-                        </button>
-                    </div>
+                </div>
+
+                <div className="toggle-container">
+                    <label htmlFor="mute on/off">Mute on/off: </label>
+                    <button
+                        type="button"
+                        id="efectos"
+                        className="boton-sonido"
+                        onClick={() => setEfectos(!efectos)}
+                    >
+                        <img
+                            src={efectos ? desilenciado : silenciado}
+                            alt={efectos ? "Sonido activado" : "Sonido silenciado"}
+                            className="icono-sonido"
+                        />
+                    </button>
                 </div>
 
                 <div id="control-lenguaje">
-                    <label htmlFor="lenguaje">Lenguaje: </label>
-                    <select 
-                        id="lenguaje" 
-                        name="lenguaje" 
+                    <label htmlFor="lenguaje">Idioma: </label>
+                    <select
+                        id="lenguaje"
+                        name="lenguaje"
                         value={lenguaje}
                         onChange={handleLenguajeChange}
                     >
@@ -112,7 +113,7 @@ function AjustesContainerAjustes() {
 
                 <button id="boton-submit" type="submit">Guardar Ajustes</button>
 
-                { configuracionGuardada && (
+                {configuracionGuardada && (
                     <div id='mensaje-guardado-correctamente'>
                         <label> Guardado correctamente </label>
                     </div>

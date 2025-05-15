@@ -11,7 +11,7 @@
     --sombra-texto: 2px 2px 4px rgba(0, 0, 0, 0.6);
     --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
     --borde-radio: 20px;
-    --fuente-principal: 'Bangers', 'Comic Sans MS', cursive;
+    --fuente-principal: 'Bangers', 'Comic Sans MS';
     --fuente-parrafos: 'Nunito', sans-serif;
 }
 
