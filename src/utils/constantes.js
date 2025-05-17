@@ -204,16 +204,16 @@ export const INFORMACION_TUTORIAL = {
     texto: "Bienvenido al tutorial de Monkey Pop"
   },
   1: {
-    texto: "Aquí se indican las vidas y las monedas que tienes"
+    texto: "Aquí se Muestra tus vidas y monedas"
   },
   2: {
-    texto: "Las monedas se obtienen al destruir los globos"
+    texto: "Obten monedas al destruir los globos"
   },
   3: {
-    texto: "Con las monedas puedes comprar más monos o mejorar los que ya tienes"
+    texto: "Compra o mejora monos con monedas"
   },
   4: {
-    texto: "Juega con libertad, coloca los monos donde quieras"
+    texto: "Sobrevive a las oleadas de globos"
   }
 
 }

@@ -12,7 +12,7 @@
 }
 
 body {
-    padding-top: 60px; /* Ajustable según el tamaño de la navbar */
+    padding-top: 60px;
 }
 
 /* Ajuste para la barra de navegación */
@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* Evitar que los elementos salten de línea */
+    flex-wrap: nowrap;
     background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
     border-bottom: 2px solid var(--color-dorado);
     padding: 5px 10px;
@@ -63,7 +63,7 @@ body {
     letter-spacing: 1px;
     font-weight: bold;
     white-space: nowrap;
-    flex: 0 0 auto; /* No crecer, no encoger, tamaño automático */
+    flex: 0 0 auto;
 }
 
 .nav-button {
@@ -101,22 +101,21 @@ body {
     border: 1px solid var(--color-dorado);
     border-radius: 15px;
     padding: 4px 8px;
-    margin: 0 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.botones-container{
+.botones-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    margin: auto 0; /* Cambiado a auto para centrado vertical */
+    margin: auto 0;
     height: 100%;
-    min-height: 100%; /* Asegura altura mínima */
-    padding: 10px 0; /* Espaciado vertical */
+    min-height: 100%;
+    padding: 10px 0;
 }
 
-.botones-container button,.icono-boton {
+.botones-container button, .icono-boton {
     width: 30px;
     height: 30px;
 }
@@ -130,7 +129,7 @@ body {
 }
 
 /* Estilos para las monedas */
-.monedas {
+.monedas, .vidas {
     display: flex;
     align-items: center;
     color: var(--color-dorado);
@@ -140,9 +139,6 @@ body {
     font-family: var(--fuente-principal);
     letter-spacing: 1px;
     white-space: nowrap;
-}
-
-.monedas, .vidas {
     width: 20px;
     height: 20px;
     object-fit: contain;
@@ -150,19 +146,7 @@ body {
     filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.5));
 }
 
-.vidas {
-    display: flex;
-    align-items: center;
-    color: var(--color-dorado);
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-shadow: var(--sombra-texto);
-    font-family: var(--fuente-principal);
-    letter-spacing: 1px;
-    white-space: nowrap;
-}
-
-.monkey.disabled{
+.monkey.disabled {
     filter: grayscale(70%) opacity(70%);
     cursor: not-allowed;
     pointer-events: none;
@@ -173,9 +157,9 @@ body {
     gap: 9px;
     align-items: center;
     justify-content: center;
-    flex: 1 1 auto; /* Puede crecer y encoger según espacio disponible */
-    min-width: 0; /* Permite que se comprima si es necesario */
-    overflow-x: auto; /* Permite scroll horizontal si hay muchos monos */
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
     margin: 0 10px;
 }
 
@@ -197,8 +181,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-
 
 .monkey::before {
     content: "";
@@ -227,12 +209,12 @@ body {
     width: 35px;
     height: 35px;
     filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
-    -webkit-touch-callout: none; /* Safari */
-    -webkit-user-select: none; /* Safari, Chrome */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Estándar */
-    touch-action: manipulation; /* Mejora interacción táctil */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
 }
 
 /* Estilo del marcador de la ronda */
@@ -248,9 +230,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-  }
+}
 
-  .info-tutorial {
+.info-tutorial {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,14 +244,14 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    max-width: 400px; /* Ancho máximo fijo */
-    white-space: normal; /* Permite saltos de línea */
-    text-align: center; /* Centra el texto */
-    word-wrap: break-word; /* Rompe palabras largas si es necesario */
-    line-height: 1.2; /* Ajusta el espaciado entre líneas */
-  }
-  
-  .info-tutorial::before {
+    max-width: 400px;
+    white-space: normal;
+    text-align: center;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+
+.info-tutorial::before, .info-ronda::before {
     content: "";
     position: absolute;
     top: 0;
@@ -278,20 +260,9 @@ body {
     height: 50%;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
     border-radius: 8px 8px 0 0;
-  }
-  
-  .info-ronda::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent);
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .info-ronda h2 {
+}
+
+.info-ronda h2 {
     margin: 0;
     color: #ffd700;
     font-size: 1.4rem;
@@ -300,18 +271,18 @@ body {
     z-index: 1;
     font-family: 'Bangers', 'Comic Sans MS', cursive;
     letter-spacing: 1px;
-  }
-  
-  /* Animación cuando cambia la ronda */
-  @keyframes roundChange {
+}
+
+/* Animación cuando cambia la ronda */
+@keyframes roundChange {
     0% { transform: scale(1); }
     50% { transform: scale(1.15); }
     100% { transform: scale(1); }
-  }
-  
-  .info-ronda.round-change h2 {
+}
+
+.info-ronda.round-change h2 {
     animation: roundChange 0.5s ease-in-out;
-  }
+}
 
 .monkey-count {
     color: var(--color-dorado);
@@ -335,50 +306,44 @@ body {
     animation: pulsate 2s infinite;
 }
 
-
-
 /* RESPONSIVE */
+/* Media queries optimizados */
 @media (max-width: 1200px) {
     .navbar {
-        flex-wrap: nowrap; /* Mantener en una línea incluso en pantallas pequeñas */
+        flex-wrap: nowrap;
         scrollbar-gutter: 0px;
     }
     
     .monkey-container {
-        flex: 1 1 auto; /* Mantiene la capacidad de crecer/encoger */
+        flex: 1 1 auto;
         padding: 5px 0; 
         gap: 2px;
     }
+    
     .info-ronda {
         padding: 4px 8px;
         margin: 0 5px;
     }
-
+    
     .nav-button, #back-button {
         padding: 4px 8px;
         font-size: 0.85rem;
         width: auto;
     }
-
-    .info-container{
+    
+    .info-container {
         width: auto;
     }
-
+    
     .vidas-container, .monedas-container {
         padding: 2px 2px;
         width: auto;
     }
-
+    
     .botones-container {
-        display: wrap;
-        justify-content: center;
-        align-items: center;
         gap: 3px;
-        margin: auto 0; /* Cambiado a auto para centrado vertical */
-        height: 100%;
-        min-height: 100%; /* Asegura altura mínima */
     }
-
+    
     .info-tutorial {
         width: 200px;
         max-width: 200px;
@@ -405,61 +370,44 @@ body {
         height: 30px;
     }
     
-    .nav-button, #back-button {
-        padding: 6px 10px;
-        font-size: 0.85rem;
-    }
-    
     .botones-container {
-        display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
         gap: 3px;
         margin: 2px 0;
         padding: 1px 0;
         width: 15%;
     }
     
-
     .botones-container .icono-boton {
         width: 20px;
         height: 20px;
     }
-
-
-    .info-ronda h2{
+    
+    .info-ronda h2 {
         font-size: 0.7rem;
         padding: 4px 7px;
     }
-
-    .info-container{
-        margin: auto;
+    
+    .info-container {
         padding: 0px 0px;
     }
-
-    .info-container img{
+    
+    .info-container img {
         width: 15px;
         height: 15px;
     }
-
+    
     .info-tutorial {
         width: 190px;
         max-width: 200px;
         padding: 6px 10px;
-        font-size: 0.7rem;
+        font-size: 0.95rem;
     }
-    
 }
 
-@media (max-width: 700px) {
+@media (max-width: 740px) {
     body {
         padding-top: 120px;
-    }
-    
-    .nav-button, #back-button {
-        padding: 6px 10px;
-        font-size: 0.85rem;
     }
     
     .monkey img {
@@ -476,8 +424,8 @@ body {
     .monkey-count {
         font-size: 0.7rem;
     }
-
-    h2{
+    
+    h2 {
         font-size: 0.1rem;
     }
     
@@ -485,40 +433,56 @@ body {
         margin: 0px;
     }
     
-    .boton-barraNavegacion img{
+    .boton-barraNavegacion img {
         width: 24px;
         height: 24px;
     }
-
-    .info-ronda{
+    
+    .info-ronda {
         padding: 1px 3px;
         margin: 0 3px;
     }
-
-    .info-ronda h2{
+    
+    .info-ronda h2 {
         font-size: 1.0rem;
     }
-
-    .vidas-container{
+    
+    .vidas-container {
         padding: 0px 0px;
         margin: 0px;
     }
-
-    .vidas{
+    
+    .vidas {
         margin: 1px;
     }
-
+    
     .info-tutorial {
-        width: 155px;
+        width: 175px;
         max-width: 180px;
         padding: 2px 4px;
-        font-size: 0.65rem;
+        font-size: 1rem;
         margin: 0 5px;
     }
-
-    .info-container{
+    
+    .info-container {
         font-size: 13px;
         flex-direction: column;
+    }
+}
+
+@media (max-width: 650px) {
+    .info-tutorial {
+        width: 155px;
+        font-size: 1rem;
+    }
+    
+    .monkey img {
+        width: 21px;
+        height: 21px;
+    }
+    
+    .navbar {
+        padding: 1px;
     }
 }
 
@@ -527,19 +491,11 @@ body {
         padding-top: 150px;
     }
     
-    .navbar {
-        padding: 5px;
-    }
-    
     .info-container {
         flex-direction: row;
         width: 100%;
         justify-content: space-around;
         flex-wrap: wrap;
-    }
-    
-    .monedas, .vidas {
-        font-size: 0.85rem;
     }
     
     .monkey {
@@ -558,30 +514,17 @@ body {
         font-size: 0.8rem;
         margin: 3px;
     }
-
-    .info-ronda h2{
+    
+    .info-ronda h2 {
         font-size: 1.2rem;
     }
-
+    
     .info-tutorial {
         width: 150px;
         max-width: 150px;
         padding: 3px 6px;
         font-size: 0.6rem;
         margin: 0 3px;
-    }
-}
-
-@media (max-width: 650px) {
-    
-    .monkey img {
-        width: 21px;
-        height: 21px;
-    }
-
-
-    .navbar {
-        padding: 1px;
     }
 }
 
