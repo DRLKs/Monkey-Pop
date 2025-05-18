@@ -484,6 +484,11 @@ body {
     .navbar {
         padding: 1px;
     }
+
+    .info-ronda{
+        font-size: 0.8rem;
+        padding: 0px 0px;
+    }
 }
 
 @media (max-width: 480px) {

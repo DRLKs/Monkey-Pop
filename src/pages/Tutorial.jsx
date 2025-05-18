@@ -35,7 +35,7 @@ import '../styles/tutorial.css';
 
 function Tutorial() {
   // Estados del juego:
-  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonal);
+  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});

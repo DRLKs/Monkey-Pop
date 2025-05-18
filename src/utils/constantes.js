@@ -146,7 +146,7 @@ export const PARTIDA = {
   /**
    * Tiempo entre rondas en milisegundos
    */
-  tiempoEntreRondas: 2500,      
+  tiempoEntreRondas: 1500,      
 
   /**
    * Monedas que da un globo al ser destruido
@@ -182,8 +182,32 @@ export const CAMINO_DIAGONAL_MOVIL = [
   { x: 17, y: 8 },
   { x: 18, y: 9 },
   { x: 19, y: 9 }
-  // Termina en la esquina inferior derecha (19,9)
 ];
+
+/**
+ * Mapa movil camino diagonal
+ * 
+ * 0 = Casilla deafult, cesped
+ * 1 = Casilla de camino
+ * 2 = Casilla de agua
+ * 3, 4 = Casilla entre camino y cesped
+ * 5 = Flores azules
+ * 6, 7 = Casilla entre agua y cesped
+ * 8 = Folres rojas
+ */
+export const MAPA_CAMINO_DIAGONAL_MOVIL = [
+  [1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2, 2, 2],
+  [3, 1, 1, 1, 1, 4, 0, 0, 0, 0, 8, 0, 0, 0, 5, 0, 0, 7, 2, 2],
+  [0, 0, 3, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2],
+  [0, 0, 0, 0, 3, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 5, 0, 0, 0, 2],
+  [0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0, 0, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 4, 0, 0, 0, 0, 0, 0],
+  [6, 0, 5, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 4, 0, 0, 0, 0],
+  [2, 6, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 4, 0, 0],
+  [2, 2, 6, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 3, 1, 1, 1, 1, 4],
+  [2, 2, 2, 6, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 3, 1, 1, 1]
+];
+
 
 export const MAPA_MOVIL = {
   ancho_mapa: 20,

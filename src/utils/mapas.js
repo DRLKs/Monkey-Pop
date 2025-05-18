@@ -2,7 +2,7 @@
 // Cada mapa es un array de 450 elementos (30x15)
 // Valores posibles: 'default' (verde), 'agua', 'camino', 'selected'
 
-import { PARTIDA, MAPA_MOVIL, CAMINO_DIAGONAL_MOVIL } from "./constantes";
+import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA } from "./constantes";
 
 // Mapa con camino horizontal y agua en los bordes superior e inferior
 export const mapaCaminoHorizontal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
@@ -53,15 +53,15 @@ export const mapaCaminoDiagonalMejorado = Array(PARTIDA.ancho_mapa * PARTIDA.lar
   if (x >= 1 && x <= 25 && y >= 2 && y <= 14 && (x - 1) % 2 === 0 && (x - 1) / 2 === y - 2) return 'tierra_cesped2';
 
   // Agua en las esquinas (igual que mapaCaminoDiagonal)
-  if (y > 3 && y - 4 > x) return 'agua';
-  if (x > 17 && x > y + 17) return 'agua';
+  if (y > 3 && y - 4 > x) return ESTADO_CASILLA.AGUA;
+  if (x > 17 && x > y + 17) return ESTADO_CASILLA.AGUA;
 
   // Camino diagonal ajustado para 30x15 (igual que mapaCaminoDiagonal)
-  if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return 'camino';
+  if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return ESTADO_CASILLA.CAMINO;
 
   if((x == 3 && y == 5) || (x == 9 && y == 9) || (x == 19 && y == 13)
-    || (x == 17 && y == 6) || (x == 13 && y == 2) || (x == 12 && y == 3)) return 'florAzul';
-  if((x == 4 && y == 6) || (x == 11 && y == 2) || (x == 16 && y == 5) || (x == 18 && y == 14) || (x == 10 && y == 10)) return 'florRoja';
+    || (x == 17 && y == 6) || (x == 13 && y == 2) || (x == 12 && y == 3)) return ESTADO_CASILLA.FLORAZUL;
+  if((x == 4 && y == 6) || (x == 11 && y == 2) || (x == 16 && y == 5) || (x == 18 && y == 14) || (x == 10 && y == 10)) return ESTADO_CASILLA.FLORROJA;
 
 
   return casilla;
@@ -69,71 +69,54 @@ export const mapaCaminoDiagonalMejorado = Array(PARTIDA.ancho_mapa * PARTIDA.lar
 
 /**
  * Para mejorar la jugabilidad en dispositivos móviles, se ajusta el mapa diagonal
- * En este caso el mapa será más pequeño y las casillas serán más grande por lo tanto
+ * con casillas de transición para mayor integridad visual
  */
 export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).fill('default').map((casilla, index) => {
   const x = index % MAPA_MOVIL.ancho_mapa;
   const y = Math.floor(index / MAPA_MOVIL.ancho_mapa);
   
-  // Agua en las esquinas superiores izquierdas e inferiores derechas
-  if (y > 3 && y - 2 > x) return 'agua';
-  if (x > 15 && x > y + 14) return 'agua';
+  // Usar la matriz para determinar el tipo de casilla
+  // Estás usando MAPA_CAMINO_DIAGONAL_MOVIL que sí es una matriz bidimensional
+  const valorCasilla = MAPA_CAMINO_DIAGONAL_MOVIL[y] && MAPA_CAMINO_DIAGONAL_MOVIL[y][x];
   
-  // Usar el camino definido en CAMINO_DIAGONAL_MOVIL
-  for (const punto of CAMINO_DIAGONAL_MOVIL) {
-    if (punto.x === x && punto.y === y) return 'camino';
-    
-    // También hacemos el camino un poco más ancho (1 casilla adicional de ancho)
-    if (punto.x === x && punto.y === y - 1) return 'camino';
+  // Si es cesped, default (0), no se hace nada
+  if( valorCasilla === 0 ){
+
+  }
+
+  // Si es camino (1), devuelve camino
+  else if (valorCasilla === 1) {
+    return ESTADO_CASILLA.CAMINO;
   }
   
-  return casilla;
-});
+  // Si es agua (2), devuelve agua
+  else if (valorCasilla === 2) {
+    return ESTADO_CASILLA.AGUA;
+  }
 
-// Mapa con río horizontal y camino vertical
-export const mapaRio = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
-  const x = index % PARTIDA.ancho_mapa;
-  const y = Math.floor(index / PARTIDA.ancho_mapa);
-  
-  // Crear río horizontal (ajustado para nuevas dimensiones)
-  if (y === 3) return 'agua';
-  if (y === 4) return 'agua';
-  if (y === 5) return 'agua';
+  else if (valorCasilla === 3) {
+    return ESTADO_CASILLA.TIERRA_CESPED2;
+  }
 
-  if (y === 9) return 'agua';
-  if (y === 10) return 'agua';
-  if (y === 11) return 'agua';
-  
-  // Crear camino horizontal
-  if (y == 7) return 'camino';
-  
-  // Puentes sobre el río
-  if ((x === 15 && y === 5) || (x === 15 && y === 10)) return 'camino';
-  
-  return casilla;
-});
+  else if (valorCasilla === 4){
+    return ESTADO_CASILLA.TIERRA_CESPED1;
+  }
 
-// Mapa con lago en el centro
-export const mapaLago = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
-  const x = index % PARTIDA.ancho_mapa;
-  const y = Math.floor(index / PARTIDA.ancho_mapa);
+  else if ( valorCasilla === 5){
+    return ESTADO_CASILLA.FLORAZUL;
+  }
   
-  // Centro del lago
-  const centroX = PARTIDA.ancho_mapa / 2;
-  const centroY = PARTIDA.largo_mapa / 2;
-  
-  // Calcula distancia al centro
-  const distancia = Math.sqrt(Math.pow(x - centroX, 2) + Math.pow(y - centroY, 2));
-  
-  // Crear lago circular (ajustado para dimensiones 30x15)
-  if (distancia < 6) return 'agua';
-  
-  // Caminos alrededor del lago
-  if (distancia < 8) return 'camino';
-  
-  // Camino horizontal
-  if (y === 4) return 'camino';
-    
+  else if ( valorCasilla == 6 ){
+    return ESTADO_CASILLA.AGUA_CESPED1;
+  }
+
+  else if ( valorCasilla === 7 ){
+    return ESTADO_CASILLA.AGUA_CESPED2;
+  }
+
+  else if ( valorCasilla === 8 ){
+    return ESTADO_CASILLA.FLORROJA;
+  }
   return casilla;
 });
 
@@ -180,8 +163,6 @@ export const mapaArchipiélago = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).
 
 // Exportar todos los mapas en un objeto para fácil acceso
 export const mapas = {
-  rio: mapaRio,
-  lago: mapaLago,
   isla: mapaIsla,
   archipielago: mapaArchipiélago,
   horizontal: mapaCaminoHorizontal,
