@@ -28,7 +28,7 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 function Juego() {
-  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonal);
+  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -134,7 +134,11 @@ function Juego() {
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
     setMonoVerAjustes(null);  // Deselecciona el mono 
-    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO ) return;
+    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO 
+        || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED2
+        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED2
+        || estadoCasillaMarcada === ESTADO_CASILLA.FLORAZUL || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJA
+    ) return;
 
     const monoExistente = gameState.monosColocados.find(mono => mono.index === index);  // En la casilla pinchada, hay un mono
     if (monoExistente) {

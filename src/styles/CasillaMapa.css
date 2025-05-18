@@ -21,7 +21,7 @@
   /*background-color: var(--color-terreno);
   /*background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)); */
 
-  background-image: url('../assets/images/mapa/cesped.webp');
+  background-image: url('../assets/images/mapa/cesped2.jpg');
   cursor: pointer;
 }
 
@@ -35,8 +35,47 @@
   background-size: 10px 10px;
   animation: mover-agua 3s linear infinite;*/
 
-  background-image: url('../assets/images/mapa/agua.webp');
+  background-image: url('../assets/images/mapa/agua3.jpg');
+  background-size: cover;
+  background-position: center;
   z-index: 5; /* Para que el agua esté por debajo del terreno */
+}
+
+.casilla-agua_cesped1{
+ background-image: url('../assets/images/mapa/aguaCesped3.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(180deg);
+  z-index: 5;
+}
+.casilla-agua_cesped2{
+  background-image: url('../assets/images/mapa/aguaCesped3.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.casilla-tierra_cesped1{
+  background-image: url('../assets/images/mapa/cespedTierra5.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(180deg);
+}
+.casilla-tierra_cesped2{
+  background-image: url('../assets/images/mapa/cespedTierra5.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+}
+
+.casilla-florRoja{
+  background-image: url('../assets/images/mapa/cespedyflor.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.casilla-florAzul{
+  background-image: url('../assets/images/mapa/cespedyflor3.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 @keyframes mover-agua {
@@ -51,7 +90,7 @@
                     transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, 
                     transparent 75%, transparent); */
 
-  background-image: url('../assets/images/mapa/camino.webp');
+  background-image: url('../assets/images/mapa/camino2.png');
 
   z-index: 8; /* Para que el camino esté por encima del terreno */
 }

@@ -12,11 +12,22 @@ import monoLaser from '../assets/images/monkeys/monoLaser.png'
  * @property {string} DEFAULT - Casilla por defecto, verde
  * @property {string} AGUA - Casilla de agua
  * @property {string} CAMINO - Casilla de camino
+ * @property {string} AGUA_CESPED1 - Casilla de agua con césped 1
+ * @property {string} AGUA_CESPED2 - Casilla de agua con césped 2
+ * @property {string} TIERRA_CESPED1 - Casilla de tierra con césped 1
+ * @property {string} TIERRA_CESPED2 - Casilla de tierra con césped 2
+ * 
  */
 export const ESTADO_CASILLA = {
     DEFAULT: 'default',
     AGUA: 'agua',
-    CAMINO: 'camino'
+    CAMINO: 'camino',
+    AGUA_CESPED1: 'agua_cesped1',
+    AGUA_CESPED2: 'agua_cesped2',
+    TIERRA_CESPED1: 'tierra_cesped1',
+    TIERRA_CESPED2: 'tierra_cesped2',
+    FLORAZUL: 'florAzul',
+    FLORROJA: 'florRoja',
 }
 
 /**

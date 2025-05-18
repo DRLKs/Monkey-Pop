@@ -33,6 +33,40 @@ export const mapaCaminoDiagonal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa)
   return casilla;
 });
 
+//Mapa con camino diagonal intentando mejorar como se ve. Añadiendo más tipos de casillas
+export const mapaCaminoDiagonalMejorado = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % PARTIDA.ancho_mapa;
+  const y = Math.floor(index / PARTIDA.ancho_mapa);
+
+  // Diagonal (0,4) a (10,14) Agua-Cesped1
+  if (x >= 0 && x <= 10 && y >= 4 && y <= 14 && x === y - 4) return 'agua_cesped1';
+
+  // Diagonal (17,0) a (29,12) Agua-Cesped2
+  if (x >= 17 && x <= 29 && y >= 0 && y <= 12 && x === y + 17) return 'agua_cesped2';
+
+  // Diagonal (2,0) a (28,13) Tierra-Cesped1 (2x, 1y)
+  // (x, y) = (2 + 2*n, 0 + n) para n = 0..13
+  if (x >= 2 && x <= 28 && y >= 0 && y <= 13 && (x - 2) % 2 === 0 && (x - 2) / 2 === y) return 'tierra_cesped1';
+
+  // Diagonal (1,2) a (25,14) Tierra-Cesped2 (2x, 1y)
+  // (x, y) = (1 + 2*n, 2 + n) para n = 0..12
+  if (x >= 1 && x <= 25 && y >= 2 && y <= 14 && (x - 1) % 2 === 0 && (x - 1) / 2 === y - 2) return 'tierra_cesped2';
+
+  // Agua en las esquinas (igual que mapaCaminoDiagonal)
+  if (y > 3 && y - 4 > x) return 'agua';
+  if (x > 17 && x > y + 17) return 'agua';
+
+  // Camino diagonal ajustado para 30x15 (igual que mapaCaminoDiagonal)
+  if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return 'camino';
+
+  if((x == 3 && y == 5) || (x == 9 && y == 9) || (x == 19 && y == 13)
+    || (x == 17 && y == 6) || (x == 13 && y == 2) || (x == 12 && y == 3)) return 'florAzul';
+  if((x == 4 && y == 6) || (x == 11 && y == 2) || (x == 16 && y == 5) || (x == 18 && y == 14) || (x == 10 && y == 10)) return 'florRoja';
+
+
+  return casilla;
+});
+
 /**
  * Para mejorar la jugabilidad en dispositivos móviles, se ajusta el mapa diagonal
  * En este caso el mapa será más pequeño y las casillas serán más grande por lo tanto
@@ -152,6 +186,7 @@ export const mapas = {
   archipielago: mapaArchipiélago,
   horizontal: mapaCaminoHorizontal,
   diagonal: mapaCaminoDiagonal,
+  diagonalMejorado: mapaCaminoDiagonalMejorado,
   diagonalMovil: mapaCaminoDiagonalMovil
 };
 
