@@ -9,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 200;
   pointer-events: none;
 }
 
@@ -21,7 +21,7 @@
   right: 0; /* Añadido right:0 para ocupar todo el ancho */
   margin: 0 auto; /* Centrado automático */
   width: 100%;
-  z-index: 2000;
+  z-index: 80;
   pointer-events: none;
   display: flex;
   justify-content: center; /* Centrar el contenido horizontalmente */

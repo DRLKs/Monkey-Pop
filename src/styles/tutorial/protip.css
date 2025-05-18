@@ -1,5 +1,7 @@
 /* Por defecto, ocultamos el componente */
-
+.pro-tip-container {
+  display: none; /* Ocultar por defecto */
+}
 
 /* Solo mostramos el componente en dispositivos que soportan hover (principalmente PCs) */
 @media (hover: hover) {

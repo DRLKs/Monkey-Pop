@@ -263,7 +263,7 @@ body {
 }
 
 /* Media queries para dispositivos móviles */
-@media (max-width: 900px) {
+@media (max-width: 935px) {
   /* Ajustes para modo landscape (horizontal) */
   .game-container {
     grid-template-columns: repeat(20, 1fr);
