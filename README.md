@@ -1,7 +1,7 @@
-# GRUPO A - PROYECTO: MONKEY POP
+![Título](./src/assets/images/tituloJuego.webp)
 
 ## DESCRIPCIÓN
-Monkey Pop es un videojuego shooter de estrategia, inspirado en el juego Bloons. El objetivo es defender una base de los globos que avanzan por un camino específico, usando múltiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
+Somos el grupo A y Monkey Pop es un videojuego shooter de estrategia, inspirado en el juego Bloons. El objetivo es defender una base de los globos que avanzan por un camino específico, usando múltiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
 
 Cada globo tiene características especiales, como resistencia o velocidad. Además, el personaje puede recibir mejoras, lo que añade un nivel adicional de estrategia al juego.
 
@@ -49,6 +49,23 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 ## INSTALACIÓN Y EJECUCIÓN 
 1. Clonar el repositorio:
    ```sh
-   git clone https://github.com/DRLKs/ProyectoIntefacesDeUsuario.git
+   git clone https://github.com/DRLKs/Monkey-Pop.git
+   
+2. Moverse al directorio correspondiente:
+   ```sh
+   cd Monkey-Pop
+
+3. Instalar dependencias:
+   ```sh
+   npm install
+
+4. Cargar:
+   ```sh
+   npm run deb
+
+## Deploy
+La aplicación final está subida a GitHub pages, por tanto:
+🌐 [Monkey-Pop](drlks.github.io/Monkey-Pop/#/)  
+
 
 
