@@ -361,7 +361,7 @@
 :root[data-colorblind="deuteranopia"] {
   filter: url('#deuteranopia-filter');
 }
-
+ 
 :root[data-colorblind="tritanopia"] {
   filter: url('#tritanopia-filter');
 }

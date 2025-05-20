@@ -1,5 +1,5 @@
 /* --- Importación de Fuente (Si no está ya en :root o globalmente) --- */
-/* @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Nunito:wght@400;700&display=swap');
 
 :root {
     --color-boton-importante: #e19718;
@@ -11,7 +11,7 @@
     --sombra-texto: 2px 2px 4px rgba(0, 0, 0, 0.6);
     --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
     --borde-radio: 20px;
-    --fuente-principal: 'Bangers', 'Comic Sans MS';
+    --fuente-principal: 'Montserrat', sans-serif;
     --fuente-parrafos: 'Nunito', sans-serif;
 }
 

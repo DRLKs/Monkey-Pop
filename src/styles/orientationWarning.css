@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+:root {
+    --fuente-principal: 'Montserrat', sans-serif;
+}
+
 .orientation-overlay {
   position: fixed;
   top: 0;
@@ -33,7 +40,7 @@
 
 .orientation-container h2 {
   color: #ffd700;
-  font-family: 'Bangers', 'Comic Sans MS', cursive;
+  font-family: 'Luckiest Guy', 'Comic Sans MS', cursive;
   font-size: 24px;
   margin: 10px 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);

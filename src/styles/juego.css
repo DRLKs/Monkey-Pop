@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 :root{
     --color-boton-importante: #e19718;
-    --color-navegador: #282c34
-
+    --color-navegador: #282c34;
+    --fuente-principal: 'Montserrat', sans-serif;
 }
+
 .fondo-juego{
     position: fixed;
     top: 0;
@@ -144,7 +148,7 @@ body {
   font-size: 1.6rem;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-family: 'Bangers', 'Comic Sans MS';
+  font-family: 'Luckiest Guy', 'Comic Sans MS';
   letter-spacing: 1px;
 }
 
