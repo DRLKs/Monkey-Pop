@@ -1,9 +1,21 @@
 ![Título](./src/assets/images/tituloJuego.webp)
 
-## DESCRIPCIÓN
-Somos el grupo A y Monkey Pop es un videojuego shooter de estrategia, inspirado en el juego Bloons. El objetivo es defender una base de los globos que avanzan por un camino específico, usando múltiples torres defensivas con habilidades únicas. Los jugadores asumen el rol de un ejército de monos que deben proteger su territorio de una invasión de globos.
 
-Cada globo tiene características especiales, como resistencia o velocidad. Además, el personaje puede recibir mejoras, lo que añade un nivel adicional de estrategia al juego.
+## Índice
+
+1. [Descripción](#descripción)
+   - [Tipos de Monos](#tipos-de-monos)
+   - [Tipos de Globos](#tipos-de-globos)
+   - [Sistema de Desbloqueo de Monos](#sistema-de-desbloqueo-de-monos)
+2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+3. [Roles del Equipo](#roles-del-equipo)
+4. [Instalación y Ejecución](#instalación-y-ejecución)
+5. [🚀 Deploy](#deploy)
+
+## DESCRIPCIÓN
+Somos el grupo A y Monkey Pop es un 'Tower Defense' un videojuego de estrategia, inspirado en el juego Bloons TD Battles, donde el objetivo es defenderse de los globos que avanzan por un camino, evitando que lleguen al final de este, haciendo uso de los monos que tienes a disposición.
+
+El juego consta de aguantar todas las rondas posibles, las cuales se irán complicando exponencialmente apareciendo globos mucho más resistentes y rápidos.
 
 ### **Tipos de monos** 
 Los jugadores pueden colocar distintos tipos de monos a lo largo del camino, cada uno con habilidades especiales:
@@ -36,6 +48,7 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 - **HTML5** → Estructura del juego y elementos de la interfaz.
 - **CSS3** → Estilos y animaciones para una experiencia visual atractiva.
 - **JavaScript** → Lógica del juego, interacción, detección de colisiones y mecánicas avanzadas.
+- **React** → Estructura y lógica del juego
 
 ## ROLES DEL EQUIPO 
 | Rol  | Nombre | Correo |
@@ -65,7 +78,7 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 
 ## Deploy
 La aplicación final está subida a GitHub pages, por tanto:
-🌐 [Monkey-Pop](drlks.github.io/Monkey-Pop/#/)  
+🌐 [Monkey-Pop](https://drlks.github.io/Monkey-Pop/#/)  
 
 
 
