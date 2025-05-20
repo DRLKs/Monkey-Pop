@@ -1,5 +1,5 @@
 import React, { use, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 // Función para saber si el usuario puede jugar
 import { habilitadoParaJugar, puedeJugar } from '../utils/funciones.js'
@@ -9,6 +9,9 @@ import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.web
 
 // Importamos las imágenes del título
 import tituloJuego from '../assets/images/tituloJuego.webp';
+
+// Importamos el icono de accesibilidad
+import iconoAccesibilidad from '../assets/images/botones/icono-accesibilidad.webp';
 
 import '../styles/menu.css'
 
@@ -34,12 +37,25 @@ export function Menu() {
         <>
         <div className="menu-page"></div>
         
+        {/* Botón de accesibilidad fijo en esquina */}
+        <button 
+            className="accesibilidad-flotante" 
+            aria-label="Opciones de accesibilidad"
+            onClick={() => navigate('/accesibilidad')}
+        >
+            <img 
+                src={iconoAccesibilidad} 
+                alt="Ícono de accesibilidad" 
+                className="icono-accesibilidad-flotante"
+            />
+        </button>
+        
         <div className='menu-container-container'>
             <div className='titulo-juego-container'>
                     <img src={tituloJuego} alt='titulo'/>
             </div>
 
-            <div className="menu-container">
+            <div className="menu-container">                
                 <button 
                     id="play-btn" 
                     className={`menu-btn ${!jugarActivo ? 'btn-oscuro' : ''}`}
@@ -53,6 +69,7 @@ export function Menu() {
                     <span>Jugar</span>
                 </button>
                 <button id="tutorial-btn" className='menu-btn' onClick={() => navigate('/tutorial')}>Tutorial</button>
+                {/* Quitamos el botón de accesibilidad del menú ya que ahora está en la esquina */}
                 <button id="settings-btn" className='menu-btn' onClick={() => navigate('/ajustes')}>Ajustes</button>
                 <button id="infomonos-btn" className='menu-btn' onClick={() => navigate('/monoInfo')}>Monos</button>
             </div>
@@ -102,9 +119,10 @@ export function Menu() {
         )}
 
         <footer>
-            <a onClick={() => navigate('/creditos')}> Créditos </a>
+            <Link to="/creditos">Créditos</Link>
             <a href='https://github.com/DRLKs/Monkey-Pop' > github </a>
             <a href='https://ninjakiwi.com/Games/Mobile/Bloons-TD-Battles-Mobile.html'> Bloons TD Battles </a>
+            <Link to="/infoJuego">Historia</Link>
         </footer>
         </>
     )

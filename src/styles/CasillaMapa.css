@@ -92,7 +92,7 @@
                     transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, 
                     transparent 75%, transparent); */
 
-  background-image: url('../assets/images/mapa/camino2.png');
+  background-image: url('../assets/images/mapa/camino2.webp');
 
   z-index: 5; /* Para que el camino esté por encima del terreno */
 }

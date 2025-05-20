@@ -443,3 +443,81 @@ footer a:hover {
 
 
 }
+
+/* Estilos para el botón de accesibilidad flotante - VERSIÓN CUADRADA */
+.accesibilidad-flotante {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px; /* Cambiado de 50% a 12px para hacerlo cuadrado con esquinas redondeadas */
+    background: linear-gradient(to bottom, #36ba6f, #70c74e);
+    border: 3px solid var(--color-dorado);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: 1000;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.icono-accesibilidad-flotante {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.accesibilidad-flotante:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+    border-color: #ffe066;
+}
+
+.accesibilidad-flotante:active {
+    transform: scale(0.95);
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 600px) {
+    .accesibilidad-flotante {
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px; /* Ajustado para mantener la proporción */
+    }
+    
+    .icono-accesibilidad-flotante {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Para dispositivos muy pequeños */
+@media (max-width: 320px) {
+    .accesibilidad-flotante {
+        top: 5px;
+        right: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px; /* Ajustado para mantener la proporción */
+    }
+    
+    .icono-accesibilidad-flotante {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Asegurar que el botón no sea tapado en orientación landscape */
+@media (max-height: 450px) {
+    .accesibilidad-flotante {
+        top: 5px;
+        right: 5px;
+    }
+}
