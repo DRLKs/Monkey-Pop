@@ -155,15 +155,12 @@ select:hover {
 #boton-submit {
     background: linear-gradient(to bottom, var(--color-boton-importante), var(--color-hover));
     margin-top: 20px;
-    height: 50px;
     width: 100%;
     border-radius: 50px;
     border: 2px solid var(--color-dorado);
     color: var(--color-texto-claro);
     font-family: var(--fuente-principal);
     font-size: clamp(1rem, 4vw, 1.2em);
-    letter-spacing: 2px;
-    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -256,7 +253,6 @@ select:hover {
 .toggle-container {
     display: flex;
     align-items: center;
-    margin-top: 5px;
 }
 
 .toggle-label {

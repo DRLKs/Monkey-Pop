@@ -384,6 +384,15 @@ function Juego() {
       window.removeEventListener('orientationchange', checkOrientation);
     };
   }, []);
+
+  // Pausar el juego automáticamente cuando se abran los ajustes
+  useEffect(() => {
+    if (ajustesVisible) {
+      setCronometroActivo(false);
+    } else {
+      setCronometroActivo(true);
+    }
+  }, [ajustesVisible]);
   
   return (
     <>

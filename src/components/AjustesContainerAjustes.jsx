@@ -5,9 +5,6 @@ import { cargarConfiguracion, guardarConfiguracion } from '../utils/funciones';
 import silenciado from '../assets/images/botones/silenciado.webp';
 import desilenciado from '../assets/images/botones/desilenciado.webp';
 
-// Importamos los estilos del botón de sonido
-import '../styles/botonSonido.css';
-
 
 function AjustesContainerAjustes() {
 
@@ -89,7 +86,7 @@ function AjustesContainerAjustes() {
                         onClick={() => setEfectos(!efectos)}
                     >
                         <img
-                            src={efectos ? desilenciado : silenciado}
+                            src={efectos ? silenciado : desilenciado}
                             alt={efectos ? "Sonido activado" : "Sonido silenciado"}
                             className="icono-sonido"
                         />

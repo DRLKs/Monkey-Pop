@@ -1,4 +1,5 @@
 import React, { useMemo, useReducer, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa';
@@ -34,6 +35,8 @@ import '../styles/tutorial.css';
 
 
 function Tutorial() {
+  const navigate = useNavigate(); 
+
   // Estados del juego:
   const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
@@ -128,7 +131,7 @@ function Tutorial() {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [camino, paso]);
+  }, [camino, paso, cronometroActivo]);
 
 
   /**
@@ -151,6 +154,14 @@ function Tutorial() {
 
   }, [gameState.ronda]);
 
+  /**
+   * Cuando el tutorial termina, el juego se pausa
+   */
+  useEffect(() => {
+    if (tutorialTerminado) {
+      setCronometroActivo(false);
+    }
+  }, [tutorialTerminado]);
 
   /**
      * Función que se ejecuta al presionar una tecla
@@ -358,7 +369,7 @@ function Tutorial() {
           <div className="tutorial-mensaje">
             <div className="tutorial-content">
               <div className="tutorial-text">
-                <h2>Selecciona un mono</h2>
+                <h2>Selecciona y coloca un mono</h2>
                 <p>Nuestros monos están arriba a la derecha.</p>
                 <p>Arrastra el que quieras a una casilla de cesped del mapa. </p>
                 <p>Ellos son nuestros héroes, nos defienden de .....</p>
@@ -414,13 +425,12 @@ function Tutorial() {
             <div className="tutorial-content">
               <div className="tutorial-text">
                 <h2>¡Enhorabuena!</h2>
-                <p> Completaste el tutorial.</p>
-                <p><b> Ya eres todo un profesional</b>.</p>
-                <p>Puedes volver a jugar el tutorial si lo necesitas</p>
+                <p> Has completado el tutorial.</p>
+                <p>Puedes volver a jugarlo desde la pantalla de inicio siempre que lo necesites.</p>
               </div>
               <div className="tutorial-image">
                 <img src={monoAncianoFinal} alt="Felicitaciones" />
-                <button className='tutorial-button' onClick={() => window.location.reload()}>Volver a jugar</button>
+                <button className='tutorial-button' onClick={() => navigate('/')}>Inicio</button>
               </div>
             </div>
           </div>

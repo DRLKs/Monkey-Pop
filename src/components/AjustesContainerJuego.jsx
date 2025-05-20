@@ -73,7 +73,7 @@ function AjustesContainerJuego({ visible, onClose }) {
                                       onClick={() => setEfectos(!efectos)}
                                   >
                                       <img 
-                                          src={efectos ? desilenciado : silenciado} 
+                                          src={efectos ? silenciado : desilenciado} 
                                           alt={efectos ? "Sonido activado" : "Sonido silenciado"} 
                                           className="icono-sonido"
                                       />
