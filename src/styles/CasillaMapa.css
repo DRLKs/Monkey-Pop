@@ -69,13 +69,13 @@
 }
 
 .casilla-florRoja{
-  background-image: url('../assets/images/mapa/cespedyflor.jpg');
+  background-image: url('../assets/images/mapa/flores.jpg');
   background-size: cover;
   background-position: center;
 }
 
 .casilla-florAzul{
-  background-image: url('../assets/images/mapa/cespedyflor3.jpg');
+  background-image: url('../assets/images/mapa/flores2.jpg');
   background-size: cover;
   background-position: center;
 }
