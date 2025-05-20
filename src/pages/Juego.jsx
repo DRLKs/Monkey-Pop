@@ -7,8 +7,11 @@ import MonoAgarrado from '../components/MonoAgarrado'
 import FinJuego from '../components/FinJuego'
 import AjustesContainerJuego from '../components/AjustesContainerJuego'
 import AjustesMono from '../components/AjustesMono'
-import ConfirmacionComponent from '../components/CofirmacionComponent';
-import OrientationWarning from '../components/OrientationWarning';
+import ConfirmacionComponent from '../components/CofirmacionComponent'
+import OrientationWarning from '../components/OrientationWarning'
+import Globo from '../components/Globo'
+import MonoMapa from '../components/MonoMapa'
+import globoExplotado from '../assets/images/globos/globoExplotado.webp';
 
 // Clases 
 import { Mono as MonoClass } from '../utils/clases'
@@ -424,26 +427,98 @@ function Juego() {
           y={position.y}
           tipoMono={monoSeleccionado}
         />
-        )}
-
-      <div className="game-container">
-        {mapa.map((estado, index) => {
-          const globosEnCasilla = gameState.globos.filter(globo => globo.index === index);
-          const monosEnCasilla = gameState.monosColocados.filter(mono => mono.index === index);
-          const explotaGloboCasilla = gameState.indexsGlobosExplotados.some(idx => index === idx);
+        )}      <div className="game-container">
+        {mapa.map((estado, index) => (
+          <CasillaMapa 
+            key={index} 
+            estado={estado}
+            index={index}
+            actualizarMapa={() => actualizarMapa(index)}
+          />
+        ))}
+        
+        {/* Renderizar los monos por encima del mapa */}
+        <div className="elementos-juego-container">
+          {gameState.monosColocados.map((mono) => {
+            // Calcular la posición basada en el índice de la casilla
+            const casilla = document.querySelector(`.casilla-mapa[data-index="${mono.index}"]`);
+            const rect = casilla ? casilla.getBoundingClientRect() : null;
+            const gameContainer = document.querySelector('.game-container');
+            const containerRect = gameContainer ? gameContainer.getBoundingClientRect() : null;
+            
+            const posX = rect ? rect.left - containerRect.left : 0;
+            const posY = rect ? rect.top - containerRect.top : 0;
+            
+            return (
+              <div 
+                key={mono.id} 
+                className="mono-container"
+                style={{
+                  position: 'absolute',
+                  left: `${posX}px`,
+                  top: `${posY}px`,
+                  zIndex: 9000
+                }}
+              >
+                <MonoMapa tipo={mono.tipo} />
+              </div>
+            );
+          })}
           
-          return (
-            <CasillaMapa 
-              key={index} 
-              estado={estado}
-              index={index}
-              actualizarMapa={() => actualizarMapa(index)}
-              globos={globosEnCasilla} 
-              monos={monosEnCasilla}
-              explotaGloboCasilla={explotaGloboCasilla}
-              />
-          )
-        })}
+          {/* Renderizar los globos por encima del mapa */}
+          {gameState.globos.map((globo) => {
+            // Calcular la posición basada en el índice de la casilla
+            const casilla = document.querySelector(`.casilla-mapa[data-index="${globo.index}"]`);
+            const rect = casilla ? casilla.getBoundingClientRect() : null;
+            const gameContainer = document.querySelector('.game-container');
+            const containerRect = gameContainer ? gameContainer.getBoundingClientRect() : null;
+            
+            const posX = rect ? rect.left - containerRect.left : 0;
+            const posY = rect ? rect.top - containerRect.top : 0;
+            
+            return (
+              <div 
+                key={globo.id} 
+                className="globo-container"
+                style={{
+                  position: 'absolute',
+                  left: `${posX}px`,
+                  top: `${posY}px`,
+                  zIndex: 8000
+                }}
+              >
+                <Globo health={globo.health} />
+              </div>
+            );
+          })}
+          
+          {/* Renderizar las explosiones por encima del mapa */}
+          {gameState.indexsGlobosExplotados.map((index) => {
+            // Calcular la posición basada en el índice de la casilla
+            const casilla = document.querySelector(`.casilla-mapa[data-index="${index}"]`);
+            const rect = casilla ? casilla.getBoundingClientRect() : null;
+            const gameContainer = document.querySelector('.game-container');
+            const containerRect = gameContainer ? gameContainer.getBoundingClientRect() : null;
+            
+            const posX = rect ? rect.left - containerRect.left : 0;
+            const posY = rect ? rect.top - containerRect.top : 0;
+            
+            return (
+              <div 
+                key={`explosion-${index}`} 
+                className="explosion-container"
+                style={{
+                  position: 'absolute',
+                  left: `${posX}px`,
+                  top: `${posY}px`,
+                  zIndex: 7000
+                }}
+              >
+                <img className='globo-explotado' src={globoExplotado} />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       { monoVerAjustes !== null && 

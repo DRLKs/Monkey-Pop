@@ -47,7 +47,7 @@
   background-size: cover;
   background-position: center;
   transform: rotate(180deg);
-  z-index: 5;
+  z-index: 4;
 }
 .casilla-agua_cesped2{
   background-image: url('../assets/images/mapa/aguaCesped3.jpg');
@@ -59,13 +59,13 @@
   background-size: cover;
   background-position: center;
   transform: rotate(180deg);
-  z-index: 9;
+  z-index: 4;
 }
 .casilla-tierra_cesped2{
   background-image: url('../assets/images/mapa/cespedTierra5.jpg');
   background-size: cover;
   background-position: center;
-  z-index: 8;
+  z-index: 4;
 }
 
 .casilla-florRoja{
@@ -101,15 +101,85 @@
 .casilla-selected {
   background-color: #FFC107;
   transform: scale(1.05);
+  /* Aseguramos que la casilla seleccionada no tape al mono */
+  z-index: 10; 
 }
 
-.globo, .mono, .globo-explotado{
+/* Separamos los estilos para tener mayor control */
+.globo {
   position: absolute;
   max-width: 35px;
   max-height: 35px;
   border-radius: 50%;
   animation: move 5s linear infinite;
-  z-index: 10;
+  z-index: 2000; /* Valor mucho mayor para asegurar que esté por encima */
+}
+
+.mono {
+  position: absolute;
+  max-width: 35px;
+  max-height: 35px;
+  z-index: 3000; /* Aumentado para mayor prioridad */
+  transform: translateZ(0); /* Forzar nuevo contexto de apilamiento */
+  will-change: transform; /* Mejorar rendering */
+  pointer-events: none; /* Evitar que intercepte eventos */
+}
+
+.globo {
+  position: absolute;
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  animation: move 5s linear infinite;
+  z-index: 2900; /* Un poco menos que los monos pero muy alto */
+  transform: translateZ(0); /* Forzar nuevo contexto de apilamiento */
+  will-change: transform; /* Mejorar rendering */
+  pointer-events: none; /* Evitar que intercepte eventos */
+}
+
+.globo-explotado {
+  position: absolute;
+  max-width: 35px;
+  max-height: 35px;
+  border-radius: 50%;
+  z-index: 2800; /* Un poco menos que los globos pero muy alto */
+  transform: translateZ(0); /* Forzar nuevo contexto de apilamiento */
+  will-change: transform; /* Mejorar rendering */
+  pointer-events: none; /* Evitar que intercepte eventos */
+}
+
+/* Añadimos un contenedor específico para monos y globos que esté por encima de todo */
+.elementos-juego-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5000; /* Contenedor con z-index extremadamente alto */
+}
+
+/* Aseguramos que los contenedores específicos mantengan la prioridad de z-index */
+.mono-container, .globo-container, .explosion-container {
+  position: absolute;
+  pointer-events: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mono-container {
+  z-index: 9000; /* Valor extremadamente alto para los monos */
+}
+
+.globo-container {
+  z-index: 8000; /* Valor muy alto para los globos */
+}
+
+.explosion-container {
+  z-index: 7000; /* Valor alto para las explosiones */
 }
 
 /* Efectos hover solo para dispositivos que soportan hover (principalmente PC) */
@@ -155,7 +225,7 @@
 }
 
 @media (max-height: 450px) {
-  .casilla-mapa, .globo, .globo-explotado {
+  .casilla-mapa {
     width: 22px;
     height: 22px;
   }
@@ -164,22 +234,29 @@
     transform: none;
   }
 
-  .mono, .globo, .globo-explotado{
+  .mono {
+    max-width: 35px;
+    max-height: 35px;
+  }
+  
+  .globo, .globo-explotado {
     max-width: 35px;
     max-height: 35px;
   }
 }
 
 @media (max-height: 380px) {
-  
-  
   .casilla-selected {
     transform: none;
   }
 
-  .mono, .globo-explotado{
+  .mono {
     max-width: 30px;
     max-height: 30px;
   }
-
+  
+  .globo-explotado {
+    max-width: 30px;
+    max-height: 30px;
+  }
 }

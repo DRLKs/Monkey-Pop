@@ -39,10 +39,11 @@
 
 /* Filtro de alto contraste */
 .high-contrast {
-  backdrop-filter: contrast(1.4) brightness(1.1);
-  -webkit-backdrop-filter: contrast(1.4) brightness(1.1);
+  backdrop-filter: contrast(1.8) brightness(1.2);
+  -webkit-backdrop-filter: contrast(1.8) brightness(1.2);
   background-color: rgba(0, 0, 0, 0.05);
   mix-blend-mode: normal;
+  pointer-events: none;
 }
 
 /* Combinación de alto contraste con daltonismo */

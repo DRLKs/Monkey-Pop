@@ -491,6 +491,10 @@ body {
         font-size: 0.8rem;
         padding: 0px 0px;
     }
+
+    .info-ronda h2 {
+        font-size: 0.6rem;
+    }
 }
 
 @media (max-width: 480px) {
