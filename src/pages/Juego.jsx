@@ -368,7 +368,13 @@ function Juego() {
   useEffect(() => {
     const checkOrientation = () => {
       // Detectar si la pantalla está en modo retrato (portrait)
-      setIsPortrait(window.innerHeight > window.innerWidth);
+      if( window.innerHeight > window.innerWidth) {
+        setIsPortrait(true);
+        setCronometroActivo(false);
+      }else{
+        setIsPortrait(false);
+        setCronometroActivo(true);
+      }
     };
     
     // Verificar orientación inicial
@@ -397,8 +403,8 @@ function Juego() {
   return (
     <>
       {/* Mostrar advertencia si es móvil y está en portrait */}
-      {isPortrait && window.innerWidth <= 768 && (
-        <OrientationWarning isPaused={pausarReaunudarCronometro} />
+      {isPortrait && (
+        <OrientationWarning />
       )}
       
       <div className='fondo-juego'></div>
