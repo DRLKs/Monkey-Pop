@@ -40,7 +40,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -90px; /* SUBIR TÍTULO */
+    margin-top: -90px;
+    /* SUBIR TÍTULO */
 }
 
 .titulo-juego-container img {
@@ -112,20 +113,23 @@ button::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 20px; /* Añadido padding más grande para acomodar el icono */
+    padding: 12px 20px;
+    /* Añadido padding más grande para acomodar el icono */
 }
 
 #play-btn span {
     margin-left: 6px;
-    font-size: 1.1em; /* Ligeramente más grande para equilibrar con la imagen */
+    font-size: 1.1em;
+    /* Ligeramente más grande para equilibrar con la imagen */
 }
 
-#tutorial-btn{
+#tutorial-btn {
     background: linear-gradient(to bottom, var(--color-boton-tutorial), var(--color-hover));
     color: var(--color-texto-claro);
 }
 
-#settings-btn, #infomonos-btn {
+#settings-btn,
+#infomonos-btn {
     background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
     color: var(--color-texto-claro);
 }
@@ -156,10 +160,13 @@ button:active {
 .btn-oscuro {
     opacity: 0.8;
     filter: brightness(70%);
-    background-color: #554231 !important; /* Color más oscuro */
+    background-color: #554231 !important;
+    /* Color más oscuro */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
-    transition: none !important; /* Desactiva transiciones */
-    animation: none !important; /* Desactiva animaciones */
+    transition: none !important;
+    /* Desactiva transiciones */
+    animation: none !important;
+    /* Desactiva animaciones */
 }
 
 
@@ -210,7 +217,7 @@ footer {
     font-size: 16px;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
-    
+
 }
 
 footer a {
@@ -224,14 +231,23 @@ footer a {
 footer a:hover {
     color: var(--color-dorado);
     text-decoration: underline;
-    text-decoration: none; /* Quita el subrayado */
+    text-decoration: none;
+    /* Quita el subrayado */
 }
 
 /* Animación para el botón principal */
 @keyframes pulsate {
-    0% { transform: scale(1.05); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1.05); }
+    0% {
+        transform: scale(1.05);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
 }
 
 #play-btn {
@@ -262,7 +278,8 @@ footer a:hover {
     color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     animation: aparecer 0.3s ease-out;
-    position: relative; /* Necesario para posicionar el botón correctamente */
+    position: relative;
+    /* Necesario para posicionar el botón correctamente */
 }
 
 .modal-contenido h2 {
@@ -283,7 +300,8 @@ footer a:hover {
 .modal-cerrar-btn {
     position: absolute;
     top: 10px;
-    left: 10px;  /* Cambiado de right a left para posicionar a la izquierda */
+    left: 10px;
+    /* Cambiado de right a left para posicionar a la izquierda */
     background-color: rgba(0, 0, 0, 0.3);
     color: white;
     border: none;
@@ -339,7 +357,8 @@ footer a:hover {
 }
 
 .modal-header h2 {
-    margin-bottom: 0; /* Quitar el margen del título para alinearlo correctamente */
+    margin-bottom: 0;
+    /* Quitar el margen del título para alinearlo correctamente */
 }
 
 .modal-icono-candado {
@@ -357,6 +376,7 @@ footer a:hover {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -370,12 +390,12 @@ footer a:hover {
         padding: 12px;
         font-size: 18px;
     }
-    
+
     .menu-container {
         padding: 20px;
     }
 
-    .titulo-juego-container img{
+    .titulo-juego-container img {
         width: 250px;
     }
 }
@@ -385,12 +405,12 @@ footer a:hover {
         width: 90%;
         padding: 15px;
     }
-    
+
     .modal-icono-candado {
         width: 30px;
         height: 30px;
     }
-    
+
     .modal-header h2 {
         font-size: 24px;
     }
@@ -399,7 +419,7 @@ footer a:hover {
 @media (max-height: 450px) {
 
     /* En caso de ponerse horizontal, cambiamos la configuración del menú */
-    .menu-container-container{
+    .menu-container-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -413,7 +433,8 @@ footer a:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 0; /* Eliminar el margen negativo anterior */
+        margin-top: 0;
+        /* Eliminar el margen negativo anterior */
     }
 
     button {
@@ -421,19 +442,19 @@ footer a:hover {
         padding: 10px;
         font-size: 16px;
     }
-    
+
     .menu-container {
         padding: 10px;
     }
 
-    .titulo-juego-container img{
+    .titulo-juego-container img {
         width: 20vm;
     }
 }
 
 @media (max-height: 400px) {
 
-    .menu-container-container{
+    .menu-container-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -447,13 +468,14 @@ footer a:hover {
 }
 
 /* Actualización del sistema responsivo */
- 
+
 /* Estilos para el botón de accesibilidad flotante - VERSIÓN MEJORADA */
 .accesibilidad-flotante {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: clamp(40px, 8vw, 60px); /* Tamaño responsivo */
+    width: clamp(40px, 8vw, 60px);
+    /* Tamaño responsivo */
     height: clamp(40px, 8vw, 60px);
     border-radius: 12px;
     background: linear-gradient(to bottom, #36ba6f, #70c74e);
@@ -470,7 +492,8 @@ footer a:hover {
 }
 
 .icono-accesibilidad-flotante {
-    width: clamp(24px, 5vw, 40px); /* Tamaño responsivo */
+    width: clamp(24px, 5vw, 40px);
+    /* Tamaño responsivo */
     height: auto;
     object-fit: contain;
     filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
@@ -485,7 +508,8 @@ footer a:hover {
 }
 
 /* Para dispositivos muy pequeños o en modo landscape */
-@media (max-width: 320px), (max-height: 450px) {
+@media (max-width: 320px),
+(max-height: 450px) {
     .accesibilidad-flotante {
         top: 5px;
         right: 5px;
@@ -504,27 +528,33 @@ footer a:hover {
 }
 
 .titulo-juego-container {
-    margin-top: clamp(-60px, -8vh, -90px); /* Ajuste responsivo */
+    margin-top: clamp(-60px, -8vh, -90px);
+    /* Ajuste responsivo */
     margin-bottom: clamp(10px, 3vh, 30px);
 }
 
 .titulo-juego-container img {
-    width: clamp(200px, 80vw, 400px); /* Ajuste responsivo */
-    max-height: 30vh; /* Evitar que sea demasiado grande en pantallas altas */
+    width: clamp(200px, 80vw, 400px);
+    /* Ajuste responsivo */
+    max-height: 30vh;
+    /* Evitar que sea demasiado grande en pantallas altas */
     object-fit: contain;
 }
 
 .menu-container {
-    width: clamp(250px, 90%, 450px); /* Ancho responsivo */
+    width: clamp(250px, 90%, 450px);
+    /* Ancho responsivo */
     padding: clamp(15px, 4vw, 30px);
 }
 
 /* Botones responsivos */
 button {
-    width: clamp(180px, 80%, 250px); /* Ancho responsivo */
+    width: clamp(180px, 80%, 250px);
+    /* Ancho responsivo */
     margin: clamp(10px, 2vh, 15px) auto;
     padding: clamp(10px, 2vh, 15px);
-    font-size: clamp(16px, 4vw, 22px); /* Tamaño de texto responsivo */
+    font-size: clamp(16px, 4vw, 22px);
+    /* Tamaño de texto responsivo */
 }
 
 /* Mejora del footer responsivo */
@@ -549,7 +579,8 @@ footer a {
 
 .modal-contenido h2 {
     font-size: clamp(20px, 5vw, 28px);
-    font-family: var(--fuente-principal); /* Usar la fuente actualizada */
+    font-family: var(--fuente-principal);
+    /* Usar la fuente actualizada */
 }
 
 .modal-contenido p {
@@ -571,41 +602,41 @@ footer a {
         padding: 5vh 5vw;
         gap: clamp(15px, 3vw, 30px);
     }
-    
+
     .titulo-juego-container {
         margin-top: 0;
         width: 40%;
     }
-    
+
     .titulo-juego-container img {
         width: 100%;
         height: auto;
         max-height: 80vh;
     }
-    
+
     .menu-container {
         width: 50%;
         max-height: 80vh;
         overflow-y: auto;
         padding: 15px;
     }
-    
+
     button {
         margin: 8px auto;
         padding: 8px;
     }
-    
+
     /* Ajustes específicos para modo landscape en dispositivos más pequeños */
     @media (max-width: 700px) {
         .menu-container-container {
             padding: 2vh 3vw;
             gap: 10px;
         }
-        
+
         .menu-container {
             padding: 10px;
         }
-        
+
         button {
             margin: 6px auto;
             padding: 6px;
@@ -619,22 +650,22 @@ footer a {
     .titulo-juego-container {
         margin-top: -30px;
     }
-    
+
     .titulo-juego-container img {
         width: 180px;
     }
-    
+
     .menu-container {
         padding: 12px;
     }
-    
+
     button {
         width: 160px;
         margin: 8px auto;
         padding: 8px;
         font-size: 16px;
     }
-    
+
     footer {
         padding: 3px 0;
         font-size: 11px;
