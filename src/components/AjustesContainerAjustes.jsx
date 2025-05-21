@@ -61,11 +61,11 @@ function AjustesContainerAjustes() {
     }, [configuracionGuardada]);
 
     return (
-        <div id="container-controles">
-            <h1> AJUSTES </h1>
+        <main id="container-controles">
+            <header> <h1> AJUSTES </h1></header>
 
             <form id="controlForm" onSubmit={guardar}>
-                <div id="control-volumen">
+                <nav id="control-volumen">
                     <label htmlFor="volumen">Volumen: </label>
                     <input
                         type="range"
@@ -75,15 +75,22 @@ function AjustesContainerAjustes() {
                         value={volumen}
                         onChange={handleVolumenChange}
                     />
-                </div>
+                </nav>
 
-                <div className="toggle-container">
-                    <label htmlFor="mute on/off">Mute on/off: </label>
+                <nav className="toggle-container">
+                    <label htmlFor="efectos">Mute on/off: </label>
+                    <input
+                        type="checkbox"
+                        id="efectos"
+                        checked={efectos}
+                        onChange={() => setEfectos(!efectos)}
+                        style={{ position: 'absolute', opacity: 0 }} // Ocultar visualmente pero mantener accesible
+                    />
                     <button
                         type="button"
-                        id="efectos"
                         className="boton-sonido"
                         onClick={() => setEfectos(!efectos)}
+                        aria-hidden="true" // El botón es solo visual, el checkbox es el control real
                     >
                         <img
                             src={efectos ? silenciado : desilenciado}
@@ -91,9 +98,9 @@ function AjustesContainerAjustes() {
                             className="icono-sonido"
                         />
                     </button>
-                </div>
+                </nav>
 
-                <div id="control-lenguaje">
+                <nav id="control-lenguaje">
                     <label htmlFor="lenguaje">Idioma: </label>
                     <select
                         id="lenguaje"
@@ -106,7 +113,7 @@ function AjustesContainerAjustes() {
                         <option value="fr">Francés</option>
                         <option value="de">Alemán</option>
                     </select>
-                </div>
+                </nav>
 
                 <button id="boton-submit" type="submit">Guardar Ajustes</button>
 
@@ -116,7 +123,7 @@ function AjustesContainerAjustes() {
                     </div>
                 )}
             </form>
-        </div>
+        </main>
     );
 }
 

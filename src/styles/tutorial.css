@@ -74,7 +74,7 @@
   flex: 4; /* Increased ratio for text */
 }
 
-.tutorial-text h2 {
+.tutorial-text h1 {
   font-family: var(--fuente-principal);
   color: #ffd700;
   margin: 0 0 10px 0;
@@ -110,7 +110,7 @@
 }
 
 .tutorial-button {
-  background-color: var(--color-boton-importante);
+  background-color: #926e06; /* var(--color-boton-importante) */
   color: white;
   border: none;
   padding: 8px 12px; /* Reduced horizontal padding from 14px to 10px */
@@ -211,7 +211,7 @@
     gap: 15px;
   }
   
-  .tutorial-text h2 {
+  .tutorial-text h1 {
     font-size: 26px;
   }
   
@@ -269,7 +269,7 @@
     border-radius: 10px;
   }
   
-  .tutorial-text h2 {
+  .tutorial-text h1 {
     font-size: 18px;
   }
   
@@ -314,7 +314,7 @@
     max-height: 80px;
   }
   
-  .tutorial-text h2 {
+  .tutorial-text h1 {
     font-size: 20px;
     margin-bottom: 5px;
   }
@@ -356,7 +356,7 @@
     max-height: 100px; /* Altura reducida para no ocupar demasiado espacio vertical */
   }
   
-  .tutorial-text h2 {
+  .tutorial-text h1 {
     font-size: 18px;
     margin-bottom: 6px;
   }
@@ -383,7 +383,7 @@
     padding: 8px;
   }
   
-  .tutorial-text h2 {
+  .tutorial-text h1 {
     font-size: 16px;
     margin-bottom: 4px;
   }

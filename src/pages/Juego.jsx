@@ -1,5 +1,6 @@
 // Bibliotecas de React
 import React, { useMemo, useReducer, useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet';
 
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa'
@@ -402,6 +403,9 @@ function Juego() {
   
   return (
     <>
+      <Helmet>
+        <title>Monkey Pop - Juego</title>
+      </Helmet>
       {/* Mostrar advertencia si es móvil y está en portrait */}
       {isPortrait && (
         <OrientationWarning />

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
-import backgroundMusic from '../assets/sounds/musicaFondo.mp3'; // Asumiendo que esta es la ruta correcta
+import backgroundMusic from '../assets/sounds/menuPrincipal.mp3'; // Asumiendo que esta es la ruta correcta
 import { cargarConfiguracion } from '../utils/funciones'; // Asumiendo que tienes esta función
 
 // Crear el contexto

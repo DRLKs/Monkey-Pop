@@ -14,15 +14,15 @@ import proTipBombilla from '../../assets/images/tutorial/proTip.webp';
  */
 function ProTip({ message, title = "Pro-Tip" }) {
   return (
-    <div className="pro-tip">
-      <div className="pro-tip-header">
+    <aside className="pro-tip">
+      <main className="pro-tip-header">
         <div className="pro-tip-icon">
           <img src={proTipBombilla} alt="Pro Tip" />
         </div>
         <h2>{title}</h2>
-      </div>
+      </main>
       <p>{message}</p>
-    </div>
+    </aside>
   );
 }
 
