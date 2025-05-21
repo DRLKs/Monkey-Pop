@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import { UIContext } from "../context/UIContext";
 
@@ -57,6 +58,7 @@ function InfoJuego() {
                 );
             case 'objetivos':
                 return (
+                    
                     <div className="info-content objetivos-content">
                         <div className="info-header">
                             <img src={proTipImage} alt="Pro Tip" className="personaje-imagen" />
@@ -177,6 +179,10 @@ function InfoJuego() {
     };
 
     return (
+        <>
+        <Helmet>
+            <title>Monkey Pop - Información del Juego</title>
+        </Helmet>
         <div className="info-juego-container">
             <div className="info-juego-background"></div>
             <BarraNavegacion />
@@ -216,6 +222,7 @@ function InfoJuego() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

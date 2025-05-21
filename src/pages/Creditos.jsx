@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet'
+
 import { Link } from 'react-router-dom';
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import '../styles/creditos.css';
@@ -87,6 +89,10 @@ function Creditos() {
 
     return (
         <>
+        <Helmet>
+            <title>Monkey Pop - Creditos</title>
+        </Helmet>
+
             <div className='fondo-creditos'></div>
             <BarraNavegacion />
             
@@ -153,6 +159,17 @@ function Creditos() {
                     <p className='version-info'>Versión 1.0.0</p>
                 </div>
             </div>
+        
+        <div className='fondo-creditos'></div>
+        <BarraNavegacion>
+
+        </BarraNavegacion>
+        <div className='creditos-container'>
+            <h1> Developers </h1>
+            <p>
+            David, Suito, Fran, Soraya, Marquito
+            </p>
+        </div>
         </>
     );
 }

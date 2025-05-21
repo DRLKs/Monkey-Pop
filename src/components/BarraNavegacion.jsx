@@ -7,9 +7,9 @@ export function BarraNavegacion({ children }) {
     const navigate = useNavigate()
 
     return (
-        <div className="navbar">
+        <nav className="navbar">
             <button className="nav-button" id="back-button" onClick={() => navigate('/')}>Volver</button>
             {children}
-        </div>
+        </nav>
     )
 }

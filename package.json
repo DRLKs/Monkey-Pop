@@ -1,8 +1,10 @@
 {
   "name": "Monkey-Pop",
-  "private": true,  "version": "0.0.0",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "homepage": "https://DRLKs.github.io/Monkey-Pop",  "scripts": {
+  "homepage": "https://DRLKs.github.io/Monkey-Pop",
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -13,6 +15,7 @@
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {

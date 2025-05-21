@@ -68,9 +68,9 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
             </div>
            
     
-            <div className="info-ronda">
+            <aside className="info-ronda">
               <h2>Ronda: {ronda}</h2>
-            </div>
+            </aside>
     
             <BarraMonos
               monedas={monedas}

@@ -11,7 +11,7 @@ export const MonoBarraNavegador = ({ tipo, agarrarMono, sePuedeComprar }) => {
     };
 
     return (
-        <div id={`'monkey-${tipo}'`} className={`monkey${!sePuedeComprar ? ' disabled' : ''}`}>
+        <main id={`'monkey-${tipo}'`} className={`monkey${!sePuedeComprar ? ' disabled' : ''}`}>
             <img 
                 src={MONOS[tipo].imagen} 
                 alt={`Monkey ${tipo}`} 
@@ -21,6 +21,6 @@ export const MonoBarraNavegador = ({ tipo, agarrarMono, sePuedeComprar }) => {
                 onMouseDown={handleInteraction}
             />
             <span className="monkey-count">{MONOS[tipo].precio}</span>
-        </div>
+        </main>
     )
 }

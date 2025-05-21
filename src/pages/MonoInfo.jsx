@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
+import { Helmet } from "react-helmet";
 
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import AjustesMono from "../components/AjustesMono";
@@ -67,6 +68,10 @@ function MonoInfo() {
     }, [changeBackgroundMusic]);
 
     return (
+        <>
+        <Helmet>
+            <title>Monkey Pop - Información de Monos</title>
+        </Helmet>
         <div className="pagina-mono-info">
             <BarraNavegacion />
             
@@ -114,6 +119,7 @@ function MonoInfo() {
                 />
             )}
         </div>
+        </>
     );
 }
 

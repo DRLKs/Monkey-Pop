@@ -282,7 +282,7 @@ footer a:hover {
     /* Necesario para posicionar el botón correctamente */
 }
 
-.modal-contenido h2 {
+.modal-contenido h1 {
     color: #ffd700;
     margin-bottom: 15px;
     font-family: 'Luckiest Guy', 'Comic Sans MS', cursive;
@@ -356,9 +356,8 @@ footer a:hover {
     position: relative;
 }
 
-.modal-header h2 {
-    margin-bottom: 0;
-    /* Quitar el margen del título para alinearlo correctamente */
+.modal-header h1 {
+    margin-bottom: 0; /* Quitar el margen del título para alinearlo correctamente */
 }
 
 .modal-icono-candado {
@@ -410,8 +409,8 @@ footer a:hover {
         width: 30px;
         height: 30px;
     }
-
-    .modal-header h2 {
+    
+    .modal-header h1 {
         font-size: 24px;
     }
 }
@@ -577,7 +576,7 @@ footer a {
     padding: clamp(15px, 4vw, 25px);
 }
 
-.modal-contenido h2 {
+.modal-contenido h1 {
     font-size: clamp(20px, 5vw, 28px);
     font-family: var(--fuente-principal);
     /* Usar la fuente actualizada */

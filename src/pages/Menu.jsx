@@ -1,5 +1,7 @@
-import React, { use, useEffect, useRef } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import React, { use, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 
 // Función para saber si el usuario puede jugar
 import { habilitadoParaJugar, puedeJugar } from '../utils/funciones.js'
@@ -35,6 +37,9 @@ export function Menu() {
 
     return (
         <>
+        <Helmet>
+            <title>Monkey Pop - Menú Principal</title>
+        </Helmet>
         <div className="menu-page"></div>
         
         {/* Botón de accesibilidad fijo en esquina */}
@@ -45,15 +50,15 @@ export function Menu() {
         >
             <img 
                 src={iconoAccesibilidad} 
-                alt="Ícono de accesibilidad" 
+                alt="Accesibilidad" 
                 className="icono-accesibilidad-flotante"
             />
         </button>
         
         <div className='menu-container-container'>
-            <div className='titulo-juego-container'>
-                    <img src={tituloJuego} alt='titulo'/>
-            </div>
+            <header className='titulo-juego-container'>
+                    <img src={tituloJuego} alt='Título'/>
+            </header>
 
             <div className="menu-container">                
                 <button 
@@ -78,23 +83,23 @@ export function Menu() {
 
         {mostrarConfirmacionJugar && (
             <div className="modal-confirmacion">
-                <div className="modal-contenido">
+                <main className="modal-contenido">
                     <button 
                         className="modal-cerrar-btn" 
                         onClick={() => setMostrarConfirmacionJugar(false)}
                     >
                         ×
                     </button>
-                    <div className="modal-header">
-                        <h2>¡Atención!</h2>
+                    <aside className="modal-header">
+                        <h1>¡Atención!</h1>
                         <img 
                             src={candadoCerrado} 
                             alt="Candado cerrado" 
                             className="modal-icono-candado" 
                         />
-                    </div>
+                    </aside>
                     <p>No has completado el tutorial aún. ¿Estás seguro que deseas continuar sin hacerlo?</p>
-                    <div className="modal-botones">
+                    <aside className="modal-botones">
                         <button 
                             className="menu-btn btn-primario" 
                             onClick={() => {
@@ -113,8 +118,8 @@ export function Menu() {
                         >
                             Jugar
                         </button>
-                    </div>
-                </div>
+                    </aside>
+                </main>
             </div>
         )}
 
