@@ -7,7 +7,7 @@ import { UIContext } from "../context/UIContext";
 
 // Importamos la música específica para la sección de información de monos
 import musica from '../assets/sounds/MonoInfo.mp3';
-import backgroundMusic from '../assets/sounds/musicaFondo.mp3';
+import backgroundMusic from '../assets/sounds/menuPrincipal.mp3';
 
 import '../styles/infoMonos.css';
 

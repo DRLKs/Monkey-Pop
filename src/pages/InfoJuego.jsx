@@ -27,11 +27,11 @@ function InfoJuego() {
     
     useEffect(() => {
         // Cambiar la música de fondo cuando se carga el componente
-        changeBackgroundMusic('../assets/sounds/musicaFondo.mp3');
+        changeBackgroundMusic('../assets/sounds/menuPrincipal.mp3');
         
         return () => {
             // Restaurar la música original al salir
-            changeBackgroundMusic('../assets/sounds/musicaFondo.mp3');
+            changeBackgroundMusic('../assets/sounds/menuPrincipal.mp3');
         };
     }, [changeBackgroundMusic]);
 
