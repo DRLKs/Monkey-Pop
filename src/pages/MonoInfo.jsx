@@ -41,7 +41,9 @@ function MonoInfo() {
             const scrollAmount = direction === 'left' ? -300 : 300;
             scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
-    };    // Comprobar el estado de scroll al montar y cuando cambie el tamaño
+    };
+
+    // Comprobar el estado de scroll al montar y cuando cambie el tamaño
     useEffect(() => {
         const container = scrollContainerRef.current;
         if (container) {
@@ -73,41 +75,77 @@ function MonoInfo() {
             <title>Monkey Pop - Información de Monos</title>
         </Helmet>
         <div className="pagina-mono-info">
-            <BarraNavegacion />
+            {/* Agregamos encabezados semánticos para definir regiones de página */}
+            <header>
+                <BarraNavegacion />
+            </header>
             
             {/* Separador para evitar la superposición con la barra de navegación */}
             <div className="separador-navbar"></div>
             
-            <div className="scroll-container-wrapper">
-                {canScrollLeft && <button className="scroll-button left" onClick={() => scroll('left')}>◀</button>}
-                
-                <div 
-                    ref={scrollContainerRef}
-                    className="contenedor-monos"
-                    onScroll={checkScroll}
-                >
-                    {Object.values(MONOS).map((mono) => (
-                        <div 
-                            key={mono.tipo || mono.id}
-                            className="tarjeta-mono"
-                        >
-                            <img src={mono.imagen} alt={mono.nombre} className="imagen-mono" />
-                            
-                            <div className="info-texto-mono">
-                                <h3>{mono.nombre}</h3>
-                                <p><strong>Precio:</strong> ${mono.precio}</p>
-                                <p><strong>Rango:</strong> {mono.rango}</p>
-                                <p><strong>Velocidad:</strong> {mono.tiempoRecarga}s</p>
-                                <p><strong>Daño:</strong> {mono.damage}</p>
-                                <p className="descripcion-mono">{mono.descripcion}</p>
-                            </div>
-                        </div>
-                    ))}
+            {/* Agregamos main como región principal del documento */}
+            <main>
+                {/* Envolvemos el título en un contenedor con fondo para mejorar contraste */}
+                <div className="titulo-principal-wrapper">
+                    <h1 className="titulo-principal">Información de Monos</h1>
                 </div>
                 
-                {canScrollRight && <button className="scroll-button right" onClick={() => scroll('right')}>▶</button>}
-            </div>
+                <div className="scroll-container-wrapper">
+                    {canScrollLeft && (
+                        <button 
+                            className="scroll-button left" 
+                            onClick={() => scroll('left')}
+                            aria-label="Desplazar hacia la izquierda"
+                        >
+                            ◀
+                        </button>
+                    )}
+                    
+                    <div 
+                        ref={scrollContainerRef}
+                        className="contenedor-monos"
+                        onScroll={checkScroll}
+                        aria-label="Galería de monos"
+                    >
+                        {Object.values(MONOS).map((mono) => (
+                            <div 
+                                key={mono.tipo || mono.id}
+                                className="tarjeta-mono"
+                            >
+                                {/* Corregimos texto alternativo redundante */}
+                                <img 
+                                    src={mono.imagen} 
+                                    alt="" 
+                                    className="imagen-mono" 
+                                    aria-hidden="true"
+                                />
+                                
+                                <div className="info-texto-mono">
+                                    {/* Cambiamos h3 por h2 para no saltar niveles de encabezado */}
+                                    <h2 className="nombre-mono">{mono.nombre}</h2>
+                                    <p><strong>Precio:</strong> ${mono.precio}</p>
+                                    <p><strong>Rango:</strong> {mono.rango}</p>
+                                    <p><strong>Velocidad:</strong> {mono.tiempoRecarga}s</p>
+                                    <p><strong>Daño:</strong> {mono.damage}</p>
+                                    <p className="descripcion-mono">{mono.descripcion}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {canScrollRight && (
+                        <button 
+                            className="scroll-button right" 
+                            onClick={() => scroll('right')}
+                            aria-label="Desplazar hacia la derecha"
+                        >
+                            ▶
+                        </button>
+                    )}
+                </div>
+            </main>
 
+            {/* Modal/diálogo para ajustes */}
             {verAjustesMono !== null && (
                 <AjustesMono
                     mono={verAjustesMono} 
