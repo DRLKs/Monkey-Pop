@@ -10,7 +10,7 @@ import globoCeleste1 from '../assets/images/globos/globo_celeste1.webp';
 
 import globoRojo from '../assets/images/globos/globoRojo.webp';
 import globoAmarillo from '../assets/images/globos/globoAmarillo.webp';
-import globoMorado from '../assets/images/globos/globoMorado.webp';
+import globoVerdeClaro from '../assets/images/globos/globoVerdeClaro.webp';
 import globoVerde from '../assets/images/globos/globoVerde.webp';
 
 function Globo({ health }) {
@@ -23,7 +23,7 @@ function Globo({ health }) {
     if (health === 6) return globoCeleste1;
     if (health === 7) return globoRojo;
     if (health === 8) return globoAmarillo;
-    if (health === 9) return globoMorado;
+    if (health === 9) return globoVerdeClaro;
     
     return globoVerde;
   };
