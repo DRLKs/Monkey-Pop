@@ -12,9 +12,9 @@ function BarraNavegacionPartida( {vidas, monedas, agarrarMono, informacion} ){
     return(
         <BarraNavegacion>
             
-            <div className="info-tutorial">
+            <aside className="info-tutorial">
               {informacion}
-            </div>
+            </aside>
     
             <BarraMonos
               monedas={monedas}

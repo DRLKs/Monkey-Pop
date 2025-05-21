@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import '../styles/accesibilidad.css';
 import { BarraNavegacion } from '../components/BarraNavegacion';
@@ -13,6 +14,11 @@ const AccesibilidadPanel = () => {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Monkey Pop - Accesibilidad</title>
+    </Helmet>
+
     <div className="accesibilidad-page">
       <BarraNavegacion />
       
@@ -116,6 +122,7 @@ const AccesibilidadPanel = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

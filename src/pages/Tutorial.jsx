@@ -1,6 +1,6 @@
 import React, { useMemo, useReducer, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-
+import { Helmet } from 'react-helmet';
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa';
 import MonoAgarrado from '../components/MonoAgarrado';
@@ -333,6 +333,9 @@ function Tutorial() {
 
   return (
     <>
+    <Helmet>
+      <title>Monkey Pop - Tutorial</title>
+    </Helmet>
     {isPortrait && window.innerWidth <= 739 && (
         <OrientationWarning />
       )}
@@ -352,7 +355,7 @@ function Tutorial() {
           <div className="tutorial-mensaje">
             <div className="tutorial-content">
               <div className="tutorial-text">
-                <h2>Bienvenido al tutorial</h2>
+                <h1>Bienvenido al tutorial</h1>
                 <p>Hoy aprenderás a jugar Monkey Pop.</p>
                 <button className="tutorial-button" onClick={avanzarPaso}>Comenzar</button>
               </div>
