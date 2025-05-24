@@ -56,14 +56,13 @@
   width: clamp(280px, 90%, 900px);
   margin: 0 auto;
   padding: clamp(20px, 5vh, 50px);
-  padding-top: clamp(1300px, 135vh, 1350px); /* SEPARACIÓN EXTREMA */
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   position: relative;
   z-index: 1;
-  overflow-x: hidden;
+  /*background: rgba(40, 20, 0, 0.88); Fondo oscuro semitransparente para contraste */
+  color: #fff;
 }
 
 /* Estilos específicos para la barra de navegación */
@@ -145,7 +144,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('../assets/images/textures/paper-texture.png');
+  /*background: url('../assets/images/textures/paper-texture.png');*/
   opacity: 0.1;
   z-index: -1;
   pointer-events: none;
@@ -411,6 +410,11 @@
   font-family: var(--fuente-secundaria);
   font-size: 0.9rem;
   width: 100%;
+  background: rgba(40, 20, 0, 0.96); /* Fondo más oscuro para el footer */
+  color: #fff !important;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  padding: 1.5rem 0 1rem 0;
 }
 
 .creditos-footer hr {
@@ -419,7 +423,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 215, 0, 0.5),
+    #ffd700,
     transparent
   );
   margin-bottom: 1rem;
@@ -428,13 +432,14 @@
 /* Estilo de enlaces generales */
 .creditos-container a:not(.boton-volver) {
   color: var(--color-dorado);
+  text-shadow: 1px 1px 2px #000;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.2s;
-  font-weight: 500;
 }
 
 .creditos-container a:not(.boton-volver):hover {
-  color: white;
+  color: #fff;
   text-decoration: underline;
 }
 
@@ -443,6 +448,9 @@
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.5);
+  color: #ffd700;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px #000;
 }
 
 /* Media queries para responsividad */

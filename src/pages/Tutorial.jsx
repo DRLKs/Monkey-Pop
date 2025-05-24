@@ -339,7 +339,7 @@ function Tutorial() {
     {isPortrait && window.innerWidth <= 739 && (
         <OrientationWarning />
       )}
-
+    <h1 className="visually-hidden">Tutorial de Monkey Pop</h1>
     <div>
       <BarraNavegacionTutorial
         informacion={INFORMACION_TUTORIAL[paso].texto}
@@ -355,7 +355,7 @@ function Tutorial() {
           <div className="tutorial-mensaje">
             <div className="tutorial-content">
               <div className="tutorial-text">
-                <h1>Bienvenido al tutorial</h1>
+                <h2>Bienvenido al tutorial</h2>
                 <p>Hoy aprenderás a jugar Monkey Pop.</p>
                 <button className="tutorial-button" onClick={avanzarPaso}>Comenzar</button>
               </div>

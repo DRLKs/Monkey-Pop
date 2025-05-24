@@ -13,7 +13,7 @@ import candadoAbierto from '../assets/images/tutorial/candadoTutorialAbierto.web
 import tituloJuego from '../assets/images/tituloJuego.webp';
 
 // Importamos el icono de accesibilidad
-import iconoAccesibilidad from '../assets/images/botones/icono-accesibilidad.webp';
+import iconoAccesibilidad from '../assets/images/botones/icono-accesibilidad.png';
 
 import '../styles/menu.css'
 
@@ -58,6 +58,8 @@ export function Menu() {
         <div className='menu-container-container'>
             <header className='titulo-juego-container'>
                     <img src={tituloJuego} alt='Título'/>
+                    {/* h1 con el titulo de la pagina oculto */}
+                    <h1 className='visually-hidden'>Página de inicio</h1>
             </header>
 
             <div className="menu-container">                

@@ -164,12 +164,7 @@ function Creditos() {
         <BarraNavegacion>
 
         </BarraNavegacion>
-        <div className='creditos-container'>
-            <h1> Developers </h1>
-            <p>
-            David, Suito, Fran, Soraya, Marquito
-            </p>
-        </div>
+        
         </>
     );
 }
