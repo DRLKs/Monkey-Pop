@@ -20,7 +20,7 @@
     font-family: var(--fuente-principal);
     text-shadow: var(--sombra-texto);
     position: relative;
-    padding-bottom: 50px;
+    margin-bottom: 15px;
     overflow-x: hidden;
 }
 
@@ -36,8 +36,9 @@
 }
 
 .info-juego-content {
-    max-width: 1200px;
+    width: 1200px;
     margin: 80px auto 0;
+    margin-top: 800px;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border: 3px solid var(--color-dorado);
@@ -94,7 +95,7 @@
     border: 2px solid var(--color-marron-claro);
     border-radius: var(--borde-radio);
     padding: 25px;
-    min-height: 400px;
+    height: 1000px;
 }
 
 .info-content {
@@ -183,7 +184,7 @@
 
 /* Sección de controles */
 .controles-section {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     padding: 15px;

@@ -80,9 +80,6 @@
 
 .botones-container-cerrar-vender {
     margin-top: auto; /* Empuja los botones hacia abajo */
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
 }
 
 .botones-container-cerrar-vender button {

@@ -127,8 +127,8 @@ export function Menu() {
 
         <footer>
             <Link to="/creditos">Créditos</Link>
-            <a href='https://github.com/DRLKs/Monkey-Pop' > github </a>
-            <a href='https://ninjakiwi.com/Games/Mobile/Bloons-TD-Battles-Mobile.html'> Bloons TD Battles </a>
+            <a href='https://github.com/DRLKs/Monkey-Pop' target="_blank"> github </a>
+            <a href='https://ninjakiwi.com/Games/Mobile/Bloons-TD-Battles-Mobile.html' target="_blank"> Bloons TD Battles </a>
             <Link to="/infoJuego">Historia</Link>
         </footer>
         </>

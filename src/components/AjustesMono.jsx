@@ -38,13 +38,13 @@ function AjustesMono({mono, venderMono, cerrar, funcionMejorarMono}) {
         </div>
 
         {mono.esMejorable() && (
-            <button className="btn-mejora" onClick={() => {mono.mejorarMono(), funcionMejorarMono(50);}}> Mejorar </button>
+            <button className="btn-mejora" onClick={() => {mono.mejorarMono(), funcionMejorarMono(50);}}> Mejorar (-50🪙) </button>
             )}
 
         <div className="botones-container-cerrar-vender">
             
-            <button className="btn" onClick={cerrar}> Cerrar </button>
-            <button className="btn" onClick={venderMono}> Vender {precioVentaMono} </button>
+            <button className="btn" onClick={venderMono}> Vender (+{precioVentaMono}🪙) </button>
+            <button className="btn" onClick={cerrar}> Cerrar </button>            
         </div>
     </div>
   );

@@ -11,7 +11,7 @@ export function BarraMonos({ monedas, vidas, children }) {
                     <span className="moneda-count">{monedas}</span>
                 </div>
                 <div className="vidas-container">
-                <h3 className="vidas"> ❤️ </h3>
+                <h2 className="vidas"> ❤️ </h2>
                 <span className="vidas-count">{vidas}</span>
                 </div>
             </div>

@@ -54,7 +54,7 @@
 /* Contenedor principal de créditos */
 .creditos-container {
   width: clamp(280px, 90%, 900px);
-  margin: 0 auto;
+  margin-top: 1400px;
   padding: clamp(20px, 5vh, 50px);
   display: flex;
   flex-direction: column;
@@ -81,15 +81,14 @@
   font-size: clamp(2.5rem, 10vw, 4rem);
   color: var(--color-dorado);
   text-align: center;
-  margin-top: 60px; /* Aumentado significativamente */
-  margin-bottom: 60px; /* Aumentado significativamente */
   position: relative;
-  text-shadow: var(--sombra-texto),
-               0 0 10px rgba(255, 215, 0, 0.6);
   animation: brilloTitulo 3s ease-in-out infinite alternate;
   letter-spacing: 2px;
   margin-top: 20px; /* Espacio adicional en la parte superior del título */
   margin-bottom: 30px;
+  border-radius: 20px;
+  background-color: rgba(75, 35, 0, 0.9);
+  padding: 10px 30px;
 }
 
 @keyframes brilloTitulo {
@@ -475,6 +474,7 @@
 @media (max-width: 480px) {
   .creditos-container {
     padding: clamp(15px, 3vh, 30px);
+    margin-top: 1200px;
   }
   
   .tecnologias-grid {
@@ -498,6 +498,7 @@
   .creditos-container {
     padding: 10px;
     padding-top: 70px; /* Menor espacio para la barra de navegación */
+    margin-top: 1200px;
   }
   
   .creditos-titulo {
@@ -532,6 +533,7 @@
 @media (max-height: 500px) and (orientation: landscape) {
   .creditos-container {
     padding-top: clamp(120px, 25vh, 180px); /* Muy aumentado para landscape */
+    margin-top: 1500px;
   }
   
   /* En modo landscape con poca altura, reducir el tamaño del título para que quepa */
@@ -548,6 +550,7 @@
     padding-top: clamp(150px, 25vh, 200px); /* Mayor padding en móviles pequeños */
     padding-left: 15px;
     padding-right: 15px;
+    margin-top: 1500px; /* Ajuste para móviles pequeños */
   }
 }
 

@@ -60,7 +60,7 @@ function Creditos() {
             rol: "Desarrollador Frontend",
             descripcion: "Implementación de componentes y funcionalidades interactivas.",
             email: "franramirez@uma.es",
-            github: "https://github.com/franramirez"
+            github: "https://github.com/franra18"
         },
         {
             nombre: "Soraya",

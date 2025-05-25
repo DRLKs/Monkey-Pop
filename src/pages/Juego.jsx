@@ -288,10 +288,15 @@ function Juego() {
    * @param {Number} id Identificador
    */
   const mejorarMono = (precio) => {
-    dispatch({
-      type: 'MEJORAR_MONO',
-      precio: precio
-    });
+    if (gameState.monedas >= precio) {
+      dispatch({
+        type: 'MEJORAR_MONO',
+        precio: precio
+      });
+    } else {
+      // Opcional: mostrar mensaje de error o feedback al usuario
+      alert('No tienes suficientes monedas para mejorar este mono.');
+    }
   }
 
   /**
@@ -410,7 +415,7 @@ function Juego() {
       {isPortrait && (
         <OrientationWarning />
       )}
-      
+      <h1 className="visually-hidden">Página de Juego de Monkey Pop</h1>
       <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
         ronda={gameState.ronda}

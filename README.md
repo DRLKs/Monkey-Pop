@@ -74,7 +74,7 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 
 4. Cargar:
    ```sh
-   npm run deb
+   npm run dev
 
 ## Deploy
 La aplicación final está subida a GitHub pages, por tanto:

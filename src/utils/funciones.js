@@ -242,10 +242,15 @@ export const gameReducer = (state, action) => {
       };
 
     case 'MEJORAR_MONO':
-      return {
-        ...state,
-        monedas: state.monedas - action.precio
-      };
+      if (state.monedas >= action.precio) {
+        return {
+          ...state,
+          monedas: state.monedas - action.precio
+        };
+      } else {
+        // No se puede mejorar si no hay suficientes monedas
+        return state;
+      }
       
     default:
       return state;
