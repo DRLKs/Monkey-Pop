@@ -52,6 +52,9 @@ body {
     border-radius: 10px;
 }
 
+.menu-container-container{
+    margin-bottom: 100px;
+}
 
 /*  BOTONES */
 .menu-container {

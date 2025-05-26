@@ -20,7 +20,6 @@
 .game-container{
     display: grid;
     flex-grow: 1;       /* Ocupa todo lo que puede */
-    margin-top: 65px;   /* No se superpone a la navBar */
     width: max-content;
     grid-template-columns: repeat(30, 1fr);
     
@@ -275,7 +274,6 @@ body {
   
   @media (orientation: landscape) {
     .game-container {
-      margin-top: 45px; /* Barra de navegación más pequeña en móvil */
       padding: 10px;
     }
     
@@ -305,9 +303,7 @@ body {
 /* Media queries para pantallas muy pequeñas */
 @media (max-width: 480px) {
   @media (orientation: landscape) {
-    .game-container {
-      margin-top: 40px;
-    }
+
     
     .imagenMonoAgarrado, .globo, .mono, .globo-explotado {
       max-width: 25px;
