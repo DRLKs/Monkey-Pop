@@ -288,15 +288,10 @@ function Juego() {
    * @param {Number} id Identificador
    */
   const mejorarMono = (precio) => {
-    if (gameState.monedas >= precio) {
       dispatch({
         type: 'MEJORAR_MONO',
         precio: precio
       });
-    } else {
-      // Opcional: mostrar mensaje de error o feedback al usuario
-      alert('No tienes suficientes monedas para mejorar este mono.');
-    }
   }
 
   /**
@@ -460,6 +455,7 @@ function Juego() {
         mono={monoVerAjustes}
         venderMono={venderMono}
         funcionMejorarMono={(precio) => mejorarMono(precio)}
+        monedas={gameState.monedas}
         cerrar={() => setMonoVerAjustes(null)}
       />
       }

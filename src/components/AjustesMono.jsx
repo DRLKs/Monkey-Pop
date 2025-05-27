@@ -2,9 +2,11 @@ import '../styles/ajustesMono.css';
 
 import { MONOS } from '../utils/constantes'
 
-function AjustesMono({mono, venderMono, cerrar, funcionMejorarMono}) {
+function AjustesMono({mono, venderMono, cerrar, monedas, funcionMejorarMono}) {
 
   const precioVentaMono = MONOS[mono.getTipo()].precio / 2;
+
+  const sePuedeComprar = monedas >= 50;
 
   return (
     <div className="ajustes-mono-container">
@@ -38,7 +40,9 @@ function AjustesMono({mono, venderMono, cerrar, funcionMejorarMono}) {
         </div>
 
         {mono.esMejorable() && (
-            <button className="btn-mejora" onClick={() => {mono.mejorarMono(), funcionMejorarMono(50);}}> Mejorar (-50🪙) </button>
+
+            <button 
+            className={`btn-mejora${!sePuedeComprar ? ' disabled' : ''}`} onClick={() => {mono.mejorarMono(), funcionMejorarMono(50);}}> Mejorar (-50🪙) </button>
             )}
 
         <div className="botones-container-cerrar-vender">

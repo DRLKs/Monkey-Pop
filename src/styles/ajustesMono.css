@@ -127,14 +127,51 @@
     transform: translateY(1px);
 }
 
-/* Versión deshabilitada (opcional) */
-.btn-mejora:disabled {
-    background-color: #a0a0a0;
-    cursor: not-allowed;
-    transform: none;
+/* Estilo para el botón de mejora deshabilitado */
+.btn-mejora.disabled {
+    background-color: #666666 !important;
+    color: #999999 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    pointer-events: none;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none !important;
 }
 
-/* Responsive para móviles muy pequeños */
+.btn-mejora.disabled:hover {
+    background-color: #666666 !important;
+    color: #999999 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.btn-mejora.disabled:active {
+    background-color: #666666 !important;
+    color: #999999 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Alternativa usando :disabled si cambias a usar el atributo disabled */
+.btn-mejora:disabled {
+    background-color: #666666 !important;
+    color: #999999 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    pointer-events: none;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.btn-mejora:disabled:hover,
+.btn-mejora:disabled:active {
+    background-color: #666666 !important;
+    color: #999999 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 @media (max-width: 320px) {
     .ajustes-mono-container {
         width: 150px;

@@ -138,12 +138,25 @@
 }
 
 /* Responsive */
-@media (max-width: 600px) {
+@media (max-width: 850px) {
+
+  .fin-juego-contenedor {
+    height: auto;
+    width: 95%;
+    padding: 20px;
+  }
+
   .fin-juego-titulo {
     font-size: 2rem;
+    margin: 0px 0px 5px;
+  }
+
+  .fin-juego-estadisticas {
+    margin-bottom: 10px;
   }
   
   .etiqueta, .valor {
     font-size: 1rem;
   }
 }
+
