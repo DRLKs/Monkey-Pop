@@ -65,53 +65,7 @@ const AccesibilidadPanel = () => {
               <option value="large">Grande</option>
             </select>
           </div>
-          
-          <div className="accesibilidad-opcion">
-            <label htmlFor="reducir-movimiento">Reducir movimiento</label>
-            <input 
-              id="reducir-movimiento"
-              type="checkbox" 
-              checked={accessibilitySettings.reduceMotion} 
-              onChange={(e) => updateAccessibilitySetting('reduceMotion', e.target.checked)} 
-            />
-          </div>
-        </div>
         
-        <div className="accesibilidad-tarjeta">
-          <h2>Opciones de Jugabilidad</h2>
-          
-          <div className="accesibilidad-opcion">
-            <label htmlFor="velocidad-juego">Velocidad del juego</label>
-            <select 
-              id="velocidad-juego"
-              value={accessibilitySettings.gameSpeed} 
-              onChange={(e) => updateAccessibilitySetting('gameSpeed', e.target.value)}
-            >
-              <option value="slow">Lento</option>
-              <option value="normal">Normal</option>
-              <option value="fast">Rápido</option>
-            </select>
-          </div>
-          
-          <div className="accesibilidad-opcion">
-            <label htmlFor="descripciones-audio">Descripciones de audio</label>
-            <input 
-              id="descripciones-audio"
-              type="checkbox" 
-              checked={accessibilitySettings.audioDescriptions} 
-              onChange={(e) => updateAccessibilitySetting('audioDescriptions', e.target.checked)} 
-            />
-          </div>
-          
-          <div className="accesibilidad-opcion">
-            <label htmlFor="navegacion-teclado">Navegación por teclado</label>
-            <input 
-              id="navegacion-teclado"
-              type="checkbox" 
-              checked={accessibilitySettings.keyboardNavigation} 
-              onChange={(e) => updateAccessibilitySetting('keyboardNavigation', e.target.checked)} 
-            />
-          </div>
         </div>
         
         <button 

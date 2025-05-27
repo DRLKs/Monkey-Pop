@@ -107,7 +107,7 @@
   color: white;
   font-family: var(--fuente-principal);
   /* Aumentamos MUCHO MÁS el padding superior */
-  padding-top: 850px; 
+  padding-top: 250px; 
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 60px;
@@ -386,4 +386,16 @@
 :root.reduce-motion * {
   animation-duration: 0.001ms !important;
   transition-duration: 0.001ms !important;
+}
+
+@media (max-height: 700px) {
+  .accesibilidad-page {
+    padding-top: 150px; 
+  }
+}
+
+@media (max-height: 400px) {
+  .accesibilidad-page {
+    padding-top: 375px; 
+  }
 }
