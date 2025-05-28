@@ -1,50 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet'
-
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import '../styles/creditos.css';
 
-function Creditos() {
-    const [visibleSections, setVisibleSections] = useState({
-        equipo: false,
-        agradecimientos: false,
-        tecnologias: false
-    });
+// Si los logos no existen, podemos crear un objeto con URLs de CDNs públicos
+const logosExternos = {
+  React: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png",
+  CSS3: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/340px-CSS3_logo_and_wordmark.svg.png",
+  JavaScript: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/600px-JavaScript-logo.png",
+  Vite: "https://vitejs.dev/logo.svg",
+  HTML5: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png"
+};
 
-    // Función para manejar la animación de elementos al hacer scroll
+function Creditos() {
+    // Función para hacer visible todas las secciones inmediatamente
     useEffect(() => {
-        const handleScroll = () => {
+        const makeAllVisible = () => {
             const sections = document.querySelectorAll('.fade-in');
             sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (sectionTop < windowHeight - 100) {
-                    section.classList.add('visible');
-                    const sectionId = section.id;
-                    if (sectionId) {
-                        setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
-                    }
-                }
+                section.classList.add('visible');
+                section.classList.add('animate');
             });
         };
 
-        window.addEventListener('scroll', handleScroll);
-        // Ejecutar una vez para elementos ya visibles al cargar
-        handleScroll();
-        
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        // Ejecutar inmediatamente para que todo sea visible
+        makeAllVisible();
     }, []);
 
     // Datos del equipo
     const equipoData = [
         {
             nombre: "David",
-            rol: "Desarrollador Principal",
-            descripcion: "Encargado de la estructura principal del juego y la lógica del frontend.",
+            rol: "Desarrollador Backend",
+            descripcion: "Encargado de la lógica del juego y la integración con el backend.",
             email: "davidmunvalle@uma.es",
             github: "https://github.com/DRLKs"
         },
@@ -78,21 +67,22 @@ function Creditos() {
         }
     ];
 
-    // Tecnologías utilizadas - sin logos
+    // Tecnologías utilizadas con sus logos
     const tecnologias = [
-        { nombre: "React" },
-        { nombre: "CSS3" },
-        { nombre: "JavaScript" },
-        { nombre: "Vite" },
-        { nombre: "HTML5" }
+        { nombre: "React", logo: logosExternos.React, descripcion: "Biblioteca de JavaScript para construir interfaces de usuario" },
+        { nombre: "CSS3", logo: logosExternos.CSS3, descripcion: "Lenguaje de estilo para el diseño visual" },
+        { nombre: "JavaScript", logo: logosExternos.JavaScript, descripcion: "Lenguaje de programación para el frontend" },
+        { nombre: "Vite", logo: logosExternos.Vite, descripcion: "Herramienta de compilación rápida para desarrollo" },
+        { nombre: "HTML5", logo: logosExternos.HTML5, descripcion: "Lenguaje de marcado para estructurar el contenido" }
     ];
 
     return (
         <>
-        <Helmet>
-            <title>Monkey Pop - Creditos</title>
-        </Helmet>
-
+            <Helmet>
+                <title>Monkey Pop - Créditos</title>
+                <meta name="description" content="Créditos y agradecimientos del juego Monkey Pop" />
+            </Helmet>
+            
             <div className='fondo-creditos'></div>
             <BarraNavegacion />
             
@@ -109,11 +99,11 @@ function Creditos() {
                                 <div className='rol-miembro'>{miembro.rol}</div>
                                 <p className='descripcion-miembro'>{miembro.descripcion}</p>
                                 <div className='contacto-miembro'>
-                                    <a href={`mailto:${miembro.email}`} title="Email">
-                                        <span role="img" aria-label="Email">✉️</span> Email
+                                    <a href={`mailto:${miembro.email}`} title={`Enviar email a ${miembro.nombre}`} aria-label={`Enviar email a ${miembro.nombre}`}>
+                                        <span role="img" aria-hidden="true">✉️</span> Email
                                     </a>
-                                    <a href={miembro.github} target="_blank" rel="noopener noreferrer" title="GitHub">
-                                        <span role="img" aria-label="GitHub">💻</span> GitHub
+                                    <a href={miembro.github} target="_blank" rel="noopener noreferrer" title={`Perfil GitHub de ${miembro.nombre}`} aria-label={`Visitar GitHub de ${miembro.nombre}`}>
+                                        <span role="img" aria-hidden="true">💻</span> GitHub
                                     </a>
                                 </div>
                             </div>
@@ -121,15 +111,24 @@ function Creditos() {
                     </div>
                 </section>
                 
-                {/* Sección de tecnologías */}
+                {/* Sección de tecnologías mejorada con logos */}
                 <section className='seccion-creditos fade-in' id="tecnologias">
                     <h2 className='seccion-titulo'>Tecnologías Utilizadas</h2>
                     <div className='tecnologias-grid'>
                         {tecnologias.map((tech, index) => (
                             <div className='tecnologia-item' key={index}>
-                                {/* Usamos la primera letra como marcador de posición en lugar de un logo */}
-                                <div className='tecnologia-logo-placeholder'>{tech.nombre.charAt(0)}</div>
-                                <div className='tecnologia-nombre'>{tech.nombre}</div>
+                                <div className='tecnologia-logo-container'>
+                                    <img 
+                                        src={tech.logo} 
+                                        alt={`Logo de ${tech.nombre}`} 
+                                        className='tecnologia-logo'
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div className='tecnologia-info'>
+                                    <div className='tecnologia-nombre'>{tech.nombre}</div>
+                                    <div className='tecnologia-descripcion'>{tech.descripcion}</div>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -146,10 +145,12 @@ function Creditos() {
                     </ul>
                 </section>
                 
-                {/* Botón para volver al menú */}
-                <Link to="/" className='boton-volver'>
-                    Volver al Menú
-                </Link>
+                {/* Botón Volver al Menú - simplificado */}
+                <div className="nav-controles">
+                    <Link to="/" className='boton-volver'>
+                        🏠 Volver al Menú
+                    </Link>
+                </div>
                 
                 {/* Pie de página */}
                 <div className='creditos-footer'>
@@ -159,12 +160,6 @@ function Creditos() {
                     <p className='version-info'>Versión 1.0.0</p>
                 </div>
             </div>
-        
-        <div className='fondo-creditos'></div>
-        <BarraNavegacion>
-
-        </BarraNavegacion>
-        
         </>
     );
 }
