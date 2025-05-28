@@ -89,7 +89,7 @@ export const habilitadoParaJugar = () => {
 export const obtenerCaminoMapa = (mapa, ancho_mapa,largo_mapa) => {
     const camino = []
     let posicionAnterior;
-    let posicionActual;
+    let posicionActual = -1;
     
     for (let i = 0; i < mapa.length; i = i + ancho_mapa) {
         if (mapa[i] === ESTADO_CASILLA.CAMINO) {
@@ -97,6 +97,16 @@ export const obtenerCaminoMapa = (mapa, ancho_mapa,largo_mapa) => {
         posicionAnterior = i - 1;
         break;
         }
+    }
+
+    if (posicionActual === -1) {
+      for (let i = 0; i < 30; i = i + ancho_mapa) {
+        if (mapa[i] === ESTADO_CASILLA.CAMINO) {
+        posicionActual = i;
+        posicionAnterior = i - 1;
+        break;
+        }
+    }
     }
     
     let caminoTerminado = false;
