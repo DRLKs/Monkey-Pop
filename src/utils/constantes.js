@@ -1,10 +1,12 @@
 // Import the images directly
 import monoBasico from '../assets/images/monkeys/monoBasico.webp'
-import monoArco from '../assets/images/monkeys/monoArco.png'
+import monoArco from '../assets/images/monkeys/monoArco.webp'
 import monoFusil from '../assets/images/monkeys/monoFusil.png'
-import monoArtificiero from '../assets/images/monkeys/monoArtificiero.png'
+import monoArtificiero from '../assets/images/monkeys/monoArtificiero.webp'
 import monoFrancotirador from '../assets/images/monkeys/monoFrancotirador.png'
 import monoLaser from '../assets/images/monkeys/monoLaser.png'
+
+import monoBasicoDisparando from '../assets/images/monkeys/monoBasicoDisparando.webp'
 /**
  * Estados de las casillas del mapa
  * 
@@ -38,6 +40,7 @@ export const MONOS = {
       nombre: "Mono Básico",
       tipo: "basico",
       imagen: monoBasico,
+      imagen_disparando: monoBasicoDisparando,
       precio: 100,
       rango: 200,
       tiempoRecarga: 3,
@@ -141,7 +144,7 @@ export const PARTIDA = {
   /**
    * Tiempo de un tick del jeugo en milisegundos
    */
-  tiempoActualizacionGlobos: 100,
+  tiempoActualizacionGlobos: 200,
 
   /**
    * Tiempo entre rondas en milisegundos
@@ -151,7 +154,7 @@ export const PARTIDA = {
   /**
    * Monedas que da un globo al ser destruido
    */
-  monedasGlobo: 10,               
+  monedasGlobo: 5,               
   monedas_iniciales: 170,
   vidas_iniciales: 100,
   ronda_inicial: 1

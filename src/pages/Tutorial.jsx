@@ -456,6 +456,7 @@ function Tutorial() {
           mono={monoVerAjustes}
           venderMono={() => venderMono(monoVerAjustes.id)}
           funcionMejorarMono={() => mejorarMono(monoVerAjustes.id)}
+          monedas={gameState.monedas}
           cerrar={() => setMonoVerAjustes(null)}
         />
       )}

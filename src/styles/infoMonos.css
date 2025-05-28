@@ -22,7 +22,7 @@
 
 /* --- Estilos generales para el cuerpo --- */
 body {
-    padding-top: clamp(100px, 15vh, 150px); /* SEPARACIÓN EXTREMA */
+    padding-top: clamp(250px, 15vh, 150px); /* SEPARACIÓN EXTREMA */
     margin: 0;
     font-family: var(--fuente-parrafos);
     color: var(--color-texto-claro);

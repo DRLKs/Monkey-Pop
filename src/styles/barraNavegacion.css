@@ -407,6 +407,22 @@ body {
     }
 }
 
+@media (max-width: 841px) {
+    .info-tutorial {
+        width: 180px;
+        max-width: 200px;
+        padding: 5px 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 820px) {
+    .info-container {
+        font-size: 14px;
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 740px) {
     body {
         padding-top: 120px;
@@ -458,27 +474,17 @@ body {
         margin: 1px;
     }
     
-    .info-tutorial {
-        width: 175px;
-        max-width: 180px;
-        padding: 2px 4px;
-        font-size: 1rem;
-        margin: 0 5px;
-    }
-    
     .info-container {
         font-size: 13px;
-        flex-direction: column;
     }
 }
 
-@media (max-width: 670px) {
-.info-tutorial {
-        width: 165px;
-        max-width: 180px;
-        padding: 2px 4px;
-        font-size: 0.9rem;
-        margin: 0 5px;
+@media (max-width: 680px) {
+     .info-tutorial {
+        width: 180px;
+        max-width: 200px;
+        padding: 4px 3px;
+        font-size: 0.85rem;
     }
 }
 

@@ -33,7 +33,7 @@ export const CasillaMapa = ({ estado = 'default', index, actualizarMapa, globos,
         {monos.map(mono => (
             <MonoMapa 
             key={mono.id}
-            tipo={mono.tipo}
+            mono={mono}
             />
         ))}
         {explotaGloboCasilla && <img className='globo-explotado' src={globoExplotado} alt='Explosion de globo' />}

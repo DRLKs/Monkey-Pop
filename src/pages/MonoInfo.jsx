@@ -38,7 +38,7 @@ function MonoInfo() {
     const scroll = (direction) => {
         if (scrollContainerRef.current) {
             const { clientWidth } = scrollContainerRef.current;
-            const scrollAmount = direction === 'left' ? -300 : 300;
+            const scrollAmount = direction === 'left' ? -600 : 600;
             scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
     };
