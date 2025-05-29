@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
+
 :root{
     --color-boton-importante: #e19718;
     --color-navegador: #282c34;
@@ -245,6 +246,18 @@ body {
   touch-action: none;
   -webkit-user-drag: none;
   user-select: none;
+}
+
+/* Añade un sombreado a los monos mejorados */
+.mono-mapa.mono-mejorado .mono {
+  filter: drop-shadow(0 0 6px #FFD700) drop-shadow(0 0 12px #FFD700);
+}
+
+/* Añade un recuadro al mono seleccionado*/
+.mono-mapa.mono-seleccionado .mono {
+  outline: 2px solid #f6ff00; /* Azul brillante */
+  outline-offset: 0px;
+  border-radius: 45%;
 }
 
 /* Estilo del círculo que indica el rango del mono seleccionado */

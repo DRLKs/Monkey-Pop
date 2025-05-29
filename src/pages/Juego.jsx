@@ -29,8 +29,8 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 function Juego() {
-  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
-  //const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.zOrdenador);
+  //const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
+  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.zOrdenador);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -446,6 +446,7 @@ function Juego() {
               globos={globosEnCasilla} 
               monos={monosEnCasilla}
               explotaGloboCasilla={explotaGloboCasilla}
+              monoVerAjustes={monoVerAjustes}
               />
           )
         })}
