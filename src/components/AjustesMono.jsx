@@ -14,30 +14,30 @@ function AjustesMono({mono, venderMono, cerrar, monedas, funcionMejorarMono}) {
             <img src={MONOS[mono.getTipo()].imagen} alt={MONOS[mono.getTipo()].nombre} />
             <h1> { MONOS[mono.getTipo()].nombre } </h1>
         </div>
-        <div className="estadisticas-container">
+        <section className="estadisticas-container">
             <h2> Estadísticas </h2>
             <div className="estadistica-row">
               Rango: {mono.getRango()} 
               {mono.esMejorable() && (
-                <span className="mejora-label"> → {mono.getRango() + 12}</span>
+                <span className="mejora-label"> → {mono.getRango() + mono.mejoraRango}</span>
               )}
             </div>
 
             <div className="estadistica-row">
               Daño: { mono.getDamage() }
               {mono.esMejorable() && (
-                <span className="mejora-label"> → {mono.getDamage() + 12}</span>
+                <span className="mejora-label"> → {mono.getDamage() + mono.mejoraDamage}</span>
               )}
             </div>
 
             <div className="estadistica-row">
               Recarga: { mono.getTiempoRecarga() }
               {mono.esMejorable() && (
-                <span className="mejora-label"> → {mono.getTiempoRecarga() + 12}</span>
+                <span className="mejora-label"> → {mono.getTiempoRecarga() - mono.mejoraTiempoRecarga}</span>
               )}
             </div>
             
-        </div>
+        </section>
 
         {mono.esMejorable() && (
 

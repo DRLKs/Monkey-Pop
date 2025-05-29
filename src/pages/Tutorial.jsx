@@ -14,7 +14,7 @@ import ProTip from '../components/tutorial/ProTip';
 import { Mono as MonoClass } from '../utils/clases';
 
 // Utilidades
-import { mapas } from '../utils/mapas';
+import { mapas_movil, mapas_ordenador } from '../utils/mapas';
 import { ESTADO_CASILLA, MONOS, PARTIDA, INFORMACION_TUTORIAL, MAPA_MOVIL } from '../utils/constantes';
 import { gameReducer, habilitadoParaJugar, obtenerCaminoMapa} from '../utils/funciones';
 
@@ -38,7 +38,7 @@ function Tutorial() {
   const navigate = useNavigate(); 
 
   // Estados del juego:
-  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
+  const [mapa, setMapa] = useState( isMovile() ? mapas_movil : mapas_ordenador);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -57,6 +57,7 @@ function Tutorial() {
     monedas: 99999,   
     ronda: 1,
     perdido: false,
+    indexsGlobosExplotados: []
   });
 
 
@@ -447,6 +448,7 @@ function Tutorial() {
             index={index}
             actualizarMapa={() => actualizarMapa(index)}
             globos={gameState.globos.filter((globo) => globo.index === index)}
+            explotaGloboCasilla={gameState.indexsGlobosExplotados.some(idx => index === idx)}
             monos={gameState.monosColocados.filter((mono) => mono.index === index)}
           />
         ))}

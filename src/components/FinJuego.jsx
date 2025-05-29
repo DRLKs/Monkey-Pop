@@ -31,11 +31,6 @@ const FinJuego = ({ visible, estadisticas, onReiniciar }) => {
           </div>
           
           <div className="estadistica">
-            <span className="etiqueta">Monedas obtenidas:</span>
-            <span className="valor">{estadisticas.monedas}</span>
-          </div>
-          
-          <div className="estadistica">
             <span className="etiqueta">Tiempo jugado:</span>
             <span className="valor">
               {Math.floor(estadisticas.tiempoJugado / 60)}m {estadisticas.tiempoJugado % 60}s

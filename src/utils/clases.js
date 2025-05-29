@@ -1,4 +1,6 @@
 
+import { MONOS } from "./constantes";
+
 export class Globo {
 
     constructor(id, index, health, tiempoDeVida) {
@@ -55,6 +57,9 @@ export class Globo {
       this.tiempoRecarga = tiempoRecarga;
       this.mejorable = true;              // Indica si el mono es mejorable
       this.nivel = 1;                     // Contador de mejoras
+      this.mejoraRango = MONOS[tipo].mejoraRango; // Mejora del rango
+      this.mejoraDamage = MONOS[tipo].mejoraDamage; // Mejora del daño
+      this.mejoraTiempoRecarga = MONOS[tipo].mejoraTiempoRecarga; // Mejora del tiempo de recarga
     }
 
     /**
@@ -131,12 +136,12 @@ export class Globo {
     if( this.nivel < 3 ){
 
       ++this.nivel;
-      this.damage += 1; // Mejora el daño
-      this.rango += 12; // Mejora el rango
-      this.tiempoRecarga -= 1; // Mejora el tiempo de recarga
+      this.damage += this.mejoraDamage; // Mejora el daño
+      this.rango += this.mejoraRango; // Mejora el rango
+      this.recarga -= this.mejoraTiempoRecarga; // Mejora el tiempo de recarga
     }
 
-    if( this.nivel >= 3 ){
+    if( this.nivel >= 2 ){
       this.mejorable = false; // El mono no se puede mejorar más
     }
   }

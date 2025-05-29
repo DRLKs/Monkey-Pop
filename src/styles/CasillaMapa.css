@@ -225,7 +225,6 @@
   .casilla-mapa {
     width: 30px;
     height: 30px;
-    border-width: 1px;
   }
   
   .casilla-selected {
@@ -238,8 +237,8 @@
 
 @media (max-height: 450px) {
   .casilla-mapa {
-    width: 4vw;
-    height: 3.5vw;
+    width: 4.5vw;
+    height: 3.7vw;
   }
   
   .casilla-selected {

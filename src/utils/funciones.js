@@ -92,7 +92,7 @@ export const obtenerCaminoMapa = (mapa, ancho_mapa,largo_mapa) => {
     let posicionActual = -1;
     
     //Busca en la primera columna
-    for (let i = 0; i < mapa.length; i = i + ancho_mapa) {
+    for (let i = 0; i < largo_mapa; i = i + ancho_mapa) {
         if (mapa[i] === ESTADO_CASILLA.CAMINO) {
         posicionActual = i;
         posicionAnterior = i - 1;

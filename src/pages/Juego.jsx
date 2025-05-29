@@ -15,7 +15,7 @@ import OrientationWarning from '../components/OrientationWarning';
 import { Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
-import { mapas } from '../utils/mapas'
+import { mapas_ordenador, mapas_movil } from '../utils/mapas'
 import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA, MAPA_MOVIL } from '../utils/constantes'
 import { obtenerCaminoMapa, gameReducer, isMovile } from '../utils/funciones'
 
@@ -30,7 +30,7 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 function Juego() {
   //const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
-  const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.zOrdenador);
+  const [mapa, setMapa] = useState( isMovile() ? mapas_movil : mapas_ordenador);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
   const [monoVerAjustes, setMonoVerAjustes] = useState(null);
   const [position, setPosition] = useState({x: 0, y:0});
@@ -67,7 +67,15 @@ function Juego() {
   const camino = useMemo(() => {
     if( isMovile() )  return obtenerCaminoMapa(mapa, MAPA_MOVIL.ancho_mapa, MAPA_MOVIL.largo_mapa);
     else              return obtenerCaminoMapa(mapa, PARTIDA.ancho_mapa, PARTIDA.largo_mapa);
+
   }, []);
+
+  /**
+   * Deselecciona el mono
+   */
+  const soltarMono = () => {
+    setMonoSeleccionado(null);
+  }
 
   /*
    * Controla el tiempo de juego para calcular el tiempo jugado en la pantalla final 
@@ -159,11 +167,13 @@ function Juego() {
         mono: nuevoMono,
         precio: MONOS[monoSeleccionado].precio
       });
-      setMonoSeleccionado(null);
+      soltarMono();
       setMapa(newMapa);
     
     }
   }
+
+  
   /**
    * Función que trackea la posición del ratón
    * Es usada para que la imagen del mono seleccionado parezca que es arrastrada por el jugador
@@ -209,29 +219,35 @@ function Juego() {
           pausarReaunudarCronometro();  // Habrá que ponerlo en el botón de pausa para poder actualizarlo
           break;
         case '0':
-          setMonoSeleccionado(null);
+          soltarMono();
           break;
         case '1':
-          setMonoSeleccionado(MONOS.basico.tipo);
+          if (gameState.monedas < MONOS.basico.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.basico.tipo);
           break;
         case '2':
-          setMonoSeleccionado(MONOS.arco.tipo);
+          if (gameState.monedas < MONOS.arco.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.arco.tipo);
           break;
 
         case '3':
-          setMonoSeleccionado(MONOS.fusil.tipo);
+          if (gameState.monedas < MONOS.fusil.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.fusil.tipo);
           break;
 
         case '4':
-          setMonoSeleccionado(MONOS.artificiero.tipo);
+          if (gameState.monedas < MONOS.artificiero.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.artificiero.tipo);
           break;
 
         case '5':
-          setMonoSeleccionado(MONOS.francotirador.tipo);
+          if (gameState.monedas < MONOS.francotirador.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.francotirador.tipo);
           break;
         
         case '6':
-          setMonoSeleccionado(MONOS.laser.tipo);
+          if (gameState.monedas < MONOS.laser.precio) soltarMono();
+          else setMonoSeleccionado(MONOS.laser.tipo);
           break;
 
         case 'p':
@@ -263,7 +279,7 @@ function Juego() {
     // Si ya está seleccionado, lo deseleccionamos; si no, lo seleccionamos
     console.log("Agarrando mono:", tipoMono, "Mono seleccionado actualmente:", monoSeleccionado);
     if (monoSeleccionado === tipoMono) {
-      setMonoSeleccionado(null);
+      soltarMono();
     } else {
       setMonoSeleccionado(tipoMono);
     }
@@ -421,6 +437,7 @@ function Juego() {
         reiniciarJuego={() => abrirConfirmacion(reiniciarJuego, 'REINICIAR')}
         abrirAjustes={abrirAjustes}
         agarrarMono={agarrarMono}
+        cronometroActivo={cronometroActivo}
       />      
       
       {monoSeleccionado !== null && (
@@ -471,7 +488,6 @@ function Juego() {
         visible={gameState.perdido} 
         estadisticas={{
           ronda: gameState.ronda,
-          monedas: gameState.monedas - PARTIDA.monedas_iniciales,
           tiempoJugado: Math.floor(((tiempoFin || Date.now()) - tiempoInicio) / 1000),
           globosExplotados: gameState.globosExplotados
         }}

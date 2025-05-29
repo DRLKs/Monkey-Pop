@@ -6,7 +6,7 @@ import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA } from 
 
 
 //Mapa con camino diagonal intentando mejorar como se ve. Añadiendo más tipos de casillas
-export const mapaCaminoDiagonalMejorado = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
+export const mapaCaminoDiagonal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
   const x = index % PARTIDA.ancho_mapa;
   const y = Math.floor(index / PARTIDA.ancho_mapa);
 
@@ -24,11 +24,10 @@ export const mapaCaminoDiagonalMejorado = Array(PARTIDA.ancho_mapa * PARTIDA.lar
   // (x, y) = (1 + 2*n, 2 + n) para n = 0..12
   if (x >= 1 && x <= 25 && y >= 2 && y <= 14 && (x - 1) % 2 === 0 && (x - 1) / 2 === y - 2) return 'tierra_cesped2';
 
-  // Agua en las esquinas (igual que mapaCaminoDiagonal)
   if (y > 3 && y - 4 > x) return ESTADO_CASILLA.AGUA;
   if (x > 17 && x > y + 17) return ESTADO_CASILLA.AGUA;
 
-  // Camino diagonal ajustado para 30x15 (igual que mapaCaminoDiagonal)
+  // Camino diagonal ajustado para 30x15 
   if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return ESTADO_CASILLA.CAMINO;
 
   if((x == 3 && y == 5) || (x == 9 && y == 9) || (x == 19 && y == 13)
@@ -151,11 +150,29 @@ export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.
 
 
 
-// Exportar todos los mapas en un objeto para fácil acceso
-export const mapas = {
-  diagonalMejorado: mapaCaminoDiagonalMejorado,
-  diagonalMovil: mapaCaminoDiagonalMovil,
-  zOrdenador: mapaZOrdenador,
+/** 
+ * Función que devuelve aleatoriamente un mapa para el ordenador
+*/
+export const mapas_ordenador = () => {
+  const mapasDisponiblesOrdenador = [
+    mapaCaminoDiagonal,
+    mapaZOrdenador
+  ];
+
+  const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesOrdenador.length);
+  return mapasDisponiblesOrdenador[indiceAleatorio];
 };
 
-export default mapas;
+/**
+ * Función que devuelve aleatoriamente un mapa para el movil
+ */ 
+export const mapas_movil = () => {
+  const mapasDisponiblesMovil = [
+    mapaCaminoDiagonalMovil
+  ];
+  
+  const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesMovil.length);
+  return mapasDisponiblesMovil[indiceAleatorio];
+};
+
+

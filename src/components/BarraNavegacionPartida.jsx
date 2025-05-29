@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Constantes
 import { MONOS } from "../utils/constantes";
 
@@ -15,10 +15,17 @@ import btnReanudar from '../assets/images/botones/btn-play.png'
 import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
 import btnAcelerar from '../assets/images/botones/btn-acelerar.webp'
 
-function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reiniciarJuego, abrirAjustes, agarrarMono} ){
+function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reiniciarJuego, abrirAjustes, agarrarMono, cronometroActivo} ){
 
-    const [pausado, setPausado] = useState(false)
+    const [pausado, setPausado] = useState(!cronometroActivo)
 
+    useEffect(() => {
+        setPausado(!cronometroActivo)
+    }, [cronometroActivo])  
+
+    /**
+     * Actualiza el estado de pausado y llama a la función pararReaunudar
+     */
     const pausarReaunudar = () => {
       setPausado(!pausado)
       pararReaunudar()

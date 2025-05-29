@@ -15,14 +15,14 @@ import globoVerde from '../assets/images/globos/globoVerde.webp';
 
 function Globo({ health }) {
   const getImage = () => {
-    if (health === 1) return globoFuxia1;
+    if (health === 1) return globoAmarillo;
     if (health === 2) return globoRosa1;
     if (health === 3) return globoMorado1;
     if (health === 4) return globoAzul1;
     if (health === 5) return globoVerde1;
     if (health === 6) return globoCeleste1;
     if (health === 7) return globoRojo;
-    if (health === 8) return globoAmarillo;
+    if (health === 8) return globoFuxia1;
     if (health === 9) return globoVerdeClaro;
     
     return globoVerde;

@@ -7,6 +7,7 @@ import monoFrancotirador from '../assets/images/monkeys/monoFrancotirador.png'
 import monoLaser from '../assets/images/monkeys/monoLaser.png'
 
 import monoBasicoDisparando from '../assets/images/monkeys/monoBasicoDisparando.webp'
+import monoArcoDisparando from '../assets/images/animaciones/monoDisparo.webp' 
 /**
  * Estados de las casillas del mapa
  * 
@@ -40,22 +41,29 @@ export const MONOS = {
       nombre: "Mono Básico",
       tipo: "basico",
       imagen: monoBasico,
-      imagen_disparando: monoBasicoDisparando,
+      imagen_disparando: monoArcoDisparando,
       precio: 100,
       rango: 200,
       tiempoRecarga: 3,
       damage: 1,
-      descripcion: "Mono atacante básico con alcance corto"
+      descripcion: "Mono atacante básico con alcance corto",
+      mejoraRango: 50,
+      mejoraDamage: 1,
+      mejoraTiempoRecarga: 1
     },
     arco: {
       nombre: "Mono Arquero",
       tipo: "arco",
       imagen: monoArco,
+      imagen_disparando: monoArcoDisparando,
       precio: 150,
       rango: 100,
       damage: 1,
       tiempoRecarga: 3,
-      descripcion: "Mono con arco y alcance medio"
+      descripcion: "Mono con arco y alcance medio",
+      mejoraRango: 50,
+      mejoraDamage: 1,
+      mejoraTiempoRecarga: 1
     },
     fusil: {
       nombre: "Mono Fusilero",
@@ -65,7 +73,10 @@ export const MONOS = {
       rango: 150,
       damage: 2,
       tiempoRecarga: 2,
-      descripcion: "Mono con fusil y alcance largo"
+      descripcion: "Mono con fusil y alcance largo",
+      mejoraRango: 50,
+      mejoraDamage: 1,
+      mejoraTiempoRecarga: 1
     },
     artificiero: {
       nombre: "Mono Artificiero",
@@ -75,7 +86,10 @@ export const MONOS = {
       rango: 350,
       damage: 5,
       tiempoRecarga: 5,
-      descripcion: "Mono con lanza cohetes"
+      descripcion: "Mono con lanza cohetes",
+      mejoraRango: 50,
+      mejoraDamage: 4,
+      mejoraTiempoRecarga: 1
     },
     francotirador: {
       nombre: "Mono Francotirador",
@@ -85,7 +99,10 @@ export const MONOS = {
       rango: 800,
       damage: 10,
       tiempoRecarga: 6,
-      descripcion: "Mono con rifle de francotirador, grandisimo alcance, poca cadencia de disparo"
+      descripcion: "Mono con rifle de francotirador, grandisimo alcance, poca cadencia de disparo",
+      mejoraRango: 50,
+      mejoraDamage: 1,
+      mejoraTiempoRecarga: 1
     },
     laser: {
       nombre: "Mono Laser",
@@ -95,70 +112,14 @@ export const MONOS = {
       rango: 200,
       damage: 2,
       tiempoRecarga: 1,
-      descripcion: "Mono con rifle laser, mucha cadencia de disparo"
+      descripcion: "Mono con rifle laser, mucha cadencia de disparo",
+      mejoraRango: 75,
+      mejoraDamage: 2,
+      mejoraTiempoRecarga: 0
     },
 }
 
-/**
- * Constantes de una partida normal
- */
-export const PARTIDA = {
-  /**
-   * Globos y su vida en cada ronda del juego
-   */
-  rondas: [
-    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1],
-    [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1],
-    [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
-    [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
-    [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4],
-    [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],
-    [6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5],
-    [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6],
-    [9,9,8,8,8,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7],
-    [10,10,10,10,10,9,9,9,9,9,9,9,9,9,9,9],
-    [13,13,13,13,12,12,12,11,10],
-    [14,14,14,14,13,13,13,12,11],
-    [15,15,15,15,14,14,14,13,12],
-    [16,16,16,16,15,15,15,14,13],
-    [17,17,17,17,16,16,16],
-    [18,18,18,18,17,17,17],
-    [19,19,19,19,18,18,18],
-    [20,20,20,20,19,19],
-    [21,21,21,21],
-    [22,22],
-    [90,90],
-    [500]
-  ],
-  /**
-   * Número de columnas del mapa    Hay que cambiarlo también en el css
-   */
 
-  ancho_mapa: 30, 
-  /**
-   * Número de filas del mapa       Hay que cambiarlo también en el css
-   */                
-  largo_mapa: 15,    
-  
-  /**
-   * Tiempo de un tick del jeugo en milisegundos
-   */
-  tiempoActualizacionGlobos: 200,
-
-  /**
-   * Tiempo entre rondas en milisegundos
-   */
-  tiempoEntreRondas: 1500,      
-
-  /**
-   * Monedas que da un globo al ser destruido
-   */
-  monedasGlobo: 5,               
-  monedas_iniciales: 170,
-  vidas_iniciales: 100,
-  ronda_inicial: 1
-}
 
 /**
  * Array con las coordenadas de los caminos en el mapa
@@ -260,3 +221,82 @@ export const GLOBO_AMARILLO = '../assets/images/globos/globoAmarillo.webp';
 export const GLOBO_ROJO = '../assets/images/globos/globoRojo.webp';
 export const GLOBO_VERDE = '../assets/images/globos/globoVerde.webp';
 export const GLOBO_MORADO = '../assets/images/globos/globoMorado.webp';
+
+
+/**
+ * Constantes de una partida normal
+ */
+export const PARTIDA = {
+  /**
+   * Globos y su vida en cada ronda del juego
+   */
+  rondas: [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1],
+    [3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,1],
+    [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+    [4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3],
+    [4,4,4,5,4,5,4,5,4,4,4,4,4,4,4,4,4,4],
+    [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5],
+    [6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,5,5],
+    [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,6,6],
+    [9,9,8,8,8,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7],
+    [10,10,10,10,10,9,9,9,9,9,9,9,9,9,9,9],
+    [13,13,13,13,12,12,12,11,10],
+    [14,14,14,14,13,13,13,12,11],
+    [15,15,15,15,14,14,14,13,12],
+    [16,16,16,16,15,15,15,14,13],
+    [17,17,17,17,16,16,16],
+    [18,18,18,18,17,17,17],
+    [19,19,19,19,18,18,18],
+    [20,20,20,20,19,19],
+    [21,21,21,21],
+    [22,22,22,22],
+    [23,23,24,24,25,25,26,26,27,27,28,28,29,29], 
+    [30,30,31,31,32,32,33,33,34,34,35,35,36,36],
+    [40,40,40,40,40,40,40,40,40,40,40,40],
+    [50,50,50,50,50,50], 
+    [90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90,90],
+    [100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100],
+    [110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110],
+    [115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115],
+    [120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120],
+    [125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125],
+    [130,130,130,130,130,130,130,130,130,130,130,130,130,130,130,130],
+    [135,135,135,135,135,135,135,135,135,135,135,135,135,135,135,135],
+    [140,140,140,140,140,140,140,140,140,140,140,140,140,140,140,140],
+    [145,145,145,145,145,145,145,145,145,145,145,145,145,145,145,145],
+    [150,150,150,150,150,150,150,150,150,150,150,150,150,150,150,150],
+    [155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155],
+    [160,160,160,160,160,160,160,160,160,160,160,160,160,160,160,160],
+    [165,165,165,165,165,165,165,165,165,165,165,165,165,165,165,165],
+    [500,500,500,500]
+  ],
+  /**
+   * Número de columnas del mapa    Hay que cambiarlo también en el css
+   */
+
+  ancho_mapa: 30, 
+  /**
+   * Número de filas del mapa       Hay que cambiarlo también en el css
+   */                
+  largo_mapa: 15,    
+  
+  /**
+   * Tiempo de un tick del jeugo en milisegundos
+   */
+  tiempoActualizacionGlobos: 200,
+
+  /**
+   * Tiempo entre rondas en milisegundos
+   */
+  tiempoEntreRondas: 1500,      
+
+  /**
+   * Monedas que da un globo al ser destruido
+   */
+  monedasGlobo: 5,               
+  monedas_iniciales: 170,
+  vidas_iniciales: 100,
+  ronda_inicial: 1
+}

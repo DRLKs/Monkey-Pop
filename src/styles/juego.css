@@ -8,6 +8,22 @@
     --fuente-principal: 'Montserrat', sans-serif;
 }
 
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    user-select: none;
+
+    /* También prevenir el arrastre de imágenes */
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+   user-drag: none;
+}
+
 .fondo-juego{
     position: fixed;
     top: 0;
@@ -23,6 +39,10 @@
     flex-grow: 1;       /* Ocupa todo lo que puede */
     width: max-content;
     grid-template-columns: repeat(30, 1fr);
+    position: fixed;    /* Agregar posición fija */
+    top: 53%;          /* Centrar verticalmente */
+    left: 50%;         /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Centrar exactamente */
     
     /* Nuevo estilo de borde */
     border: 3px solid #ffd700;
@@ -30,8 +50,8 @@
     border-radius: 20px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     padding: 15px;
-    position: relative;
     overflow: hidden;
+    z-index: 1;        /* Asegurar que esté por encima de otros elementos */
 }
 
 .game-container::before {
@@ -68,12 +88,6 @@
 
 
 
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
 
 
 @media (max-width: 600px) {
@@ -283,6 +297,7 @@ body {
   /* Ajustes para modo landscape (horizontal) */
   .game-container {
     grid-template-columns: repeat(20, 1fr);
+    top: 60%;          /* Centrar verticalmente */
   }
   
   @media (orientation: landscape) {
