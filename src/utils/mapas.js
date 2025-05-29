@@ -2,7 +2,7 @@
 // Cada mapa es un array de 450 elementos (30x15)
 // Valores posibles: 'default' (verde), 'agua', 'camino', 'selected'
 
-import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA } from "./constantes";
+import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA, MAPA_CAMINO_Z_MOVIL } from "./constantes";
 
 
 //Mapa con camino diagonal intentando mejorar como se ve. Añadiendo más tipos de casillas
@@ -148,6 +148,54 @@ export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.
   return casilla;
 });
 
+export const mapaZMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % MAPA_MOVIL.ancho_mapa;
+  const y = Math.floor(index / MAPA_MOVIL.ancho_mapa);
+
+  // Usar la matriz para determinar el tipo de casilla
+  const valorCasilla = MAPA_CAMINO_Z_MOVIL[y] && MAPA_CAMINO_Z_MOVIL[y][x];
+
+  // Si es cesped, default (0), no se hace nada
+  if( valorCasilla === 0 ){
+
+  }
+
+  // Si es camino (1), devuelve camino
+  else if (valorCasilla === 1) {
+    return ESTADO_CASILLA.CAMINO;
+  }
+  
+  // Si es agua (2), devuelve agua
+  else if (valorCasilla === 2) {
+    return ESTADO_CASILLA.AGUA;
+  }
+
+  else if (valorCasilla === 3) {
+    return ESTADO_CASILLA.TIERRA_CESPED2;
+  }
+
+  else if (valorCasilla === 4){
+    return ESTADO_CASILLA.TIERRA_CESPED1;
+  }
+
+  else if ( valorCasilla === 5){
+    return ESTADO_CASILLA.FLORAZUL;
+  }
+  
+  else if ( valorCasilla == 6 ){
+    return ESTADO_CASILLA.AGUA_CESPED1;
+  }
+
+  else if ( valorCasilla === 7 ){
+    return ESTADO_CASILLA.AGUA_CESPED2;
+  }
+
+  else if ( valorCasilla === 8 ){
+    return ESTADO_CASILLA.FLORROJA;
+  }
+  
+  return casilla;
+});
 
 
 /** 
@@ -168,7 +216,8 @@ export const mapas_ordenador = () => {
  */ 
 export const mapas_movil = () => {
   const mapasDisponiblesMovil = [
-    mapaCaminoDiagonalMovil
+    mapaCaminoDiagonalMovil,
+    mapaZMovil
   ];
   
   const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesMovil.length);

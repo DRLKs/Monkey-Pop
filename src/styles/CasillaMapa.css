@@ -271,3 +271,12 @@
     max-height: 30px;
   }
 }
+
+/* Mi movil */
+@media (max-height: 430px) and (max-width: 930px) {
+  .casilla-mapa {
+    width: 3.8vw;
+    height: 3.0vw;
+  }
+  
+}

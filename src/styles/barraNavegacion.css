@@ -544,9 +544,13 @@ body {
         font-size: 0.8rem;
         margin: 3px;
     }
-    
-
 }
 
+@media (max-height: 430px) {
+
+  .monkey-container {
+    padding: 0px 0px 0px 0px;
+  }
+}
 
 

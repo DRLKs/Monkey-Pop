@@ -77,6 +77,70 @@ function Juego() {
     setMonoSeleccionado(null);
   }
 
+  // Agregar después de las importaciones y antes de la función Juego
+
+
+  // Efecto para activar pantalla completa automáticamente
+  useEffect(() => {
+    const activarPantallaCompleta = async () => {
+      try {
+        // Verificar si ya estamos en pantalla completa
+        if (!document.fullscreenElement) {
+          // Intentar diferentes métodos según el navegador
+          if (document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            await document.documentElement.webkitRequestFullscreen();
+          } else if (document.documentElement.msRequestFullscreen) {
+            await document.documentElement.msRequestFullscreen();
+          }
+        }
+      } catch (error) {
+        console.log('No se pudo activar pantalla completa automáticamente:', error);
+      }
+    };
+
+    // Detectar si es móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // En móviles, activar en la primera interacción del usuario
+      const handleFirstInteraction = () => {
+        activarPantallaCompleta();
+        // Remover todos los listeners después de la primera activación
+        document.removeEventListener('touchstart', handleFirstInteraction);
+        document.removeEventListener('click', handleFirstInteraction);
+        document.removeEventListener('keydown', handleFirstInteraction);
+      };
+      
+      // Agregar múltiples tipos de eventos para capturar la primera interacción
+      document.addEventListener('touchstart', handleFirstInteraction, { once: true });
+      document.addEventListener('click', handleFirstInteraction, { once: true });
+      document.addEventListener('keydown', handleFirstInteraction, { once: true });
+    } else {
+      // En escritorio, activar inmediatamente
+      activarPantallaCompleta();
+    }
+
+    // Prevenir zoom con gestos táctiles
+    const preventZoom = (e) => {
+      if (e.touches && e.touches.length > 1) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchmove', preventZoom, { passive: false });
+    document.addEventListener('gesturestart', preventZoom, { passive: false });
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('touchmove', preventZoom);
+      document.removeEventListener('gesturestart', preventZoom);
+    };
+  }, []); // Solo se ejecuta una vez al montar el componente
+
+  // ...resto de tu código existente...
+
   /*
    * Controla el tiempo de juego para calcular el tiempo jugado en la pantalla final 
    */
