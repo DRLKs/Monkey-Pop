@@ -86,52 +86,93 @@ export const habilitadoParaJugar = () => {
     
 };
 
-export const obtenerCaminoMapa = (mapa, ancho_mapa,largo_mapa) => {
-    const camino = []
+export const obtenerCaminoMapa = (mapa, ancho_mapa, largo_mapa) => {
+    const camino = [];
     let posicionAnterior;
     let posicionActual = -1;
-    
-    //Busca en la primera columna
-    for (let i = 0; i < largo_mapa; i = i + ancho_mapa) {
+
+    // Busca en la primera columna
+    for (let i = 0; i < largo_mapa * ancho_mapa; i = i + ancho_mapa) {
         if (mapa[i] === ESTADO_CASILLA.CAMINO) {
-        posicionActual = i;
-        posicionAnterior = i - 1;
-        break;
+            posicionActual = i;
+            posicionAnterior = i - 1;
+            break;
         }
     }
 
-    //Si no encontró en la primera columna, busca en la primera fila
+    // Si no encontró en la primera columna, busca en la primera fila
     if (posicionActual === -1) {
-      for (let i = 0; i < ancho_mapa; i++) {
-        if (mapa[i] === ESTADO_CASILLA.CAMINO) {
-        posicionActual = i;
-        posicionAnterior = i - 1;
-        break;
+        for (let i = 0; i < ancho_mapa; i++) {
+            if (mapa[i] === ESTADO_CASILLA.CAMINO) {
+                posicionActual = i;
+                posicionAnterior = i - 1;
+                break;
+            }
         }
     }
-    }
-    
+
     let caminoTerminado = false;
-    let movimiento;
-    while( caminoTerminado === false)  { 
-        camino.push(posicionActual); 
-        movimiento = 0;
-        if ((posicionActual + 1) % ancho_mapa !== 0 && posicionActual + 1 !== posicionAnterior && mapa[posicionActual + 1] === ESTADO_CASILLA.CAMINO) {
-           movimiento = 1;
-        } else if (posicionActual > ancho_mapa - 1  && posicionActual - ancho_mapa !== posicionAnterior && mapa[posicionActual - ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-            movimiento = -ancho_mapa;
-        } else if (posicionActual < ((ancho_mapa*largo_mapa)-ancho_mapa) && posicionActual + ancho_mapa !== posicionAnterior && mapa[posicionActual + ancho_mapa] === ESTADO_CASILLA.CAMINO) {
-            movimiento = ancho_mapa;
-        } else if (posicionActual % ancho_mapa !== 0 && posicionActual - 1 !== posicionAnterior && mapa[posicionActual - 1] === ESTADO_CASILLA.CAMINO) {
-            movimiento = -1;
+    let movimiento = 0;
+    let movimientoAnterior = 0;
+
+    const direccionesBase = [
+        { mov: 1, cond: (pos) => (pos + 1) % ancho_mapa !== 0 }, // derecha
+        { mov: ancho_mapa, cond: (pos) => pos < ((ancho_mapa * largo_mapa) - ancho_mapa) }, // abajo
+        { mov: -1, cond: (pos) => pos % ancho_mapa !== 0 }, // izquierda
+        { mov: -ancho_mapa, cond: (pos) => pos > ancho_mapa - 1 } // arriba
+    ];
+
+    while (!caminoTerminado) {
+        camino.push(posicionActual);
+
+        let direcciones = [];
+
+        if (movimientoAnterior !== 0) {
+            // Primero intenta continuar en la misma dirección
+            const mismaDireccion = direccionesBase.find(d => d.mov === movimientoAnterior);
+            if (mismaDireccion) {
+                direcciones.push(mismaDireccion);
+            }
+
+            // Luego intenta las otras, excepto la opuesta
+            for (let i = 0; i < direccionesBase.length; i++) {
+                const mov = direccionesBase[i].mov;
+                if (mov !== movimientoAnterior && mov !== -movimientoAnterior) {
+                    direcciones.push(direccionesBase[i]);
+                }
+            }
         } else {
-            caminoTerminado = true;
+            // Primer paso
+            direcciones = [...direccionesBase];
         }
-        posicionAnterior = posicionActual;
-        posicionActual = posicionActual + movimiento;
-    }    
-    return camino
-}
+
+        movimiento = 0;
+        for (const dir of direcciones) {
+            const siguiente = posicionActual + dir.mov;
+            if (
+                dir.cond(posicionActual) &&
+                siguiente !== posicionAnterior &&
+                mapa[siguiente] === ESTADO_CASILLA.CAMINO
+            ) {
+                movimiento = dir.mov;
+                break;
+            }
+        }
+
+        if (movimiento === 0) {
+            caminoTerminado = true;
+        } else {
+            posicionAnterior = posicionActual;
+            posicionActual = posicionActual + movimiento;
+            movimientoAnterior = movimiento;
+        }
+    }
+
+    return camino;
+};
+
+
+
 
 
 /**

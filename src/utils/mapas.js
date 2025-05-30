@@ -95,6 +95,48 @@ export const mapaZOrdenador = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fil
   return casilla;
 });
 
+// Mapa con un camino con figura de espiral
+export const mapaCaminoEspiral = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % PARTIDA.ancho_mapa;
+  const y = Math.floor(index / PARTIDA.ancho_mapa);
+
+  if (
+    // Línea recta horizontal
+    (y === 7 && x >= 0 && x <= 6) ||
+    // Línea recta vertical
+    (x === 6 && y >= 4 && y <= 7) ||
+    // Esquina en diagonal
+    (x === 7 && y === 4) ||
+    (x === 7 && y === 3) ||
+    (x === 8 && y === 3) ||
+    // Línea recta horizontal
+    (y === 2 && x >= 8 && x <= 20) ||
+    // Esquina en diagonal
+    (x === 20 && y === 3) ||
+    (x === 21 && y === 3) ||
+    (x === 21 && y === 4) ||
+    // Línea recta vertical
+    (x === 22 && y >= 4 && y <= 10) || 
+    // Esquina en diagonal
+    (x === 21 && y === 10) ||
+    (x === 21 && y === 11) ||
+    (x === 20 && y === 11) ||
+    // Línea recta horizontal
+    (y === 12 && x >= 14 && x <= 20) ||
+    // Linea recta vertical
+    (x === 13 && y >= 8 && y <= 11) || 
+    // Linea recta horizontal
+    (y === 7 && x >= 14 && x <= 29) ||
+    // Las dos esquinas que quedan
+    (x === 14 && y === 11) ||
+    (x === 14 && y === 8) 
+  ) return ESTADO_CASILLA.CAMINO;
+
+  // Césped por defecto
+  return casilla;
+});
+
+
 /**
  * Para mejorar la jugabilidad en dispositivos móviles, se ajusta el mapa diagonal
  * con casillas de transición para mayor integridad visual
@@ -204,7 +246,8 @@ export const mapaZMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).f
 export const mapas_ordenador = () => {
   const mapasDisponiblesOrdenador = [
     mapaCaminoDiagonal,
-    mapaZOrdenador
+    mapaZOrdenador,
+    mapaCaminoEspiral
   ];
 
   const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesOrdenador.length);
