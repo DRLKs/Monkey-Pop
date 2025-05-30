@@ -417,11 +417,11 @@ footer a:hover {
     }
 
     .menu-container {
-        padding: 15px;
+        padding: 20px;
     }
-    
+
     .titulo-juego-container img {
-        width: clamp(200px, 80vw, 300px);
+        width: 250px;
     }
 }
 
@@ -695,31 +695,6 @@ footer a {
         padding: 3px 0;
         font-size: 11px;
     }
-}
-
-/* Xiaomi gama media */
-@media screen and (min-width: 360px) and (max-width: 414px) {
-  .menu-container-container {
-    padding: 10px;
-  }
-  
-  .titulo-juego-container {
-    margin-bottom: 20px;
-  }
-  
-  .accesibilidad-flotante {
-    top: 15px;
-    right: 15px;
-    width: 45px;
-    height: 45px;
-  }
-}
-
-/* iPhone 15 específico */
-@media screen and (width: 390px) and (height: 844px) {
-  .menu-container {
-    padding-bottom: 40px; /* Espacio para gestos de iOS */
-  }
 }
 
 .visually-hidden {

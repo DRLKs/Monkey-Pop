@@ -2,42 +2,6 @@
 
 :root {
     --fuente-principal: 'Montserrat', sans-serif;
-
-    /* Variables responsivas para espaciado */
-    --espacio-navegacion-desktop: 80px;
-    --espacio-navegacion-tablet: 75px;
-    --espacio-navegacion-mobile: 70px;
-    
-    /* Márgenes seguros */
-    --margen-superior-desktop: 800px; /* Mantener valores altos */
-    --margen-superior-mobile: 90px;
-    
-    /* Padding lateral responsivo */
-    --padding-lateral-desktop: 40px;
-    --padding-lateral-mobile: 15px;
-}
-
-/* Aplicar variables según dispositivo */
-@media (min-width: 1025px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-desktop);
-    --margen-superior: var(--margen-superior-desktop);
-    --padding-lateral: var(--padding-lateral-desktop);
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-tablet);
-    --margen-superior: var(--margen-superior-mobile);
-    --padding-lateral: var(--padding-lateral-mobile);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-mobile);
-  }
 }
 
 .ajustes-overlay {

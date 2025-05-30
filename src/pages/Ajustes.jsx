@@ -17,7 +17,6 @@ function Ajustes() {
     <BarraNavegacion />
     <AjustesContainerAjustes/>    
     
-    {/* ELIMINAR ESTA IMAGEN SUELTA QUE NO DEBERÍA ESTAR AQUÍ */}
     </>
   )
 }

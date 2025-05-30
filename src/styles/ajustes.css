@@ -11,42 +11,6 @@
     --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
     --borde-radio: 20px;
     --fuente-principal: 'Montserrat', sans-serif;
-
-    /* Variables responsivas para espaciado */
-    --espacio-navegacion-desktop: 80px;
-    --espacio-navegacion-tablet: 75px;
-    --espacio-navegacion-mobile: 70px;
-    
-    /* Márgenes seguros */
-    --margen-superior-desktop: 800px; /* Mantener valores altos */
-    --margen-superior-mobile: 90px;
-    
-    /* Padding lateral responsivo */
-    --padding-lateral-desktop: 40px;
-    --padding-lateral-mobile: 15px;
-}
-
-/* Aplicar variables según dispositivo */
-@media (min-width: 1025px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-desktop);
-    --margen-superior: var(--margen-superior-desktop);
-    --padding-lateral: var(--padding-lateral-desktop);
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-tablet);
-    --margen-superior: var(--margen-superior-mobile);
-    --padding-lateral: var(--padding-lateral-mobile);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-mobile);
-  }
 }
 
 .ajustes-page{
@@ -81,13 +45,8 @@ body {
     border: 2px solid var(--color-dorado);
     padding: 25px;
     box-shadow: var(--sombra-elemento);
-    position: fixed; /* Cambiado de relative a fixed para mejor posicionamiento */
-    overflow-y: auto; /* AÑADIDO: Permitir scroll si el contenido es muy grande */
-    max-height: 85vh; /* AÑADIDO: Limitar altura máxima para evitar cortes */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* MANTENER para desktop */
-    z-index: 100; /* AÑADIDO: Asegurar que esté por encima de otros elementos */
+    position: relative;
+    overflow: hidden;
 }
 
 #container-controles::before {
@@ -113,10 +72,7 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* REDUCIDO de 20px a 15px */
-    max-height: 65vh; /* AÑADIDO: Limitar altura para dispositivos pequeños */
-    overflow-y: auto; /* AÑADIDO: Permitir scroll si es necesario */
-    padding-right: 5px; /* AÑADIDO: Espacio para scrollbar */
+    gap: 20px;
 }
 
 label {
@@ -202,22 +158,16 @@ select:hover {
     background: linear-gradient(to bottom, var(--color-boton-importante), var(--color-hover));
     margin-top: 20px;
     width: 100%;
-    max-width: 300px; /* AÑADIDO: Limitar ancho máximo */
-    padding: 12px 20px; /* AJUSTADO: Padding más razonable */
     border-radius: 50px;
     border: 2px solid var(--color-dorado);
     color: var(--color-texto-claro);
     font-family: var(--fuente-principal);
-    font-size: 1.1rem; /* REDUCIDO: Tamaño de fuente más pequeño y fijo */
+    font-size: clamp(1rem, 4vw, 1.2em);
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    align-self: center; /* AÑADIDO: Centrar el botón */
-    display: block; /* AÑADIDO: Asegurar que se comporta como bloque */
-    margin-left: auto; /* AÑADIDO: Centrar horizontalmente */
-    margin-right: auto; /* AÑADIDO: Centrar horizontalmente */
 }
 
 #boton-submit::before {
@@ -270,483 +220,74 @@ select:hover {
     }
 }
 
-/* Solo ajustar en móviles */
-@media (max-width: 768px) {
-  #container-controles {
-    top: 45%; /* AJUSTADO para móviles */
-    width: 90%;
-    max-height: 80vh;
-    padding: 15px;
-  }
-
-  #container-controles h1 {
-    font-size: 1.5rem; /* REDUCIDO */
-    margin-bottom: 15px;
-  }
-
-  form {
-    gap: 10px;
-    max-height: 60vh;
-  }
-
-  #boton-submit {
-    padding: 10px 15px; /* REDUCIDO */
-    font-size: 1rem;
-    margin-top: 15px;
-  }
-
-  /* Ajuste elemento más compacto en móviles */
-  .ajuste-item {
-    margin-bottom: 8px;
-  }
-
-  select, input[type="range"] {
-    height: 30px; /* AÑADIDO: Altura fija */
-  }
-}
-
-/* Xiaomi gama media - posicionamiento corregido */
-@media screen and (min-width: 360px) and (max-width: 414px) {
-    #container-controles {
-        width: 92%;
-        max-height: 70vh;
-        padding: 12px;
-        top: 50%; /* CORREGIDO: Mantener centrado */
-    }
-    
-    #boton-submit {
-        padding: 8px 12px; /* REDUCIDO */
-        font-size: 0.95rem;
-        margin-top: 12px;
-        max-width: 250px;
-    }
-    
-    label {
-        font-size: 0.9rem; /* REDUCIDO */
-    }
-    
-    .ajuste-item img {
-        width: 16px; /* REDUCIDO */
-        height: 16px;
-    }
-}
-
-/* iPhone 15 específico */
-@media screen and (width: 390px) and (height: 844px) {
-    #container-controles {
-        padding-bottom: 20px;
-        max-height: 65vh;
-    }
-}
-
-/* Modo paisaje - evitar cortes */
-@media (max-height: 500px) and (orientation: landscape) {
+@media (max-height: 500px) {
     #container-controles {
         max-height: 80vh;
-        padding: 10px;
+        padding: 12px;
     }
     
     form {
-        max-height: 55vh;
-        gap: 8px; /* REDUCIDO */
+        gap: 0px;
     }
     
+    #boton-submit {
+        margin-top: 15px;
+        height: 40px;
+    }
+
     #container-controles h1 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    
-    #boton-submit {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-        margin-top: 10px;
+        margin: 0 0 5px 0;
+        padding: 0;
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
+        letter-spacing: 1px;
+        line-height: 1;
     }
 }
 
-/* Ajuste para evitar que el botón sea demasiado pequeño en pantallas muy grandes */
-@media (min-width: 1200px) {
-    #boton-submit {
-        max-width: 350px;
-        padding: 12px 25px;
-        font-size: 1.2rem;
-    }
-}
-
-/* Corrección del tamaño excesivo de la imagen de mute */
-.ajuste-item img {
-  width: 14px !important; /* REDUCIDO EXTREMADAMENTE: De 20px a 14px */
-  height: 14px !important;
-  object-fit: contain !important;
-  margin-left: 6px !important;
-  vertical-align: middle !important;
-  max-width: 14px !important; /* Forzar tamaño máximo */
-  max-height: 14px !important;
-}
-
-/* Asegurar que el contenedor de controles muestre todo el contenido */
-#container-controles {
-  max-height: 80vh !important; /* Reducido de 85vh para asegurar visibilidad */
-  padding-bottom: 30px !important; /* Aumentar espacio inferior */
-  overflow-y: auto !important;
-}
-
-/* Hacer más compacto el formulario */
-form {
-  gap: 8px !important; /* Reducido de 15px a 8px */
-  max-height: 60vh !important; /* Reducido para mayor compacidad */
-}
-
-/* Ajustar espacio del botón submit */
-#boton-submit {
-  margin-top: 15px !important; /* Reducido de 20px */
-  padding: 10px 15px !important; /* Reducido */
-  font-size: 0.9rem !important; /* Reducido */
-}
-
-/* Asegurar que los elementos de ajuste sean más compactos */
+/* Estilos para el ajuste-item */
 .ajuste-item {
-  margin-bottom: 5px !important;
-  display: flex !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
-/* Ajuste para pantallas pequeñas */
-@media screen and (max-width: 480px) {
-  .ajuste-item img {
-    width: 12px !important; /* AÚN MÁS PEQUEÑO */
-    height: 12px !important;
-    max-width: 12px !important;
-    max-height: 12px !important;
-  }
-  
-  #container-controles {
-    max-height: 70vh !important;
-    top: 45% !important; /* Desplazar hacia arriba */
-  }
-  
-  form {
-    gap: 6px !important; /* Aún más compacto */
-  }
-  
-  label {
-    font-size: 0.85rem !important;
-    margin-bottom: 2px !important;
-  }
-  
-  #boton-submit {
-    padding: 8px 12px !important;
-    margin-top: 10px !important;
-    font-size: 0.85rem !important;
-  }
+/* Estilos para el container del toggle */
+.toggle-container {
+    display: flex;
+    align-items: center;
 }
 
-/* SOLUCIÓN EQUILIBRADA PARA EL ICONO DE SONIDO */
-.icono-sonido,
-img.icono-sonido,
-.ajuste-item .icono-sonido,
-.ajuste-item img[alt*="Sonido"] {
-  width: 16px !important; /* TAMAÑO INTERMEDIO: ni muy grande ni muy pequeño */
-  height: 16px !important;
-  max-width: 16px !important;
-  max-height: 16px !important;
-  object-fit: contain !important;
-  margin-left: 8px !important;
-  vertical-align: middle !important;
-  display: inline-block !important;
-  background-color: transparent !important; /* ELIMINAR FONDO BLANCO */
-  filter: drop-shadow(0 0 1px rgba(0,0,0,0.5)) !important; /* AÑADIR LIGERA SOMBRA PARA VISIBILIDAD */
+.toggle-label {
+    margin-left: 10px;
+    font-size: 0.9rem;
+    color: var(--color-texto-claro);
 }
 
-/* Eliminar cualquier fondo blanco del contenedor */
-.ajuste-item {
-  background-color: transparent !important;
+/* Estilos para el botón de sonido en los ajustes */
+.boton-sonido {
+    background: linear-gradient(to bottom, var(--color-marron-claro), var(--color-marron-oscuro));
+    border: 2px solid var(--color-dorado);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.ajuste-label-container {
-  background-color: transparent !important;
+.boton-sonido:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    border-color: #ffec80;
 }
 
-/* Ajuste específico para móviles - mantener proporción */
-@media screen and (max-width: 480px) {
-  .icono-sonido,
-  img.icono-sonido,
-  .ajuste-item .icono-sonido,
-  .ajuste-item img[alt*="Sonido"] {
-    width: 14px !important; /* VERSIÓN MÓVIL: ligeramente más pequeña */
-    height: 14px !important;
-    max-width: 14px !important;
-    max-height: 14px !important;
-  }
+.boton-sonido:active {
+    transform: scale(0.95);
 }
 
-/* CORRECCIÓN DE COLAPSO DE ELEMENTOS Y DISEÑO RESPONSIVE */
-
-/* Contenedor principal mejorado */
-#container-controles {
-  width: 90% !important;
-  max-width: 800px !important;
-  padding: 25px 20px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 15px !important;
-  border-radius: var(--borde-radio) !important;
-  background-color: rgba(102, 51, 0, 0.8) !important;
-}
-
-/* Formulario más responsivo */
-form {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 15px !important;
-}
-
-/* Ajuste de elementos individuales */
-.ajuste-item {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-  margin-bottom: 10px !important;
-}
-
-/* Correcciones para label y contenido */
-.ajuste-item label {
-  font-size: 1rem !important;
-  margin-right: 10px !important;
-  flex: 1 !important;
-  white-space: nowrap !important;
-}
-
-/* Correcciones para inputs y select */
-.ajuste-item input[type="range"] {
-  flex: 2 !important;
-  min-width: 150px !important;
-  max-width: 300px !important;
-}
-
-.ajuste-item select {
-  flex: 2 !important;
-  min-width: 150px !important;
-  max-width: 300px !important;
-  padding: 8px 12px !important;
-  appearance: auto !important; /* Permitir estilo nativo para evitar problemas */
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  color: white !important;
-  border: 1px solid var(--color-dorado) !important;
-  border-radius: 15px !important;
-}
-
-/* Corregir el icono de mute - tamaño definitivo y sin fondo blanco */
-.icono-sonido,
-.ajuste-item img {
-  width: 16px !important;
-  height: 16px !important;
-  object-fit: contain !important;
-  margin-left: 8px !important;
-  vertical-align: middle !important;
-  background-color: transparent !important;
-  filter: brightness(1.2) contrast(1.2) !important; /* Mejorar visibilidad */
-  border-radius: 0 !important; /* Eliminar bordes redondeados */
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Botón de guardar ajustes - siempre visible */
-#boton-submit {
-  width: 80% !important;
-  max-width: 300px !important;
-  margin-top: 20px !important;
-  padding: 12px 20px !important;
-  font-size: 1rem !important;
-  background: linear-gradient(to bottom, var(--color-boton-importante), var(--color-hover)) !important;
-  border: 2px solid var(--color-dorado) !important;
-  border-radius: 50px !important;
-  color: var(--color-texto-claro) !important;
-  cursor: pointer !important;
-  transition: all 0.3s !important;
-}
-
-/* MEDIA QUERIES ESPECÍFICOS PARA RESPONSIVIDAD */
-
-/* Tabletas y dispositivos medianos */
-@media screen and (max-width: 768px) {
-  #container-controles {
-    width: 95% !important;
-    padding: 20px 15px !important;
-  }
-  
-  .ajuste-item {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    margin-bottom: 15px !important;
-  }
-  
-  .ajuste-item label {
-    margin-bottom: 8px !important;
-    margin-right: 0 !important;
-  }
-  
-  .ajuste-item input[type="range"],
-  .ajuste-item select {
-    width: 100% !important;
-    min-width: unset !important;
-    max-width: unset !important;
-  }
-  
-  #boton-submit {
-    width: 100% !important;
-  }
-}
-
-/* Móviles pequeños - extremadamente responsive */
-@media screen and (max-width: 480px) {
-  #container-controles {
-    padding: 15px 10px !important;
-    width: 98% !important;
-  }
-  
-  .ajuste-item label {
-    font-size: 0.9rem !important;
-    margin-bottom: 5px !important;
-  }
-  
-  .icono-sonido,
-  .ajuste-item img {
-    width: 14px !important;
-    height: 14px !important;
-  }
-  
-  #boton-submit {
-    padding: 10px 15px !important;
-    font-size: 0.9rem !important;
-  }
-}
-
-/* Ajustar altura del contenedor para pantallas muy pequeñas */
-@media screen and (max-height: 600px) {
-  #container-controles {
-    max-height: 85vh !important;
-    overflow-y: auto !important;
-    padding-bottom: 15px !important;
-  }
-  
-  form {
-    gap: 10px !important;
-  }
-  
-  .ajuste-item {
-    margin-bottom: 5px !important;
-  }
-}
-
-/* Corregir el toggle de mute para eliminar fondo blanco */
-.mute-toggle,
-input[type="checkbox"] + label,
-.toggle-switch {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  position: relative !important;
-  display: inline-block !important;
-}
-
-/* Corregir el diseño del contenedor del toggle */
-.mute-container {
-  background-color: transparent !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 25px !important;
-  padding: 5px 10px !important;
-  position: relative !important;
-}
-
-/* SOLUCIÓN ESPECÍFICA PARA EL SELECT DE IDIOMA */
-.ajuste-item select,
-select[id*="idioma"],
-#idioma-select {
-  min-width: 180px !important; /* ANCHO MÍNIMO GARANTIZADO */
-  width: auto !important; /* Permitir que crezca según contenido */
-  max-width: none !important; /* Eliminar restricción de ancho máximo */
-  white-space: nowrap !important; /* No truncar texto */
-  text-overflow: ellipsis !important; /* Añadir puntos suspensivos si es necesario */
-  padding: 8px 30px 8px 15px !important; /* IMPORTANTE: Espacio para el texto y la flecha */
-  appearance: menulist !important; /* Mostrar flecha nativa */
-  -webkit-appearance: menulist !important; 
-  -moz-appearance: menulist !important;
-  text-indent: 1px !important; /* Prevenir problema de recorte de texto */
-  text-align: left !important; /* Alineación a la izquierda */
-  font-size: 14px !important; /* Tamaño de fuente fijo */
-  overflow: visible !important; /* Permitir que el contenido sea visible */
-  text-rendering: optimizeLegibility !important; /* Mejorar legibilidad */
-  font-weight: normal !important; /* Evitar que la negrita cause problemas */
-  color: white !important; /* Color de texto visible */
-  background-color: rgba(102, 51, 0, 0.9) !important; /* Fondo más oscuro para contraste */
-  box-sizing: content-box !important; /* Evitar que padding afecte el ancho */
-}
-
-/* Ajuste específico para el contenedor del select de idioma */
-.ajuste-item:has(select[id*="idioma"]),
-.ajuste-item:has(#idioma-select) {
-  flex-direction: row !important; /* FORZAR dirección horizontal */
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 10px !important;
-  width: 100% !important;
-}
-
-/* Media queries específico para select en móviles */
-@media screen and (max-width: 480px) {
-  .ajuste-item select,
-  select[id*="idioma"],
-  #idioma-select {
-    min-width: 150px !important; /* Aún ancho suficiente en móviles */
-    font-size: 13px !important;
-    padding: 6px 25px 6px 10px !important;
-  }
-  
-  /* FORZAR la estructura horizontal para idioma incluso en móvil */
-  .ajuste-item:has(select[id*="idioma"]),
-  .ajuste-item:has(#idioma-select) {
-    flex-direction: row !important; 
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-  
-  /* Label más compacta para el idioma */
-  .ajuste-item:has(select[id*="idioma"]) label,
-  .ajuste-item:has(#idioma-select) label {
-    margin-bottom: 0 !important;
-    font-size: 14px !important;
-    flex-shrink: 0 !important;
-    width: auto !important;
-    flex-basis: auto !important;
-  }
-}
-
-/* Corrección para el problema de resize en Safari */
-@supports (-webkit-touch-callout: none) {
-  .ajuste-item select,
-  select[id*="idioma"],
-  #idioma-select {
-    -webkit-text-size-adjust: 100% !important;
-    font-size: 14px !important;
-  }
-}
-
-/* Solución para Firefox */
-@-moz-document url-prefix() {
-  .ajuste-item select,
-  select[id*="idioma"],
-  #idioma-select {
-    text-indent: 0 !important;
-    padding-right: 25px !important;
-  }
+.icono-sonido {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
 }

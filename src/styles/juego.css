@@ -6,44 +6,8 @@
     --color-boton-importante: #e19718;
     --color-navegador: #282c34;
     --fuente-principal: 'Montserrat', sans-serif;
-
-    
-    /* Variables responsivas para espaciado */
-    --espacio-navegacion-desktop: 80px;
-    --espacio-navegacion-tablet: 75px;
-    --espacio-navegacion-mobile: 70px;
-    
-    /* Márgenes seguros */
-    --margen-superior-desktop: 800px; /* Mantener valores altos */
-    --margen-superior-mobile: 90px;
-    
-    /* Padding lateral responsivo */
-    --padding-lateral-desktop: 40px;
-    --padding-lateral-mobile: 15px;
 }
 
-/* Aplicar variables según dispositivo */
-@media (min-width: 1025px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-desktop);
-    --margen-superior: var(--margen-superior-desktop);
-    --padding-lateral: var(--padding-lateral-desktop);
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-tablet);
-    --margen-superior: var(--margen-superior-mobile);
-    --padding-lateral: var(--padding-lateral-mobile);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-mobile);
-  }
-}
 
 body {
     display: flex;
@@ -332,9 +296,8 @@ body {
 @media (max-width: 935px) {
   /* Ajustes para modo landscape (horizontal) */
   .game-container {
-    grid-template-columns: repeat(20, 1fr); /* REDUCIDO para móviles */
-    top: 55%;
-    padding: 10px;
+    grid-template-columns: repeat(20, 1fr);
+    top: 60%;          /* Centrar verticalmente */
   }
   
   @media (orientation: landscape) {
@@ -376,43 +339,6 @@ body {
     }
     
 
-  }
-}
-
-/* Xiaomi gama media */
-@media screen and (min-width: 360px) and (max-width: 414px) {
-  .game-container {
-    grid-template-columns: repeat(16, 1fr); /* REDUCIDO para mejor fit */
-    top: 48%;
-    padding: 10px;
-    transform: translate(-50%, -50%) scale(0.95); /* AÑADIDO scale para mejor ajuste */
-  }
-  
-  .imagenMonoAgarrado, .globo, .mono, .globo-explotado {
-    max-width: 26px; /* REDUCIDO ligeramente */
-    max-height: 26px;
-  }
-}
-
-/* iPhone 15 específico */
-@media screen and (width: 390px) and (height: 844px) {
-  .game-container {
-    top: 49%;
-    padding-bottom: 25px; /* AUMENTADO espacio para gestos de iOS */
-  }
-}
-
-/* Modo paisaje */
-@media (max-height: 500px) and (orientation: landscape) {
-  .game-container {
-    grid-template-columns: repeat(25, 1fr);
-    top: 58%;
-    padding: 6px;
-  }
-  
-  .imagenMonoAgarrado, .globo, .mono, .globo-explotado {
-    max-width: 22px;
-    max-height: 22px;
   }
 }
 

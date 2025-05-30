@@ -51,13 +51,12 @@
   z-index: -1;
 }
 
-/* CORRECCIÓN CRÍTICA: Contenedor principal de créditos - MANTENER PARA DESKTOP */
+/* CORRECCIÓN CRÍTICA: Contenedor principal de créditos */
 .creditos-container {
   width: clamp(280px, 90%, 900px);
   margin: 0 auto; 
   padding: clamp(20px, 5vh, 50px);
-  padding-top: 2200px; /* AUMENTADO de 1800px a 2200px para desktop */
-  padding-bottom: 80px;
+  padding-top: 1800px; /* Cambiado de 2000px a un valor razonable de 120px */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,6 +65,7 @@
   color: #fff;
   min-height: 100vh;
 }
+
 
 /* Estilos para el botón volver al menú - mejorado */
 .boton-volver {
@@ -542,19 +542,35 @@
 
 /* Media queries para responsividad */
 @media (max-width: 768px) {
-  /* Solo ajustar en móviles */
   .creditos-container {
-    padding-top: 120px; /* AUMENTADO de 100px a 120px para móviles */
-    padding-bottom: 80px;
+    padding-top: 100px; /* Valor ajustado para móviles */
     margin-top: 0;
+  }
+  
+  .navegacion-interna {
+    top: 70px;
+    padding: 5px 0;
+  }
+  
+  .navegacion-interna ul {
+    gap: 5px;
+  }
+  
+  .navegacion-interna a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .tecnologias-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
 
 /* Correcciones para landscape y pantallas pequeñas */
 @media (max-height: 500px) and (orientation: landscape) {
   .creditos-container {
-    padding-top: 60px; /* SOLO cambiar en modo paisaje */
-    padding-bottom: 40px;
+    padding-top: 80px;
+    margin-top: 0;
   }
   
   .navegacion-interna {
@@ -580,34 +596,14 @@
   }
 }
 
-/* Xiaomi gama media e iPhone 15 */
-@media screen and (min-width: 360px) and (max-width: 414px) {
+@media (max-height: 500px) and (orientation: landscape) {
   .creditos-container {
-    padding: 15px;
-    padding-top: 110px; /* AUMENTADO de 90px a 110px */
-    padding-bottom: 120px;
-  }
-}
-
-/* iPhone 15 específico */
-@media screen and (width: 390px) and (height: 844px) {
-  .creditos-container {
-    padding-top: 110px; /* AUMENTADO de 90px a 110px */
-    padding-bottom: 140px; /* AUMENTADO para gestos de iOS */
-  }
-}
-
-/* Móviles pequeños */
-@media (max-width: 480px) {
-  .creditos-container {
-    padding-top: 100px; /* AUMENTADO de 80px a 100px */
     margin-top: 0;
   }
 }
 
-/* Móviles muy pequeños */
-@media (max-width: 320px) {
+@media (max-width: 480px) {
   .creditos-container {
-    padding-top: 90px; /* AUMENTADO de 70px a 90px */
+    margin-top: 0;
   }
 }

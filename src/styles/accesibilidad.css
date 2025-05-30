@@ -19,44 +19,8 @@
   --fuente-principal: 'Montserrat', sans-serif;
   --fuente-secundaria: 'Nunito', sans-serif;
   --radio-borde: 15px;
-  --espacio-navegacion: 70px; /* Altura de la barra de navegación */
+  --espacio-navegacion: 80px; /* Altura de la barra de navegación */
   --transicion: all 0.3s ease;
-  
-  /* Variables responsivas para espaciado */
-  --espacio-navegacion-desktop: 80px;
-  --espacio-navegacion-tablet: 75px;
-  --espacio-navegacion-mobile: 70px;
-  
-  /* Márgenes seguros */
-  --margen-superior-desktop: 1800px; /* Mantener valores altos */
-  --margen-superior-mobile: 90px;
-  
-  /* Padding lateral responsivo */
-  --padding-lateral-desktop: 40px;
-  --padding-lateral-mobile: 15px;
-}
-
-/* Aplicar variables según dispositivo */
-@media (min-width: 1025px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-desktop);
-    --margen-superior: var(--margen-superior-desktop);
-    --padding-lateral: var(--padding-lateral-desktop);
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-tablet);
-    --margen-superior: var(--margen-superior-mobile);
-    --padding-lateral: var(--padding-lateral-mobile);
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --espacio-navegacion: var(--espacio-navegacion-mobile);
-  }
 }
 
 /**
@@ -69,371 +33,48 @@
 }
 
 /**
- * PÁGINA BASE - CORREGIDA
+ * PÁGINA BASE
  */
 body {
-  /* ELIMINADO: margin-top: 70px; que causaba problemas */
   background-color: var(--color-fondo);
   color: var(--color-texto);
   font-family: var(--fuente-secundaria);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  margin-top: 120px;
 }
 
 /**
- * ESTRUCTURA PRINCIPAL - CORREGIDA
+ * ESTRUCTURA PRINCIPAL
+ * Con margen superior CORRECTO para todos los dispositivos
  */
 .accesibilidad-page {
   width: 100%;
   min-height: 100vh;
   background-color: var(--color-fondo);
   color: var(--color-texto);
-  margin: 0;
+  margin: 0; /* Quitado el margin-top: 800px que causaba problemas */
   padding: 0;
+  margin-top: 800px;
   position: relative;
-  padding-top: var(--espacio-navegacion);
+  padding-top: var(--espacio-navegacion); /* Usar variable para consistencia */
 }
 
 /**
- * CONTENEDOR PRINCIPAL - SOLUCIÓN DEFINITIVA
- * Aumentar significativamente el padding-top para evitar cualquier corte
+ * CONTENEDOR PRINCIPAL
+ * Con margen superior fijo para colocarse debajo de la barra de navegación
  */
 .accesibilidad-contenedor-principal {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: calc(var(--espacio-navegacion) + 100px); /* AUMENTADO DRÁSTICAMENTE de 60px a 100px */
+  padding-top: calc(var(--espacio-navegacion) + 40px); /* 40px extra después de la barra */
   display: flex;
   flex-direction: column;
   gap: 30px;
   position: relative;
   z-index: 10;
-}
-
-
-/* SOLUCIÓN RADICAL - FORZAR ESPACIO SUPERIOR CON !important */
-
-/**
- * CONTENEDOR PRINCIPAL - SOLUCIÓN EXTREMA
- */
-.accesibilidad-contenedor-principal {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  padding-top: 300px !important; /* AUMENTADO A 300px PARA TODOS LOS DISPOSITIVOS */
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  position: relative;
-  z-index: 10;
-  margin-top: 100px !important; /* AÑADIR MARGEN SUPERIOR ADICIONAL */
-}
-
-/* ESPACIADOR EXTREMO */
-.accesibilidad-page::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 150px !important; /* AUMENTADO DE 50px A 150px */
-  flex-shrink: 0;
-}
-
-/* TÍTULO CON MARGEN EXTREMO */
-.accesibilidad-titulo-seccion {
-  text-align: center;
-  margin-top: 100px !important; /* AUMENTADO DE 50px A 100px */
-  margin-bottom: 30px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radio-borde);
-  padding: 20px;
-}
-
-/* TRANSFORM EXTREMO PARA BAJAR TODO */
-.accesibilidad-contenedor-principal {
-  transform: translateY(100px) !important; /* AUMENTADO DE 50px A 100px */
-}
-
-/* MEDIA QUERY SIMPLIFICADO CON VALORES EXTREMOS */
-@media (max-width: 768px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: 250px !important; /* EXTREMO PARA MÓVILES */
-    padding-left: 15px;
-    padding-right: 15px;
-    gap: 20px;
-    margin-top: 80px !important;
-    transform: translateY(80px) !important;
-  }
-  
-  .accesibilidad-page::before {
-    height: 120px !important;
-  }
-  
-  .accesibilidad-titulo-seccion {
-    margin-top: 80px !important;
-  }
-}
-
-/* OVERRIDE PARA DISPOSITIVOS MUY PEQUEÑOS */
-@media screen and (max-width: 500px) {
-  .accesibilidad-page {
-    padding-top: 150px !important; /* EXTREMO */
-  }
-  
-  .accesibilidad-contenedor-principal {
-    margin-top: 120px !important; /* EXTREMO */
-    padding-top: 200px !important; /* EXTREMO */
-    transform: translateY(100px) !important;
-  }
-  
-  .accesibilidad-titulo-seccion {
-    margin-top: 60px !important;
-  }
-}
-
-/* SOLUCIÓN ALTERNATIVA - POSICIÓN ABSOLUTA EXTREMA */
-.accesibilidad-contenedor-principal {
-  position: relative !important;
-  top: 200px !important; /* FORZAR POSICIÓN DESDE ARRIBA */
-}
-
-/* AÑADIR ALTURA MÍNIMA EXTREMA A LA PÁGINA */
-.accesibilidad-page {
-  min-height: calc(100vh + 400px) !important; /* AUMENTAR ALTURA TOTAL */
-  padding-top: 120px !important;
-}
-
-/* ELIMINAR TODOS LOS MEDIA QUERIES CONFLICTIVOS */
-/* Comentar/eliminar TODAS estas declaraciones duplicadas: */
-
-/*
-@media (min-width: 1025px) { ... }
-@media (min-width: 769px) and (max-width: 1024px) { ... }
-@media (min-width: 577px) and (max-width: 768px) { ... }
-@media (max-width: 576px) { ... }
-@media screen and (min-width: 360px) and (max-width: 414px) and (orientation: portrait) { ... }
-@media screen and (width: 390px) and (height: 844px) and (orientation: portrait) { ... }
-@media (max-height: 500px) and (orientation: landscape) { ... }
-@media (min-width: 768px) and (max-width: 991px) { ... }
-@media (min-width: 576px) and (max-width: 767px) { ... }
-@media (max-width: 575px) { ... }
-@media screen and (min-width: 360px) and (max-width: 414px) and (min-height: 740px) { ... }
-@media screen and (width: 390px) and (height: 844px) { ... }
-*/
-
-/* REEMPLAZAR con UN SOLO MEDIA QUERY SIMPLE */
-@media (max-width: 768px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: 150px !important; /* FORZAR 150px para móviles */
-    padding-left: 15px;
-    padding-right: 15px;
-    gap: 20px;
-  }
-  
-  .accesibilidad-titulo-seccion h1 {
-    font-size: 1.8rem;
-  }
-  
-  .accesibilidad-opcion {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 12px;
-  }
-  
-  .input-container {
-    width: 100%;
-    margin-top: 10px;
-    justify-content: flex-start;
-  }
-  
-  .accesibilidad-btn-guardar {
-    width: 100%;
-  }
-}
-
-/* ESPACIADOR ADICIONAL DE EMERGENCIA */
-.accesibilidad-page::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 50px !important; /* FORZAR espaciador adicional */
-  flex-shrink: 0;
-}
-
-/* FORZAR MARGIN-TOP ADICIONAL EN EL TÍTULO */
-.accesibilidad-titulo-seccion {
-  text-align: center;
-  margin-top: 50px !important; /* FORZAR margen superior */
-  margin-bottom: 30px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radio-borde);
-  padding: 20px;
-}
-
-/* SOLUCIÓN EXTREMA - APLICAR TRANSFORM PARA BAJAR TODO */
-.accesibilidad-contenedor-principal {
-  transform: translateY(50px) !important; /* FORZAR desplazamiento hacia abajo */
-}
-
-/* OVERRIDE COMPLETO para dispositivos problemáticos */
-@media screen and (max-width: 500px) {
-  .accesibilidad-page {
-    padding-top: 100px !important;
-  }
-  
-  .accesibilidad-contenedor-principal {
-    margin-top: 80px !important;
-    padding-top: 100px !important;
-    transform: translateY(30px) !important;
-  }
-}
-
-/* ÚLTIMO RECURSO - FORZAR CON JAVASCRIPT SI ES NECESARIO */
-
-/* ELIMINACIÓN DE MEDIA QUERIES DUPLICADOS Y CONFLICTIVOS */
-/* Mantener solo estos media queries principales */
-
-/* Pantallas grandes (Desktop) - MANTENER valor alto */
-@media (min-width: 1025px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion-desktop) + 100px); /* VALOR ALTO para desktop */
-  }
-}
-
-/* Tablets */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion-tablet) + 80px); /* AUMENTADO */
-  }
-}
-
-/* Móviles grandes */
-@media (min-width: 577px) and (max-width: 768px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion-mobile) + 70px); /* AUMENTADO */
-    gap: 20px;
-  }
-}
-
-/* Móviles pequeños y medianos - UNIFICADO */
-@media (max-width: 576px) {
-  :root {
-    --espacio-navegacion: 65px;
-  }
-  
-  .accesibilidad-contenedor-principal {
-    max-width: 100%;
-    padding: 12px;
-    padding-top: calc(var(--espacio-navegacion) + 60px); /* AUMENTADO SIGNIFICATIVAMENTE */
-    gap: 15px;
-  }
-  
-  .accesibilidad-titulo-seccion {
-    padding: 12px;
-    margin-bottom: 15px;
-  }
-  
-  .accesibilidad-opcion {
-    padding: 10px;
-    margin-bottom: 15px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .input-container {
-    width: 100%;
-    justify-content: flex-start;
-    margin-top: 10px;
-  }
-  
-  .accesibilidad-btn-guardar {
-    width: 100%;
-  }
-}
-
-/* Xiaomi gama media - ESPECÍFICO Y SIN CONFLICTOS */
-@media screen and (min-width: 360px) and (max-width: 414px) and (orientation: portrait) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(70px + 65px); /* VALOR FIJO: 135px total */
-  }
-}
-
-/* iPhone 15 - ESPECÍFICO Y SIN CONFLICTOS */
-@media screen and (width: 390px) and (height: 844px) and (orientation: portrait) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(75px + 70px); /* VALOR FIJO: 145px total */
-    padding-bottom: 60px;
-  }
-}
-
-/* Modo paisaje - UNIFICADO */
-@media (max-height: 500px) and (orientation: landscape) {
-  :root {
-    --espacio-navegacion: 50px;
-  }
-  
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion) + 40px); /* VALOR FIJO: 90px total */
-    gap: 15px;
-  }
-  
-  .accesibilidad-titulo-seccion {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-}
-
-/* ELIMINAR TODOS LOS MEDIA QUERIES DUPLICADOS */
-/* Comentar o eliminar estos selectores duplicados que causan conflictos:
-
-@media screen and (min-width: 360px) and (max-width: 414px) { ... }
-@media screen and (min-width: 360px) and (max-width: 414px) and (min-height: 740px) { ... }
-@media (max-width: 575px) { ... } (duplicado)
-@media (max-height: 500px) and (orientation: landscape) { ... } (duplicado)
-
-*/
-
-/* Dispositivos con notch - SIMPLIFICADO */
-@supports (padding-top: env(safe-area-inset-top)) {
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion) + 100px + env(safe-area-inset-top)); /* AUMENTADO base */
-    padding-left: calc(20px + env(safe-area-inset-left));
-    padding-right: calc(20px + env(safe-area-inset-right));
-    padding-bottom: calc(40px + env(safe-area-inset-bottom));
-  }
-}
-
-/* Solución de emergencia - FORZAR margen superior si persiste el problema */
-.accesibilidad-titulo-seccion {
-  text-align: center;
-  margin-top: 20px; /* AÑADIDO: Margen superior adicional */
-  margin-bottom: 30px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radio-borde);
-  padding: 20px;
-}
-
-/* Espaciador de emergencia - AÑADIR si es necesario */
-.accesibilidad-page::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 20px; /* Espaciador adicional */
-  flex-shrink: 0;
-}
-
-/* Aplicación forzada para Xiaomi - SOLUCIÓN ESPECÍFICA */
-@media screen and (max-width: 414px) {
-  .accesibilidad-page {
-    padding-top: 80px; /* FORZAR padding en la página */
-  }
-  
-  .accesibilidad-contenedor-principal {
-    margin-top: 40px; /* AÑADIR margen superior adicional */
-  }
 }
 
 /**
@@ -826,7 +467,7 @@ body {
   .accesibilidad-contenedor-principal {
     max-width: 100%;
     padding: 12px;
-    padding-top: calc(var(--espacio-navegacion) + 30px); /* AUMENTADO de 15px a 30px */
+    padding-top: calc(var(--espacio-navegacion) + 15px);
     gap: 15px;
   }
   
@@ -1079,128 +720,4 @@ body {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-/* RESPONSIVE ESPECÍFICO PARA XIAOMI GAMA MEDIA Y IPHONE 15 */
-
-/* Xiaomi gama media (aproximadamente 6.1-6.7 pulgadas, 1080x2400) */
-@media screen and (min-width: 360px) and (max-width: 414px) and (min-height: 740px) {
-  :root {
-    --espacio-navegacion: 70px;
-  }
-  
-  .accesibilidad-page {
-    padding-top: var(--espacio-navegacion);
-  }
-  
-  .accesibilidad-contenedor-principal {
-    padding: 15px;
-    padding-top: calc(var(--espacio-navegacion) + 15px);
-    gap: 20px;
-  }
-  
-  .accesibilidad-titulo-seccion h1 {
-    font-size: 1.7rem;
-  }
-  
-  .accesibilidad-opcion {
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .input-container {
-    width: 100%;
-    margin-top: 10px;
-    justify-content: flex-start;
-  }
-}
-
-/* iPhone 15 (390x844) */
-@media screen and (width: 390px) and (height: 844px) {
-  :root {
-    --espacio-navegacion: 75px;
-  }
-  
-  .accesibilidad-contenedor-principal {
-    padding: 18px;
-    padding-top: calc(var(--espacio-navegacion) + 25px);
-    padding-bottom: 40px; /* Espacio extra para la barra de gestos de iOS */
-  }
-}
-
-/* Modo paisaje para móviles */
-@media (max-height: 500px) and (orientation: landscape) {
-  :root {
-    --espacio-navegacion: 50px;
-  }
-  
-  .accesibilidad-page {
-    padding-top: var(--espacio-navegacion);
-  }
-  
-  .accesibilidad-contenedor-principal {
-    padding-top: calc(var(--espacio-navegacion) + 10px);
-    gap: 15px;
-  }
-  
-  .accesibilidad-titulo-seccion {
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .accesibilidad-tarjeta {
-    padding: 15px;
-    margin-bottom: 15px;
-  }
-}
-
-/* SOLUCIÓN PRECISA - ELIMINAR DECLARACIONES DUPLICADAS Y CONFLICTIVAS */
-
-/**
- * RESETEO COMPLETO PARA ELIMINAR EL ESCALÓN
- */
-body {
-  margin: 0 !important; /* Eliminar cualquier margin del body */
-}
-
-.accesibilidad-page {
-  padding-top: 0 !important; /* Eliminar padding superior */
-  margin-top: 0 !important;  /* Eliminar margin superior */
-  min-height: 100vh;
-  position: relative;
-  background-color: var(--color-fondo);
-}
-
-/* RESETEAR Y SIMPLIFICAR CONTENEDOR PRINCIPAL */
-.accesibilidad-contenedor-principal {
-  padding-top: 120px !important; /* Valor preciso basado en la imagen */
-  margin-top: 0 !important;
-  transform: none !important; /* Eliminar transformaciones */
-  position: relative !important;
-  top: 0 !important; /* Eliminar posicionamiento vertical forzado */
-}
-
-/* ELIMINAR ESPACIADORES FANTASMA */
-.accesibilidad-page::before {
-  display: none !important; /* Eliminar completamente */
-}
-
-/* ELIMINAR MARGIN SUPERIOR DEL TÍTULO */
-.accesibilidad-titulo-seccion {
-  margin-top: 0 !important;
-}
-
-/* AJUSTES ESPECÍFICOS PARA MÓVILES */
-@media screen and (max-width: 768px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: 90px !important; /* Valor más bajo para móviles */
-  }
-}
-
-/* SOLUCIÓN ESPECÍFICA PARA XIAOMI */
-@media screen and (min-width: 360px) and (max-width: 414px) {
-  .accesibilidad-contenedor-principal {
-    padding-top: 80px !important; /* Aún menor para móviles pequeños */
-  }
 }
