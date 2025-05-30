@@ -9,8 +9,70 @@ const AccesibilidadPanel = () => {
   const navigate = useNavigate();
   const { accessibilitySettings, updateAccessibilitySetting } = useContext(UIContext);
 
-  // Efecto para anunciar la página a lectores de pantalla
+  // SOLUCIÓN JAVASCRIPT EXTREMA PARA FORZAR POSICIONAMIENTO
   useEffect(() => {
+    // Función para aplicar estilos extremos
+    const aplicarEstilosExtremos = () => {
+      const contenedor = document.querySelector('.accesibilidad-contenedor-principal');
+      const page = document.querySelector('.accesibilidad-page');
+      const titulo = document.querySelector('.accesibilidad-titulo-seccion');
+      
+      if (contenedor) {
+        // VALORES EXTREMOS con !important inline
+        contenedor.style.setProperty('margin-top', '100px', 'important');
+        contenedor.style.setProperty('padding-top', '0px', 'important');
+        contenedor.style.setProperty('transform', 'translateY(70px)', 'important');
+        contenedor.style.setProperty('position', 'relative', 'important');
+        contenedor.style.setProperty('top', '100px', 'important');
+      }
+      
+      if (page) {
+        page.style.setProperty('padding-top', '150px', 'important');
+        page.style.setProperty('min-height', 'calc(100vh + 500px)', 'important');
+      }
+      
+      if (titulo) {
+        titulo.style.setProperty('margin-top', '120px', 'important');
+      }
+      
+      // Verificar overlap y aplicar corrección extrema
+      const navbar = document.querySelector('.barra-navegacion');
+      if (navbar && titulo) {
+        const navbarHeight = navbar.offsetHeight;
+        const espacioSeguro = navbarHeight + 200; // 200px de espacio extra
+        contenedor.style.setProperty('margin-top', `${espacioSeguro}px`, 'important');
+      }
+      
+      // Crear espaciador adicional si no existe
+      const espaciadorExistente = document.querySelector('.espaciador-extremo');
+      if (!espaciadorExistente) {
+        const espaciador = document.createElement('div');
+        espaciador.className = 'espaciador-extremo';
+        espaciador.style.height = '200px';
+        espaciador.style.width = '100%';
+        espaciador.style.flexShrink = '0';
+        espaciador.setAttribute('aria-hidden', 'true');
+        
+        const contenedorPrincipal = document.querySelector('.accesibilidad-contenedor-principal');
+        if (contenedorPrincipal && contenedorPrincipal.parentNode) {
+          contenedorPrincipal.parentNode.insertBefore(espaciador, contenedorPrincipal);
+        }
+      }
+    };
+    
+    // Aplicar inmediatamente
+    aplicarEstilosExtremos();
+    
+    // Aplicar después de un pequeño delay por si acaso
+    setTimeout(aplicarEstilosExtremos, 100);
+    
+    // Aplicar cuando la ventana se redimensiona
+    const handleResize = () => {
+      setTimeout(aplicarEstilosExtremos, 50);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
     // Notificar a tecnologías asistivas que la página ha cargado
     const pageLoadAnnouncement = document.createElement('div');
     pageLoadAnnouncement.setAttribute('role', 'status');
@@ -21,6 +83,7 @@ const AccesibilidadPanel = () => {
 
     // Limpiar después de anunciar
     return () => {
+      window.removeEventListener('resize', handleResize);
       document.body.removeChild(pageLoadAnnouncement);
     };
   }, []);
@@ -115,6 +178,9 @@ const AccesibilidadPanel = () => {
 
       <div className="accesibilidad-page" role="main">
         <BarraNavegacion />
+        
+        {/* ESPACIADOR ADICIONAL FORZADO */}
+        <div style={{ height: '120px', width: '100%', flexShrink: 0 }} aria-hidden="true"></div>
         
         <div className="accesibilidad-contenedor-principal">
           <div className="accesibilidad-titulo-seccion">
