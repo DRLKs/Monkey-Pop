@@ -18,11 +18,24 @@
     --fuente-principal: 'Montserrat', sans-serif;
     --fuente-parrafos: 'Nunito', sans-serif;
     --transicion-suave: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* --- Variables responsivas para espaciado --- */
+    --espacio-navegacion-desktop: 80px;
+    --espacio-navegacion-tablet: 75px;
+    --espacio-navegacion-mobile: 70px;
+    
+    /* Márgenes seguros */
+    --margen-superior-desktop: 800px; /* Mantener valores altos */
+    --margen-superior-mobile: 90px;
+    
+    /* Padding lateral responsivo */
+    --padding-lateral-desktop: 40px;
+    --padding-lateral-mobile: 15px;
 }
 
 /* --- Estilos generales para el cuerpo --- */
 body {
-    padding-top: clamp(250px, 15vh, 150px); /* SEPARACIÓN EXTREMA */
+    padding-top: clamp(50px, 10vh, 150px); /* SEPARACIÓN EXTREMA */
     margin: 0;
     font-family: var(--fuente-parrafos);
     color: var(--color-texto-claro);
@@ -116,14 +129,17 @@ body {
 
 /* --- Contenedor Principal de la Página --- */
 .pagina-mono-info {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
-    padding-bottom: 60px;
-    align-items: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100vh; /* AÑADIDO: Limitar altura para evitar scroll */
+  box-sizing: border-box;
+  overflow-y: hidden; /* CORREGIDO: Eliminar scroll vertical */
+  overflow-x: hidden;
+  padding-bottom: 0; /* CORREGIDO: Eliminar padding inferior */
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
 
 /* Fondo con overlay para mejorar contraste */
@@ -141,10 +157,22 @@ body {
 
 /* Estilo para el separador de navegación */
 .separador-navbar {
-    width: 100%;
-    height: 120px; /* Aumentado */
-    flex-shrink: 0;
-    display: block;
+  width: 100%;
+  height: 100px; /* REDUCIDO para ganar espacio vertical */
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .separador-navbar {
+    height: 80px; /* REDUCIDO para móviles */
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 414px) {
+  .separador-navbar {
+    height: 75px; /* REDUCIDO para Xiaomi */
+  }
 }
 
 /* --- Contenedor para el wrapper del scroll y botones --- */
@@ -206,23 +234,22 @@ body {
 
 /* --- Contenedor de las Tarjetas de Monos --- */
 .contenedor-monos {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    gap: 35px;
-    padding: 35px 25px;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-    min-height: 620px; /* Aumentado para mayor espacio */
-    padding-left: 15px;
-    padding-right: 15px;
-    touch-action: pan-x;
-    -ms-overflow-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 35px;
+  padding: 25px 40px; /* AUMENTADO padding lateral para desktop */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  min-height: auto; /* CORREGIDO: Altura automática */
+  max-height: calc(100vh - 200px); /* AÑADIDO: Limitar altura */
+  touch-action: pan-x;
+  -ms-overflow-style: none;
 }
 
 /* Ocultar la barra de desplazamiento pero permitir scroll */
@@ -456,9 +483,11 @@ body {
     }
 
     .scroll-container-wrapper {
-        width: 92%;
+        width: 90%; /* REDUCIDO para más margen lateral */
+        margin: 10px auto;
+        padding: 0 20px; /* AUMENTADO padding lateral */
     }
-
+    
     .scroll-button {
         width: 40px;
         height: 40px;
@@ -466,39 +495,23 @@ body {
     }
     
     .scroll-button.left {
-        left: -15px;
+        left: 0px; /* AJUSTADO para no cortar */
     }
     
     .scroll-button.right {
-        right: -15px;
+        right: 0px; /* AJUSTADO para no cortar */
     }
 
     .contenedor-monos {
-        padding: 20px 15px;
-        gap: 22px;
-        min-height: 570px;
-    }
-
-    .tarjeta-mono {
-        width: 310px;
-        min-width: 310px;
-        min-height: 540px;
-        padding: 22px;
+        padding: 20px 25px; /* AUMENTADO padding lateral */
+        gap: 20px;
+        max-height: calc(100vh - 180px);
     }
     
-    .imagen-mono {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 20px;
-    }
-    
-    .info-texto-mono h2 {
-        font-size: 1.7em;
-    }
-    
-    .info-texto-mono p {
-        font-size: 1em;
-    }
+    .pagina-mono-info {
+    max-height: 100vh;
+    overflow-y: hidden; /* Asegurar que no haya scroll vertical */
+  }
 }
 
 @media (max-width: 600px) {
@@ -525,7 +538,7 @@ body {
     .contenedor-monos {
         padding: 15px;
         gap: 20px;
-        min-height: 540px;
+        max-height: calc(100vh - 150px);
     }
     
     .tarjeta-mono {
@@ -536,9 +549,17 @@ body {
     }
     
     .imagen-mono {
-        width: 110px;
-        height: 110px;
-        margin-bottom: 18px;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+    
+    .info-texto-mono h2 {
+        font-size: 1.7em;
+    }
+    
+    .info-texto-mono p {
+        font-size: 1em;
     }
 }
 
@@ -553,8 +574,8 @@ body {
     }
     
     .scroll-container-wrapper {
-        width: 88%;
-        padding: 0 10px;
+        width: 82%; /* REDUCIDO para más margen lateral */
+        padding: 0 30px; /* AUMENTADO padding lateral */
     }
     
     .scroll-button {
@@ -572,180 +593,143 @@ body {
     }
     
     .contenedor-monos {
-        padding: 10px 20px;
-        gap: 18px;
-        min-height: 520px;
+        padding: 12px 35px; /* AUMENTADO padding lateral */
+        gap: 12px;
+        max-height: calc(100vh - 150px);
     }
     
     .tarjeta-mono {
-        width: 270px;
-        min-width: 270px;
-        min-height: 500px;
-        padding: 16px;
-    }
-    
-    .imagen-mono {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 15px;
-    }
-    
-    .info-texto-mono h2 {
-        font-size: 1.6em;
+        width: 220px;
+        min-width: 220px;
     }
 }
 
-@media (max-height: 480px) and (orientation: landscape) {
-    .titulo-principal {
-        font-size: clamp(1.4rem, 5vw, 1.8rem);
-        margin-top: 5px;
-        margin-bottom: 15px;
-    }
-    
-    .separador-navbar {
-        height: 80px;
-    }
-    
-    .titulo-principal-wrapper {
-        padding: 8px 15px;
-    }
-    
-    .scroll-container-wrapper {
-        width: 80%;
-        max-width: 1200px;
-        margin: 8px auto;
-        padding: 0 30px;
-    }
-    
-    .contenedor-monos {
-        padding: 10px 40px;
-        gap: 35px;
-        min-height: 290px;
-        margin: 0 40px;
-    }
-    
-    .tarjeta-mono {
-        width: 210px;
-        min-width: 210px;
-        min-height: 280px;
-        max-height: 280px;
-        padding: 12px;
-        border-width: 3px;
-        overflow: auto;
-    }
-    
-    .imagen-mono {
-        width: 65px;
-        height: 65px;
-        margin-bottom: 10px;
-        padding: 6px;
-    }
-    
-    .info-texto-mono h2 {
-        font-size: 1.3em;
-        margin-bottom: 8px;
-    }
-    
-    .info-texto-mono h2::after {
-        bottom: -4px;
-    }
-    
-    .info-texto-mono p {
-        font-size: 0.8em;
-        margin: 4px 0;
-        line-height: 1.3;
-    }
-    
-    .descripcion-mono {
-        font-size: 0.75em;
-        min-height: 40px;
-        margin-top: 6px !important;
-        padding-top: 6px;
-    }
-    
-    .scroll-button {
-        width: 28px;
-        height: 28px;
-        font-size: 0.8rem;
-        top: 45%;
-    }
-    
-    .scroll-button.left {
-        left: 15px;
-    }
-    
-    .scroll-button.right {
-        right: 15px;
-    }
-    
-    /* Ajuste para iPhone SE y otros dispositivos muy pequeños en landscape */
-    @media (max-width: 568px) {
-        .tarjeta-mono {
-            width: 190px;
-            min-width: 190px;
-            min-height: 260px;
-            max-height: 260px;
-            padding: 10px;
-        }
-        
-        .imagen-mono {
-            width: 55px;
-            height: 55px;
-            margin-bottom: 8px;
-        }
-        
-        .info-texto-mono h2 {
-            font-size: 1.2em;
-        }
-    }
+/* Corrección para eliminar scroll vertical y mostrar tarjetas directamente */
+.pagina-mono-info {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100vh; /* AÑADIDO: Limitar altura para evitar scroll */
+  box-sizing: border-box;
+  overflow-y: hidden; /* CORREGIDO: Eliminar scroll vertical */
+  overflow-x: hidden;
+  padding-bottom: 0; /* CORREGIDO: Eliminar padding inferior */
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
 
-/* Ajuste extra para dispositivos muy pequeños en landscape */
-@media (max-height: 375px) and (orientation: landscape) {
-    .separador-navbar {
-        height: 60px;
-    }
-    
-    .titulo-principal {
-        font-size: clamp(1.3rem, 4.5vw, 1.6rem);
-        margin-top: 2px;
-        margin-bottom: 12px;
-    }
-    
-    .scroll-container-wrapper {
-        width: 85%;
-        padding: 0 25px;
-        margin: 5px auto;
-    }
-    
-    .contenedor-monos {
-        padding: 8px 30px;
-        gap: 30px;
-        min-height: 240px;
-    }
-    
-    .tarjeta-mono {
-        width: 180px;
-        min-width: 180px;
-        min-height: 230px;
-        max-height: 230px;
-        padding: 10px;
-    }
-    
-    .imagen-mono {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 6px;
-        padding: 4px;
-    }
-    
-    .info-texto-mono h2 {
-        font-size: 1.1em;
-        margin-bottom: 6px;
-    }
-    
-    .info-texto-mono p {
-        font-size: 0.75em;
-        margin: 3px 0;
-    }
+/* Ajustar el contenedor de monos para que se vea completo sin scroll */
+.contenedor-monos {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 35px;
+  padding: 25px 40px; /* AUMENTADO padding lateral para desktop */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  min-height: auto; /* CORREGIDO: Altura automática */
+  max-height: calc(100vh - 200px); /* AÑADIDO: Limitar altura */
+  touch-action: pan-x;
+  -ms-overflow-style: none;
+}
+
+/* Media queries para responsividad - AUMENTAR MÁRGENES LATERALES */
+@media (max-width: 768px) {
+  .scroll-container-wrapper {
+    width: 90%; /* REDUCIDO para más margen lateral */
+    margin: 10px auto;
+    padding: 0 20px; /* AUMENTADO padding lateral */
+  }
+  
+  .contenedor-monos {
+    padding: 20px 25px; /* AUMENTADO padding lateral */
+    gap: 20px;
+    max-height: calc(100vh - 180px);
+  }
+  
+  .pagina-mono-info {
+    max-height: 100vh;
+    overflow-y: hidden; /* Asegurar que no haya scroll vertical */
+  }
+}
+
+/* Xiaomi gama media - más margen lateral para evitar colapsos */
+@media screen and (min-width: 360px) and (max-width: 414px) {
+  .scroll-container-wrapper {
+    width: 85%; /* REDUCIDO para más margen lateral */
+    margin: 10px auto;
+    padding: 0 25px; /* AUMENTADO significativamente */
+  }
+  
+  .contenedor-monos {
+    padding: 15px 30px; /* AUMENTADO padding lateral */
+    gap: 15px;
+    max-height: calc(100vh - 160px);
+  }
+  
+  .tarjeta-mono {
+    width: 240px; /* REDUCIDO para que quepan mejor */
+    min-width: 240px;
+    flex-shrink: 0;
+  }
+  
+  /* Botones de scroll con más margen */
+  .scroll-button.left {
+    left: 5px; /* AÑADIDO margen desde el borde */
+  }
+  
+  .scroll-button.right {
+    right: 5px; /* AÑADIDO margen desde el borde */
+  }
+}
+
+/* iPhone 15 específico */
+@media screen and (width: 390px) and (height: 844px) {
+  .scroll-container-wrapper {
+    width: 87%;
+    padding: 0 22px;
+  }
+  
+  .contenedor-monos {
+    padding: 15px 28px;
+    max-height: calc(100vh - 170px);
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .scroll-container-wrapper {
+    width: 82%; /* REDUCIDO para más margen lateral */
+    padding: 0 30px; /* AUMENTADO padding lateral */
+  }
+  
+  .contenedor-monos {
+    padding: 12px 35px; /* AUMENTADO padding lateral */
+    gap: 12px;
+    max-height: calc(100vh - 150px);
+  }
+  
+  .tarjeta-mono {
+    width: 220px;
+    min-width: 220px;
+  }
+}
+
+/* Modo paisaje - ajustes especiales */
+@media (max-height: 500px) and (orientation: landscape) {
+  .contenedor-monos {
+    max-height: calc(100vh - 120px);
+    padding: 10px 40px; /* MANTENER padding lateral generoso */
+  }
+  
+  .scroll-container-wrapper {
+    width: 88%;
+    padding: 0 20px;
+  }
 }

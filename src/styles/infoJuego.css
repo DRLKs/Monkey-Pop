@@ -11,6 +11,42 @@
     --sombra-elemento: 0 8px 15px rgba(0, 0, 0, 0.4);
     --borde-radio: 20px;
     --fuente-principal: 'Montserrat', sans-serif;
+
+    /* Variables responsivas para espaciado */
+    --espacio-navegacion-desktop: 80px;
+    --espacio-navegacion-tablet: 75px;
+    --espacio-navegacion-mobile: 70px;
+    
+    /* Márgenes seguros */
+    --margen-superior-desktop: 800px; /* Mantener valores altos */
+    --margen-superior-mobile: 90px;
+    
+    /* Padding lateral responsivo */
+    --padding-lateral-desktop: 40px;
+    --padding-lateral-mobile: 15px;
+}
+
+/* Aplicar variables según dispositivo */
+@media (min-width: 1025px) {
+  :root {
+    --espacio-navegacion: var(--espacio-navegacion-desktop);
+    --margen-superior: var(--margen-superior-desktop);
+    --padding-lateral: var(--padding-lateral-desktop);
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --espacio-navegacion: var(--espacio-navegacion-tablet);
+    --margen-superior: var(--margen-superior-mobile);
+    --padding-lateral: var(--padding-lateral-mobile);
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --espacio-navegacion: var(--espacio-navegacion-mobile);
+  }
 }
 
 .info-juego-container {
@@ -36,9 +72,9 @@
 }
 
 .info-juego-content {
-    width: 1200px;
+    width: 1200px; /* MANTENER para desktop */
     margin: 80px auto 0;
-    margin-top: 800px;
+    margin-top: 800px; /* MANTENER valor para desktop */
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     border: 3px solid var(--color-dorado);
@@ -271,60 +307,78 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .info-juego-content {
-        margin-top: 70px;
-        padding: 15px;
-    }
-    
-    .info-juego-content h1 {
-        font-size: 2.2em;
-    }
-    
-    .tab-btn {
-        padding: 10px 15px;
-        font-size: 1em;
-        min-width: 100px;
-    }
-    
-    .personaje-imagen {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .info-header h2 {
-        font-size: 1.8em;
-    }
-    
-    .info-text {
-        font-size: 1em;
-    }
-    
-    .estrategia-monos {
-        gap: 10px;
-    }
-    
-    .mono-estrategia {
-        width: 100px;
-    }
+  .info-juego-content {
+    margin-top: 90px; /* CORREGIDO para móviles */
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .info-juego-content h1 {
+    font-size: 2rem;
+  }
+  
+  .info-tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .tab-btn {
+    width: 100%;
+    padding: 10px 15px;
+  }
+  
+  .tab-content {
+    height: auto; /* CORREGIDO para móviles */
+    padding: 15px;
+  }
 }
 
-@media (max-width: 480px) {
-    .info-tabs {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .tab-btn {
-        width: 100%;
-    }
-    
-    .info-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .info-header h2 {
-        margin-left: 0;
-        margin-top: 10px;
-    }
+/* Xiaomi gama media */
+@media screen and (min-width: 360px) and (max-width: 414px) {
+  .info-juego-content {
+    margin-top: 80px; /* AJUSTADO para pantallas medianas */
+    width: 98%;
+    padding: 12px;
+    margin-bottom: 60px;
+  }
+  
+  .info-header {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .personaje-imagen {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .estrategia-monos {
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .mono-estrategia {
+    width: 100px;
+  }
+}
+
+/* iPhone 15 específico */
+@media screen and (width: 390px) and (height: 844px) {
+  .info-juego-content {
+    margin-bottom: 80px; /* Espacio para gestos de iOS */
+  }
+}
+
+/* Modo paisaje */
+@media (max-height: 500px) and (orientation: landscape) {
+  .info-juego-content {
+    margin-top: 60px;
+    padding: 10px;
+  }
+  
+  .tab-content {
+    padding: 10px;
+  }
 }
