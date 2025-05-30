@@ -24,9 +24,6 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     font-family: var(--fuente-principal);
     overflow: hidden;
@@ -39,14 +36,16 @@ body {
 #container-controles {
     color: var(--color-texto-claro);
     background-color: rgba(102, 51, 0, 0.8); /* Marrón oscuro con transparencia */
-    width: 95%;
-    max-width: 800px;
+    position: fixed;    /* Agregar posición fija */
+    top: 53%;          /* Centrar verticalmente */
+    left: 50%;         /* Centrar horizontalmente */   
+    transform: translate(-50%, -50%); /* Esto centra perfectamente */
     border-radius: var(--borde-radio);
     border: 2px solid var(--color-dorado);
     padding: 25px;
     box-shadow: var(--sombra-elemento);
-    position: relative;
     overflow: hidden;
+    width: 28%;
 }
 
 #container-controles::before {
@@ -194,8 +193,8 @@ select:hover {
 
 @media (max-width: 950px){
     #container-controles {
-        width: 90%;
         padding: 15px;
+        width: 45%;
     }
 
     #container-controles h1 {
@@ -219,6 +218,14 @@ select:hover {
         font-size: clamp(0.8rem, 3vw, 1rem);
     }
 }
+
+
+@media (max-width: 550px){
+    #container-controles {
+        width: 90%;
+    }
+}
+
 
 @media (max-height: 500px) {
     #container-controles {

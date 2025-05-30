@@ -11,6 +11,7 @@
 3. [Roles del Equipo](#roles-del-equipo)
 4. [Instalación y Ejecución](#instalación-y-ejecución)
 5. [🚀 Deploy](#deploy)
+6. [Contribuyentes](#contribuyentes)
 
 ## DESCRIPCIÓN
 Somos el grupo A y Monkey Pop es un 'Tower Defense' un videojuego de estrategia, inspirado en el juego Bloons TD Battles, donde el objetivo es defenderse de los globos que avanzan por un camino, evitando que lleguen al final de este, haciendo uso de los monos que tienes a disposición.
@@ -79,6 +80,19 @@ Estamos evaluando dos posibles formas de desbloquear nuevos monos en el juego:
 ## Deploy
 La aplicación final está subida a GitHub pages, por tanto:
 🌐 [Monkey-Pop](https://drlks.github.io/Monkey-Pop/#/)  
+
+## Contribuyentes
+
+Agradecimientos a todas las personas que han participado en el desarrollo de Monkey-Pop:
+
+<a href="https://github.com/DRLKs/Monkey-Pop/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=DRLKs/Monkey-Pop" />
+</a>
+
+---
+
+Generado automáticamente con [contrib.rocks](https://contrib.rocks).
+
 
 
 

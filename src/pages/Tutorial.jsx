@@ -414,7 +414,7 @@ function Tutorial() {
             <div className="tutorial-content">
               <div className="tutorial-text">
                 <h2>Mejora y vende monos</h2>
-                <p>Selecciona un mono del tablero para mejorarlo o venderlo. Coloca más monos para pasar de ronda.</p>
+                <p>Selecciona un mono del mapa para mejorarlo o venderlo. Coloca más monos para pasar de ronda.</p>
               </div>
               <div className="tutorial-image">
                 <img src={monoAncianoApunta} alt="Mejora de monos" />
