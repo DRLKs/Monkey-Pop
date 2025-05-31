@@ -311,5 +311,6 @@ export const PARTIDA = {
   monedasGlobo: 5,               
   monedas_iniciales: 170,
   vidas_iniciales: 100,
-  ronda_inicial: 1
+  ronda_inicial: 1,
+  potenciadorTiempo: [0.2,0.5,1,2,3,4]
 }

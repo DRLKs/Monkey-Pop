@@ -286,27 +286,30 @@ function Tutorial() {
 
 
   /**
-   * Mejora un mono teniendo en cuenta su identificador
-   * @param {Number} id Identificador
-   */
-  const mejorarMono = (id) => {
-    const mono = gameState.monosColocados.find((mono) => mono.id === id);
-    const precio = MONOS[mono.tipo].precio * 0.5;
-    const incremento = MONOS[mono.tipo].damage * 0.5;
-    dispatch({ type: 'MEJORAR_MONO', id, precio, incremento });
-    if (paso === 3) avanzarPaso(), pausarReaunudarCronometro();
-  };
-
-
-  /**
-   * Vende un mono teniendo en cuenta su identificador
-   * @param {Number} id Identificador
-   */
-  const venderMono = (id) => {
-    const mono = gameState.monosColocados.find((mono) => mono.id === id);
-    const precio = MONOS[mono.tipo].precio / 2;
-    dispatch({ type: 'VENDER_MONO', id, precio });
-  };
+     * Vende un mono teniendo en cuenta su identificador
+     * @param {Number} id Identificador
+     */
+    const venderMono = () => {
+      setMonoVerAjustes(null);
+      console.log('Vender mono:', monoVerAjustes);
+      dispatch({
+        type: 'VENDER_MONO',
+        id: monoVerAjustes.id,
+        precio: MONOS[monoVerAjustes.tipo].precio / 2
+      });
+    }
+  
+    /**
+     * Mejora un mono teniendo en cuenta su identificador
+     * @param {Number} id Identificador
+     */
+    const mejorarMono = (precio) => {
+        dispatch({
+          type: 'MEJORAR_MONO',
+          precio: precio
+        });
+      if (paso === 3) avanzarPaso(), pausarReaunudarCronometro();
+    }
 
 
   /**
@@ -456,8 +459,8 @@ function Tutorial() {
       {monoVerAjustes && (
         <AjustesMono
           mono={monoVerAjustes}
-          venderMono={() => venderMono(monoVerAjustes.id)}
-          funcionMejorarMono={() => mejorarMono(monoVerAjustes.id)}
+          venderMono={venderMono}
+          funcionMejorarMono={(precio) => mejorarMono(precio)}
           monedas={gameState.monedas}
           cerrar={() => setMonoVerAjustes(null)}
         />

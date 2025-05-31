@@ -15,7 +15,7 @@ import btnReanudar from '../assets/images/botones/btn-play.png'
 import btnRalentizar from '../assets/images/botones/btn-ralentizar.png'
 import btnAcelerar from '../assets/images/botones/btn-acelerar.webp'
 
-function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reiniciarJuego, abrirAjustes, agarrarMono, cronometroActivo} ){
+function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar, acelerarJuego, ralentizarJuego,  reiniciarJuego, abrirAjustes, agarrarMono, cronometroActivo} ){
 
     const [pausado, setPausado] = useState(!cronometroActivo)
 
@@ -39,13 +39,15 @@ function BarraNavegacionPartida( {ronda, vidas, monedas, pararReaunudar,  reinic
                   src={btnRalentizar} 
                   alt="Ralentizar" 
                   className="icono-boton" 
+                  onClick={ralentizarJuego} 
                 />
               </div>
               <div className="boton-barraNavegacion">
                 <img 
                   src={btnAcelerar} 
                   alt="Acelerar" 
-                  className="icono-boton" 
+                  className="icono-boton"
+                  onClick={acelerarJuego}  
                 />
               </div>
               <div className="boton-barraNavegacion">

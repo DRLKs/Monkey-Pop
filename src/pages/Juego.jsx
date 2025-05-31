@@ -39,6 +39,9 @@ function Juego() {
   const [ajustesVisible, setAjustesVisible] = useState(false);
   const [cronometroActivo, setCronometroActivo] = useState(true);
 
+  // Guarda el índice multiplicactivo, que hará que el juego vaya más rápido o más lento
+  const[potenciadorVelocidadJuego, setPotenciadorVelocidadJuego] = useState(3); 
+
   /* Constantes para el componente de la confirmación */
   const [confirmacionVisible, setConfirmacionVisible] = useState(false);
   const [funcionConfirmacion, setFuncionConfirmacion] = useState(null);
@@ -172,7 +175,7 @@ function Juego() {
           });
         }
       }else {
-        if (elapsed >= PARTIDA.tiempoActualizacionGlobos ) {
+        if (elapsed >= PARTIDA.tiempoActualizacionGlobos * PARTIDA.potenciadorTiempo[potenciadorVelocidadJuego] ) {
           if (!gameState.perdido) {
             dispatch({
               type: 'TICK',
@@ -502,6 +505,8 @@ function Juego() {
         abrirAjustes={abrirAjustes}
         agarrarMono={agarrarMono}
         cronometroActivo={cronometroActivo}
+        ralentizarJuego={() => setPotenciadorVelocidadJuego(Math.min(potenciadorVelocidadJuego + 1, 5))}
+        acelerarJuego={() => setPotenciadorVelocidadJuego(Math.max(potenciadorVelocidadJuego - 1, 0))}
       />      
       
       {monoSeleccionado !== null && (
