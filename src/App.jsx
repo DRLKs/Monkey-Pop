@@ -11,7 +11,8 @@ import AccesibilidadPanel from './pages/AccesibilidadPanel'
 import { UIProvider } from './context/UIContext'
 import ColorBlindFilter from './components/accesibilidad/ColorBlindFilter'
 
-function App() {  return (
+function App() {  
+  return (
     <HashRouter>
       <UIProvider>
         <ColorBlindFilter />

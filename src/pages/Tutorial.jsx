@@ -30,7 +30,7 @@ import { puedeJugar, isMovile } from '../utils/funciones.js';
 
 // Estilos
 import '../styles/juego.css';
-import '../styles/tutorial.css';
+import '../styles/tutorial/tutorial.css';
 
 
 
@@ -53,7 +53,7 @@ function Tutorial() {
     globos: [],
     monosColocados: [],
     indexGlobo: 0,
-    vidas: PARTIDA.vidas_iniciales,
+    vidas: 999,
     monedas: 99999,   
     ronda: 1,
     perdido: false,

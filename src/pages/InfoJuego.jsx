@@ -2,22 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import { UIContext } from "../context/UIContext";
+import { useNavigate } from 'react-router-dom';
 
-// Importamos las imágenes para la sección de información
+// Imágenes varias
 import monoAncianoImg from '../assets/images/tutorial/monoAncianoPrincipio.webp';
 import globoMalvado from '../assets/images/tutorial/globoMalvado.webp';
 import proTipImage from '../assets/images/tutorial/proTip.webp';
 
-// Importamos imágenes de monos para la sección de estrategia
+// Imágenes de los monos
 import monoBasico from '../assets/images/monkeys/monoBasico.webp';
-import monoArco from '../assets/images/monkeys/en .webp/monoArco.webp';
-import monoFusil from '../assets/images/monkeys/en .webp/monoFusil.webp';
-import monoArtificiero from '../assets/images/monkeys/en .webp/monoArtificiero.webp';
-import monoFrancotirador from '../assets/images/monkeys/en .webp/monoFrancotirador.webp';
-import monoLaser from '../assets/images/monkeys/en .webp/monoLaser.webp';
-
-// Importamos imágenes de mapa para la sección de mapas
-import fondoJuego from '../assets/images/backgrounds/fondoJuego.webp';
+import monoArco from '../assets/images/monkeys/monoArco.webp';
+import monoArtificiero from '../assets/images/monkeys/monoArtificiero.webp';
+import monoFrancotirador from '../assets/images/monkeys/monoFrancotirador.webp';
 
 // Estilos
 import '../styles/infoJuego.css';
@@ -26,6 +22,8 @@ function InfoJuego() {
     const [activeTab, setActiveTab] = useState('historia');
     const { changeBackgroundMusic } = useContext(UIContext);
     
+    const navigate = useNavigate();
+
     useEffect(() => {
         // Cambiar la música de fondo cuando se carga el componente
         changeBackgroundMusic('../assets/sounds/menuPrincipal.mp3');
@@ -185,7 +183,7 @@ function InfoJuego() {
         </Helmet>
         <div className="info-juego-container">
             <div className="info-juego-background"></div>
-            <BarraNavegacion />
+                <BarraNavegacion funcionVolver ={() => navigate('/')}/>
             
             <div className="info-juego-content">
                 <h1>Información del Juego</h1>

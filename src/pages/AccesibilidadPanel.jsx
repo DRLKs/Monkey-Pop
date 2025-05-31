@@ -1,12 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
-import '../styles/accesibilidad.css';
+
+// Componentes
 import { BarraNavegacion } from '../components/BarraNavegacion';
+
+// Contexto
 import { UIContext } from '../context/UIContext';
 
+// Estilos 
+import '../styles/accesibilidad/accesibilidad.css';
+
+
 const AccesibilidadPanel = () => {
+
   const navigate = useNavigate();
+
   const { accessibilitySettings, updateAccessibilitySetting } = useContext(UIContext);
 
   // Efecto para anunciar la página a lectores de pantalla
@@ -114,7 +123,7 @@ const AccesibilidadPanel = () => {
       </svg>
 
       <div className="accesibilidad-page" role="main">
-        <BarraNavegacion />
+        <BarraNavegacion funcionVolver ={() => navigate('/')}/>
         
         <div className="accesibilidad-contenedor-principal">
           <div className="accesibilidad-titulo-seccion">

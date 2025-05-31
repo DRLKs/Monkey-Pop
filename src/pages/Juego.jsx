@@ -17,7 +17,7 @@ import { Mono as MonoClass } from '../utils/clases'
 
 // Utilidades
 import { mapas_ordenador, mapas_movil } from '../utils/mapas'
-import { ESTADO_CASILLA, MENSAJES, MONOS, PARTIDA, MAPA_MOVIL } from '../utils/constantes'
+import { ESTADO_CASILLA, MENSAJES_CONFIRMACIONES, MONOS, PARTIDA, MAPA_MOVIL } from '../utils/constantes'
 import { obtenerCaminoMapa, gameReducer, isMovile } from '../utils/funciones'
 
 // Estilos
@@ -26,7 +26,18 @@ import BarraNavegacionPartida from '../components/BarraNavegacionPartida'
 import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
-
+/**
+ * Devuelve si la casilla clicada es una casilla donde no se puede colocar un mono
+ * @param {String} estadoCasillaMarcada Nombre de la casilla que se ha clicado
+ * @returns 
+ */
+function casillaNoColocable(estadoCasillaMarcada) {
+  return estadoCasillaMarcada === ESTADO_CASILLA.AGUA || estadoCasillaMarcada === ESTADO_CASILLA.CAMINO 
+        || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED2
+        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED2
+        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED3 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED4
+        || estadoCasillaMarcada === ESTADO_CASILLA.FLORROSA || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJAYAZUL;
+}
 
 
 function Juego() {
@@ -190,7 +201,9 @@ function Juego() {
       }else {
         if (elapsed >= PARTIDA.tiempoActualizacionGlobos * PARTIDA.potenciadorTiempo[potenciadorVelocidadJuego] ) {
           if (!gameState.perdido) {
+                      console.log(monoSeleccionado)
             dispatch({
+              
               type: 'TICK',
               camino: camino,
             });
@@ -224,12 +237,7 @@ function Juego() {
   const actualizarMapa = (index) => {
     const estadoCasillaMarcada = mapa[index];
     setMonoVerAjustes(null);  // Deselecciona el mono 
-    if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO 
-        || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED2
-        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED2
-        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED3 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED4
-        || estadoCasillaMarcada === ESTADO_CASILLA.FLORROSA || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJAYAZUL
-    ) return;
+    if ( casillaNoColocable(estadoCasillaMarcada)) return;
 
     const monoExistente = gameState.monosColocados.find(mono => mono.index === index);  // En la casilla pinchada, hay un mono
     if (monoExistente) {
@@ -284,20 +292,18 @@ function Juego() {
    * Función que se ejecuta al presionar una tecla
    */
   useEffect(() => {
-    // Función que se ejecuta cuando se presiona una tecla
+
     const handleKeyDown = (event) => {
       // Obtener el código o nombre de la tecla presionada
       const key = event.key;
       
-      // Diferentes acciones según la tecla presionada
       switch (key) {
         case 'Escape':
-          // Por ejemplo, cancelar el mono seleccionado
           setAjustesVisible(true);
           break;
         case ' ':
           // Espacio para pausar/reanudar
-          pausarReaunudarCronometro();  // Habrá que ponerlo en el botón de pausa para poder actualizarlo
+          pausarReaunudarCronometro(); 
           break;
         case '0':
           soltarMono();
@@ -369,7 +375,6 @@ function Juego() {
 
   /**
    * Vende un mono teniendo en cuenta su identificador
-   * @param {Number} id Identificador
    */
   const venderMono = () => {
     setMonoVerAjustes(null);
@@ -394,6 +399,7 @@ function Juego() {
 
   /**
    * Función que se ejecutará para reiniciar los estados y comenzar una nueva partida 
+   * Reinicia todos los estados del juego
    */
   const reiniciarJuego = () => {
     setTiempoInicio(Date.now());
@@ -421,7 +427,8 @@ function Juego() {
 
   /**
    * Componente para confirmar acciones críticas
-   * @param {*} funcion 
+   * @param {*} funcion Función que se va a ejecutar al confirmar la acción
+   * @param {string} nombreFuncion Nombre de la función que se va a ejecutar al confirmar, sirve para obtener el mensaje de confirmación
    */
   const abrirConfirmacion = (funcion, nombreFuncion) => {
     console.log('abrirConfirmacion', funcion);
@@ -504,10 +511,12 @@ function Juego() {
       <Helmet>
         <title>Monkey Pop - Juego</title>
       </Helmet>
+
       {/* Mostrar advertencia si es móvil y está en portrait */}
       {isPortrait && (
         <OrientationWarning />
       )}
+      
       <h1 className="visually-hidden">Página de Juego de Monkey Pop</h1>
       <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
@@ -585,8 +594,8 @@ function Juego() {
 
       {confirmacionVisible && (
         <ConfirmacionComponent
-          msg={MENSAJES[funcionConfirmacionNombre].msg}
-          msgAccion={MENSAJES[funcionConfirmacionNombre].msgAccion}
+          msg={MENSAJES_CONFIRMACIONES[funcionConfirmacionNombre].msg}
+          msgAccion={MENSAJES_CONFIRMACIONES[funcionConfirmacionNombre].msgAccion}
           funcion={() => {funcionConfirmacion(); setConfirmacionVisible(false);}}
           onClose={() => setConfirmacionVisible(false)}
         />

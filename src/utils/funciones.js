@@ -48,6 +48,7 @@ export const guardarConfiguracionPartida = (configuracion) => {
   localStorage.setItem('configuracionPartida', JSON.stringify(configuracion));
 }
 
+
 /**
  * Carga en la partida la configuración desde el localStorage.
  * 
@@ -60,8 +61,6 @@ export const cargarConfiguracionPartida = () => {
 }
 
 
-
-
 /**
  * Función que guarda en localStorage la capacidad del usuario de jugar.
  * Podrá jugar cuando haya terminado el tutorial.
@@ -69,6 +68,7 @@ export const cargarConfiguracionPartida = () => {
 export const puedeJugar = () => {
     localStorage.setItem("PuedeJugar", true);
 };
+
 
 /**
  * Recupera un valor booleano desde el localStorage.

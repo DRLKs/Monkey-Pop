@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import '../styles/creditos.css';
@@ -15,6 +15,9 @@ const logosExternos = {
 
 function Creditos() {
     // Función para hacer visible todas las secciones inmediatamente
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         const makeAllVisible = () => {
             const sections = document.querySelectorAll('.fade-in');
@@ -83,7 +86,7 @@ function Creditos() {
                 <meta name="description" content="Créditos y agradecimientos del juego Monkey Pop" />
             </Helmet>
             
-            <BarraNavegacion />
+            <BarraNavegacion funcionVolver ={() => navigate('/')}/>
             
             <div className='creditos-container'>
                 <h1 className='creditos-titulo'>Créditos</h1>

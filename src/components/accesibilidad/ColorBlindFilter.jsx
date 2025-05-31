@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { UIContext } from '../../context/UIContext';
-import '../../styles/colorblind-filters.css';
+
+// Estilos
+import '../../styles/accesibilidad/colorblind-filters.css';
 
 const ColorBlindFilter = () => {
   const { accessibilitySettings } = useContext(UIContext);

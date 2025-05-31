@@ -246,8 +246,8 @@
 
 @media (max-height: 450px) {
   .casilla-mapa {
-    width: 4.5vw;
-    height: 3.7vw;
+    width: 4.2vw;
+    height: 3.2vw;
   }
   
   .casilla-selected {
@@ -281,11 +281,15 @@
   }
 }
 
-/* Mi movil */
 @media (max-height: 430px) and (max-width: 930px) {
   .casilla-mapa {
-    width: 3.8vw;
-    height: 3.0vw;
+    width: 4.2vw;
+    height: 3.4vw;
+  }
+
+  .globo, .globo-explotado {
+    max-width: 4.2vw;
+    max-height: 3.4vw;
   }
   
 }

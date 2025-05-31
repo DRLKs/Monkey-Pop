@@ -1,13 +1,11 @@
 // Import the images directly
 import monoBasico from '../assets/images/monkeys/monoBasico.webp'
 import monoArco from '../assets/images/monkeys/monoArco.webp'
-import monoFusil from '../assets/images/monkeys/monoFusil.png'
+import monoFusil from '../assets/images/monkeys/monoFusil.webp'
 import monoArtificiero from '../assets/images/monkeys/monoArtificiero.webp'
-import monoFrancotirador from '../assets/images/monkeys/monoFrancotirador.png'
-import monoLaser from '../assets/images/monkeys/monoLaser.png'
+import monoFrancotirador from '../assets/images/monkeys/monoFrancotirador.webp'
+import monoLaser from '../assets/images/monkeys/monoLaser.webp'
 
-import monoBasicoDisparando from '../assets/images/monkeys/monoBasicoDisparando.webp'
-import monoArcoDisparando from '../assets/images/animaciones/monoDisparo.webp' 
 /**
  * Estados de las casillas del mapa
  * 
@@ -47,7 +45,6 @@ export const MONOS = {
       nombre: "Mono Básico",
       tipo: "basico",
       imagen: monoBasico,
-      imagen_disparando: monoArcoDisparando,
       precio: 100,
       rango: 200,
       tiempoRecarga: 3,
@@ -61,7 +58,6 @@ export const MONOS = {
       nombre: "Mono Arquero",
       tipo: "arco",
       imagen: monoArco,
-      imagen_disparando: monoArcoDisparando,
       precio: 150,
       rango: 100,
       damage: 1,
@@ -188,14 +184,18 @@ export const VALORES_PREDETERMINADOS = {
   idioma: 'es'
 }
 
-export const MENSAJES = {
+
+/**
+ * 
+ */
+export const MENSAJES_CONFIRMACIONES = {
   REINICIAR : {
     msg: "¿Seguro que quieres reiniciar la partida?",
     msgAccion: "Reiniciar"
   },
   VOLVER: {
-    msg: "¿Seguro que quieres volver al menú principal?",
-    msgAccion: "Volver"
+    msg: "¿Seguro que quieres salir al menú principal?",
+    msgAccion: "Salir"
   }
 }
 

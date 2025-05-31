@@ -1,4 +1,11 @@
-
+/**
+ * Pop-Up de confirmación para acciones críticas
+ * @param {string} param0.msg - Mensaje a mostrar en el componente de confirmación
+ * @param {string} param0.msgAccion - Mensaje del botón de acción 
+ * @param {function} param0.funcion - Función a ejecutar al confirmar
+ * @param {function} param0.onClose - Función para cerrar el componente ante la confirmación
+ * @returns 
+ */
 function ConfirmacionComponent({ msg, msgAccion, funcion, onClose }) {
   
   

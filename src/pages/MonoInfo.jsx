@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Helmet } from "react-helmet";
+import { useNavigate } from 'react-router-dom';
 
 import { BarraNavegacion } from '../components/BarraNavegacion';
 import AjustesMono from "../components/AjustesMono";
@@ -10,9 +11,12 @@ import { UIContext } from "../context/UIContext";
 import musica from '../assets/sounds/MonoInfo.mp3';
 import backgroundMusic from '../assets/sounds/menuPrincipal.mp3';
 
-import '../styles/infoMonos.css';
+import '../styles/monoInfo.css';
 
 function MonoInfo() {
+
+    const navigate = useNavigate();
+
     const [verAjustesMono, setVerAjustesMono] = useState(null);
     const scrollContainerRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -77,7 +81,7 @@ function MonoInfo() {
         <div className="pagina-mono-info">
             {/* Agregamos encabezados semánticos para definir regiones de página */}
             <header>
-                <BarraNavegacion />
+                <BarraNavegacion funcionVolver ={() => navigate('/')}/>
             </header>
             
             {/* Separador para evitar la superposición con la barra de navegación */}
