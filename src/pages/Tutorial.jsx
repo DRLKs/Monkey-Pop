@@ -346,6 +346,7 @@ function Tutorial() {
     <h1 className="visually-hidden">Tutorial de Monkey Pop</h1>
     <div>
       <BarraNavegacionTutorial
+        funcionVolver ={() => navigate('/')}
         informacion={INFORMACION_TUTORIAL[paso].texto}
         vidas={gameState.vidas}
         monedas={gameState.monedas}

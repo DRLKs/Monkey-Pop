@@ -1,4 +1,4 @@
-import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 
 import '../styles/ajustes.css'
@@ -8,13 +8,19 @@ import { BarraNavegacion } from '../components/BarraNavegacion'
 
 function Ajustes() {
   
+  const navigate = useNavigate()
+  
+  const volver = () => {
+    navigate('/');
+  }
+
   return (
     <>
     <Helmet>
       <title>Monkey Pop - Ajustes</title>
     </Helmet>
     <div className="ajustes-page"></div> {/* Configuración de un div que actuará como body */}
-    <BarraNavegacion />
+    <BarraNavegacion funcionVolver={volver}/>
     <AjustesContainerAjustes/>    
     
     </>

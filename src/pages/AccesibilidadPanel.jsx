@@ -182,38 +182,6 @@ const AccesibilidadPanel = () => {
                 </select>
               </div>
             </div>
-
-            <div className="accesibilidad-opcion">
-              <div className="opcion-header">
-                <span className="opcion-label" id="reduce-motion-label">Reducir animaciones</span>
-                <p className="opcion-descripcion">Minimiza o elimina las animaciones y efectos de movimiento</p>
-              </div>
-              <div className="input-container">
-                <input 
-                  id="reducir-animaciones"
-                  type="checkbox"
-                  aria-labelledby="reduce-motion-label" 
-                  checked={accessibilitySettings.reduceMotion} 
-                  onChange={(e) => updateAccessibilitySetting('reduceMotion', e.target.checked)} 
-                />
-              </div>
-            </div>
-
-            <div className="accesibilidad-opcion">
-              <div className="opcion-header">
-                <span className="opcion-label" id="text-to-speech-label">Lector de pantalla</span>
-                <p className="opcion-descripcion">Mejora la compatibilidad con lectores de pantalla</p>
-              </div>
-              <div className="input-container">
-                <input 
-                  id="lector-pantalla"
-                  type="checkbox"
-                  aria-labelledby="text-to-speech-label" 
-                  checked={accessibilitySettings.screenReaderMode} 
-                  onChange={(e) => updateAccessibilitySetting('screenReaderMode', e.target.checked)} 
-                />
-              </div>
-            </div>
           </div>
           
 

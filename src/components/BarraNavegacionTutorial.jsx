@@ -7,10 +7,10 @@ import { BarraNavegacion } from "./BarraNavegacion";
 import { BarraMonos } from "./BarraMonos";
 import { MonoBarraNavegador } from "./MonoBarraNavegador";
 
-function BarraNavegacionPartida( {vidas, monedas, agarrarMono, informacion} ){
+function BarraNavegacionPartida( {vidas, monedas, agarrarMono, informacion, funcionVolver} ){
 
     return(
-        <BarraNavegacion>
+        <BarraNavegacion funcionVolver={funcionVolver}>
             
             <aside className="info-tutorial">
               {informacion}

@@ -726,3 +726,9 @@ body {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+@media (max-height: 400px) {
+  .accesibilidad-contenedor-principal {
+        padding-top: calc(var(--espacio-navegacion) + 110px);
+    }
+}

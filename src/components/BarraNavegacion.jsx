@@ -1,14 +1,11 @@
 
-import { useNavigate } from 'react-router-dom'
 import '../styles/barraNavegacion.css'
 
-export function BarraNavegacion({ children }) {
-
-    const navigate = useNavigate()
+export function BarraNavegacion({ funcionVolver, children }) {
 
     return (
         <nav className="navbar">
-            <button className="nav-button" id="back-button" onClick={() => navigate('/')}>Volver</button>
+            <button className="nav-button" id="back-button" onClick={funcionVolver}>Volver</button>
             {children}
         </nav>
     )
