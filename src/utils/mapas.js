@@ -2,7 +2,7 @@
 // Cada mapa es un array de 450 elementos (30x15)
 // Valores posibles: 'default' (verde), 'agua', 'camino', 'selected'
 
-import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA, MAPA_CAMINO_Z_MOVIL } from "./constantes";
+import { PARTIDA, MAPA_MOVIL, MAPA_CAMINO_DIAGONAL_MOVIL, ESTADO_CASILLA, MAPA_CAMINO_Z_MOVIL, MAPA_CAMINO_ESPIRAL_MOVIL } from "./constantes";
 
 
 //Mapa con camino diagonal intentando mejorar como se ve. Añadiendo más tipos de casillas
@@ -31,8 +31,8 @@ export const mapaCaminoDiagonal = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa)
   if (Math.floor(x * (15/30)) === y || Math.floor(x * (15/30)) === y - 1) return ESTADO_CASILLA.CAMINO;
 
   if((x == 3 && y == 5) || (x == 9 && y == 9) || (x == 19 && y == 13)
-    || (x == 17 && y == 6) || (x == 13 && y == 2) || (x == 12 && y == 3)) return ESTADO_CASILLA.FLORAZUL;
-  if((x == 4 && y == 6) || (x == 11 && y == 2) || (x == 16 && y == 5) || (x == 18 && y == 14) || (x == 10 && y == 10)) return ESTADO_CASILLA.FLORROJA;
+    || (x == 17 && y == 6) || (x == 13 && y == 2) || (x == 12 && y == 3)) return ESTADO_CASILLA.FLORROSA;
+  if((x == 4 && y == 6) || (x == 11 && y == 2) || (x == 16 && y == 5) || (x == 18 && y == 14) || (x == 10 && y == 10)) return ESTADO_CASILLA.FLORROJAYAZUL;
 
 
   return casilla;
@@ -43,7 +43,7 @@ export const mapaZOrdenador = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fil
   const x = index % PARTIDA.ancho_mapa;
   const y = Math.floor(index / PARTIDA.ancho_mapa);
 
-  // CAMINO AZUL
+  // CAMINO
   if (
     // Nuevo inicio del camino bajando desde (4, 0)
     (x === 4 && y >= 0 && y <= 3) ||
@@ -65,31 +65,53 @@ export const mapaZOrdenador = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fil
     (x === 10 && y >= 13 && y <= 14)
   ) return ESTADO_CASILLA.CAMINO;
 
-  // AGUA AMARILLA (sin tocar el camino)
+  // AGUA (sin tocar el camino)
   if (
     // Esquina inferior izquierda
-    (x === 0 && y >= 6 && y <= 14) ||
-    (x === 1 && y >= 6 && y <= 14) ||
-    (x === 2 && y >= 8 && y <= 14) ||
+    (x === 0 && y >= 7 && y <= 14) ||
+    (x === 1 && y >= 8 && y <= 14) ||
+    (x === 2 && y >= 9 && y <= 14) ||
     (x === 3 && y >= 10 && y <= 14) ||
     (x === 4 && y >= 11 && y <= 14) ||
     (x === 5 && y >= 12 && y <= 14) ||
+    (x === 6 && y >= 13 && y <= 14) ||
+    (x === 7 && y === 14) ||
 
     // Esquina superior derecha
-    (x >= 25 && x <= 29 && y >= 0 && y <= 1) ||
-    (x >= 28 && x <= 29 && y >= 2 && y <= 6) ||
-    (x >= 27 && y >= 2 && y <= 5) ||
-    (x === 26 && y === 2)
+    (x === 29 && y >=0 && y <= 6) ||
+    (x === 28 && y >= 0 && y <= 5) ||
+    (x === 27 && y >= 0 && y <= 4) ||
+    (x === 26 && y >= 0 && y <= 3) ||
+    (x === 25 && y >= 0 && y <= 2) ||
+    (x === 24 && y >= 0 && y <= 1) ||
+    (x === 23 && y === 0) 
   ) return ESTADO_CASILLA.AGUA;
 
-  
+  if(
+    // La diagonal (0,6) a (8,14)
+    (x >= 0 && x <= 8 && y >= 6 && y <= 14 && x === y - 6) 
+  ) return ESTADO_CASILLA.AGUA_CESPED1;
 
-  // FLORES AZULES
-  if ((x === 6 && y === 5) || (x === 7 && y === 11)) return ESTADO_CASILLA.FLORAZUL;
-  // FLORES ROJAS
-  if ((x === 7 && y === 5) || (x === 8 && y === 11)
-    || (x === 5 && y === 4) || (x === 6 && y === 10)
-  ) return ESTADO_CASILLA.FLORROJA;
+  if(
+    // La diagonal (22,0) a (29,7)
+    (x >= 22 && x <= 29 && y >= 0 && y <= 7 && x === y + 22)
+  ) return ESTADO_CASILLA.AGUA_CESPED2;
+
+  // FLORES ROSAS
+  if (
+    (x === 4 && y === 5) ||
+    (x === 14 && y === 8) ||
+    (x === 26 && y === 8) ||
+    (x === 25 && y === 7) 
+  ) return ESTADO_CASILLA.FLORROSA;
+  // FLORES ROJAS Y AZULES
+  if (
+    (x === 3 && y === 6) ||
+    (x === 5 && y === 6) ||
+    (x === 14 && y === 0) ||
+    (x === 13 && y === 1) ||
+    (x === 15 && y === 8) 
+  ) return ESTADO_CASILLA.FLORROJAYAZUL;
 
   // CÉSPED por defecto
   return casilla;
@@ -130,6 +152,151 @@ export const mapaCaminoEspiral = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).
     // Las dos esquinas que quedan
     (x === 14 && y === 11) ||
     (x === 14 && y === 8) 
+  ) return ESTADO_CASILLA.CAMINO;
+
+  if (
+    (y === 0 && x >= 0 && x <= 2) ||
+    (y === 0 && x >= 26 && x <= 29) ||
+    (y === 1 && x >= 0 && x <= 1) ||
+    (y === 1 && x >= 27 && x <= 29) ||
+    (y === 2 && x === 0) ||
+    (y === 3 && x === 29) ||
+    (y === 2 && x >= 28 && x <= 29) ||
+    (y === 11 && x === 0) ||
+    (y === 12 && x >= 0 && x <= 1) ||
+    (y === 12 && x === 29) ||
+    (y === 13 && x >= 0 && x <= 2) ||
+    (y === 13 && x >= 28 && x <= 29) ||
+    (y === 14 && x >= 0 && x <= 3) ||
+    (y === 14 && x >= 27 && x <= 29) 
+  ) return ESTADO_CASILLA.AGUA;
+
+  if(
+    //Diagonal (0,10) a (4,14)
+    (x >= 0 && x <= 4 && y >= 10 && y <= 14 && x === y - 10)
+  ) return ESTADO_CASILLA.AGUA_CESPED1;
+
+  if(
+    //Diagonal (25,0) a (29, 4)
+    (x >= 25 && x <= 29 && y >= 0 && y <= 4 && x === y + 25)
+  ) return ESTADO_CASILLA.AGUA_CESPED2;
+
+  if(
+    //Diagonal (26,14) a (29,11)
+    (x === 26 && y == 14) ||
+    (x === 27 && y == 13) ||
+    (x === 28 && y == 12) ||
+    (x === 29 && y == 11)
+  ) return ESTADO_CASILLA.AGUA_CESPED3;
+
+  if(
+    //Diagonal (0,3) a (3,0) 
+    (x >= 0 && x <= 3 && y >= 0 && y <= 3 && x === 3 - y)
+  ) return ESTADO_CASILLA.AGUA_CESPED4;
+
+  // FLORES ROSAS
+  if (
+    (x === 5 && y === 10) ||
+    (x === 6 && y === 11) ||
+    (x === 12 && y === 5) ||
+    (x === 17 && y === 9) ||
+    (x === 26 && y === 4)
+  ) return ESTADO_CASILLA.FLORROSA;
+  // FLORES ROJAS Y AZULES
+  if (
+    (x === 7 && y === 10) ||
+    (x === 13 && y === 4) ||
+    (x === 18 && y === 10) ||
+    (x === 25 && y === 3) ||
+    (x === 26 && y === 3)
+  ) return ESTADO_CASILLA.FLORROJAYAZUL;
+
+  // Césped por defecto
+  return casilla;
+});
+
+// Otro mapa con un camino que empieza y acaba en el mismo lado del mapa
+export const mapaPrincipioFinMismoLado = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % PARTIDA.ancho_mapa;
+  const y = Math.floor(index / PARTIDA.ancho_mapa);
+
+  if (
+    // Línea recta horizontal
+    (y === 5 && x >= 0 && x <= 23) ||
+    // Línea recta vertical
+    (x === 23 && y >= 2 && y <= 5) ||
+    // Línea recta horizontal
+    (y === 2 && x >= 16 && x <= 23) ||
+    // Línea recta vertical
+    (x === 16 && y >= 2 && y <= 9) || 
+    // Línea recta horizontal
+    (y === 9 && x >= 7 && x <= 16) ||
+    // Linea recta vertical
+    (x === 7 && y >= 9 && y <= 12) || 
+    // Linea recta horizontal
+    (y === 12 && x >= 0 && x <= 7)
+  ) return ESTADO_CASILLA.CAMINO;
+
+if (
+    (y === 8 && x >= 22 && x <= 26) ||
+    (y === 9 && x >= 21 && x <= 27) ||
+    (y === 10 && x >= 20 && x <= 27) ||
+    (y === 11 && x >= 20 && x <= 26) ||
+    (y === 12 && x >= 21 && x <= 24) 
+  ) return ESTADO_CASILLA.AGUA;
+
+  if(
+    (x === 27 && y === 8)
+  ) return ESTADO_CASILLA.AGUA_CESPED1;
+
+  if(
+    (x === 20 && y === 12)
+  ) return ESTADO_CASILLA.AGUA_CESPED2;
+
+  if(
+    (x === 21 && y === 8) ||
+    (x === 20 && y === 9)
+  ) return ESTADO_CASILLA.AGUA_CESPED3;
+
+  if(
+    (x === 25 && y === 12) ||
+    (x === 27 && y === 11)
+  ) return ESTADO_CASILLA.AGUA_CESPED4;
+
+// FLORES ROSAS
+  if (
+    (x === 2 && y === 10) ||
+    (x === 2 && y === 8) ||
+    (x === 5 && y === 0) ||
+    (x === 6 && y === 1) ||
+    (x === 13 && y === 12) ||
+    (x === 14 && y === 13) ||
+    (x === 27 && y === 2) ||
+    (x === 27 && y === 7) ||
+    (x === 28 && y === 3) 
+  ) return ESTADO_CASILLA.FLORROSA;
+  // FLORES ROJAS Y AZULES
+  if (
+    (x === 3 && y === 9) ||
+    (x === 6 && y === 2) ||
+    (x === 12 && y === 2) ||
+    (x === 13 && y === 1) ||
+    (x === 28 && y === 2) ||
+    (x === 28 && y === 8)
+  ) return ESTADO_CASILLA.FLORROJAYAZUL;
+
+  // Césped por defecto
+  return casilla;
+});
+
+// Mapa con un camino circular
+export const mapaCaminoCircular = Array(PARTIDA.ancho_mapa * PARTIDA.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % PARTIDA.ancho_mapa;
+  const y = Math.floor(index / PARTIDA.ancho_mapa);
+
+  if (
+    // Línea recta horizontal
+    (y === 5 && x >= 0 && x <= 6)
   ) return ESTADO_CASILLA.CAMINO;
 
   // Césped por defecto
@@ -173,7 +340,7 @@ export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.
   }
 
   else if ( valorCasilla === 5){
-    return ESTADO_CASILLA.FLORAZUL;
+    return ESTADO_CASILLA.FLORROSA;
   }
   
   else if ( valorCasilla == 6 ){
@@ -185,7 +352,7 @@ export const mapaCaminoDiagonalMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.
   }
 
   else if ( valorCasilla === 8 ){
-    return ESTADO_CASILLA.FLORROJA;
+    return ESTADO_CASILLA.FLORROJAYAZUL;
   }
   return casilla;
 });
@@ -221,7 +388,7 @@ export const mapaZMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).f
   }
 
   else if ( valorCasilla === 5){
-    return ESTADO_CASILLA.FLORAZUL;
+    return ESTADO_CASILLA.FLORROSA;
   }
   
   else if ( valorCasilla == 6 ){
@@ -233,12 +400,60 @@ export const mapaZMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).f
   }
 
   else if ( valorCasilla === 8 ){
-    return ESTADO_CASILLA.FLORROJA;
+    return ESTADO_CASILLA.FLORROJAYAZUL;
   }
   
   return casilla;
 });
 
+export const mapaEspiralMovil = Array(MAPA_MOVIL.ancho_mapa * MAPA_MOVIL.largo_mapa).fill('default').map((casilla, index) => {
+  const x = index % MAPA_MOVIL.ancho_mapa;
+  const y = Math.floor(index / MAPA_MOVIL.ancho_mapa);
+
+  // Usar la matriz para determinar el tipo de casilla
+  const valorCasilla = MAPA_CAMINO_ESPIRAL_MOVIL[y] && MAPA_CAMINO_ESPIRAL_MOVIL[y][x];
+
+  // Si es cesped, default (0), no se hace nada
+  if( valorCasilla === 0 ){
+
+  }
+
+  // Si es camino (1), devuelve camino
+  else if (valorCasilla === 1) {
+    return ESTADO_CASILLA.CAMINO;
+  }
+  
+  // Si es agua (2), devuelve agua
+  else if (valorCasilla === 2) {
+    return ESTADO_CASILLA.AGUA;
+  }
+
+  else if (valorCasilla === 3) {
+    return ESTADO_CASILLA.TIERRA_CESPED2;
+  }
+
+  else if (valorCasilla === 4){
+    return ESTADO_CASILLA.TIERRA_CESPED1;
+  }
+
+  else if ( valorCasilla === 5){
+    return ESTADO_CASILLA.FLORROSA;
+  }
+  
+  else if ( valorCasilla == 6 ){
+    return ESTADO_CASILLA.AGUA_CESPED1;
+  }
+
+  else if ( valorCasilla === 7 ){
+    return ESTADO_CASILLA.AGUA_CESPED2;
+  }
+
+  else if ( valorCasilla === 8 ){
+    return ESTADO_CASILLA.FLORROJAYAZUL;
+  }
+  
+  return casilla;
+});
 
 /** 
  * Función que devuelve aleatoriamente un mapa para el ordenador
@@ -247,7 +462,8 @@ export const mapas_ordenador = () => {
   const mapasDisponiblesOrdenador = [
     mapaCaminoDiagonal,
     mapaZOrdenador,
-    mapaCaminoEspiral
+    mapaCaminoEspiral,
+    mapaPrincipioFinMismoLado
   ];
 
   const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesOrdenador.length);
@@ -260,7 +476,8 @@ export const mapas_ordenador = () => {
 export const mapas_movil = () => {
   const mapasDisponiblesMovil = [
     mapaCaminoDiagonalMovil,
-    mapaZMovil
+    mapaZMovil,
+    mapaEspiralMovil
   ];
   
   const indiceAleatorio = Math.floor(Math.random() * mapasDisponiblesMovil.length);

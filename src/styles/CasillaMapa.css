@@ -54,6 +54,18 @@
   background-size: cover;
   background-position: center;
 }
+.casilla-agua_cesped3{
+  background-image: url('../assets/images/mapa/aguaCesped3.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(90deg);
+}
+.casilla-agua_cesped4{
+  background-image: url('../assets/images/mapa/aguaCesped3.jpg');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(270deg);
+}
 .casilla-tierra_cesped1{
   background-image: url('../assets/images/mapa/cespedTierra5.jpg');
   background-size: cover;
@@ -68,13 +80,15 @@
   z-index: 4;
 }
 
-.casilla-florRoja{
+
+
+.casilla-florRojaYAzul{
   background-image: url('../assets/images/mapa/flores.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.casilla-florAzul{
+.casilla-florRosa{
   background-image: url('../assets/images/mapa/flores2.jpg');
   background-size: cover;
   background-position: center;
@@ -196,13 +210,8 @@
 
 /* Efectos hover solo para dispositivos que soportan hover (principalmente PC) */
 @media (hover: hover) {
-  .casilla-default:hover {
+  .casilla-default:hover{
     filter: brightness(1.2);
-  }
-  
-  .casilla-default:hover,
-  .casilla-camino:hover,
-  .casilla-agua:hover {
     transform: scale(1.05);
   }
 }

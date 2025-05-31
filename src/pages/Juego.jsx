@@ -214,7 +214,8 @@ function Juego() {
     if (estadoCasillaMarcada === ESTADO_CASILLA.AGUA || mapa[index] === ESTADO_CASILLA.CAMINO 
         || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.TIERRA_CESPED2
         || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED1 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED2
-        || estadoCasillaMarcada === ESTADO_CASILLA.FLORAZUL || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJA
+        || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED3 || estadoCasillaMarcada === ESTADO_CASILLA.AGUA_CESPED4
+        || estadoCasillaMarcada === ESTADO_CASILLA.FLORROSA || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJAYAZUL
     ) return;
 
     const monoExistente = gameState.monosColocados.find(mono => mono.index === index);  // En la casilla pinchada, hay un mono
