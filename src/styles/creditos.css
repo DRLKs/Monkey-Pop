@@ -515,6 +515,7 @@
 @media (max-width: 768px) {
   .creditos-container {
     padding-top: 300px;
+    margin-top: 70px;
   }
   
   .navegacion-interna {
@@ -550,16 +551,22 @@
 
 @media (max-width: 470px) {
   .creditos-container {
-    margin-top: 2890px;
+    margin: 2200px auto 0 auto; 
+    padding: 10% 0; 
+    width: 90%;
+    max-width: 400px; 
   }
 }
+
+
 
 
 
 /* Correcciones para landscape y pantallas pequeñas */
 @media (max-height: 500px) and (orientation: landscape) {
   .creditos-container {
-    padding-top: 80px;
+    padding-top: clamp(2300px, 50vh, 450px);
+
     margin-top: 0;
   }
   

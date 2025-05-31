@@ -542,6 +542,7 @@ body {
     }
 }
 
+
 @media (max-width: 480px) {
     .titulo-principal {
         font-size: clamp(1.6rem, 6vw, 2rem);
@@ -593,6 +594,60 @@ body {
     .info-texto-mono h2 {
         font-size: 1.6em;
     }
+}
+@media (max-width: 470px) {
+    .separador-navbar
+    {
+        height: 0px; 
+    }
+  .contenedor-monos {
+    margin: 0 auto 0 auto; 
+    padding: 10% 0; 
+    width: 90%;
+    max-width: 400px; 
+  }
+}
+
+@media (max-width:1000px) {
+    .titulo-principal {
+        font-size: clamp(3rem, 7vw, 2.2rem);
+        margin-bottom: 22px;
+    }
+    
+    .separador-navbar {
+        height: 130px; 
+    }
+    
+    .scroll-container-wrapper {
+        width: 90%;
+        margin: 10px auto;
+    }
+    
+    .scroll-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .contenedor-monos {
+        padding: 15px;
+        gap: 20px;
+        min-height: 540px;
+    }
+    
+    .tarjeta-mono {
+        width: 290px;
+        min-width: 290px;
+        min-height: 520px;
+        padding: 18px;
+    }
+    
+    .imagen-mono {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 20px;
+    }
+    
 }
 
 @media (max-height: 480px) and (orientation: landscape) {
