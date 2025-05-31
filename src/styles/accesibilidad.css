@@ -55,7 +55,7 @@ body {
   color: var(--color-texto);
   margin: 0; /* Quitado el margin-top: 800px que causaba problemas */
   padding: 0;
-  margin-top: 800px;
+  margin-top: 200px;
   position: relative;
   padding-top: var(--espacio-navegacion); /* Usar variable para consistencia */
 }
@@ -451,6 +451,11 @@ body {
   .accesibilidad-btn-guardar {
     min-width: 200px;
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 1000px) {
+  .accesibilidad-page{
+    margin-top:600px ;
   }
 }
 

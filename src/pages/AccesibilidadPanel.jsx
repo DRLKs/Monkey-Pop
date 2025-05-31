@@ -216,25 +216,7 @@ const AccesibilidadPanel = () => {
             </div>
           </div>
           
-          <div className="accesibilidad-tarjeta" role="region" aria-labelledby="touch-options">
-            <h2 id="touch-options" className="accesibilidad-seccion-titulo">Opciones de Control</h2>
-            
-            <div className="accesibilidad-opcion">
-              <div className="opcion-header">
-                <span className="opcion-label" id="touch-assist-label">Asistente táctil</span>
-                <p className="opcion-descripcion">Hace que los elementos táctiles sean más grandes y más fáciles de tocar</p>
-              </div>
-              <div className="input-container">
-                <input 
-                  id="asistente-tactil"
-                  type="checkbox"
-                  aria-labelledby="touch-assist-label" 
-                  checked={accessibilitySettings.touchAssist} 
-                  onChange={(e) => updateAccessibilitySetting('touchAssist', e.target.checked)} 
-                />
-              </div>
-            </div>
-          </div>
+
           
           <div className="accesibilidad-acciones">
             <button 
