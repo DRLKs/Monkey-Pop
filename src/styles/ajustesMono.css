@@ -94,7 +94,6 @@
 .mejora-label{
     color: var(--color-mejoras);
     font-weight: bold;
-    margin-left: 5px;
 }
 
 .btn-mejora {
@@ -210,7 +209,7 @@
     }
 
     .btn-mejora{
-        font-size: 14px;
+        font-size: 10px;
         padding: 6px 10px;
     }
 
@@ -225,7 +224,7 @@
 @media (max-height: 480px) {
     
     .ajustes-mono-container{
-        width: 100px; /* Ancho reducido */
+        width: 150px; 
     }
     
     .presentacion-continer{
@@ -269,6 +268,7 @@
     .presentacion-continer h1 {
         margin: 0 0 5px 0;
         font-size: 14px;
+        line-height: 1;
     }
 
     .estadistica-row {
