@@ -658,11 +658,11 @@ body {
     }
     
     .separador-navbar {
-        height: 80px;
+        height: 20px;
     }
     
     .titulo-principal-wrapper {
-        padding: 8px 15px;
+        padding: 5px 15px;
     }
     
     .scroll-container-wrapper {
@@ -682,11 +682,10 @@ body {
     .tarjeta-mono {
         width: 210px;
         min-width: 210px;
-        min-height: 280px;
-        max-height: 280px;
+        min-height: 250px;
+        max-height: 400px;
         padding: 12px;
         border-width: 3px;
-        overflow: auto;
     }
     
     .imagen-mono {

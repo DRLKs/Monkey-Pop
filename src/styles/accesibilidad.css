@@ -55,7 +55,7 @@ body {
   color: var(--color-texto);
   margin: 0; /* Quitado el margin-top: 800px que causaba problemas */
   padding: 0;
-  margin-top: 200px;
+  margin-top: 500px;
   position: relative;
   padding-top: var(--espacio-navegacion); /* Usar variable para consistencia */
 }

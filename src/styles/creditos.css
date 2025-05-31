@@ -565,7 +565,8 @@
 /* Correcciones para landscape y pantallas pequeñas */
 @media (max-height: 500px) and (orientation: landscape) {
   .creditos-container {
-    padding-top: clamp(2300px, 50vh, 450px);
+    padding-top: clamp(2200px, 500vh, 500px);
+    
 
     margin-top: 0;
   }
