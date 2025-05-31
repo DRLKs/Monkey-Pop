@@ -14,18 +14,20 @@
   --fuente-secundaria: 'Nunito', sans-serif;
 }
 
-/* Fondo con efecto de paralaje */
-.fondo-creditos {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: url('../assets/images/backgrounds/posiblesFondos.webp') no-repeat center center/cover;
-  z-index: -1;
-  animation: suaveFondo 60s infinite alternate;
-  transform-origin: center;
+.creditos-container {
+  width: clamp(280px, 90%, 900px);
+  margin: 2000px 0 0 0; 
+  padding: clamp(20px, 5vh, 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  min-height: 100vh;
 }
+
+
 
 @keyframes suaveFondo {
   0% {
@@ -34,36 +36,6 @@
   100% {
     transform: scale(1.1);
   }
-}
-
-/* Superposición del fondo para mejorar legibilidad */
-.fondo-creditos::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.3),
-    rgba(102, 51, 0, 0.7)
-  );
-  z-index: -1;
-}
-
-/* CORRECCIÓN CRÍTICA: Contenedor principal de créditos */
-.creditos-container {
-  width: clamp(280px, 90%, 900px);
-  margin: 0 auto; 
-  padding: clamp(20px, 5vh, 50px);
-  padding-top: 1800px; /* Cambiado de 2000px a un valor razonable de 120px */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  min-height: 100vh;
 }
 
 
@@ -85,7 +57,6 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 40px;
   box-shadow: var(--sombra-elemento);
 }
 
@@ -543,8 +514,7 @@
 /* Media queries para responsividad */
 @media (max-width: 768px) {
   .creditos-container {
-    padding-top: 100px; /* Valor ajustado para móviles */
-    margin-top: 0;
+    padding-top: 300px;
   }
   
   .navegacion-interna {
@@ -565,6 +535,26 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
+
+@media (max-width: 700px) {
+  .creditos-container {
+    margin-top: 2360px;
+  }
+}
+
+@media (max-width: 530px) {
+  .creditos-container {
+    margin-top: 2760px;
+  }
+}
+
+@media (max-width: 470px) {
+  .creditos-container {
+    margin-top: 2890px;
+  }
+}
+
+
 
 /* Correcciones para landscape y pantallas pequeñas */
 @media (max-height: 500px) and (orientation: landscape) {
@@ -589,20 +579,9 @@
   }
 }
 
-/* Eliminar todos los margin-top excesivos en media queries */
-@media (max-width: 480px) {
-  .creditos-container {
-    margin-top: 0;
-  }
-}
+
 
 @media (max-height: 500px) and (orientation: landscape) {
-  .creditos-container {
-    margin-top: 0;
-  }
-}
-
-@media (max-width: 480px) {
   .creditos-container {
     margin-top: 0;
   }

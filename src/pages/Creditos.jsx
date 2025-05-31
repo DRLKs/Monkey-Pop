@@ -83,7 +83,6 @@ function Creditos() {
                 <meta name="description" content="Créditos y agradecimientos del juego Monkey Pop" />
             </Helmet>
             
-            <div className='fondo-creditos'></div>
             <BarraNavegacion />
             
             <div className='creditos-container'>
