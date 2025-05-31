@@ -1,6 +1,7 @@
 // Bibliotecas de React
 import React, { useMemo, useReducer, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom'
 
 // Componentes
 import { CasillaMapa } from '../components/CasillaMapa'
@@ -29,6 +30,9 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 function Juego() {
+
+  const navigate = useNavigate()
+
   //const [mapa, setMapa] = useState( isMovile() ? mapas.diagonalMovil : mapas.diagonalMejorado);
   const [mapa, setMapa] = useState( isMovile() ? mapas_movil : mapas_ordenador);
   const [monoSeleccionado, setMonoSeleccionado] = useState(null);
@@ -72,6 +76,15 @@ function Juego() {
     else              return obtenerCaminoMapa(mapa, PARTIDA.ancho_mapa, PARTIDA.largo_mapa);
 
   }, []);
+
+
+  /**
+   * Función para volver, salir del juego
+   */
+  const volver = () => {
+    navigate('/');
+  }
+
 
   /**
    * Deselecciona el mono
@@ -507,6 +520,7 @@ function Juego() {
         cronometroActivo={cronometroActivo}
         ralentizarJuego={() => setPotenciadorVelocidadJuego(Math.min(potenciadorVelocidadJuego + 1, 5))}
         acelerarJuego={() => setPotenciadorVelocidadJuego(Math.max(potenciadorVelocidadJuego - 1, 0))}
+        funcionVolver={() => abrirConfirmacion(volver, 'VOLVER')}
       />      
       
       {monoSeleccionado !== null && (

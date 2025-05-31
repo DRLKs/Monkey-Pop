@@ -20,7 +20,9 @@ body {
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
-  -o-user-drag: none;
+  user-select: none;        /* Evita seleccionar texto */
+  user-drag: none;          /* Evita arrastrar elementos */
+  touch-action: none;       /* Evita gestos táctiles predeterminados */
 }
 
 .fondo-juego{
