@@ -102,8 +102,11 @@ export class Globo {
      * @returns {Boolean} true si el mono puede atacar, false en caso contrario
      */
     puedeAtacar() {
-      this.recarga = (this.recarga + 1) % this.tiempoRecarga;
       return this.recarga === 0; // El mono puede atacar si el tiempo de recarga es 0
+    }
+
+    cicloAtaque() {
+      this.recarga = (this.recarga + 1) % this.tiempoRecarga;
     }
 
     /**
@@ -122,9 +125,7 @@ export class Globo {
         }
       });
 
-      if( globoAtacar === null ){               // Si no está a rango de nadie, mantiene el arma cargada
-        this.recarga = this.tiempoRecarga - 1;  // Está cargado
-      }
+
 
       return globoAtacar;
   }
@@ -138,7 +139,7 @@ export class Globo {
       ++this.nivel;
       this.damage += this.mejoraDamage; // Mejora el daño
       this.rango += this.mejoraRango; // Mejora el rango
-      this.recarga -= this.mejoraTiempoRecarga; // Mejora el tiempo de recarga
+      this.tiempoRecarga -= this.mejoraTiempoRecarga; // Mejora el tiempo de recarga
     }
 
     if( this.nivel >= 2 ){

@@ -16,14 +16,8 @@ const MonoMapa = ( {mono, seleccionado} ) => {
 
     return (
     <div className={`mono-mapa ${claseMejorado} ${claseSeleccionado}`}>
+     
       
-      {/*
-      {mono.puedeAtacar() ?
-        <img src={mono_img_disparando} alt={`Mono ${mono.tipo} disparando`} className="mono" />
-        :
-          <img src={mono_img} alt={`Mono${mono.tipo}`} className="mono" />
-      }
-      */}
       {mono.puedeAtacar() && <img src={animacionDisparo} alt="disparo" className="disparo" />    }
 
       <img src={mono_img} alt={`Mono${mono.tipo}`} className="mono" />
