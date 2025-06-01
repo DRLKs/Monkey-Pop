@@ -59,14 +59,14 @@ function Creditos() {
             rol: "Desarrolladora Full Stack",
             descripcion: "Integración de datos y lógica de aplicación.",
             email: "sorayasadqui@uma.es",
-            github: "https://github.com/soraya"
+            github: "https://github.com/sorayabs"
         },
         {
             nombre: "Marquito (Marcos)",
             rol: "Diseñador Gráfico",
             descripcion: "Creación de assets visuales y animaciones.",
             email: "maarcoos_8@uma.es",
-            github: "https://github.com/marcos"
+            github: "https://github.com/maarcoos8"
         }
     ];
 

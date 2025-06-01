@@ -7,10 +7,6 @@ import AjustesMono from "../components/AjustesMono";
 import { MONOS } from "../utils/constantes";
 import { UIContext } from "../context/UIContext";
 
-// Importamos la música específica para la sección de información de monos
-import musica from '../assets/sounds/MonoInfo.mp3';
-import backgroundMusic from '../assets/sounds/menuPrincipal.mp3';
-
 import '../styles/monoInfo.css';
 
 function MonoInfo() {
@@ -62,17 +58,6 @@ function MonoInfo() {
         }
     }, []);
     
-    // Efecto para cambiar la música cuando se monta el componente
-    useEffect(() => {
-        // Cambiar a la música de la sección de información de monos
-        changeBackgroundMusic(musica);
-        
-        // Restaurar la música original cuando se desmonte el componente
-        return () => {
-            changeBackgroundMusic(backgroundMusic);
-        };
-    }, [changeBackgroundMusic]);
-
     return (
         <>
         <Helmet>

@@ -32,12 +32,13 @@ import { Mono as MonoClass } from '../utils/clases'
 // Utilidades
 import { mapas_ordenador, mapas_movil } from '../utils/mapas'
 import { ESTADO_CASILLA, MENSAJES_CONFIRMACIONES, MONOS, PARTIDA, MAPA_MOVIL } from '../utils/constantes'
-import { obtenerCaminoMapa, gameReducer, isMovile } from '../utils/funciones'
+import { obtenerCaminoMapa, gameReducer, isMovile, cargarConfiguracion } from '../utils/funciones'
 
 // Estilos
 import '../styles/juego.css'
 import BarraNavegacionPartida from '../components/BarraNavegacionPartida'
 import NuevaRondaContainer from '../components/NuevaRondaContainer'
+import nuevaRondaSound from '../assets/sounds/nuevaRonda.mp3'
 
 
 /**
@@ -533,6 +534,17 @@ function Juego() {
       setCronometroActivo(true);
     }
   }, [ajustesVisible]);
+
+  // Sonido de nueva ronda
+  useEffect(() => {
+    if (gameState.nuevaRonda) {
+      // Comprobar si los efectos están activados antes de reproducir el sonido
+      const { efectos, volumen } = cargarConfiguracion();
+      const audio = new Audio(nuevaRondaSound);
+      audio.volume = efectos ? 0 : (volumen / 100);
+      audio.play();
+    }
+  }, [gameState.nuevaRonda]);
   
   return (
     <>
