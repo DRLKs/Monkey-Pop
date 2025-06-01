@@ -88,7 +88,7 @@ export const MONOS = {
       rango: 350,
       damage: 5,
       tiempoRecarga: 5,
-      descripcion: "Mono con lanza cohetes",
+      descripcion: "Mono con lanzacohetes",
       mejoraRango: 50,
       mejoraDamage: 4,
       mejoraTiempoRecarga: 1
@@ -107,14 +107,14 @@ export const MONOS = {
       mejoraTiempoRecarga: 1
     },
     laser: {
-      nombre: "Mono Laser",
+      nombre: "Mono Láser",
       tipo: "laser",
       imagen: monoLaser,
       precio: 300,
       rango: 200,
       damage: 2,
       tiempoRecarga: 1,
-      descripcion: "Mono con rifle laser, mucha cadencia de disparo",
+      descripcion: "Mono con rifle láser, mucha cadencia de disparo",
       mejoraRango: 75,
       mejoraDamage: 2,
       mejoraTiempoRecarga: 0
