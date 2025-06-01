@@ -344,6 +344,7 @@ function Tutorial() {
     {isPortrait && window.innerWidth <= 739 && (
         <OrientationWarning />
       )}
+    <h1 className="visually-hidden">Tutorial de Monkey Pop</h1>
     <div>
       <BarraNavegacionTutorial
         funcionVolver ={() => navigate('/')}

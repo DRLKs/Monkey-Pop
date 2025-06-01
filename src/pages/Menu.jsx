@@ -59,6 +59,8 @@ export function Menu() {
         <div className='menu-container-container'>
             <header className='titulo-juego-container'>
                     <img src={tituloJuego} alt='Título'/>
+                    {/* h1 con el titulo de la pagina oculto */}
+                    <h1 className='visually-hidden'>Página de inicio</h1>
             </header>
 
             <div className="menu-container">                
