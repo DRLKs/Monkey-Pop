@@ -1,9 +1,29 @@
+/**
+ * Panel de configuración de accesibilidad para el juego Monkey Pop
+ * 
+ * Este componente @see {@link AccesibilidadPanel} proporciona opciones para personalizar la experiencia del juego
+ * según las necesidades de accesibilidad del usuario, incluyendo:
+ * - Opciones visuales (alto contraste, tamaño de texto)
+ * - Configuraciones para daltonismo usando {@link ColorBlindFilters}
+ * - Navegación por teclado y tecnologías asistivas
+ * 
+
+ * 
+ * @see {@link UIContext} - Contexto que maneja la configuración de accesibilidad
+ * @see {@link BarraNavegacion} - Componente de navegación principal
+ * @see {@link ColorBlindFilters} - Componente con filtros SVG para daltonismo
+ */
+
+
+
+// Librerias de react
 import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
 // Componentes
 import { BarraNavegacion } from '../components/BarraNavegacion';
+import ColorBlindFilters, { COLORBLIND_FILTERS } from '../components/accesibilidad/ColorBlindFilters';
 
 // Contexto
 import { UIContext } from '../context/UIContext';
@@ -11,51 +31,40 @@ import { UIContext } from '../context/UIContext';
 // Estilos 
 import '../styles/accesibilidad/accesibilidad.css';
 
-
+/**
+ * Componente principal del panel de accesibilidad
+ * 
+ * Gestiona todas las opciones de accesibilidad disponibles en el juego
+ * y proporciona una interfaz accesible para configurarlas.
+ * 
+ * @function
+ * @returns {JSX.Element} El panel de accesibilidad renderizado
+ */
 const AccesibilidadPanel = () => {
 
   const navigate = useNavigate();
 
   const { accessibilitySettings, updateAccessibilitySetting } = useContext(UIContext);
 
-  // Efecto para anunciar la página a lectores de pantalla
+
+  /**
+   * Hook de efecto para manejar atajos de teclado de accesibilidad
+   * 
+   * Gestiona los siguientes atajos:
+   * - ESC: Volver al menú principal
+   * 
+   * @function
+   */
   useEffect(() => {
-    // Notificar a tecnologías asistivas que la página ha cargado
-    const pageLoadAnnouncement = document.createElement('div');
-    pageLoadAnnouncement.setAttribute('role', 'status');
-    pageLoadAnnouncement.setAttribute('aria-live', 'polite');
-    pageLoadAnnouncement.className = 'sr-only'; // Solo para lectores de pantalla
-    pageLoadAnnouncement.textContent = 'Página de opciones de accesibilidad cargada';
-    document.body.appendChild(pageLoadAnnouncement);
-
-    // Limpiar después de anunciar
-    return () => {
-      document.body.removeChild(pageLoadAnnouncement);
-    };
-  }, []);
-
-  const handleSaveAndReturn = () => {
-    // Anunciar a lectores de pantalla que los cambios se han guardado
-    const savedAnnouncement = document.createElement('div');
-    savedAnnouncement.setAttribute('role', 'alert');
-    savedAnnouncement.setAttribute('aria-live', 'assertive');
-    savedAnnouncement.className = 'sr-only';
-    savedAnnouncement.textContent = 'Configuración guardada. Volviendo al menú principal.';
-    document.body.appendChild(savedAnnouncement);
-    
-    // Pequeño retraso para que el lector de pantalla tenga tiempo de anunciar
-    setTimeout(() => {
-      navigate('/');
-      document.body.removeChild(savedAnnouncement);
-    }, 500);
-  };
-
-  // Manejar atajos de teclado para accesibilidad
-  useEffect(() => {
+    /**
+     * Manejador de eventos de teclado para atajos de accesibilidad
+     * 
+     * @param {KeyboardEvent} event - Evento de teclado
+     */
     const handleKeyDown = (event) => {
       // ESC para volver al menú principal
       if (event.key === 'Escape') {
-        handleSaveAndReturn();
+        navigate('/');
       }
     };
 
@@ -65,8 +74,19 @@ const AccesibilidadPanel = () => {
     };
   }, [navigate]);
 
+  /**
+   * Renderiza el componente del panel de accesibilidad
+   * 
+   * Incluye:
+   * - Metadatos SEO y accesibilidad en el head
+   * - Filtros SVG importados desde {@link ColorBlindFilters}
+   * - Opciones de configuración visual
+   * 
+   * @returns {JSX.Element} El JSX del panel de accesibilidad
+   */
   return (
     <>
+      {/* Metadatos del documento para SEO y accesibilidad */}
       <Helmet>
         <title>Monkey Pop - Opciones de Accesibilidad</title>
         <meta name="description" content="Configura las opciones de accesibilidad de Monkey Pop para adaptarlo a tus necesidades" />
@@ -76,54 +96,16 @@ const AccesibilidadPanel = () => {
         <meta name="theme-color" content="#2a5a8a" />
       </Helmet>
 
-      {/* SVG Filters para daltonismo - ocultos visualmente pero disponibles para CSS */}
-      <svg className="color-filters" aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
-        <defs>
-          <filter id="protanopia">
-            <feColorMatrix 
-              in="SourceGraphic"
-              type="matrix" 
-              values="0.567, 0.433, 0, 0, 0 
-                      0.558, 0.442, 0, 0, 0 
-                      0, 0.242, 0.758, 0, 0 
-                      0, 0, 0, 1, 0" 
-            />
-          </filter>
-          <filter id="deuteranopia">
-            <feColorMatrix 
-              in="SourceGraphic" 
-              type="matrix" 
-              values="0.625, 0.375, 0, 0, 0 
-                      0.7, 0.3, 0, 0, 0 
-                      0, 0.3, 0.7, 0, 0 
-                      0, 0, 0, 1, 0"
-            />
-          </filter>
-          <filter id="tritanopia">
-            <feColorMatrix 
-              in="SourceGraphic" 
-              type="matrix" 
-              values="0.95, 0.05, 0, 0, 0 
-                      0, 0.433, 0.567, 0, 0 
-                      0, 0.475, 0.525, 0, 0 
-                      0, 0, 0, 1, 0" 
-            />
-          </filter>
-          <filter id="achromatopsia">
-            <feColorMatrix 
-              in="SourceGraphic" 
-              type="matrix" 
-              values="0.299, 0.587, 0.114, 0, 0 
-                      0.299, 0.587, 0.114, 0, 0 
-                      0.299, 0.587, 0.114, 0, 0 
-                      0, 0, 0, 1, 0"
-            />
-          </filter>
-        </defs>
-      </svg>
+      {/* 
+       * Filtros SVG para simulación de daltonismo
+       * Importados desde el componente ColorBlindFilters para mejor reutilización
+       * 
+       * @see {@link ColorBlindFilters} - Componente que contiene todos los filtros SVG
+       */}
+      <ColorBlindFilters />
 
       <div className="accesibilidad-page" role="main">
-        <BarraNavegacion funcionVolver ={() => navigate('/')}/>
+        <BarraNavegacion funcionVolver={() => navigate('/')} />
         
         <div className="accesibilidad-contenedor-principal">
           <div className="accesibilidad-titulo-seccion">
@@ -133,9 +115,11 @@ const AccesibilidadPanel = () => {
             </p>
           </div>
           
+          {/* Sección de opciones visuales */}
           <div className="accesibilidad-tarjeta" role="region" aria-labelledby="visual-options">
             <h2 id="visual-options" className="accesibilidad-seccion-titulo">Opciones Visuales</h2>
             
+            {/* Opción de alto contraste */}
             <div className="accesibilidad-opcion">
               <div className="opcion-header">
                 <span className="opcion-label" id="contrast-label">Alto contraste</span>
@@ -152,6 +136,7 @@ const AccesibilidadPanel = () => {
               </div>
             </div>
             
+            {/* Selector de modo daltonismo usando constantes del componente ColorBlindFilters */}
             <div className="accesibilidad-opcion">
               <div className="opcion-header">
                 <span className="opcion-label" id="colorblind-label">Modo daltonismo</span>
@@ -164,15 +149,16 @@ const AccesibilidadPanel = () => {
                   value={accessibilitySettings.colorblindMode} 
                   onChange={(e) => updateAccessibilitySetting('colorblindMode', e.target.value)}
                 >
-                  <option value="normal">Normal</option>
-                  <option value="protanopia">Protanopia (rojo)</option>
-                  <option value="deuteranopia">Deuteranopia (verde)</option>
-                  <option value="tritanopia">Tritanopia (azul)</option>
-                  <option value="achromatopsia">Acromatopsia (sin color)</option>
+                  <option value={COLORBLIND_FILTERS.NORMAL}>Normal</option>
+                  <option value={COLORBLIND_FILTERS.PROTANOPIA}>Protanopia (rojo)</option>
+                  <option value={COLORBLIND_FILTERS.DEUTERANOPIA}>Deuteranopia (verde)</option>
+                  <option value={COLORBLIND_FILTERS.TRITANOPIA}>Tritanopia (azul)</option>
+                  <option value={COLORBLIND_FILTERS.ACHROMATOPSIA}>Acromatopsia (sin color)</option>
                 </select>
               </div>
             </div>
             
+            {/* Selector de tamaño de texto */}
             <div className="accesibilidad-opcion">
               <div className="opcion-header">
                 <span className="opcion-label" id="text-size-label">Tamaño de texto</span>
@@ -193,18 +179,8 @@ const AccesibilidadPanel = () => {
             </div>
           </div>
           
-
           
-          <div className="accesibilidad-acciones">
-            <button 
-              className="accesibilidad-btn-guardar"
-              onClick={handleSaveAndReturn}
-              aria-label="Guardar configuración y volver al menú principal"
-            >
-              Guardar y Volver
-            </button>
-          </div>
-          
+          {/* Información adicional y ayuda */}
           <div className="accesibilidad-info">
             <p>Pulsa ESC en cualquier momento para guardar y volver al menú principal.</p>
             <p>Para obtener ayuda adicional, contacta con nosotros en <a href="mailto:soporte@monkeypop.com">soporte@monkeypop.com</a>.</p>

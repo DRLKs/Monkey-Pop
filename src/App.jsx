@@ -1,3 +1,7 @@
+/**
+ * Contenedor principal, contiene toda la web
+ */
+
 import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import { Menu } from './pages/Menu'
@@ -18,7 +22,8 @@ function App() {
         <ColorBlindFilter />
         <Routes>
           <Route path="/" element={<Menu />} />
-          <Route path="juego" element={<Juego />} />          <Route path="ajustes" element={<Ajustes />} />
+          <Route path="juego" element={<Juego />} />          
+          <Route path="ajustes" element={<Ajustes />} />
           <Route path="tutorial" element={<Tutorial/>} />
           <Route path="creditos" element={<Creditos/>} />
           <Route path="monoInfo" element={<MonoInfo/>} />

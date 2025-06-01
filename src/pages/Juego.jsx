@@ -1,3 +1,17 @@
+/**
+ * Componente principal del juego Monkey Pop
+ * 
+ * Este componente maneja toda la lógica del juego incluyendo:
+ * - El ciclo de refresco controlado por {@link gameLoop}
+ * - La validación de casillas colocables mediante {@link casillaNoColocable}
+ * - El estado del juego usando useReducer con {@link gameReducer}
+ * - La gestión de monos y globos
+ * - Los controles de teclado y eventos táctiles
+ * 
+ * @see {@link BarraNavegacionPartida} - Componente de navegación principal 
+ */
+
+
 // Bibliotecas de React
 import React, { useMemo, useReducer, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet';
@@ -27,9 +41,21 @@ import NuevaRondaContainer from '../components/NuevaRondaContainer'
 
 
 /**
- * Devuelve si la casilla clicada es una casilla donde no se puede colocar un mono
- * @param {String} estadoCasillaMarcada Nombre de la casilla que se ha clicado
- * @returns 
+ * Determina si una casilla no es válida para colocar un mono
+ * 
+ * Una casilla no es colocable si es:
+ * - Agua, camino, césped, o flores decorativas
+ * 
+ * @function
+ * @param {string} estadoCasillaMarcada - El tipo de casilla según {@link ESTADO_CASILLA}
+ * @returns {boolean} true si la casilla NO es colocable, false si SÍ es colocable
+ * 
+ * @example
+ * // Verificar si se puede colocar un mono en una casilla de agua
+ * const noSePuede = casillaNoColocable(ESTADO_CASILLA.AGUA); // returns true
+ * 
+ * @see {@link ESTADO_CASILLA} - Constantes que definen los tipos de casillas
+ * @see {@link actualizarMapa} - Función que usa esta validación
  */
 function casillaNoColocable(estadoCasillaMarcada) {
   return estadoCasillaMarcada === ESTADO_CASILLA.AGUA || estadoCasillaMarcada === ESTADO_CASILLA.CAMINO 
@@ -39,7 +65,11 @@ function casillaNoColocable(estadoCasillaMarcada) {
         || estadoCasillaMarcada === ESTADO_CASILLA.FLORROSA || estadoCasillaMarcada === ESTADO_CASILLA.FLORROJAYAZUL;
 }
 
-
+/**
+ * Componente principal del juego
+ * 
+ * @returns {JSX.Element} El componente del juego renderizado
+ */
 function Juego() {
 
   const navigate = useNavigate()
@@ -90,15 +120,20 @@ function Juego() {
 
 
   /**
-   * Función para volver, salir del juego
+   * Navega de vuelta al menú principal
+   * 
+   * @function
+   * @see {@link useNavigate} - Hook de React Router para navegación
    */
   const volver = () => {
     navigate('/');
   }
 
-
   /**
-   * Deselecciona el mono
+   * Deselecciona el mono actualmente seleccionado
+   * 
+   * @function
+   * @see {@link monoSeleccionado} - Estado que guarda el mono seleccionado
    */
   const soltarMono = () => {
     setMonoSeleccionado(null);
@@ -166,8 +201,6 @@ function Juego() {
     };
   }, []); // Solo se ejecuta una vez al montar el componente
 
-  // ...resto de tu código existente...
-
   /*
    * Controla el tiempo de juego para calcular el tiempo jugado en la pantalla final 
    */
@@ -180,6 +213,7 @@ function Juego() {
   /*
    * Controla el bucle del juego
    * Actualiza el estado de los globos cada: 1 segundo
+   * 
    */
   useEffect(() => {
     let lastUpdateTime = 0;
@@ -201,7 +235,6 @@ function Juego() {
       }else {
         if (elapsed >= PARTIDA.tiempoActualizacionGlobos * PARTIDA.potenciadorTiempo[potenciadorVelocidadJuego] ) {
           if (!gameState.perdido) {
-                      console.log(monoSeleccionado)
             dispatch({
               
               type: 'TICK',
@@ -431,7 +464,6 @@ function Juego() {
    * @param {string} nombreFuncion Nombre de la función que se va a ejecutar al confirmar, sirve para obtener el mensaje de confirmación
    */
   const abrirConfirmacion = (funcion, nombreFuncion) => {
-    console.log('abrirConfirmacion', funcion);
     setConfirmacionVisible(true);
     setFuncionConfirmacion(() => funcion);
     setFuncionConfirmacionNombre(nombreFuncion);
@@ -510,6 +542,7 @@ function Juego() {
     <>
       <Helmet>
         <title>Monkey Pop - Juego</title>
+        <html lang="es" />
       </Helmet>
 
       {/* Mostrar advertencia si es móvil y está en portrait */}

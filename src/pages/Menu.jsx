@@ -1,7 +1,20 @@
+/**
+ * Componente que maneja el menú inicial, por el cual podrás moverte a los diferentes
+ * apartados del juego.
+ * 
+ * Usamos la librería @see useNavigate, para movernos entre páginas
+ * 
+ * @example
+ * // Nos movemos al apartado de accesibilidad
+ * const navigate = useNavigate();
+ * onClick={() => navigate('/accesibilidad')};
+ */
+
+
+// Librerías de react
 import React, { use, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-
 
 // Función para saber si el usuario puede jugar
 import { habilitadoParaJugar, puedeJugar } from '../utils/funciones.js'
@@ -15,6 +28,7 @@ import tituloJuego from '../assets/images/tituloJuego.webp';
 // Importamos el icono de accesibilidad
 import iconoAccesibilidad from '../assets/images/botones/icono-accesibilidad.png';
 
+// Estilos
 import '../styles/menu.css'
 
 export function Menu() {
@@ -26,8 +40,7 @@ export function Menu() {
 
 
     /**
-     * Verifica en el localStorage si
-     * el usuario ha completado el tutorial o si quiere jugar ya.
+     * Verifica en el localStorage si el usuario ha completado el tutorial para permitirle jugar.
      */
     useEffect(() => {
         const puedeJugarAux = habilitadoParaJugar();

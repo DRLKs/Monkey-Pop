@@ -19,7 +19,7 @@
   --fuente-principal: 'Montserrat', sans-serif;
   --fuente-secundaria: 'Nunito', sans-serif;
   --radio-borde: 15px;
-  --espacio-navegacion: 80px; /* Altura de la barra de navegación */
+  --espacio-navegacion: 60px; 
   --transicion: all 0.3s ease;
 }
 
@@ -53,9 +53,8 @@ body {
   min-height: 100vh;
   background-color: var(--color-fondo);
   color: var(--color-texto);
-  margin: 0; /* Quitado el margin-top: 800px que causaba problemas */
   padding: 0;
-  margin-top: 500px;
+  margin-top: 300px;
   position: relative;
   padding-top: var(--espacio-navegacion); /* Usar variable para consistencia */
 }

@@ -1,3 +1,14 @@
+/**
+ * Este componente es el que realmente funciona como filtro
+ * 
+ * Explicandolo de manera sencilla, está por encima de todas 
+ * las páginas del juego, por tanto, al realizarle un filtro a 
+ * este componente en el css, se le aplica un filtro a toda la 
+ * web. El css de este componente es global.
+ */
+
+
+// Librerias de react
 import React, { useContext } from 'react';
 import { UIContext } from '../../context/UIContext';
 
