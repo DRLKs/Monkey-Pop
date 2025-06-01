@@ -160,7 +160,7 @@ function Creditos() {
                     <hr />
                     <p>Monkey Pop &copy; 2025. Todos los derechos reservados.</p>
                     <p>Un proyecto de la asignatura de Interfaces de Usuario.</p>
-                    <p className='version-info'>Versión 1.0.0</p>
+                    <p className='version-info'>Versión 1.0.1</p>
                 </div>
             </div>
         </>

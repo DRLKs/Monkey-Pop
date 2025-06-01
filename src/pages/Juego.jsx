@@ -102,7 +102,7 @@ function Juego() {
     monosColocados: [],               // Guarda las posicies de los monos colocados por el usuario
     indexGlobo: 0,                    // Controla el índice del último globo que salió, esto es para solo enviar los globos de cada ronda
     vidas: PARTIDA.vidas_iniciales,       // Mantiene la cuenta de vidas que le quedan al usuario
-    monedas: 999,   // Mantiene la cuenta de las monedas que tiene ahorradas el usuario
+    monedas: PARTIDA.monedas_iniciales,   // Mantiene la cuenta de las monedas que tiene ahorradas el usuario
     ronda: PARTIDA.ronda_inicial,         // Estado que controla la ronda por la que vamos
     perdido: false,                   // Estado que cotrola que el jugador o haya perdido
     globosExplotados: 0,              // Mantiene la suma de los globos explotados durante todas las rodas

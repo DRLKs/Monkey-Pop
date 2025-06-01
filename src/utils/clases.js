@@ -105,6 +105,9 @@ export class Globo {
       return this.recarga === 0; // El mono puede atacar si el tiempo de recarga es 0
     }
 
+    /**
+     * Aumenta el tiempo de recarga del mono
+     */
     cicloAtaque() {
       this.recarga = (this.recarga + 1) % this.tiempoRecarga;
     }

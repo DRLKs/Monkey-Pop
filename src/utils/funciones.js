@@ -216,13 +216,11 @@ export const gameReducer = (state, action) => {
       let sumaMonedas = 0;
       let sumaGlobosExplotados = 0;
       monos.forEach(mono => {
-        console.log(mono)
         mono.cicloAtaque(); // Actualizamos el tiempo de recarga del mono
         if( mono.puedeAtacar() ){
           const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
           const globoAtacado = mono.attack(globosExistentes);
           if ( globoAtacado !== null) {
-            //console.log('Mono atacando a globo:', globoAtacado.id, globoAtacado.health,mono.damage);
 
             if ( globoAtacado.health <= mono.damage ){  // El globo explota
               sumaMonedas += PARTIDA.monedasGlobo;
