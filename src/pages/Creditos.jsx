@@ -84,6 +84,7 @@ function Creditos() {
             <Helmet>
                 <title>Monkey Pop - Créditos</title>
                 <meta name="description" content="Créditos y agradecimientos del juego Monkey Pop" />
+                <html lang="es" />
             </Helmet>
             
             <BarraNavegacion funcionVolver ={() => navigate('/')}/>

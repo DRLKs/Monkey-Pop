@@ -42,7 +42,7 @@
 /* Estilos para el botón volver al menú - mejorado */
 .boton-volver {
   background-color: var(--color-boton-importante);
-  color: white;
+  color: black;
   border: none;
   border-radius: 30px;
   padding: 12px 25px;
@@ -396,38 +396,6 @@
 
 .control-boton:active {
   transform: translateY(0);
-}
-
-/* Botón de volver al menú */
-.boton-volver {
-  background-color: var(--color-boton-importante);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 12px 25px;
-  font-family: var(--fuente-principal);
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 40px;
-  box-shadow: var(--sombra-elemento);
-}
-
-.boton-volver:hover {
-  background-color: var(--color-hover);
-  transform: translateY(-3px);
-  box-shadow: var(--sombra-hover);
-}
-
-.boton-volver:active {
-  transform: translateY(-1px);
 }
 
 /* Animaciones para elementos que entran en pantalla */
