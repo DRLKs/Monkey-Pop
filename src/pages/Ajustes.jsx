@@ -1,4 +1,9 @@
-
+/**
+ * Contenedor de los ajustes del menú principal.
+ * 
+ * Es formado por los componentes @see {@link BarraNavegacion}
+ * y el componente @see {@link AjustesContainerAjustes}
+ */
 
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet'

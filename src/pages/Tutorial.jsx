@@ -246,7 +246,7 @@ function Tutorial() {
       return () => {
         document.removeEventListener('touchmove', preventDefaultTouchMove);
       };
-    }, [monoSeleccionado]);
+  }, [monoSeleccionado]);
 
   /**
    * Función que según la casilla clicada en el tablero realiza unas acciones u otras

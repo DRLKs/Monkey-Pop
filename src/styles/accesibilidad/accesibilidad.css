@@ -57,6 +57,7 @@ body {
   margin-top: 300px;
   position: relative;
   padding-top: var(--espacio-navegacion); /* Usar variable para consistencia */
+  overflow: hidden;
 }
 
 /**
@@ -74,6 +75,7 @@ body {
   gap: 30px;
   position: relative;
   z-index: 10;
+  overflow-y: auto;
 }
 
 /**
@@ -710,20 +712,8 @@ body {
 
 /* Focus visible para accesibilidad */
 :focus-visible {
-  outline: 3px solid var(--color-acento);
-  outline-offset: 3px;
-}
-
-/* Lectores de pantalla - clase auxiliar */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+  outline: 4px solid var(--color-acento);
+  outline-offset: 5px;
 }
 
 @media (max-height: 400px) {

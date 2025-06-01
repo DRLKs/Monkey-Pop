@@ -216,6 +216,21 @@
   }
 }
 
+@media (max-width: 1300px) {
+  .casilla-mapa {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+@media (max-width: 1150px) {
+  .casilla-mapa {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
   .casilla-mapa {

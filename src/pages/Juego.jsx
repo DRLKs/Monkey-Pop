@@ -297,28 +297,22 @@ function Juego() {
 
   
   /**
-   * Función que trackea la posición del ratón
-   * Es usada para que la imagen del mono seleccionado parezca que es arrastrada por el jugador
-   */
-  useEffect(() => {
-    const controladorMovimientoRaton = (event) => {
-      // Usar clientX/Y para navegadores de escritorio y touches[0] para dispositivos móviles
-      const posX = event.touches ? event.touches[0].clientX : event.clientX;
-      const posY = event.touches ? event.touches[0].clientY : event.clientY;
-      setPosition({x: posX, y: posY});
-    }
-    
-    if (monoSeleccionado !== null) {
-      // Soportar tanto eventos de mouse como eventos táctiles
-      window.addEventListener('pointermove', controladorMovimientoRaton);
-      window.addEventListener('touchmove', controladorMovimientoRaton, { passive: false });
-    }
-    
-    return () => {
-      window.removeEventListener('pointermove', controladorMovimientoRaton);
-      window.removeEventListener('touchmove', controladorMovimientoRaton);
-    }
-  }, [monoSeleccionado]);
+     * Función que trackea la posición del ratón
+     * Es usada para que la imagen del mono seleccionado parezca que es arrastrada por el jugador
+     */
+    useEffect(() => {
+      const handleMouseMove = (event) => {
+        setPosition({ x: event.clientX, y: event.clientY });
+      };
+  
+      if (monoSeleccionado !== null) {
+        window.addEventListener('pointermove', handleMouseMove);
+      }
+  
+      return () => {
+        window.removeEventListener('pointermove', handleMouseMove);
+      };
+    }, [monoSeleccionado]);
 
 
   /**
@@ -338,6 +332,8 @@ function Juego() {
           // Espacio para pausar/reanudar
           pausarReaunudarCronometro(); 
           break;
+        case 'r':
+          abrirConfirmacion(reiniciarJuego, 'REINICIAR');
         case '0':
           soltarMono();
           break;

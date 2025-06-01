@@ -100,20 +100,8 @@ function AjustesContainerAjustes() {
                     </button>
                 </nav>
 
-                <nav id="control-lenguaje">
-                    <label htmlFor="lenguaje">Idioma: </label>
-                    <select
-                        id="lenguaje"
-                        name="lenguaje"
-                        value={lenguaje}
-                        onChange={handleLenguajeChange}
-                    >
-                        <option value="es">Español</option>
-                        <option value="en">Inglés</option>
-                        <option value="fr">Francés</option>
-                        <option value="de">Alemán</option>
-                    </select>
-                </nav>
+
+               
 
                 <button id="boton-submit" type="submit">Guardar Ajustes</button>
 
