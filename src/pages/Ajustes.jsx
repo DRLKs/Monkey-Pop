@@ -18,6 +18,7 @@ function Ajustes() {
     <>
     <Helmet>
       <title>Monkey Pop - Ajustes</title>
+      <html lang="es" />
     </Helmet>
     <div className="ajustes-page"></div> {/* Configuración de un div que actuará como body */}
     <BarraNavegacion funcionVolver={volver}/>

@@ -180,6 +180,7 @@ function InfoJuego() {
         <>
         <Helmet>
             <title>Monkey Pop - Información del Juego</title>
+            <html lang="es" />
         </Helmet>
         <div className="info-juego-container">
             <div className="info-juego-background"></div>

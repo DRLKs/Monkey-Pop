@@ -517,7 +517,6 @@ function Juego() {
         <OrientationWarning />
       )}
       
-      <h1 className="visually-hidden">Página de Juego de Monkey Pop</h1>
       <div className='fondo-juego'></div>
       <BarraNavegacionPartida 
         ronda={gameState.ronda}

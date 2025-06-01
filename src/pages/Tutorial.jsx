@@ -339,11 +339,11 @@ function Tutorial() {
     <>
     <Helmet>
       <title>Monkey Pop - Tutorial</title>
+      <html lang="es" />
     </Helmet>
     {isPortrait && window.innerWidth <= 739 && (
         <OrientationWarning />
       )}
-    <h1 className="visually-hidden">Tutorial de Monkey Pop</h1>
     <div>
       <BarraNavegacionTutorial
         funcionVolver ={() => navigate('/')}

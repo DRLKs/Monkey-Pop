@@ -82,6 +82,7 @@ function MonoInfo() {
             {/* Agregamos encabezados semánticos para definir regiones de página */}
             <header>
                 <BarraNavegacion funcionVolver ={() => navigate('/')}/>
+                <html lang="es" />
             </header>
             
             {/* Separador para evitar la superposición con la barra de navegación */}
