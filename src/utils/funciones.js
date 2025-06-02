@@ -198,7 +198,7 @@ export const gameReducer = (state, action) => {
       const globosAEliminar = [];
       const indexGlobosExplotados = []
 
-      // Actualizamos la posición de los globos existentes
+      // Actualizamos la posición de los globos existentes (Los globos avanzan en el camino)
       let vidasPerdidas = 0;
       globosTablero.forEach((globo) => {
         globo.addTiempoDeVida();
@@ -212,15 +212,17 @@ export const gameReducer = (state, action) => {
         }
       });
 
-      // Actualizamos los monos existentes
+      // Actualizamos los monos existentes (Los monos atacan o recargan)
       let sumaMonedas = 0;
       let sumaGlobosExplotados = 0;
       monos.forEach(mono => {
         mono.cicloAtaque(); // Actualizamos el tiempo de recarga del mono
+
         if( mono.puedeAtacar() ){
           const globosExistentes = globosTablero.filter(globo => globosAEliminar.some( g => g === globo.id) === false);
           const globoAtacado = mono.attack(globosExistentes);
-          if ( globoAtacado !== null) {
+          
+          if ( globoAtacado !== null) {   // Si el mono ha atacado a un globo
 
             if ( globoAtacado.health <= mono.damage ){  // El globo explota
               sumaMonedas += PARTIDA.monedasGlobo;
@@ -239,7 +241,7 @@ export const gameReducer = (state, action) => {
         }
       });
 
-      // Se eliminan los globos que han sido destruidos
+      // Se eliminan los globos que han sido destruidos (Almacenamos los globos que se van a eliminar)
       globosAEliminar.forEach(globoEliminar => {
         globosTablero.forEach((globo, index) => {
           if (globo.id === globoEliminar) {
@@ -249,17 +251,18 @@ export const gameReducer = (state, action) => {
       });
 
 
+      // (El jugador pierde)
       if (vidasPerdidas >= state.vidas) {
         return { ...state,  vidas: 0, perdido: true };  
       }
       
-      // Los globos que quedan de la ronde se introducen en el juego
+      // Los globos que quedan de la ronde se introducen en el juego (Introducimos nuevos globos)
       if (state.indexGlobo < PARTIDA.rondas[state.ronda-1].length) {
         const health = PARTIDA.rondas[state.ronda-1][state.indexGlobo];
         const globo = new GloboClass(state.indexGlobo, action.camino[0], health, 0);
         globosTablero.push(globo);
       }else{
-        // Si no quedan globos de la ronda, se pasa a la siguiente ronda
+        // Si no quedan globos de la ronda, se pasa a la siguiente ronda  (Nueva ronda)
         if (globosTablero.length === 0) {
           return { ...state, vidas: state.vidas - vidasPerdidas, globos: globosTablero, indexsGlobosExplotados: [], indexGlobo: 0, ronda: state.ronda + 1, nuevaRonda: true };
         }

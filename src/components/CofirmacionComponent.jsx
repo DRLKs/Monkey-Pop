@@ -15,7 +15,9 @@ function ConfirmacionComponent({ msg, msgAccion, funcion, onClose }) {
           <div className="confirmacion-titulo" >
             <h2> {msg} </h2>
           </div>
+          {/* Botón para confirmar la acción, ejecuta la función proporcionada */}
           <button onClick={funcion}>{msgAccion}</button>
+          {/* Botón para cancelar la acción, cierra el Pop-Up */}
           <button onClick={onClose}>Cancelar</button>
       </div>
     </div>

@@ -36,6 +36,8 @@ const ColorBlindFilter = () => {
     filterClasses += ' high-contrast';
   }
   
+  // Retornamos el div con las clases de los estilos aplicados
+  // envargadas de aplicar los filtros
   return (
     <div className={filterClasses}></div>
   );

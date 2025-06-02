@@ -168,12 +168,11 @@ function Tutorial() {
      * Función que se ejecuta al presionar una tecla
      */
     useEffect(() => {
-      // Función que se ejecuta cuando se presiona una tecla
+
       const handleKeyDown = (event) => {
         // Obtener el código o nombre de la tecla presionada
         const key = event.key;
         
-        // Diferentes acciones según la tecla presionada
         switch (key) {
           
           case '0':
@@ -214,7 +213,7 @@ function Tutorial() {
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
       };
-    }, [monoSeleccionado, cronometroActivo]); // Dependencias del useEffect
+    }, [cronometroActivo]); // Dependencias del useEffect
 
 
   /**

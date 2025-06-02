@@ -1,4 +1,11 @@
-import React from 'react'
+/**
+ * Componente que representa una casilla del mapa en el juego.
+ * 
+ * Este componente realiza la función @see actualizarMapa al hacer click o touch (Movil) en la casilla.
+ * Esta función es muy compleja, se puede ver en el componente @see Juego.jsx
+ */
+
+
 import '../styles/CasillaMapa.css'
 
 

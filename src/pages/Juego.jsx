@@ -132,15 +132,11 @@ function Juego() {
 
   /**
    * Deselecciona el mono actualmente seleccionado
-   * 
-   * @function
    * @see {@link monoSeleccionado} - Estado que guarda el mono seleccionado
    */
   const soltarMono = () => {
     setMonoSeleccionado(null);
   }
-
-  // Agregar después de las importaciones y antes de la función Juego
 
 
   // Efecto para activar pantalla completa automáticamente
@@ -227,6 +223,8 @@ function Juego() {
       const elapsed = timestamp - lastUpdateTime;
       if ( gameState.nuevaRonda  ){       // Mantiene un margen entre ronda y ronda
 
+        // Cuando se inicia una nueva ronda, el tiempo de TICK varía
+        // El Tick dura más para pausar el juego durante la transición entre rondas
         if ( elapsed >= PARTIDA.tiempoEntreRondas ){
           dispatch({
             type: 'TICK',
@@ -234,6 +232,8 @@ function Juego() {
           });
         }
       }else {
+        // El tiempo de TICK
+        // Este tiene un índice multiplicativo que hace que el juego vaya más rápido o más lento
         if (elapsed >= PARTIDA.tiempoActualizacionGlobos * PARTIDA.potenciadorTiempo[potenciadorVelocidadJuego] ) {
           if (!gameState.perdido) {
             dispatch({
@@ -326,11 +326,11 @@ function Juego() {
       const key = event.key;
       
       switch (key) {
+        
         case 'Escape':
           setAjustesVisible(true);
           break;
-        case ' ':
-          // Espacio para pausar/reanudar
+        case ' ': // Espacio para pausar/reanudar
           pausarReaunudarCronometro(); 
           break;
         case 'r':
@@ -384,7 +384,7 @@ function Juego() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [monoSeleccionado, cronometroActivo]); // Dependencias del useEffect
+  }, [cronometroActivo, gameState.monedas]); // Dependencias del useEffect
 
 
   /**

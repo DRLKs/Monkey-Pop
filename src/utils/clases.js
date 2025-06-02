@@ -107,6 +107,7 @@ export class Globo {
 
     /**
      * Aumenta el tiempo de recarga del mono
+     * Esta función se llama en cada ciclo de ataque del juego para cada mono
      */
     cicloAtaque() {
       this.recarga = (this.recarga + 1) % this.tiempoRecarga;
@@ -128,8 +129,6 @@ export class Globo {
         }
       });
 
-
-
       return globoAtacar;
   }
 
@@ -150,11 +149,13 @@ export class Globo {
     }
   }
 
+  /**
+   * @returns {String} Nivel del mono
+   */
   getNivel(){
-    if( this.nivel >= 3 ) return "MAX";
+    if( !this.mejorable ) return "MAX";
     return this.nivel.toString();
   }
-
 
 }
 
